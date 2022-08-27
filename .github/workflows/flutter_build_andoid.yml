@@ -33,6 +33,7 @@ jobs:
     - run: flutter pub get
     - run: flutter test
     - run: flutter build apk
+    - run: pwd
     - uses: actions/checkout@v2
     - uses: actions/upload-artifact@v3
       with:

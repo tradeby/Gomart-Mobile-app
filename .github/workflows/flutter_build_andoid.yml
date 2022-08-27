@@ -33,9 +33,10 @@ jobs:
     - run: flutter pub get
     - run: flutter test
     - run: flutter build apk
-    - run: pwd
+    - run: cd build\app\outputs\flutter-apk\
+    - run: ls
     - uses: actions/checkout@v2
     - uses: actions/upload-artifact@v3
       with:
         name: android-apk
-        path: /home/runner/work/Gomart-Mobile-app/Gomart-Mobile-app/build/app/outputs/flutter-apk/app-release.apk
+        path: app-release.apk

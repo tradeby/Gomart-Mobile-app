@@ -38,4 +38,4 @@ jobs:
     - uses: actions/upload-artifact@v3
       with:
         name: android-apk
-        path: build/app/outputs/flutter-apk/app-release.apk
+        path: /home/runner/work/Gomart-Mobile-app/Gomart-Mobile-app/build/app/outputs/flutter-apk/app-release.apk

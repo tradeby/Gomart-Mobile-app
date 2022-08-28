@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "1066738259998",
+    "project_id": "gomart-apps",
+    "storage_bucket": "gomart-apps.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1066738259998:android:46d185a082c02601a3760f",
+        "android_client_info": {
+          "package_name": "com.example.gomart"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1066738259998-qirvsvjb1e97bhc3hdm124aji8cqfteo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDhUDwfjkZ5hqwaE61HjTy3wZXE7v5Iy5E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1066738259998-qirvsvjb1e97bhc3hdm124aji8cqfteo.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1066738259998-l2t7qgmqdkslvgk852jqcollv8k358lh.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.gomart"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

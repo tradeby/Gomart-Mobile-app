@@ -24,6 +24,7 @@ jobs:
     steps:
     - name: git Checkout
       uses: actions/checkout@v3
+      
     - name: Generate build number
       id: buildnumber
       uses: einaregilsson/build-number@v3 
@@ -35,17 +36,26 @@ jobs:
       with:
         distribution: 'zulu'
         java-version: '11'
+        
     - name: Setting up flutter environment
       uses: subosito/flutter-action@v2
       with:
         flutter-version: '3.0.5'
         
+    - name: Download flutter app dependecies
+      run: flutter pub get
+      
+    - name: Run all our tests
+      run: flutter test
+      
     - name: Build flutter apk
-    - run: flutter pub get
-    - run: flutter test
-    - run: flutter build apk --build-name=1.2.0+${GITHUB_SHA::6} --build-number=${{ steps.buildnumber.outputs.build_number }}
-    - run: cd build/app/outputs/flutter-apk/ && ls
-    - uses: actions/upload-artifact@v3
+      run: flutter build apk --build-name=1.2.0+${GITHUB_SHA::6} --build-number=${{ steps.buildnumber.outputs.build_number }}
+      
+    - name: Navigate to where our apk is 
+      run: cd build/app/outputs/flutter-apk/ && ls
+      
+    - name: Upload our apk artifact  
+      uses: actions/upload-artifact@v3
       with:
         name: android-apk
         path: build/app/outputs/flutter-apk/app-release.apk

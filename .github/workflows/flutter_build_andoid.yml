@@ -23,6 +23,13 @@ jobs:
       JAVA_VERSION: "11.0"
     steps:
     - uses: actions/checkout@v3
+    - name: Generate build number
+      id: buildnumber
+      uses: einaregilsson/build-number@v3 
+      with:
+        token: ${{secrets.ACCESS_TOKEN_GITHUB}}    
+        
+    - name: Setup flutter environment
     - uses: actions/setup-java@v2
       with:
         distribution: 'zulu'
@@ -30,9 +37,11 @@ jobs:
     - uses: subosito/flutter-action@v2
       with:
         flutter-version: '3.0.5'
+        
+    - name: Build flutter apk
     - run: flutter pub get
     - run: flutter test
-    - run: flutter build apk
+    - run: flutter build apk --build-name=1.2.0+${GITHUB_SHA::6} --build-number=${{ steps.buildnumber.outputs.build_number }}
     - run: cd build/app/outputs/flutter-apk/ && ls
     - uses: actions/upload-artifact@v3
       with:

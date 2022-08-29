@@ -37,7 +37,7 @@ class MyHomePage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: const <Widget>[
             Text(
-              'Splash screen',
+              'Splash screen Test',
             ),
           ],
         ),

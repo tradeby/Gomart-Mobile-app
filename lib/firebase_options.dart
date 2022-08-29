@@ -64,6 +64,6 @@ class DefaultFirebaseOptions {
     projectId: 'gomart-apps',
     storageBucket: 'gomart-apps.appspot.com',
     iosClientId: '1066738259998-l2t7qgmqdkslvgk852jqcollv8k358lh.apps.googleusercontent.com',
-    iosBundleId: 'com.example.gomart',
+    iosBundleId: 'com.tradebyservices.gomart',
   );
 }

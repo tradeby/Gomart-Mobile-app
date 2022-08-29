@@ -17,7 +17,7 @@ on:
 jobs:
   # This workflow contains a single job called "build"
   build:
-    # The type of runner that the job will run on
+    name: Build app
     runs-on: ubuntu-latest
     env:
       JAVA_VERSION: "11.0"
@@ -61,7 +61,8 @@ jobs:
         path: build/app/outputs/flutter-apk/app-release.apk
         
   deploy_app_distribution:
-
+    name: Deploy to app distribution
+    needs: build
     runs-on: ubuntu-latest
 
     steps:
@@ -75,4 +76,4 @@ jobs:
         appId: ${{secrets.FIREBASE_ANDROID_APPID}}
         token: ${{secrets.FIREBASE_TOKEN}}
         groups: app_testers
-        file: build/app/outputs/flutter-apk/app-release.apk
+        file: app-release.apk

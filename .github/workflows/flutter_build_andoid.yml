@@ -59,3 +59,20 @@ jobs:
       with:
         name: android-apk
         path: build/app/outputs/flutter-apk/app-release.apk
+        
+  deploy_app_distribution:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Download a single artifact
+      uses: actions/download-artifact@v3
+      with:
+        name: android-apk
+    - name: upload artifact to Firebase App Distribution
+      uses: wzieba/Firebase-Distribution-Github-Action@v1
+      with:
+        appId: ${{secrets.FIREBASE_ANDROID_APPID}}
+        token: ${{secrets.FIREBASE_TOKEN}}
+        groups: app_testers
+        file: build/app/outputs/flutter-apk/app-release.apk

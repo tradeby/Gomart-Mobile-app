@@ -62,7 +62,13 @@ jobs:
       - name: Pod install
         run: cd ios && pod install
       - name: Build app iOS app
-        run: flutter build ipa
+        env:
+            EXPORT_PLIST: ${{ secrets.IOS_EXPORT_PRODUCTION}}
+        run: |
+              # create export options
+              EXPORT_PLIST_PATH=$RUNNER_TEMP/ExportOptions.plist
+              echo -n "$EXPORT_PLIST" | base64 --decode --output $EXPORT_PLIST_PATH
+              flutter build ipa --export-options-plist=$EXPORT_PLIST_PATH
       - name: Decode auth. api key file and save it
         env:
           API_KEY_BASE64: ${{ secrets.APPSTORE_API_PRIVATE_KEY }}

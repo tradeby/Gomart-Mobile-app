@@ -12,7 +12,7 @@ on:
 
 jobs:
   build_with_signing:
-    runs-on: macos-latest
+    runs-on: macos-12
 
     steps:
       - name: Setup xcode version

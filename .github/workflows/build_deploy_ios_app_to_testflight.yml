@@ -57,8 +57,6 @@ jobs:
           architecture: x64
       - name: Flutter pub get
         run: flutter pub get
-      - name: Pod disintegrate
-        run: cd ios && pod deintegrate
       - name: Pod install
         run: cd ios && pod install
       - name: Build app iOS app

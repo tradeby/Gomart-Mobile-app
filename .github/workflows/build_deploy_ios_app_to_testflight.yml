@@ -62,15 +62,7 @@ jobs:
       - name: Pod install
         run: cd ios && pod install
       - name: Build app iOS app
-        run: cd ios && xcodebuild -scheme "Runner" clean archive -archivePath "Actions" -configuration "Release Production"
-      - name: export ipa
-        env:
-          EXPORT_PLIST: ${{ secrets.IOS_EXPORT_PRODUCTION}}
-        run: |
-            # create export options
-            EXPORT_PLIST_PATH=$RUNNER_TEMP/ExportOptions.plist
-            echo -n "$EXPORT_PLIST" | base64 --decode --output $EXPORT_PLIST_PATH
-            xcodebuild -exportArchive -archivePath $GITHUB_WORKSPACE/Actions.xcarchive -exportOptionsPlist $EXPORT_PLIST_PATH -exportPath $RUNNER_TEMP/export
+        run: flutter build ipa
       - name: Decode auth. api key file and save it
         env:
           API_KEY_BASE64: ${{ secrets.APPSTORE_API_PRIVATE_KEY }}
@@ -84,8 +76,8 @@ jobs:
         run: |
             echo "Starting upload.. "
             ls ~/private_keys
-            xcrun altool — validate-app -f [path/to/.ipa] -t ios — apiKey ${{ secrets.APPSTORE_API_KEY_ID }} — apiIssuer ${{secrets.APPSTORE_ISSUER_ID }}
-            xcrun altool — upload-app -f [path/to/.ipa] -t ios — apiKey "${{ secrets.APPSTORE_API_KEY_ID }}" — apiIssuer "${{ secrets.APPSTORE_ISSUER_ID }}"
+            xcrun altool --upload-app --type ios -f build/ios/ipa/*.ipa --apiKey "${{ secrets.APPSTORE_API_KEY_ID }}" --apiIssuer "${{ secrets.APPSTORE_ISSUER_ID }}"
+ 
             
         
       

@@ -1,5 +1,14 @@
 name: Build and upload Ios app to Testflight
-on: push
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
 
 jobs:
   build_with_signing:
@@ -37,7 +46,7 @@ jobs:
           mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
           cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
       - name: Build app iOS app
-        run: xcodebuild -scheme "Actions Production" clean archive -archivePath "Actions" -configuration "Release Production"
+        run: cd ios && xcodebuild -scheme "Actions Production" clean archive -archivePath "Actions" -configuration "Release Production"
       - name: export ipa
         env:
           EXPORT_PLIST: ${{ secrets.IOS_EXPORT_PRODUCTION}}

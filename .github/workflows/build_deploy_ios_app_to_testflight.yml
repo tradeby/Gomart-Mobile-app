@@ -45,6 +45,11 @@ jobs:
           # apply provisioning profile
           mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
           cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
+      - name: Generate build number
+        id: buildnumber
+        uses: einaregilsson/build-number@v3 
+        with:
+          token: ${{secrets.ACCESS_TOKEN_GITHUB}}    
       - name: Setting up flutter environment
         uses: subosito/flutter-action@v2
         with:
@@ -64,7 +69,7 @@ jobs:
               # create export options
               EXPORT_PLIST_PATH=$RUNNER_TEMP/ExportOptions.plist
               echo -n "$EXPORT_PLIST" | base64 --decode --output $EXPORT_PLIST_PATH
-              flutter build ipa --export-options-plist=$EXPORT_PLIST_PATH
+              flutter build ipa --export-options-plist=$EXPORT_PLIST_PATH --build-name=1.2.0+${GITHUB_SHA::6} --build-number=${{ steps.buildnumber.outputs.build_number }}
       - name: Decode auth. api key file and save it
         env:
           API_KEY_BASE64: ${{ secrets.APPSTORE_API_PRIVATE_KEY }}

@@ -45,6 +45,11 @@ jobs:
           # apply provisioning profile
           mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
           cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
+          
+      - name: Pod disintegrate
+        run: cd ios && pod deintegrate
+      - name: Pod install
+        run: cd ios && pod install
       - name: Build app iOS app
         run: cd ios && xcodebuild -scheme "Runner" clean archive -archivePath "Actions" -configuration "Release Production"
       - name: export ipa

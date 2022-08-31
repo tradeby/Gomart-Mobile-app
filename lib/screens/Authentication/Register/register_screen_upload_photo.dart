@@ -21,7 +21,6 @@ class RegisterScreenUploadPhoto extends StatelessWidget {
             Container(
               padding: const EdgeInsets.fromLTRB(0, 80, 0, 0),
               width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height * 0.28,
               decoration: const BoxDecoration(
                 color: Styles.colorPrimary,
                 borderRadius: BorderRadius.only(

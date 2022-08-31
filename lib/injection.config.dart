@@ -24,7 +24,7 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
     {String? environment, _i2.EnvironmentFilter? environmentFilter}) async {
   final gh = _i2.GetItHelper(get, environment, environmentFilter);
   final appModule = _$AppModule();
-  gh.factory<_i3.BlocService>(() => appModule.blocService);
+  gh.singleton<_i3.BlocService>(appModule.blocService);
   gh.factory<_i4.FirebaseAuth>(() => appModule.auth);
   gh.factory<_i5.FirebaseFirestore>(() => appModule.store);
   await gh.factoryAsync<_i6.FirebaseService>(() => appModule.fireService,

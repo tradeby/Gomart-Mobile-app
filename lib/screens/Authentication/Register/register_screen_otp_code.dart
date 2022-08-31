@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gomart/data/bloc/authentication/authentication_bloc.dart';
+import 'package:gomart/injection.dart';
 import 'package:gomart/screens/Authentication/Register/register_screen_upload_photo.dart';
 import 'package:gomart/screens/styles.dart';
 
@@ -106,9 +107,7 @@ class RegisterOtpCodeScreen extends StatelessWidget {
                 shape: const StadiumBorder(),
               ),
               onPressed: () {
-                context
-                    .read<AuthenticationBloc>()
-                    .add(AuthenticationLoggedIn());
+                locator<AuthenticationBloc>().add(AuthenticationLoggedIn());
               },
               child: const Text(
                 'Get started',

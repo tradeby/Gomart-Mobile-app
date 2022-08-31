@@ -9,6 +9,7 @@ abstract class AppModule {
   @preResolve
   Future<FirebaseService> get fireService => FirebaseService.init();
 
+  @singleton
   BlocService get blocService => BlocService.init();
 
   @injectable

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gomart/data/bloc/authentication/authentication_bloc.dart';
+import 'package:gomart/injection.dart';
 import 'package:gomart/screens/styles.dart';
 
 class OtpCodeScreen extends StatelessWidget {
@@ -22,7 +23,7 @@ class OtpCodeScreen extends StatelessWidget {
               height: MediaQuery.of(context).size.height * 0.28,
             ),
             const Padding(padding: EdgeInsets.all(16)),
-            const Text('Enter the otp code we just texted you',
+            const Text('Enter the OTP code we just texted you',
                 style: TextStyle(color: Styles.colorTextDark, fontSize: 16)),
             const Padding(padding: EdgeInsets.all(12)),
             SizedBox(
@@ -71,9 +72,7 @@ class OtpCodeScreen extends StatelessWidget {
                 shape: const StadiumBorder(),
               ),
               onPressed: () {
-                context
-                    .read<AuthenticationBloc>()
-                    .add(AuthenticationLoggedIn());
+                locator<AuthenticationBloc>().add(AuthenticationLoggedIn());
               },
               child: const Text(
                 'Next',

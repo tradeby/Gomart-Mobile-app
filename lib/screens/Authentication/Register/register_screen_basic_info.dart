@@ -20,7 +20,6 @@ class RegisterScreenAddBasicInfo extends StatelessWidget {
             Container(
               padding: const EdgeInsets.fromLTRB(0, 80, 0, 0),
               width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height * 0.28,
               decoration: const BoxDecoration(
                 color: Styles.colorPrimary,
                 borderRadius: BorderRadius.only(
@@ -91,7 +90,6 @@ class CustomInput extends StatelessWidget {
       width: MediaQuery.of(context).size.width * 0.6,
       height: 40,
       child: TextField(
-        keyboardType: TextInputType.phone,
         style: const TextStyle(fontSize: 14),
         cursorColor: Styles.colorPrimary,
         textAlign: TextAlign.center,

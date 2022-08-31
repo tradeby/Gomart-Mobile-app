@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:gomart/styles.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
+import 'package:gomart/data/bloc/authentication/authentication_bloc.dart';
+import 'package:gomart/screens/Authentication/authentication_screen.dart';
+import 'package:gomart/screens/styles.dart';
 
 import 'injection.dart';
 
@@ -9,7 +13,19 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await configureDependencies();
 
-  runApp(const MyApp());
+  runApp(
+    Phoenix(
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider<AuthenticationBloc>(
+            create: (context) =>locator<AuthenticationBloc>()
+              ..add(AuthenticationStarted()),
+          ),
+        ],
+        child: const MyApp(),
+      ),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -24,82 +40,6 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: const Authentication(),
-    );
-  }
-}
-
-class Authentication extends StatefulWidget {
-  const Authentication({Key? key}) : super(key: key);
-
-  @override
-  State<StatefulWidget> createState() => _StateAuthentication();
-}
-
-class _StateAuthentication extends State<Authentication> {
-  bool isLoading = false;
-
-  @override
-  void initState() {
-    super.initState();
-    Future.delayed(const Duration(seconds: 2)).then((_) {
-      setState(() {
-        isLoading = true;
-      });
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    if (!isLoading) {
-      return const SplashScreen();
-    } else {
-      return const HomeScreen();
-    }
-  }
-}
-
-class SplashScreen extends StatelessWidget {
-  const SplashScreen({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Styles.colorPrimary,
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Image.asset(
-              'assets/icon/icon-true-round.png',
-              width: 110,
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: const <Widget>[
-            Text(
-              'Home screen',
-            ),
-          ],
-        ),
-      ),
     );
   }
 }

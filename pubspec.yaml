@@ -39,11 +39,21 @@ dependencies:
   cloud_firestore: ^3.4.6
   flutter_launcher_icons: ^0.10.0
   flutter_native_splash: ^2.2.8
+  get_it: ^7.2.0
+  injectable: ^1.5.3
+  equatable: ^2.0.5
+  bloc: ^8.1.0
+  flutter_bloc: ^8.1.1
+  flutter_phoenix: ^1.1.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  # add the generator to your dev_dependencies
+  injectable_generator:
+  # add build runner if not already added
 
+  build_runner:
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your

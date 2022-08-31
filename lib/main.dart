@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:gomart/styles.dart';
-import 'firebase_options.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
+
+import 'injection.dart';
 
 Future<void> main() async {
   //WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   //FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  await configureDependencies();
+
   runApp(const MyApp());
 }
 
@@ -54,8 +52,7 @@ class _StateAuthentication extends State<Authentication> {
   Widget build(BuildContext context) {
     if (!isLoading) {
       return const SplashScreen();
-    }
-    else {
+    } else {
       return const HomeScreen();
     }
   }
@@ -73,9 +70,11 @@ class SplashScreen extends StatelessWidget {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children:  <Widget>[
-           Image.asset('assets/icon/icon-true-round.png',
-           width: 110,),
+          children: <Widget>[
+            Image.asset(
+              'assets/icon/icon-true-round.png',
+              width: 110,
+            ),
           ],
         ),
       ),

@@ -4,12 +4,13 @@ import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:gomart/data/bloc/authentication/authentication_bloc.dart';
 import 'package:gomart/screens/Authentication/authentication_screen.dart';
 import 'package:gomart/screens/styles.dart';
-
+//import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'injection.dart';
 
 Future<void> main() async {
   //WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   //FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+
   WidgetsFlutterBinding.ensureInitialized();
   await configureDependencies();
 

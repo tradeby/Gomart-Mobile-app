@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:gomart/screens/Authentication/Login/otp_code_screen.dart';
 import 'package:gomart/screens/Authentication/Register/register_screen_upload_photo.dart';
 import 'package:gomart/screens/styles.dart';
 

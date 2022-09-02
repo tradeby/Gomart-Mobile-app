@@ -1,12 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
 
-class BlocService {
-  static BlocService init() {
-    Bloc.observer = BlocDelegateObserver();
-    return BlocService();
-  }
-}
+
 
 class BlocDelegateObserver extends BlocObserver {
   @override

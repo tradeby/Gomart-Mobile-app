@@ -1,9 +1,16 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gomart/screens/Authentication/Login/otp_code_screen.dart';
+import 'package:gomart/screens/Authentication/Register/bloc/registration_cubit.dart';
 import 'package:gomart/screens/Authentication/Register/register_screen_otp_code.dart';
 import 'package:gomart/screens/Home/home_screen.dart';
 import 'package:gomart/screens/styles.dart';
+import 'package:image_cropper/image_cropper.dart';
+import 'package:image_picker/image_picker.dart';
 
 class RegisterScreenUploadPhoto extends StatelessWidget {
   const RegisterScreenUploadPhoto({
@@ -43,27 +50,52 @@ class RegisterScreenUploadPhoto extends StatelessWidget {
               ),
             ),
             const Padding(padding: EdgeInsets.all(16)),
-            const Text('Profile photo',
+            const Text('Upload Profile photo',
                 style: TextStyle(color: Styles.colorTextDark)),
-            const Padding(padding: EdgeInsets.all(8)),
+            const Padding(padding: EdgeInsets.all(12)),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: const <Widget>[
-                IconButtonWithText(
-                  icon: Icons.camera_alt,
-                  label: 'Use camera',
-                ),
-                IconButtonWithText(
-                  icon: Icons.cloud_upload,
-                  label: 'Upload photo',
-                ),
+                UseCameraButton(),
+                PickImageFromGallery(),
               ],
             ),
+            const Padding(padding: EdgeInsets.all(16)),
+            const SectionWithoutImage()
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class SectionWithoutImage extends StatelessWidget {
+  const SectionWithoutImage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<RegistrationCubit, RegistrationState>(
+      builder: (context, state) {
+        return Column(
+          children: [
+            Text(
+                (state is SetProfilePhotoState)
+                    ? 'Press next to continue'
+                    : 'Or click skip to use this instead',
+                style: const TextStyle(color: Styles.colorTextDark)),
             const Padding(padding: EdgeInsets.all(8)),
-            const Text('Or click skip to use this instead',
-                style: TextStyle(color: Styles.colorTextDark)),
-            const Padding(padding: EdgeInsets.all(8)),
-            const CharacterAvatar(ch: 'Shams',),
+            (state is SetProfilePhotoState)
+                ? CircleAvatar(
+                    radius: 45,
+                    child: ClipOval(
+                        child: Image.file(
+                      File(state.imagePath),
+                      width: 120,
+                    )),
+                  )
+                : const CharacterAvatar(
+                    ch: 'Shams',
+                  ),
             const Padding(padding: EdgeInsets.all(16)),
             TextButton(
               style: TextButton.styleFrom(
@@ -75,28 +107,27 @@ class RegisterScreenUploadPhoto extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const RegisterOtpCodeScreen()),
+                  MaterialPageRoute(
+                      builder: (context) => const RegisterOtpCodeScreen()),
                 );
               },
-              child: const Text(
-                'Skip',
-                style: TextStyle(
+              child: Text(
+                (state is SetProfilePhotoState) ? 'Next' : 'Skip',
+                style: const TextStyle(
                     fontWeight: FontWeight.normal, color: Styles.colorBlack),
               ),
             ),
           ],
-        ),
-      ),
+        );
+      },
     );
   }
 }
 
 class CharacterAvatar extends StatelessWidget {
   final String ch;
-  const CharacterAvatar({
-    Key? key,
-    required this.ch
-  }) : super(key: key);
+
+  const CharacterAvatar({Key? key, required this.ch}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -106,7 +137,7 @@ class CharacterAvatar extends StatelessWidget {
       child: Material(
         color: Colors.deepPurpleAccent,
         borderRadius: BorderRadius.circular(50),
-        child:  Center(
+        child: Center(
           child: Text(
             ch[0],
             style: const TextStyle(
@@ -121,12 +152,92 @@ class CharacterAvatar extends StatelessWidget {
   }
 }
 
-class IconButtonWithText extends StatelessWidget {
-  final IconData icon;
-  final String label;
+class UseCameraButton extends StatefulWidget {
+  const UseCameraButton({Key? key}) : super(key: key);
 
-  const IconButtonWithText({Key? key, required this.icon, required this.label})
-      : super(key: key);
+  @override
+  State<StatefulWidget> createState() => StateUseCameraButton();
+}
+
+class StateUseCameraButton extends State<UseCameraButton> {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: <Widget>[
+        ElevatedButton(
+            style: TextButton.styleFrom(
+              backgroundColor: Styles.colorSecondary,
+              padding: const EdgeInsets.all(12),
+              shape: const CircleBorder(),
+            ),
+            onPressed: () async {
+              final ImagePicker _picker = ImagePicker();
+              // Pick an image
+              final XFile? image =
+                  await _picker.pickImage(source: ImageSource.camera);
+              if (image?.path != null) {
+                CroppedFile? croppedFile = await ImageCropper().cropImage(
+                  sourcePath: image?.path ?? '',
+                  aspectRatioPresets: [
+                    CropAspectRatioPreset.square,
+                  ],
+                  cropStyle: CropStyle.circle,
+                  uiSettings: [
+                    AndroidUiSettings(
+                        toolbarTitle: 'Crop photo',
+                        toolbarColor: Colors.black,
+                        toolbarWidgetColor: Styles.colorWhite,
+                        showCropGrid: false,
+                        initAspectRatio: CropAspectRatioPreset.square,
+                        hideBottomControls: true,
+                        lockAspectRatio: true),
+                    IOSUiSettings(
+                      title: 'Crop photo',
+                    ),
+                    WebUiSettings(
+                      context: context,
+                    ),
+                  ],
+                );
+                String? imagePath = croppedFile!.path;
+                if (!mounted) return;
+                context.read<RegistrationCubit>().setProfileImage(imagePath);
+              } else {
+                print("Error encountered");
+              }
+            },
+            child: const Icon(Icons.camera_alt)),
+        const Padding(padding: EdgeInsets.all(4)),
+        const Text('Use camera',
+            style: TextStyle(
+              fontSize: 12,
+              color: Styles.colorTextDark,
+            )),
+      ],
+    );
+  }
+}
+
+class PickImageFromGallery extends StatefulWidget {
+  const PickImageFromGallery({Key? key}) : super(key: key);
+
+  @override
+  State<StatefulWidget> createState() => StatePickImageFromGallery();
+}
+
+class StatePickImageFromGallery extends State<PickImageFromGallery> {
+  late ImagePicker _picker;
+
+  @override
+  void initState() {
+    _picker = ImagePicker();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -138,11 +249,39 @@ class IconButtonWithText extends StatelessWidget {
               padding: const EdgeInsets.all(12),
               shape: const CircleBorder(),
             ),
-            onPressed: () {},
-            child: Icon(icon)),
+            onPressed: () async {
+              final XFile? image =
+                  await _picker.pickImage(source: ImageSource.gallery);
+              if (image?.path != null) {
+                CroppedFile? croppedFile = await ImageCropper().cropImage(
+                  sourcePath: image?.path ?? '',
+                  cropStyle: CropStyle.circle,
+                  uiSettings: [
+                    AndroidUiSettings(
+                        toolbarTitle: 'Crop photo',
+                        toolbarColor: Colors.black,
+                        toolbarWidgetColor: Styles.colorWhite,
+                        showCropGrid: false,
+                        initAspectRatio: CropAspectRatioPreset.square,
+                        hideBottomControls: true,
+                        lockAspectRatio: true),
+                    IOSUiSettings(
+                      title: 'Cropper',
+                    ),
+                    WebUiSettings(
+                      context: context,
+                    ),
+                  ],
+                );
+                String? imagePath = croppedFile!.path;
+                if (!mounted) return;
+                context.read<RegistrationCubit>().setProfileImage(imagePath);
+              } else {}
+            },
+            child: const Icon(Icons.cloud_upload)),
         const Padding(padding: EdgeInsets.all(4)),
-        Text(label,
-            style: const TextStyle(
+        const Text('Upload photo',
+            style: TextStyle(
               fontSize: 12,
               color: Styles.colorTextDark,
             )),

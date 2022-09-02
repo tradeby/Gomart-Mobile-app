@@ -6,10 +6,10 @@ part 'registration_state.dart';
 
 @Injectable()
 class RegistrationCubit extends Cubit<RegistrationState> {
-  RegistrationCubit() : super(RegistrationInitial());
+  RegistrationCubit() : super(RegistrationState.initial());
 
   void setProfileImage(croppedImagePath) =>
-      emit(SetProfilePhotoState(imagePath: croppedImagePath));
+      emit(state.copyWith(photoUrl: croppedImagePath));
 
-  void removeProfilePhoto() => emit(RegistrationInitial());
+  void removeProfilePhoto() => emit(state.clearPhotoUrl());
 }

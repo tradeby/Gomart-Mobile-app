@@ -79,17 +79,17 @@ class SectionWithoutImage extends StatelessWidget {
         return Column(
           children: [
             Text(
-                (state is SetProfilePhotoState)
+                (state.photoUrl!=null)
                     ? 'Press next to continue'
                     : 'Or click skip to use this instead',
                 style: const TextStyle(color: Styles.colorTextDark)),
             const Padding(padding: EdgeInsets.all(8)),
-            (state is SetProfilePhotoState)
+            (state.photoUrl!=null)
                 ? CircleAvatar(
                     radius: 45,
                     child: ClipOval(
                         child: Image.file(
-                      File(state.imagePath),
+                      File(state.photoUrl.toString()),
                       width: 120,
                     )),
                   )
@@ -112,7 +112,7 @@ class SectionWithoutImage extends StatelessWidget {
                 );
               },
               child: Text(
-                (state is SetProfilePhotoState) ? 'Next' : 'Skip',
+                (state.photoUrl!=null) ? 'Next' : 'Skip',
                 style: const TextStyle(
                     fontWeight: FontWeight.normal, color: Styles.colorBlack),
               ),

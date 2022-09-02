@@ -12,66 +12,76 @@ class RegisterScreenAddBasicInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Styles.colorBackground,
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            Container(
-              padding: const EdgeInsets.fromLTRB(0, 80, 0, 0),
-              width: MediaQuery.of(context).size.width,
-              decoration: const BoxDecoration(
-                color: Styles.colorPrimary,
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(50.0),
-                  bottomRight: Radius.circular(50.0),
+      body: SingleChildScrollView(
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              Container(
+                padding: const EdgeInsets.fromLTRB(0, 80, 0, 0),
+                width: MediaQuery.of(context).size.width,
+                decoration: const BoxDecoration(
+                  color: Styles.colorPrimary,
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(50.0),
+                    bottomRight: Radius.circular(50.0),
+                  ),
+                ),
+                child: Column(
+                  children: <Widget>[
+                    const Text(
+                      'Find shops & services near you',
+                      style: TextStyle(color: Styles.colorWhite, fontSize: 18),
+                    ),
+                    const Padding(padding: EdgeInsets.all(16)),
+                    Image.asset(
+                      'assets/icon/gomart-logo-with-text.png',
+                      width: 200,
+                    ),
+                  ],
                 ),
               ),
-              child: Column(
-                children: <Widget>[
-                  const Text(
-                    'Find shops & services near you',
-                    style: TextStyle(color: Styles.colorWhite, fontSize: 18),
-                  ),
-                  const Padding(padding: EdgeInsets.all(16)),
-                  Image.asset(
-                    'assets/icon/gomart-logo-with-text.png',
-                    width: 200,
-                  ),
-                ],
+              const Padding(padding: EdgeInsets.all(16)),
+              const Text('Basic Information',
+                  style: TextStyle(color: Styles.colorTextDark)),
+              const Padding(padding: EdgeInsets.all(8)),
+              const CustomInput(label: 'First name'),
+              const Padding(padding: EdgeInsets.all(8)),
+              const CustomInput(label: 'Last name'),
+              const Padding(padding: EdgeInsets.all(12)),
+              SizedBox(
+                width: MediaQuery.of(context).size.width*0.6,
+                child: const Text('Your Date of birth, so we can wish you happy birthdays',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(color: Styles.colorTextDark,
+                    fontSize: 12)),
               ),
-            ),
-            const Padding(padding: EdgeInsets.all(16)),
-            const Text('Basic Information',
-                style: TextStyle(color: Styles.colorTextDark)),
-            const Padding(padding: EdgeInsets.all(8)),
-            const CustomInput(label: 'First name'),
-            const Padding(padding: EdgeInsets.all(8)),
-            const CustomInput(label: 'Last name'),
-            const Padding(padding: EdgeInsets.all(8)),
-            const CustomInput(label: 'Date of birth'),
-            const Padding(padding: EdgeInsets.all(8)),
-            const Padding(padding: EdgeInsets.all(16)),
-            TextButton(
-              style: TextButton.styleFrom(
-                backgroundColor: Styles.colorSecondary,
-                padding:
-                    const EdgeInsets.symmetric(vertical: 8, horizontal: 40),
-                shape: const StadiumBorder(),
+              const Padding(padding: EdgeInsets.all(4)),
+              const CustomInput(label: 'Date of birth'),
+              const Padding(padding: EdgeInsets.all(8)),
+              const Padding(padding: EdgeInsets.all(16)),
+              TextButton(
+                style: TextButton.styleFrom(
+                  backgroundColor: Styles.colorSecondary,
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 8, horizontal: 40),
+                  shape: const StadiumBorder(),
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const RegisterScreenUploadPhoto()),
+                  );
+                },
+                child: const Text(
+                  'Next',
+                  style: TextStyle(
+                      fontWeight: FontWeight.normal, color: Styles.colorBlack),
+                ),
               ),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const RegisterScreenUploadPhoto()),
-                );
-              },
-              child: const Text(
-                'Next',
-                style: TextStyle(
-                    fontWeight: FontWeight.normal, color: Styles.colorBlack),
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

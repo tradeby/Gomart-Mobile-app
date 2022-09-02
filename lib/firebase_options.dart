@@ -59,11 +59,11 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyCNCJl3KbgQHZYkC_4NtBeyNfVuzgvhNvA',
-    appId: '1:1066738259998:ios:76735c7cca4edc78a3760f',
+    appId: '1:1066738259998:ios:b86b9356d72a5d7ca3760f',
     messagingSenderId: '1066738259998',
     projectId: 'gomart-apps',
     storageBucket: 'gomart-apps.appspot.com',
-    iosClientId: '1066738259998-l2t7qgmqdkslvgk852jqcollv8k358lh.apps.googleusercontent.com',
+    iosClientId: '1066738259998-aq96mholj4dvtl4s0b2l2f6c6q8ca74f.apps.googleusercontent.com',
     iosBundleId: 'com.tradebyservices.gomart',
   );
 }

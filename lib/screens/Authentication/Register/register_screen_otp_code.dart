@@ -107,7 +107,9 @@ class RegisterOtpCodeScreen extends StatelessWidget {
                 shape: const StadiumBorder(),
               ),
               onPressed: () {
-                locator<AuthenticationBloc>().add(AuthenticationLoggedIn());
+                context
+                    .read<AuthenticationBloc>()
+                    .add(AuthenticationLoggedIn());
               },
               child: const Text(
                 'Get started',

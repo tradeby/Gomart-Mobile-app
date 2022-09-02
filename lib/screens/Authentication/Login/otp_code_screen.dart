@@ -71,8 +71,9 @@ class OtpCodeScreen extends StatelessWidget {
                     const EdgeInsets.symmetric(vertical: 8, horizontal: 40),
                 shape: const StadiumBorder(),
               ),
-              onPressed: () {
-                locator<AuthenticationBloc>().add(AuthenticationLoggedIn());
+              onPressed: () { context
+                  .read<AuthenticationBloc>()
+                  .add(AuthenticationLoggedIn());
               },
               child: const Text(
                 'Next',

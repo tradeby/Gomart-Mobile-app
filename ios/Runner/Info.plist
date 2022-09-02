@@ -34,6 +34,14 @@
 		</array>
 		<key>UILaunchStoryboardName</key>
 		<string>LaunchScreen</string>
+
+		<key>NSPhotoLibraryUsageDescription</key>
+        <string>Gomart uses has features that require user to upload his photo or a product photo</string>
+        <key>NSCameraUsageDescription</key>
+        <string>Gomart uses a feature that requires user to capture photo with his camera and upload it</string>
+        <key>UILaunchStoryboardName</key>
+        <string>LaunchScreen</string>
+
 		<key>UIMainStoryboardFile</key>
 		<string>Main</string>
 		<key>UIStatusBarHidden</key>

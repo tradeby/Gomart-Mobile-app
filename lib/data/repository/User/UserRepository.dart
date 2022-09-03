@@ -25,8 +25,7 @@ class UserRepository implements IUserRepository {
   }
 
   @override
-  Future<bool> isSignedIn() async {
-    //Todo remove Future and async from this method
+  bool isSignedIn(){
     final currentUser = _firebaseAuth.currentUser;
     return currentUser != null;
   }

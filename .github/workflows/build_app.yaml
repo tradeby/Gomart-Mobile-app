@@ -45,8 +45,8 @@ jobs:
             # create key.properties and gomart.keystore
             KEY_PROPERTIES_PATH=${GITHUB_WORKSPACE}/android/key.properties
             GOMART_KEYSTORE_PATH=${GITHUB_WORKSPACE}/android/gomart.keystore
-            echo -n "$KEY_PROPERTIES" | base64 --decode --output $KEY_PROPERTIES_PATH
-            echo -n "$GOMART_KEYSTORE" | base64 --decode --output $GOMART_KEYSTORE_PATH
+            openssl enc -base64 -d <<< "$KEY_PROPERTIES" -out $KEY_PROPERTIES_PATH
+            openssl enc -base64 -d <<< "$GOMART_KEYSTORE" -out $GOMART_KEYSTORE_PATH
             cd android && ls
 
 

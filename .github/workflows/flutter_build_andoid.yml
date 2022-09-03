@@ -48,16 +48,16 @@ jobs:
       
     - name: Setup Keystore and Key properties for signing
       env:
-            KEY_PROPERTIES: ${{ secrets.ANDROID_KEY_PROPERTIES}}
-            GOMART_KEYSTORE: ${{ secrets.ANROID_GOMART_KEYSTORE}}
+              KEY_PROPERTIES: ${{ secrets.ANDROID_KEY_PROPERTIES}}
+              GOMART_KEYSTORE: ${{ secrets.ANROID_GOMART_KEYSTORE}}
       run: 
-          |
-          # create key.properties and gomart.keystore
-          KEY_PROPERTIES_PATH=${GITHUB_WORKSPACE}/android/key.properties
-          GOMART_KEYSTORE_PATH=${GITHUB_WORKSPACE}/android/gomart.keystore
-          echo -n "$KEY_PROPERTIES" | base64 --decode --output $KEY_PROPERTIES_PATH
-          echo -n "$GOMART_KEYSTORE" | base64 --decode --output $GOMART_KEYSTORE_PATH
-          cd android && ls
+            |
+            # create key.properties and gomart.keystore
+            KEY_PROPERTIES_PATH=${GITHUB_WORKSPACE}/android/key.properties
+            GOMART_KEYSTORE_PATH=${GITHUB_WORKSPACE}/android/app/gomart.keystore
+            openssl enc -base64 -d <<< "$KEY_PROPERTIES" -out $KEY_PROPERTIES_PATH
+            openssl enc -base64 -d <<< "$GOMART_KEYSTORE" -out $GOMART_KEYSTORE_PATH
+            cd android && ls
           
     - name: Build flutter apk
       run: flutter build apk --build-name=1.2.0+${GITHUB_SHA::6} --build-number=${{ steps.buildnumber.outputs.build_number }}

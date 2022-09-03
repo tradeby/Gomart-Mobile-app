@@ -22,8 +22,11 @@ mixin _$RegisterState {
   String? get phoneNumber => throw _privateConstructorUsedError;
   String? get photoUrl => throw _privateConstructorUsedError;
   String? get status => throw _privateConstructorUsedError;
+  String? get verificationId => throw _privateConstructorUsedError;
+  String? get otp => throw _privateConstructorUsedError;
   FlagCountryCodeModel? get selectedCountry =>
       throw _privateConstructorUsedError;
+  bool? get registrationSuccessful => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $RegisterStateCopyWith<RegisterState> get copyWith =>
@@ -42,7 +45,10 @@ abstract class $RegisterStateCopyWith<$Res> {
       String? phoneNumber,
       String? photoUrl,
       String? status,
-      FlagCountryCodeModel? selectedCountry});
+      String? verificationId,
+      String? otp,
+      FlagCountryCodeModel? selectedCountry,
+      bool? registrationSuccessful});
 }
 
 /// @nodoc
@@ -62,7 +68,10 @@ class _$RegisterStateCopyWithImpl<$Res>
     Object? phoneNumber = freezed,
     Object? photoUrl = freezed,
     Object? status = freezed,
+    Object? verificationId = freezed,
+    Object? otp = freezed,
     Object? selectedCountry = freezed,
+    Object? registrationSuccessful = freezed,
   }) {
     return _then(_value.copyWith(
       firstName: firstName == freezed
@@ -89,10 +98,22 @@ class _$RegisterStateCopyWithImpl<$Res>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as String?,
+      verificationId: verificationId == freezed
+          ? _value.verificationId
+          : verificationId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      otp: otp == freezed
+          ? _value.otp
+          : otp // ignore: cast_nullable_to_non_nullable
+              as String?,
       selectedCountry: selectedCountry == freezed
           ? _value.selectedCountry
           : selectedCountry // ignore: cast_nullable_to_non_nullable
               as FlagCountryCodeModel?,
+      registrationSuccessful: registrationSuccessful == freezed
+          ? _value.registrationSuccessful
+          : registrationSuccessful // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 }
@@ -111,7 +132,10 @@ abstract class _$$_RegisterStateCopyWith<$Res>
       String? phoneNumber,
       String? photoUrl,
       String? status,
-      FlagCountryCodeModel? selectedCountry});
+      String? verificationId,
+      String? otp,
+      FlagCountryCodeModel? selectedCountry,
+      bool? registrationSuccessful});
 }
 
 /// @nodoc
@@ -133,7 +157,10 @@ class __$$_RegisterStateCopyWithImpl<$Res>
     Object? phoneNumber = freezed,
     Object? photoUrl = freezed,
     Object? status = freezed,
+    Object? verificationId = freezed,
+    Object? otp = freezed,
     Object? selectedCountry = freezed,
+    Object? registrationSuccessful = freezed,
   }) {
     return _then(_$_RegisterState(
       firstName: firstName == freezed
@@ -160,10 +187,22 @@ class __$$_RegisterStateCopyWithImpl<$Res>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as String?,
+      verificationId: verificationId == freezed
+          ? _value.verificationId
+          : verificationId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      otp: otp == freezed
+          ? _value.otp
+          : otp // ignore: cast_nullable_to_non_nullable
+              as String?,
       selectedCountry: selectedCountry == freezed
           ? _value.selectedCountry
           : selectedCountry // ignore: cast_nullable_to_non_nullable
               as FlagCountryCodeModel?,
+      registrationSuccessful: registrationSuccessful == freezed
+          ? _value.registrationSuccessful
+          : registrationSuccessful // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 }
@@ -178,7 +217,10 @@ class _$_RegisterState with DiagnosticableTreeMixin implements _RegisterState {
       this.phoneNumber,
       this.photoUrl,
       this.status,
-      this.selectedCountry});
+      this.verificationId,
+      this.otp,
+      this.selectedCountry,
+      this.registrationSuccessful});
 
   @override
   final String? firstName;
@@ -193,11 +235,17 @@ class _$_RegisterState with DiagnosticableTreeMixin implements _RegisterState {
   @override
   final String? status;
   @override
+  final String? verificationId;
+  @override
+  final String? otp;
+  @override
   final FlagCountryCodeModel? selectedCountry;
+  @override
+  final bool? registrationSuccessful;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'RegisterState(firstName: $firstName, lastName: $lastName, dateOfBirth: $dateOfBirth, phoneNumber: $phoneNumber, photoUrl: $photoUrl, status: $status, selectedCountry: $selectedCountry)';
+    return 'RegisterState(firstName: $firstName, lastName: $lastName, dateOfBirth: $dateOfBirth, phoneNumber: $phoneNumber, photoUrl: $photoUrl, status: $status, verificationId: $verificationId, otp: $otp, selectedCountry: $selectedCountry, registrationSuccessful: $registrationSuccessful)';
   }
 
   @override
@@ -211,7 +259,11 @@ class _$_RegisterState with DiagnosticableTreeMixin implements _RegisterState {
       ..add(DiagnosticsProperty('phoneNumber', phoneNumber))
       ..add(DiagnosticsProperty('photoUrl', photoUrl))
       ..add(DiagnosticsProperty('status', status))
-      ..add(DiagnosticsProperty('selectedCountry', selectedCountry));
+      ..add(DiagnosticsProperty('verificationId', verificationId))
+      ..add(DiagnosticsProperty('otp', otp))
+      ..add(DiagnosticsProperty('selectedCountry', selectedCountry))
+      ..add(DiagnosticsProperty(
+          'registrationSuccessful', registrationSuccessful));
   }
 
   @override
@@ -228,7 +280,12 @@ class _$_RegisterState with DiagnosticableTreeMixin implements _RegisterState {
             const DeepCollectionEquality().equals(other.photoUrl, photoUrl) &&
             const DeepCollectionEquality().equals(other.status, status) &&
             const DeepCollectionEquality()
-                .equals(other.selectedCountry, selectedCountry));
+                .equals(other.verificationId, verificationId) &&
+            const DeepCollectionEquality().equals(other.otp, otp) &&
+            const DeepCollectionEquality()
+                .equals(other.selectedCountry, selectedCountry) &&
+            const DeepCollectionEquality()
+                .equals(other.registrationSuccessful, registrationSuccessful));
   }
 
   @override
@@ -240,7 +297,10 @@ class _$_RegisterState with DiagnosticableTreeMixin implements _RegisterState {
       const DeepCollectionEquality().hash(phoneNumber),
       const DeepCollectionEquality().hash(photoUrl),
       const DeepCollectionEquality().hash(status),
-      const DeepCollectionEquality().hash(selectedCountry));
+      const DeepCollectionEquality().hash(verificationId),
+      const DeepCollectionEquality().hash(otp),
+      const DeepCollectionEquality().hash(selectedCountry),
+      const DeepCollectionEquality().hash(registrationSuccessful));
 
   @JsonKey(ignore: true)
   @override
@@ -256,7 +316,10 @@ abstract class _RegisterState implements RegisterState {
       final String? phoneNumber,
       final String? photoUrl,
       final String? status,
-      final FlagCountryCodeModel? selectedCountry}) = _$_RegisterState;
+      final String? verificationId,
+      final String? otp,
+      final FlagCountryCodeModel? selectedCountry,
+      final bool? registrationSuccessful}) = _$_RegisterState;
 
   @override
   String? get firstName;
@@ -271,7 +334,13 @@ abstract class _RegisterState implements RegisterState {
   @override
   String? get status;
   @override
+  String? get verificationId;
+  @override
+  String? get otp;
+  @override
   FlagCountryCodeModel? get selectedCountry;
+  @override
+  bool? get registrationSuccessful;
   @override
   @JsonKey(ignore: true)
   _$$_RegisterStateCopyWith<_$_RegisterState> get copyWith =>

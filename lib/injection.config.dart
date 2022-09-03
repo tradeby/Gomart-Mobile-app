@@ -31,9 +31,11 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
       preResolve: true);
   gh.factory<_i6.FirebaseStorage>(() => appModule.storage);
   gh.factory<_i7.IUserRepository>(() => _i8.UserRepository(
-      get<_i3.FirebaseAuth>(), get<_i4.FirebaseFirestore>()));
-  gh.factory<_i9.RegistrationCubit>(
-      () => _i9.RegistrationCubit(get<_i3.FirebaseAuth>()));
+      get<_i3.FirebaseAuth>(),
+      get<_i4.FirebaseFirestore>(),
+      get<_i6.FirebaseStorage>()));
+  gh.factory<_i9.RegistrationCubit>(() => _i9.RegistrationCubit(
+      get<_i3.FirebaseAuth>(), get<_i7.IUserRepository>()));
   gh.factory<_i10.AuthenticationBloc>(
       () => _i10.AuthenticationBloc(get<_i7.IUserRepository>()));
   return get;

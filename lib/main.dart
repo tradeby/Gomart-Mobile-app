@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
@@ -41,10 +42,12 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    debugDefaultTargetPlatformOverride = TargetPlatform.iOS;
     return MaterialApp(
       title: 'Gomart app',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        platform: TargetPlatform.iOS
       ),
       home: const Authentication(),
     );

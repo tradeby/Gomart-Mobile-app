@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,10 +19,11 @@ class Authentication extends StatelessWidget {
         print('This is a change of state $state');
         if (state is AuthenticationLoggedOut) {
           Navigator.of(context).pop();
-        }if (state is AuthenticationSuccess) {
+        }
+        if (state is AuthenticationSuccess) {
           Navigator.of(context).pushAndRemoveUntil(
               MaterialPageRoute(builder: (c) => const HomeScreen()),
-                  (route) => false);
+              (route) => false);
         }
       },
       child: BlocBuilder<AuthenticationBloc, AuthenticationState>(
@@ -30,11 +32,17 @@ class Authentication extends StatelessWidget {
             return const SplashScreen();
           }
           if (authState is AuthenticationFailure) {
-            print('in getting started');
+            if (kDebugMode) {
+              print('in getting started');
+            }
+
             return const GetStartedScreen();
           }
           if (authState is AuthenticationSuccess) {
-            print('Authentication success works!!!!!!!!!!!!!');
+            if (kDebugMode) {
+              print('Authentication success works!!!!!!!!!!!!!');
+            }
+
             return const HomeScreen();
             //return const LoginScreen();
           } else {

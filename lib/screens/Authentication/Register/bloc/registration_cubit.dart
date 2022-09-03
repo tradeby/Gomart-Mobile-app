@@ -2,14 +2,18 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
+import 'package:gomart/data/model/FlagCountryCode/flag_country_code.dart';
+import 'package:gomart/data/repository/User/IUserRepository.dart';
 import 'package:gomart/screens/Authentication/Register/bloc/register_state.dart';
 import 'package:injectable/injectable.dart';
 
 @Injectable()
 class RegistrationCubit extends Cubit<RegisterState> {
   final FirebaseAuth _firebaseAuth;
+  final IUserRepository _userRepository;
 
-  RegistrationCubit(this._firebaseAuth) : super(RegisterState.initial());
+  RegistrationCubit(this._firebaseAuth, this._userRepository)
+      : super(RegisterState.initial());
 
   void setPhoneNumber(_) => emit(state.copyWith(phoneNumber: sanitizeInput(_)));
 
@@ -21,28 +25,68 @@ class RegistrationCubit extends Cubit<RegisterState> {
 
   void setFlagCountryCode(_) => emit(state.copyWith(selectedCountry: _));
 
+  void setOtpCode(_) => emit(state.copyWith(otp: sanitizeInput(_)));
+
+  void setVerificationCode(_) => emit(state.copyWith(verificationId: _));
+
   void setStatus(_) => emit(state.copyWith(status: _));
 
   void setProfileImage(croppedImagePath) =>
       emit(state.copyWith(photoUrl: croppedImagePath));
 
+  //RegisterWithOtpCode
+  void prepareCredentialAndLogin() {
+    // Create a PhoneAuthCredential with the code
+    PhoneAuthCredential credential = PhoneAuthProvider.credential(
+        verificationId: state.verificationId as String,
+        smsCode: state.otp as String);
+    registerNewUser(credential);
+  }
+
+  Future<void> registerNewUser(PhoneAuthCredential credential) async {
+    // call our user repository here!
+    try {
+      await _userRepository.register(
+        firstName: state.firstName as String,
+        lastName: state.lastName as String,
+        phoneNumber: state.phoneNumber as String,
+        country: state.selectedCountry as FlagCountryCodeModel,
+        localPhotoUrl: state.photoUrl,
+        credential: credential,
+      );
+      if (kDebugMode) {
+        print('********* Login successful !');
+        emit(state.copyWith(registrationSuccessful: true));
+        setStatus('Login successful !');
+      }
+    } catch (e) {
+      if (kDebugMode) {
+        setStatus('Login failed !');
+        emit(state.copyWith(registrationSuccessful: false));
+        print('********* Login failed !');
+      }
+    }
+  }
+
   Future<void> verifyPhoneNumber() async {
-    String phoneNumber = '${state.selectedCountry?.countryCode}${state.phoneNumber}';
+    String phoneNumber =
+        '${state.selectedCountry?.countryCode}${state.phoneNumber}';
     await _firebaseAuth.verifyPhoneNumber(
       phoneNumber: phoneNumber,
       verificationCompleted: (PhoneAuthCredential credential) {
+        // ANDROID ONLY!
+
+        // Sign the user in (or link) with the auto-generated credential
+        //set phoneAuthCredential for signIn
+        registerNewUser(credential);
         setStatus('verification complete phoneNumber: $phoneNumber');
         if (kDebugMode) {
           print('verification complete  phoneNumber: $phoneNumber');
         }
       },
-      verificationFailed: (FirebaseAuthException e) {
-        setStatus('verification failed  phoneNumber: $phoneNumber $e');
-        if (kDebugMode) {
-          print('verification failed  phoneNumber: $phoneNumber $e');
-        }
-      },
       codeSent: (String verificationId, int? resendToken) {
+        //take verificationId and
+        setVerificationCode(verificationId);
         setStatus(
             'code sent, phoneNumber: $phoneNumber verificationId: $verificationId resendToken: $resendToken');
         if (kDebugMode) {
@@ -54,7 +98,14 @@ class RegistrationCubit extends Cubit<RegisterState> {
         setStatus(
             'code auto retrival timeout, phoneNumber: $phoneNumber verificationId: $verificationId');
         if (kDebugMode) {
-          print('code auto retrival timeout, phoneNumber: $phoneNumber verificationId: $verificationId');
+          print(
+              'code auto retrival timeout, phoneNumber: $phoneNumber verificationId: $verificationId');
+        }
+      },
+      verificationFailed: (FirebaseAuthException e) {
+        setStatus('verification failed  phoneNumber: $phoneNumber $e');
+        if (kDebugMode) {
+          print('verification failed  phoneNumber: $phoneNumber $e');
         }
       },
     );

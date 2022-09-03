@@ -7,17 +7,21 @@ part 'register_state.freezed.dart';
 
 @freezed
 class RegisterState with _$RegisterState {
-  const factory RegisterState(
-      {String? firstName,
-      String? lastName,
-      DateTime? dateOfBirth,
-      String? phoneNumber,
-      String? photoUrl,
-        String? status,
-      FlagCountryCodeModel? selectedCountry,
-      }) = _RegisterState;
+  const factory RegisterState({
+    String? firstName,
+    String? lastName,
+    DateTime? dateOfBirth,
+    String? phoneNumber,
+    String? photoUrl,
+    String? status,
+    String? verificationId,
+    String? otp,
+    FlagCountryCodeModel? selectedCountry,
+    bool? registrationSuccessful,
+  }) = _RegisterState;
 
   factory RegisterState.initial() {
-    return RegisterState(selectedCountry: FlagCountryCodeModel.getSupportedList[0]);
+    return RegisterState(
+        selectedCountry: FlagCountryCodeModel.getSupportedList[0]);
   }
 }

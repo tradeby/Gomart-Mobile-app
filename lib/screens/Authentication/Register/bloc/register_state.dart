@@ -13,10 +13,11 @@ class RegisterState with _$RegisterState {
       DateTime? dateOfBirth,
       String? phoneNumber,
       String? photoUrl,
+        String? status,
       FlagCountryCodeModel? selectedCountry,
       }) = _RegisterState;
 
   factory RegisterState.initial() {
-    return const RegisterState();
+    return RegisterState(selectedCountry: FlagCountryCodeModel.getSupportedList[0]);
   }
 }

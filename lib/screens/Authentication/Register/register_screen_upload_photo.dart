@@ -96,8 +96,8 @@ class SectionWithoutImage extends StatelessWidget {
                     )),
                   )
                 : CharacterAvatar(
-              ch: state.firstName ?? 'Null',
-            ),
+                    ch: state.firstName ?? 'Null',
+                  ),
             const Padding(padding: EdgeInsets.all(16)),
             TextButton(
               style: TextButton.styleFrom(
@@ -107,6 +107,7 @@ class SectionWithoutImage extends StatelessWidget {
                 shape: const StadiumBorder(),
               ),
               onPressed: () {
+                context.read<RegistrationCubit>().verifyPhoneNumber();
                 Navigator.push(
                   context,
                   MaterialPageRoute(

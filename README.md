@@ -23,3 +23,5 @@ flutter pub run flutter_native_splash:create --path=flutter_native_splash.yaml
 
 injectable build_runner
 flutter pub run build_runner build --delete-conflicting-outputs
+
+flutterfire configure

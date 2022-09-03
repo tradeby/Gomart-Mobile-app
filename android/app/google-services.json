@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "1066738259998-hd4l29tmbqc9ihv68tgnc3l3lt5vq3kl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.gomart",
+            "certificate_hash": "e0599db344f90bf4e0794dfe12b9c89f8f090a58"
+          }
+        },
+        {
           "client_id": "1066738259998-qirvsvjb1e97bhc3hdm124aji8cqfteo.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -31,10 +39,10 @@
               "client_type": 3
             },
             {
-              "client_id": "1066738259998-l2t7qgmqdkslvgk852jqcollv8k358lh.apps.googleusercontent.com",
+              "client_id": "1066738259998-aq96mholj4dvtl4s0b2l2f6c6q8ca74f.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.example.gomart"
+                "bundle_id": "com.tradebyservices.gomart"
               }
             }
           ]

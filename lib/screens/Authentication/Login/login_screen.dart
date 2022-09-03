@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:gomart/screens/Authentication/Login/otp_code_screen.dart';
 import 'package:gomart/screens/styles.dart';
 
+import '../Register/register_screen.dart';
+
 class LoginScreen extends StatelessWidget {
   const LoginScreen({
     Key? key,
@@ -29,7 +31,7 @@ class LoginScreen extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   const Text(
-                    'Welcome to',
+                    'Welcome back',
                     style: TextStyle(color: Styles.colorWhite, fontSize: 18),
                   ),
                   const Padding(padding: EdgeInsets.all(16)),
@@ -44,28 +46,7 @@ class LoginScreen extends StatelessWidget {
             const Text('Sign in with your phone number',
                 style: TextStyle(color: Styles.colorTextDark)),
             const Padding(padding: EdgeInsets.all(8)),
-            SizedBox(
-             width: MediaQuery.of(context).size.width*0.6,
-              height: 40,
-              child: TextField(
-                keyboardType:TextInputType.phone ,
-                style: const TextStyle(fontSize: 14),
-                cursorColor: Styles.colorPrimary,
-                textAlign: TextAlign.center,
-                decoration: InputDecoration(
-                  fillColor: Styles.colorWhite,
-                  filled: true,
-                  contentPadding: const EdgeInsets.symmetric(vertical: 0,horizontal: 20),
-                  focusColor: Styles.colorWhite,
-                  hoverColor: Styles.colorWhite,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(50),
-                    borderSide: BorderSide.none,
-                  ),
-                  hintText: 'Phone number',
-                ),
-              ),
-            ),
+        const PhoneNumberInput(),
             const Padding(padding: EdgeInsets.all(8)),
             SizedBox(
               width: MediaQuery.of(context).size.width * 0.6,

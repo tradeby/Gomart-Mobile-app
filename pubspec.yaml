@@ -48,6 +48,8 @@ dependencies:
   image_picker: ^0.8.5+3
   image_cropper: ^3.0.0
   firebase_storage: ^10.3.7
+  freezed_annotation: ^2.1.0
+  json_annotation: ^4.6.0
 
 dev_dependencies:
   flutter_test:
@@ -63,6 +65,8 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
+  freezed: ^2.1.0+1
+  json_serializable: ^6.3.1
 
 flutter_icons:
   android: "launcher_icon"
@@ -83,6 +87,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/icon/
+    - assets/flags/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

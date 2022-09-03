@@ -1,9 +1,15 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gomart/data/bloc/authentication/authentication_bloc.dart';
 import 'package:gomart/injection.dart';
+import 'package:gomart/screens/Authentication/Register/bloc/registration_cubit.dart';
+import 'package:gomart/screens/Authentication/Register/bloc/registration_cubit.dart';
 import 'package:gomart/screens/Authentication/Register/register_screen_upload_photo.dart';
 import 'package:gomart/screens/styles.dart';
+
+import 'bloc/register_state.dart';
 
 class RegisterOtpCodeScreen extends StatelessWidget {
   const RegisterOtpCodeScreen({
@@ -30,26 +36,45 @@ class RegisterOtpCodeScreen extends StatelessWidget {
                   children: [
                     Row(
                       children: <Widget>[
-                        const CharacterAvatar(
-                          ch: 'Shams',
+                        BlocBuilder<RegistrationCubit, RegisterState>(
+                          builder: (context, state) {
+                            return (state.photoUrl != null)
+                                ? CircleAvatar(
+                                    radius: 45,
+                                    child: ClipOval(
+                                        child: Image.file(
+                                      File(state.photoUrl.toString()),
+                                      width: 120,
+                                    )),
+                                  )
+                                : CharacterAvatar(
+                                    ch: state.firstName ?? 'Null',
+                                  );
+                          },
                         ),
                         const Padding(padding: EdgeInsets.all(12)),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: const <Widget>[
-                            Text(
-                              'Salisu Musa Jahun',
-                              style: TextStyle(
-                                  fontSize: 16, fontWeight: FontWeight.w400),
-                            ),
-                            Padding(padding: EdgeInsets.all(2)),
-                            Text(
-                              '08093446914',
-                              style: TextStyle(
-                                  fontSize: 14, color: Styles.colorTextDark),
-                            )
-                          ],
+                        BlocBuilder<RegistrationCubit, RegisterState>(
+                          builder: (context, state) {
+                            return Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Text(
+                                  '${state.firstName.toString()} ${state.lastName.toString()}',
+                                  style: const TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w400),
+                                ),
+                                const Padding(padding: EdgeInsets.all(2)),
+                                Text(
+                                  '${state.selectedCountry?.countryCode ?? '+234'} ${state.phoneNumber}',
+                                  style: const TextStyle(
+                                      fontSize: 14,
+                                      color: Styles.colorTextDark),
+                                )
+                              ],
+                            );
+                          },
                         )
                       ],
                     )
@@ -58,7 +83,7 @@ class RegisterOtpCodeScreen extends StatelessWidget {
               ),
             ),
             const Padding(padding: EdgeInsets.all(16)),
-            const Text('Enter the otp code we just texted you',
+            const Text('Enter the OTP code we just texted you',
                 style: TextStyle(color: Styles.colorTextDark, fontSize: 16)),
             const Padding(padding: EdgeInsets.all(12)),
             SizedBox(

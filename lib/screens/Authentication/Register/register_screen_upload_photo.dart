@@ -12,6 +12,8 @@ import 'package:gomart/screens/styles.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 
+import 'bloc/register_state.dart';
+
 class RegisterScreenUploadPhoto extends StatelessWidget {
   const RegisterScreenUploadPhoto({
     Key? key,
@@ -74,17 +76,17 @@ class SectionWithoutImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<RegistrationCubit, RegistrationState>(
+    return BlocBuilder<RegistrationCubit, RegisterState>(
       builder: (context, state) {
         return Column(
           children: [
             Text(
-                (state.photoUrl!=null)
+                (state.photoUrl != null)
                     ? 'Press next to continue'
                     : 'Or click skip to use this instead',
                 style: const TextStyle(color: Styles.colorTextDark)),
             const Padding(padding: EdgeInsets.all(8)),
-            (state.photoUrl!=null)
+            (state.photoUrl != null)
                 ? CircleAvatar(
                     radius: 45,
                     child: ClipOval(
@@ -93,9 +95,9 @@ class SectionWithoutImage extends StatelessWidget {
                       width: 120,
                     )),
                   )
-                : const CharacterAvatar(
-                    ch: 'Shams',
-                  ),
+                : CharacterAvatar(
+              ch: state.firstName ?? 'Null',
+            ),
             const Padding(padding: EdgeInsets.all(16)),
             TextButton(
               style: TextButton.styleFrom(
@@ -112,7 +114,7 @@ class SectionWithoutImage extends StatelessWidget {
                 );
               },
               child: Text(
-                (state.photoUrl!=null) ? 'Next' : 'Skip',
+                (state.photoUrl != null) ? 'Next' : 'Skip',
                 style: const TextStyle(
                     fontWeight: FontWeight.normal, color: Styles.colorBlack),
               ),
@@ -135,7 +137,7 @@ class CharacterAvatar extends StatelessWidget {
       height: 60,
       width: 60,
       child: Material(
-        color: Colors.deepPurpleAccent,
+        color: resolveColor(ch),
         borderRadius: BorderRadius.circular(50),
         child: Center(
           child: Text(
@@ -150,6 +152,19 @@ class CharacterAvatar extends StatelessWidget {
       ),
     );
   }
+}
+
+Color resolveColor(String? ch) {
+  if (ch == null) return Colors.deepPurpleAccent;
+  if ('ALWCNY'.characters.contains(ch[0].toUpperCase())) return Colors.green;
+  if ('BMXDOZ'.characters.contains(ch[0].toUpperCase()))
+    return Colors.pinkAccent;
+  if ('EPGR'.characters.contains(ch[0].toUpperCase())) return Colors.blueAccent;
+  if ('FQHS'.characters.contains(ch[0].toUpperCase())) return Colors.brown;
+  if ('ITKV'.characters.contains(ch[0].toUpperCase()))
+    return Colors.orangeAccent;
+  // if('JU'.characters.contains(ch[0].toUpperCase()))
+  return Colors.indigoAccent;
 }
 
 class UseCameraButton extends StatefulWidget {

@@ -38,14 +38,14 @@ class Authentication extends StatelessWidget {
 
             return const GetStartedScreen();
           }
-          if (authState is AuthenticationSuccess) {
+          /*if (authState is AuthenticationSuccess) {
             if (kDebugMode) {
               print('Authentication success works!!!!!!!!!!!!!');
             }
 
             return const HomeScreen();
             //return const LoginScreen();
-          } else {
+          }*/ else {
             return const GetStartedScreen();
           }
         },

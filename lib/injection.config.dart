@@ -11,11 +11,12 @@ import 'package:firebase_storage/firebase_storage.dart' as _i6;
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 
-import 'data/bloc/authentication/authentication_bloc.dart' as _i10;
+import 'data/bloc/authentication/authentication_bloc.dart' as _i11;
 import 'data/repository/User/IUserRepository.dart' as _i7;
 import 'data/repository/User/UserRepository.dart' as _i8;
-import 'screens/Authentication/Register/bloc/registration_cubit.dart' as _i9;
-import 'service/app_module.dart' as _i11;
+import 'screens/Authentication/Login/bloc/login_cubit.dart' as _i9;
+import 'screens/Authentication/Register/bloc/registration_cubit.dart' as _i10;
+import 'service/app_module.dart' as _i12;
 import 'service/firebase_service.dart'
     as _i5; // ignore_for_file: unnecessary_lambdas
 
@@ -34,11 +35,13 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
       get<_i3.FirebaseAuth>(),
       get<_i4.FirebaseFirestore>(),
       get<_i6.FirebaseStorage>()));
-  gh.factory<_i9.RegistrationCubit>(() => _i9.RegistrationCubit(
+  gh.factory<_i9.LoginCubit>(() =>
+      _i9.LoginCubit(get<_i3.FirebaseAuth>(), get<_i7.IUserRepository>()));
+  gh.factory<_i10.RegistrationCubit>(() => _i10.RegistrationCubit(
       get<_i3.FirebaseAuth>(), get<_i7.IUserRepository>()));
-  gh.factory<_i10.AuthenticationBloc>(
-      () => _i10.AuthenticationBloc(get<_i7.IUserRepository>()));
+  gh.factory<_i11.AuthenticationBloc>(
+      () => _i11.AuthenticationBloc(get<_i7.IUserRepository>()));
   return get;
 }
 
-class _$AppModule extends _i11.AppModule {}
+class _$AppModule extends _i12.AppModule {}

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:gomart/data/bloc/authentication/authentication_bloc.dart';
+import 'package:gomart/screens/Authentication/Login/bloc/login_cubit.dart';
 import 'package:gomart/screens/Authentication/Register/bloc/registration_cubit.dart';
 import 'package:gomart/screens/Authentication/authentication_screen.dart';
 import 'package:gomart/screens/styles.dart';
@@ -28,6 +29,9 @@ Future<void> main() async {
           ),
           BlocProvider<RegistrationCubit>(
             create: (context) => locator<RegistrationCubit>(),
+          ),
+          BlocProvider<LoginCubit>(
+            create: (context) => locator<LoginCubit>(),
           )
         ],
         child: const MyApp(),
@@ -45,10 +49,8 @@ class MyApp extends StatelessWidget {
     debugDefaultTargetPlatformOverride = TargetPlatform.iOS;
     return MaterialApp(
       title: 'Gomart app',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        platform: TargetPlatform.iOS
-      ),
+      theme:
+          ThemeData(primarySwatch: Colors.blue, platform: TargetPlatform.iOS),
       home: const Authentication(),
     );
   }

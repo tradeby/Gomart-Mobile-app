@@ -1,6 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 
+import '../../data/bloc/authentication/authentication_bloc.dart';
 import '../styles.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -26,7 +30,13 @@ class HomeScreen extends StatelessWidget {
                       const EdgeInsets.symmetric(vertical: 8, horizontal: 40),
                   shape: const StadiumBorder(),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  HapticFeedback.vibrate();
+                  context.read<AuthenticationBloc>()
+                      .add(AuthenticationLoggedOut(context));
+                  Phoenix.rebirth(context);
+
+                },
                 child: const Text('Logout'))
           ],
         ),

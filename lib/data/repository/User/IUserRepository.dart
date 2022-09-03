@@ -22,5 +22,5 @@ abstract class IUserRepository {
   //Future<User?> getUser();
   Future<void> signOut();
 
-  Future<bool> isSignedIn();
+  bool isSignedIn();
 }

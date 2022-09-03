@@ -1,4 +1,3 @@
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:equatable/equatable.dart';
@@ -17,7 +16,7 @@ class AuthenticationBloc
 
   AuthenticationBloc(this._userRepository) : super(AuthenticationInitial()) {
     on<AuthenticationStarted>((event, emit) async {
-      final isSignedIn = await _userRepository.isSignedIn();
+      final isSignedIn = _userRepository.isSignedIn();
       if (isSignedIn) {
         emit(AuthenticationSuccess());
       } else {
@@ -27,8 +26,7 @@ class AuthenticationBloc
 
     on<AuthenticationLoggedIn>((event, emit) async {
       try {
-        //final isSignedIn = await _userRepository.isSignedIn();
-        final isSignedIn = true;
+        final isSignedIn = _userRepository.isSignedIn();
         if (isSignedIn) {
           emit(AuthenticationSuccess());
         } else {
@@ -41,7 +39,6 @@ class AuthenticationBloc
 
     on<AuthenticationLoggedOut>((event, emit) async {
       await _userRepository.signOut();
-      Phoenix.rebirth;
       emit(AuthenticationFailure());
     });
   }

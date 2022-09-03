@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gomart/data/bloc/authentication/authentication_bloc.dart';
 import 'package:gomart/injection.dart';
+import 'package:gomart/screens/Authentication/Login/bloc/login_cubit.dart';
+import 'package:gomart/screens/Authentication/Login/bloc/login_state.dart';
 import 'package:gomart/screens/styles.dart';
 
 class OtpCodeScreen extends StatelessWidget {
@@ -9,80 +11,140 @@ class OtpCodeScreen extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
+  showLoaderDialog(BuildContext context) {
+    AlertDialog alert = AlertDialog(
+      content: Row(
+        children: [
+          const CircularProgressIndicator(
+            valueColor: AlwaysStoppedAnimation<Color>(Styles.colorPrimary),
+          ),
+          const Padding(padding: EdgeInsets.only(left: 12)),
+          Container(
+            margin: const EdgeInsets.only(left: 7),
+            child: const Text("Loading..."),
+          ),
+        ],
+      ),
+    );
+    showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Styles.colorBackground,
-      body: SingleChildScrollView(
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              Container(
-                padding: const EdgeInsets.fromLTRB(0, 80, 0, 0),
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height * 0.28,
-              ),
-              const Padding(padding: EdgeInsets.all(16)),
-              const Text('Enter the OTP code we just texted you',
-                  style: TextStyle(color: Styles.colorTextDark, fontSize: 16)),
-              const Padding(padding: EdgeInsets.all(12)),
-              SizedBox(
-                width: MediaQuery.of(context).size.width * 0.5,
-                height: 35,
-                child: TextField(
-                  keyboardType: const TextInputType.numberWithOptions(signed: true),
-                  style: const TextStyle(fontSize: 14),
-                  cursorColor: Styles.colorPrimary,
-                  textAlign: TextAlign.center,
-                  decoration: InputDecoration(
-                    fillColor: Styles.colorWhite,
-                    filled: true,
-                    contentPadding:
-                        const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
-                    focusColor: Styles.colorWhite,
-                    hoverColor: Styles.colorWhite,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(50),
-                      borderSide: BorderSide.none,
+    return BlocListener<LoginCubit, LoginState>(
+      listener: (context, state) {
+        if (state.loginSuccessful != null && state.loginSuccessful == true) {
+          context.read<AuthenticationBloc>().add(AuthenticationLoggedIn());
+        } else if (state.loginSuccessful != null &&
+            state.loginSuccessful == false) {
+          var snackBar = SnackBar(
+            content: Text(state.status as String),
+          );
+
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        }
+      },
+      child: Scaffold(
+        backgroundColor: Styles.colorBackground,
+        body: SingleChildScrollView(
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                Container(
+                  padding: const EdgeInsets.fromLTRB(0, 80, 0, 0),
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height * 0.28,
+                ),
+                const Padding(padding: EdgeInsets.all(16)),
+                const Text('Enter the OTP code we just texted you',
+                    style:
+                        TextStyle(color: Styles.colorTextDark, fontSize: 16)),
+                const Padding(padding: EdgeInsets.all(12)),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.5,
+                  height: 35,
+                  child: TextField(
+                    onChanged: (text) =>
+                        context.read<LoginCubit>().setOtpCode(text),
+                    keyboardType:
+                        const TextInputType.numberWithOptions(signed: true),
+                    style: const TextStyle(fontSize: 14),
+                    cursorColor: Styles.colorPrimary,
+                    textAlign: TextAlign.center,
+                    decoration: InputDecoration(
+                      fillColor: Styles.colorWhite,
+                      filled: true,
+                      contentPadding: const EdgeInsets.symmetric(
+                          vertical: 0, horizontal: 20),
+                      focusColor: Styles.colorWhite,
+                      hoverColor: Styles.colorWhite,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(50),
+                        borderSide: BorderSide.none,
+                      ),
+                      hintText: '* * * * * *',
                     ),
-                    hintText: '* * * * * *',
                   ),
                 ),
-              ),
-              const Padding(padding: EdgeInsets.all(2)),
-              TextButton(
-                style: TextButton.styleFrom(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 8, horizontal: 40),
-                  shape: const StadiumBorder(),
+                const Padding(padding: EdgeInsets.all(2)),
+                TextButton(
+                  style: TextButton.styleFrom(
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 8, horizontal: 40),
+                    shape: const StadiumBorder(),
+                  ),
+                  onPressed: () {},
+                  child: const Text(
+                    'Resend code',
+                    style: TextStyle(
+                        fontWeight: FontWeight.normal,
+                        color: Styles.colorTextDark),
+                  ),
                 ),
-                onPressed: () {},
-                child: const Text(
-                  'Resend code',
-                  style: TextStyle(
-                      fontWeight: FontWeight.normal, color: Styles.colorTextDark),
+                const Padding(padding: EdgeInsets.all(8)),
+                BlocBuilder<LoginCubit, LoginState>(
+                  builder: (context, state) {
+                    return TextButton(
+                      style: TextButton.styleFrom(
+                        backgroundColor:
+                            (state.verificationId == null || state.otp == null)
+                                ? Styles.colorSecondary.withOpacity(0.4)
+                                : Styles.colorSecondary,
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 8, horizontal: 40),
+                        shape: const StadiumBorder(),
+                      ),
+                      onPressed:
+                          (state.verificationId == null || state.otp == null)
+                              ? null
+                              : () {
+                                  showLoaderDialog(context);
+                                  context
+                                      .read<LoginCubit>()
+                                      .prepareCredentialAndLogin();
+                                },
+                      child: Text(
+                        'Login',
+                        style: TextStyle(
+                          fontWeight: FontWeight.normal,
+                          color: (state.verificationId == null ||
+                                  state.otp == null)
+                              ? Styles.colorBlack.withOpacity(0.6)
+                              : Styles.colorBlack,
+                        ),
+                      ),
+                    );
+                  },
                 ),
-              ),
-              const Padding(padding: EdgeInsets.all(8)),
-              TextButton(
-                style: TextButton.styleFrom(
-                  backgroundColor: Styles.colorSecondary,
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 8, horizontal: 40),
-                  shape: const StadiumBorder(),
-                ),
-                onPressed: () { context
-                    .read<AuthenticationBloc>()
-                    .add(AuthenticationLoggedIn());
-                },
-                child: const Text(
-                  'Next',
-                  style: TextStyle(
-                      fontWeight: FontWeight.normal, color: Styles.colorBlack),
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

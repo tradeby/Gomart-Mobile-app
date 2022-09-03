@@ -40,6 +40,8 @@ class AuthenticationBloc
     on<AuthenticationLoggedOut>((event, emit) async {
       await _userRepository.signOut();
       emit(AuthenticationFailure());
+      Phoenix.rebirth(event.context);
+
     });
   }
 }

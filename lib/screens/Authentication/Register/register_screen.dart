@@ -48,7 +48,16 @@ class RegisterScreen extends StatelessWidget {
               const Text('Sign up with your phone number',
                   style: TextStyle(color: Styles.colorTextDark)),
               const Padding(padding: EdgeInsets.all(8)),
-              const PhoneNumberInput(),
+              PhoneNumberInput(
+                onPhoneNumberChanged: (text) {
+                  context.read<RegistrationCubit>().setPhoneNumber(text);
+                },
+                onCountryChanged: (selectedCountry) {
+                  context
+                      .read<RegistrationCubit>()
+                      .setFlagCountryCode(selectedCountry);
+                },
+              ),
               const Padding(padding: EdgeInsets.all(8)),
               const Padding(padding: EdgeInsets.all(8)),
               SizedBox(
@@ -108,9 +117,14 @@ class RegisterScreen extends StatelessWidget {
 }
 
 class PhoneNumberInput extends StatelessWidget {
-  const PhoneNumberInput({
-    Key? key,
-  }) : super(key: key);
+  final ValueChanged<String>? onPhoneNumberChanged;
+  final ValueChanged<FlagCountryCodeModel?>? onCountryChanged;
+
+  const PhoneNumberInput(
+      {Key? key,
+      required this.onPhoneNumberChanged,
+      required this.onCountryChanged})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -143,11 +157,7 @@ class PhoneNumberInput extends StatelessWidget {
                                     .getSupportedList[index],
                               ),
                             )).toList(),
-                    onChanged: (selectedCountry) {
-                      context
-                          .read<RegistrationCubit>()
-                          .setFlagCountryCode(selectedCountry);
-                    }),
+                    onChanged: onCountryChanged),
                 const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 0, vertical: 8),
                   child: VerticalDivider(),
@@ -155,9 +165,7 @@ class PhoneNumberInput extends StatelessWidget {
                 SizedBox(
                     width: MediaQuery.of(context).size.width * 0.3,
                     child: TextField(
-                      onChanged: (text) {
-                        context.read<RegistrationCubit>().setPhoneNumber(text);
-                      },
+                      onChanged: onPhoneNumberChanged,
                       keyboardType: TextInputType.phone,
                       style: const TextStyle(fontSize: 14),
                       decoration: const InputDecoration(

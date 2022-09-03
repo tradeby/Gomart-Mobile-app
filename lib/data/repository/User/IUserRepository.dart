@@ -3,9 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import '../../model/FlagCountryCode/flag_country_code.dart';
 
 abstract class IUserRepository {
-  Future<void> signIn({
-    required String phoneNumber,
-    required PhoneAuthCredential credential,
+  Future<void> signIn({required PhoneAuthCredential credential,
   });
 
   Future<void> register({

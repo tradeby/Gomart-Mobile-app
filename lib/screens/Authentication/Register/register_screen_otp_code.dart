@@ -15,17 +15,45 @@ class RegisterOtpCodeScreen extends StatelessWidget {
   const RegisterOtpCodeScreen({
     Key? key,
   }) : super(key: key);
-
+  showLoaderDialog(BuildContext context) {
+    AlertDialog alert = AlertDialog(
+      content: Row(
+        children: [
+          const CircularProgressIndicator(
+            valueColor: AlwaysStoppedAnimation<Color>(Styles.colorPrimary),
+          ),
+          const Padding(padding: EdgeInsets.only(left: 12)),
+          Container(
+            margin: const EdgeInsets.only(left: 7),
+            child: const Text("Loading..."),
+          ),
+        ],
+      ),
+    );
+    showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Styles.colorBackground,
       body: BlocListener<RegistrationCubit, RegisterState>(
         listener: (context, state) {
-          if (state.registrationSuccessful != null) {
-            if (state.registrationSuccessful == true) {
-              context.read<AuthenticationBloc>().add(AuthenticationLoggedIn());
-            }
+          if (state.registrationSuccessful != null &&
+              state.registrationSuccessful == true) {
+            context.read<AuthenticationBloc>().add(AuthenticationLoggedIn());
+          } else if (state.registrationSuccessful != null &&
+              state.registrationSuccessful == false) {
+            var snackBar = SnackBar(
+              content: Text(state.status as String),
+            );
+
+            ScaffoldMessenger.of(context).showSnackBar(snackBar);
           }
         },
         child: Center(
@@ -135,16 +163,6 @@ class RegisterOtpCodeScreen extends StatelessWidget {
                 ),
               ),
               const Padding(padding: EdgeInsets.all(8)),
-              BlocBuilder<RegistrationCubit, RegisterState>(
-                builder: (context, state) {
-                  if (state.registrationSuccessful != null &&
-                      state.registrationSuccessful == false) {
-                    return Text('Error ${state.status?.toString()}');
-                  } else {
-                    return Container();
-                  }
-                },
-              ),
               const Padding(padding: EdgeInsets.all(8)),
               BlocBuilder<RegistrationCubit, RegisterState>(
                 builder: (context, state) {
@@ -162,6 +180,7 @@ class RegisterOtpCodeScreen extends StatelessWidget {
                         (state.verificationId == null || state.otp == null)
                             ? null
                             : () {
+                          showLoaderDialog(context);
                                 context
                                     .read<RegistrationCubit>()
                                     .prepareCredentialAndLogin();

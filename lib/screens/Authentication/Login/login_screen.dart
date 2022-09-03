@@ -1,5 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gomart/screens/Authentication/Login/bloc/login_cubit.dart';
+import 'package:gomart/screens/Authentication/Login/bloc/login_cubit.dart';
+import 'package:gomart/screens/Authentication/Login/bloc/login_state.dart';
 import 'package:gomart/screens/Authentication/Login/otp_code_screen.dart';
 import 'package:gomart/screens/styles.dart';
 
@@ -46,7 +50,14 @@ class LoginScreen extends StatelessWidget {
             const Text('Sign in with your phone number',
                 style: TextStyle(color: Styles.colorTextDark)),
             const Padding(padding: EdgeInsets.all(8)),
-        const PhoneNumberInput(),
+            PhoneNumberInput(
+              onPhoneNumberChanged: (text) {
+                context.read<LoginCubit>().setPhoneNumber(text);
+              },
+              onCountryChanged: (selectedCountry) {
+                context.read<LoginCubit>().setFlagCountryCode(selectedCountry);
+              },
+            ),
             const Padding(padding: EdgeInsets.all(8)),
             SizedBox(
               width: MediaQuery.of(context).size.width * 0.6,
@@ -54,29 +65,46 @@ class LoginScreen extends StatelessWidget {
                 'By entering your phone number, you agree to our '
                 'Terms and Condition',
                 textAlign: TextAlign.center,
-                style: TextStyle(color: Styles.colorTextDark, fontSize: 12,
+                style: TextStyle(
+                  color: Styles.colorTextDark,
+                  fontSize: 12,
                 ),
               ),
             ),
             const Padding(padding: EdgeInsets.all(16)),
-            TextButton(
-              style: TextButton.styleFrom(
-                backgroundColor: Styles.colorSecondary,
-                padding:
-                    const EdgeInsets.symmetric(vertical: 8, horizontal: 40),
-                shape: const StadiumBorder(),
-              ),
-              onPressed: () {
-                    Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const OtpCodeScreen()),
+            BlocBuilder<LoginCubit, LoginState>(
+              builder: (context, state) {
+                return TextButton(
+                  style: TextButton.styleFrom(
+                    backgroundColor: Styles.colorSecondary,
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 8, horizontal: 40),
+                    shape: const StadiumBorder(),
+                  ),
+                  onPressed: (state.phoneNumber == null)
+                      ? () {
+                          const snackBar = SnackBar(
+                            content: Text('Please enter a phone number'),
+                          );
+
+                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                        }
+                      : () {
+                    context.read<LoginCubit>().verifyPhoneNumber();
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const OtpCodeScreen()),
+                          );
+                        },
+                  child: const Text(
+                    'Next',
+                    style: TextStyle(
+                        fontWeight: FontWeight.normal,
+                        color: Styles.colorBlack),
+                  ),
                 );
               },
-              child: const Text(
-                'Next',
-                style: TextStyle(
-                    fontWeight: FontWeight.normal, color: Styles.colorBlack),
-              ),
             ),
           ],
         ),

@@ -21,6 +21,7 @@ mixin _$RegisterState {
   DateTime? get dateOfBirth => throw _privateConstructorUsedError;
   String? get phoneNumber => throw _privateConstructorUsedError;
   String? get photoUrl => throw _privateConstructorUsedError;
+  String? get status => throw _privateConstructorUsedError;
   FlagCountryCodeModel? get selectedCountry =>
       throw _privateConstructorUsedError;
 
@@ -40,6 +41,7 @@ abstract class $RegisterStateCopyWith<$Res> {
       DateTime? dateOfBirth,
       String? phoneNumber,
       String? photoUrl,
+      String? status,
       FlagCountryCodeModel? selectedCountry});
 }
 
@@ -59,6 +61,7 @@ class _$RegisterStateCopyWithImpl<$Res>
     Object? dateOfBirth = freezed,
     Object? phoneNumber = freezed,
     Object? photoUrl = freezed,
+    Object? status = freezed,
     Object? selectedCountry = freezed,
   }) {
     return _then(_value.copyWith(
@@ -82,6 +85,10 @@ class _$RegisterStateCopyWithImpl<$Res>
           ? _value.photoUrl
           : photoUrl // ignore: cast_nullable_to_non_nullable
               as String?,
+      status: status == freezed
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as String?,
       selectedCountry: selectedCountry == freezed
           ? _value.selectedCountry
           : selectedCountry // ignore: cast_nullable_to_non_nullable
@@ -103,6 +110,7 @@ abstract class _$$_RegisterStateCopyWith<$Res>
       DateTime? dateOfBirth,
       String? phoneNumber,
       String? photoUrl,
+      String? status,
       FlagCountryCodeModel? selectedCountry});
 }
 
@@ -124,6 +132,7 @@ class __$$_RegisterStateCopyWithImpl<$Res>
     Object? dateOfBirth = freezed,
     Object? phoneNumber = freezed,
     Object? photoUrl = freezed,
+    Object? status = freezed,
     Object? selectedCountry = freezed,
   }) {
     return _then(_$_RegisterState(
@@ -147,6 +156,10 @@ class __$$_RegisterStateCopyWithImpl<$Res>
           ? _value.photoUrl
           : photoUrl // ignore: cast_nullable_to_non_nullable
               as String?,
+      status: status == freezed
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as String?,
       selectedCountry: selectedCountry == freezed
           ? _value.selectedCountry
           : selectedCountry // ignore: cast_nullable_to_non_nullable
@@ -164,6 +177,7 @@ class _$_RegisterState with DiagnosticableTreeMixin implements _RegisterState {
       this.dateOfBirth,
       this.phoneNumber,
       this.photoUrl,
+      this.status,
       this.selectedCountry});
 
   @override
@@ -177,11 +191,13 @@ class _$_RegisterState with DiagnosticableTreeMixin implements _RegisterState {
   @override
   final String? photoUrl;
   @override
+  final String? status;
+  @override
   final FlagCountryCodeModel? selectedCountry;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'RegisterState(firstName: $firstName, lastName: $lastName, dateOfBirth: $dateOfBirth, phoneNumber: $phoneNumber, photoUrl: $photoUrl, selectedCountry: $selectedCountry)';
+    return 'RegisterState(firstName: $firstName, lastName: $lastName, dateOfBirth: $dateOfBirth, phoneNumber: $phoneNumber, photoUrl: $photoUrl, status: $status, selectedCountry: $selectedCountry)';
   }
 
   @override
@@ -194,6 +210,7 @@ class _$_RegisterState with DiagnosticableTreeMixin implements _RegisterState {
       ..add(DiagnosticsProperty('dateOfBirth', dateOfBirth))
       ..add(DiagnosticsProperty('phoneNumber', phoneNumber))
       ..add(DiagnosticsProperty('photoUrl', photoUrl))
+      ..add(DiagnosticsProperty('status', status))
       ..add(DiagnosticsProperty('selectedCountry', selectedCountry));
   }
 
@@ -209,6 +226,7 @@ class _$_RegisterState with DiagnosticableTreeMixin implements _RegisterState {
             const DeepCollectionEquality()
                 .equals(other.phoneNumber, phoneNumber) &&
             const DeepCollectionEquality().equals(other.photoUrl, photoUrl) &&
+            const DeepCollectionEquality().equals(other.status, status) &&
             const DeepCollectionEquality()
                 .equals(other.selectedCountry, selectedCountry));
   }
@@ -221,6 +239,7 @@ class _$_RegisterState with DiagnosticableTreeMixin implements _RegisterState {
       const DeepCollectionEquality().hash(dateOfBirth),
       const DeepCollectionEquality().hash(phoneNumber),
       const DeepCollectionEquality().hash(photoUrl),
+      const DeepCollectionEquality().hash(status),
       const DeepCollectionEquality().hash(selectedCountry));
 
   @JsonKey(ignore: true)
@@ -236,6 +255,7 @@ abstract class _RegisterState implements RegisterState {
       final DateTime? dateOfBirth,
       final String? phoneNumber,
       final String? photoUrl,
+      final String? status,
       final FlagCountryCodeModel? selectedCountry}) = _$_RegisterState;
 
   @override
@@ -248,6 +268,8 @@ abstract class _RegisterState implements RegisterState {
   String? get phoneNumber;
   @override
   String? get photoUrl;
+  @override
+  String? get status;
   @override
   FlagCountryCodeModel? get selectedCountry;
   @override

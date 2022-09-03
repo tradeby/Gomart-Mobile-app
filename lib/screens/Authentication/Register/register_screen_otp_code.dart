@@ -124,6 +124,12 @@ class RegisterOtpCodeScreen extends StatelessWidget {
               ),
             ),
             const Padding(padding: EdgeInsets.all(8)),
+            BlocBuilder<RegistrationCubit, RegisterState>(
+              builder: (context, state) {
+                return Text('Status: ${state.status?.toString()}');
+              },
+            ),
+            const Padding(padding: EdgeInsets.all(8)),
             TextButton(
               style: TextButton.styleFrom(
                 backgroundColor: Styles.colorSecondary,

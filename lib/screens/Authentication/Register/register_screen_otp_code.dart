@@ -128,7 +128,8 @@ class RegisterOtpCodeScreen extends StatelessWidget {
                 child: TextField(
                   onChanged: (text) =>
                       context.read<RegistrationCubit>().setOtpCode(text),
-                  keyboardType: TextInputType.phone,
+                    keyboardType: TextInputType.number,
+                  textInputAction: TextInputAction.done,
                   style: const TextStyle(fontSize: 14),
                   cursorColor: Styles.colorPrimary,
                   textAlign: TextAlign.center,

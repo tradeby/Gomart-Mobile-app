@@ -166,7 +166,8 @@ class PhoneNumberInput extends StatelessWidget {
                     width: MediaQuery.of(context).size.width * 0.3,
                     child: TextField(
                       onChanged: onPhoneNumberChanged,
-                      keyboardType: TextInputType.phone,
+                      keyboardType: TextInputType.number,
+                      textInputAction: TextInputAction.done,
                       style: const TextStyle(fontSize: 14),
                       decoration: const InputDecoration(
                         hintText: 'Phone number',

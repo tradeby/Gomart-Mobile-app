@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 
-class NotificationsScreen extends StatelessWidget {
-  const NotificationsScreen({Key? key}) : super(key: key);
+class NotificationsFragment extends StatelessWidget {
+  const NotificationsFragment({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        child: Text('Notifications works!'),
-      ),
+    return const Center(
+      child: Text('Notifications works!'),
     );
   }
 }

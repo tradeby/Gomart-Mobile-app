@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 
-class MessageScreen extends StatelessWidget {
-  const MessageScreen({Key? key}) : super(key: key);
+class MessageFragment extends StatelessWidget {
+  const MessageFragment({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        child: Text('Message screen works!'),
-      ),
+    return const  Center(
+      child: Text('Message screen works!'),
     );
   }
 }

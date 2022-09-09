@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 
-class SavedScreen extends StatelessWidget {
-  const SavedScreen({Key? key}) : super(key: key);
+class SavedFragment extends StatelessWidget {
+  const SavedFragment({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        child: Text('Saved screen works!'),
-      ),
+    return const Center(
+      child: Text('Saved screen works!'),
     );
   }
 }

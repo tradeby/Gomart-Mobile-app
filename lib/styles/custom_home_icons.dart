@@ -30,7 +30,7 @@ class Gomart {
   static const IconData messageHover = IconData(0xe808, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData heartHover = IconData(0xe809, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData searchHover = IconData(0xe80a, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData walletHover = IconData(0xe80b, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData home = IconData(0xe80c, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData homeHover = IconData(0xe80d, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData walletHover = IconData(0xe80f, fontFamily: _kFontFam, fontPackage: _kFontPkg);
 }

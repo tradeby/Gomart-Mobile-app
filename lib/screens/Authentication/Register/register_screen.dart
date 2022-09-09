@@ -15,100 +15,103 @@ class RegisterScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Styles.colorBackground,
-      body: SingleChildScrollView(
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              Container(
-                padding: const EdgeInsets.fromLTRB(0, 80, 0, 0),
-                width: MediaQuery.of(context).size.width,
-                decoration: const BoxDecoration(
-                  color: Styles.colorPrimary,
-                  borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(50.0),
-                    bottomRight: Radius.circular(50.0),
+      body: GestureDetector(
+        onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+        child: SingleChildScrollView(
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                Container(
+                  padding: const EdgeInsets.fromLTRB(0, 80, 0, 0),
+                  width: MediaQuery.of(context).size.width,
+                  decoration: const BoxDecoration(
+                    color: Styles.colorPrimary,
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(50.0),
+                      bottomRight: Radius.circular(50.0),
+                    ),
+                  ),
+                  child: Column(
+                    children: <Widget>[
+                      const Text(
+                        'Find shops & services near you',
+                        style: TextStyle(color: Styles.colorWhite, fontSize: 18),
+                      ),
+                      const Padding(padding: EdgeInsets.all(16)),
+                      Image.asset(
+                        'assets/icon/gomart-logo-with-text.png',
+                        width: 200,
+                      ),
+                    ],
                   ),
                 ),
-                child: Column(
-                  children: <Widget>[
-                    const Text(
-                      'Find shops & services near you',
-                      style: TextStyle(color: Styles.colorWhite, fontSize: 18),
-                    ),
-                    const Padding(padding: EdgeInsets.all(16)),
-                    Image.asset(
-                      'assets/icon/gomart-logo-with-text.png',
-                      width: 200,
-                    ),
-                  ],
+                const Padding(padding: EdgeInsets.all(16)),
+                const Text('Sign up with your phone number',
+                    style: TextStyle(color: Styles.colorTextDark)),
+                const Padding(padding: EdgeInsets.all(8)),
+                PhoneNumberInput(
+                  onPhoneNumberChanged: (text) {
+                    context.read<RegistrationCubit>().setPhoneNumber(text);
+                  },
+                  onCountryChanged: (selectedCountry) {
+                    context
+                        .read<RegistrationCubit>()
+                        .setFlagCountryCode(selectedCountry);
+                  },
                 ),
-              ),
-              const Padding(padding: EdgeInsets.all(16)),
-              const Text('Sign up with your phone number',
-                  style: TextStyle(color: Styles.colorTextDark)),
-              const Padding(padding: EdgeInsets.all(8)),
-              PhoneNumberInput(
-                onPhoneNumberChanged: (text) {
-                  context.read<RegistrationCubit>().setPhoneNumber(text);
-                },
-                onCountryChanged: (selectedCountry) {
-                  context
-                      .read<RegistrationCubit>()
-                      .setFlagCountryCode(selectedCountry);
-                },
-              ),
-              const Padding(padding: EdgeInsets.all(8)),
-              const Padding(padding: EdgeInsets.all(8)),
-              SizedBox(
-                width: MediaQuery.of(context).size.width * 0.6,
-                child: const Text(
-                  'By entering your phone number, you agree to our '
-                  'Terms and Condition',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Styles.colorTextDark,
-                    fontSize: 12,
+                const Padding(padding: EdgeInsets.all(8)),
+                const Padding(padding: EdgeInsets.all(8)),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.6,
+                  child: const Text(
+                    'By entering your phone number, you agree to our '
+                    'Terms and Condition',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Styles.colorTextDark,
+                      fontSize: 12,
+                    ),
                   ),
                 ),
-              ),
-              const Padding(padding: EdgeInsets.all(16)),
-              BlocBuilder<RegistrationCubit, RegisterState>(
-                builder: (context, state) {
-                  return TextButton(
-                    style: TextButton.styleFrom(
-                      backgroundColor: Styles.colorSecondary,
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 8, horizontal: 40),
-                      shape: const StadiumBorder(),
-                    ),
-                    onPressed: (state.phoneNumber == null)
-                        ? () {
-                            const snackBar = SnackBar(
-                              content: Text('Please enter a phone number'),
-                            );
+                const Padding(padding: EdgeInsets.all(16)),
+                BlocBuilder<RegistrationCubit, RegisterState>(
+                  builder: (context, state) {
+                    return TextButton(
+                      style: TextButton.styleFrom(
+                        backgroundColor: Styles.colorSecondary,
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 8, horizontal: 40),
+                        shape: const StadiumBorder(),
+                      ),
+                      onPressed: (state.phoneNumber == null)
+                          ? () {
+                              const snackBar = SnackBar(
+                                content: Text('Please enter a phone number'),
+                              );
 
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(snackBar);
-                          }
-                        : () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      const RegisterScreenAddBasicInfo()),
-                            );
-                          },
-                    child: const Text(
-                      'Next',
-                      style: TextStyle(
-                          fontWeight: FontWeight.normal,
-                          color: Styles.colorBlack),
-                    ),
-                  );
-                },
-              ),
-            ],
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(snackBar);
+                            }
+                          : () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const RegisterScreenAddBasicInfo()),
+                              );
+                            },
+                      child: const Text(
+                        'Next',
+                        style: TextStyle(
+                            fontWeight: FontWeight.normal,
+                            color: Styles.colorBlack),
+                      ),
+                    );
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),

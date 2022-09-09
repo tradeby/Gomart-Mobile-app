@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gomart/screens/Authentication/Register/bloc/register_state.dart';
 import 'package:gomart/screens/Authentication/Register/register_screen_upload_photo.dart';
-import 'package:gomart/screens/styles.dart';
+import 'package:gomart/styles/styles.dart';
 
 import 'bloc/registration_cubit.dart';
 

@@ -7,7 +7,7 @@ import 'package:gomart/injection.dart';
 import 'package:gomart/screens/Authentication/Register/bloc/registration_cubit.dart';
 import 'package:gomart/screens/Authentication/Register/bloc/registration_cubit.dart';
 import 'package:gomart/screens/Authentication/Register/register_screen_upload_photo.dart';
-import 'package:gomart/screens/styles.dart';
+import 'package:gomart/styles/styles.dart';
 
 import 'bloc/register_state.dart';
 

@@ -5,7 +5,7 @@ import 'package:gomart/screens/Authentication/Login/bloc/login_cubit.dart';
 import 'package:gomart/screens/Authentication/Login/bloc/login_cubit.dart';
 import 'package:gomart/screens/Authentication/Login/bloc/login_state.dart';
 import 'package:gomart/screens/Authentication/Login/otp_code_screen.dart';
-import 'package:gomart/screens/styles.dart';
+import 'package:gomart/styles/styles.dart';
 
 import '../Register/register_screen.dart';
 

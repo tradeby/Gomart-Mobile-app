@@ -6,7 +6,7 @@ import 'package:gomart/data/bloc/authentication/authentication_bloc.dart';
 import 'package:gomart/screens/Authentication/Login/bloc/login_cubit.dart';
 import 'package:gomart/screens/Authentication/Register/bloc/registration_cubit.dart';
 import 'package:gomart/screens/Authentication/authentication_screen.dart';
-import 'package:gomart/screens/styles.dart';
+import 'package:gomart/styles/styles.dart';
 import 'package:gomart/service/bloc_service.dart';
 
 //import 'package:flutter_native_splash/flutter_native_splash.dart';

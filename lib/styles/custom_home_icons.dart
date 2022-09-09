@@ -34,4 +34,6 @@ class Gomart {
   static const IconData walletHover = IconData(0xe80f, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData message = IconData(0xe810, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData messageHover = IconData(0xe811, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData notificationBell = IconData(0xe812, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData locationIcon = IconData(0xe813, fontFamily: _kFontFam, fontPackage: _kFontPkg);
 }

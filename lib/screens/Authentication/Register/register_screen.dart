@@ -4,7 +4,7 @@ import 'package:gomart/data/model/FlagCountryCode/flag_country_code.dart';
 import 'package:gomart/screens/Authentication/Register/bloc/register_state.dart';
 import 'package:gomart/screens/Authentication/Register/bloc/registration_cubit.dart';
 import 'package:gomart/screens/Authentication/Register/register_screen_basic_info.dart';
-import 'package:gomart/screens/styles.dart';
+import 'package:gomart/styles/styles.dart';
 
 class RegisterScreen extends StatelessWidget {
   const RegisterScreen({

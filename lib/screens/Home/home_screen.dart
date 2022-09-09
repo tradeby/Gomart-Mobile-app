@@ -6,8 +6,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 
 import '../../data/bloc/authentication/authentication_bloc.dart';
+import '../../styles/custom_home_icons.dart';
 import '../Authentication/Register/register_screen_upload_photo.dart';
-import '../styles.dart';
+import '../../styles/styles.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({
@@ -17,6 +18,63 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        currentIndex: 2,
+        selectedFontSize: 12,
+        selectedLabelStyle: const TextStyle(fontWeight: FontWeight.w500),
+        showSelectedLabels: true,
+        showUnselectedLabels: true,
+        unselectedItemColor: Styles.colorTextDark,
+        selectedItemColor: Styles.colorTextDark,
+        items: const [
+          BottomNavigationBarItem(
+              icon: Padding(
+                padding: EdgeInsets.all(9),
+                child: Icon(
+                  Gomart.home,
+                  color: Styles.colorTextDark,
+                ),
+              ),
+              label: 'Home'),
+          BottomNavigationBarItem(
+              icon: Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Icon(
+                  Gomart.heart,
+                  color: Styles.colorBlack,
+                ),
+              ),
+              label: 'Saved'),
+          BottomNavigationBarItem(
+              icon: Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Icon(
+                  Gomart.wallet,
+                  color: Styles.colorBlack,
+                ),
+              ),
+              label: 'Wallet'),
+          BottomNavigationBarItem(
+              icon: Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Icon(
+                  Gomart.message,
+                  color: Styles.colorBlack,
+                ),
+              ),
+              label: 'Message'),
+          BottomNavigationBarItem(
+              icon: Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Icon(
+                  Gomart.profile,
+                  color: Styles.colorBlack,
+                ),
+              ),
+              label: 'Account'),
+        ],
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

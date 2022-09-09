@@ -4,7 +4,7 @@ import 'package:gomart/data/bloc/authentication/authentication_bloc.dart';
 import 'package:gomart/injection.dart';
 import 'package:gomart/screens/Authentication/Login/bloc/login_cubit.dart';
 import 'package:gomart/screens/Authentication/Login/bloc/login_state.dart';
-import 'package:gomart/screens/styles.dart';
+import 'package:gomart/styles/styles.dart';
 
 class OtpCodeScreen extends StatelessWidget {
   const OtpCodeScreen({

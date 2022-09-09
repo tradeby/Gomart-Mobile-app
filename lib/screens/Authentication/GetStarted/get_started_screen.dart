@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gomart/screens/Authentication/Login/login_screen.dart';
 import 'package:gomart/screens/Authentication/Register/register_screen.dart';
-import 'package:gomart/screens/styles.dart';
+import 'package:gomart/styles/styles.dart';
 
 class GetStartedScreen extends StatefulWidget {
   const GetStartedScreen({

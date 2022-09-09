@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../styles.dart';
+import '../../styles/styles.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({

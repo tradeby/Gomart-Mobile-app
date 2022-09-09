@@ -20,11 +20,6 @@ class Authentication extends StatelessWidget {
         if (state is AuthenticationLoggedOut) {
           Navigator.of(context).pop();
         }
-        if (state is AuthenticationSuccess) {
-          Navigator.of(context).pushAndRemoveUntil(
-              MaterialPageRoute(builder: (c) => const HomeScreen()),
-              (route) => false);
-        }
       },
       child: BlocBuilder<AuthenticationBloc, AuthenticationState>(
         builder: (context, authState) {
@@ -38,14 +33,13 @@ class Authentication extends StatelessWidget {
 
             return const GetStartedScreen();
           }
-          /*if (authState is AuthenticationSuccess) {
+          if (authState is AuthenticationSuccess) {
             if (kDebugMode) {
               print('Authentication success works!!!!!!!!!!!!!');
             }
-
             return const HomeScreen();
             //return const LoginScreen();
-          }*/ else {
+          } else {
             return const GetStartedScreen();
           }
         },

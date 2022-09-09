@@ -16,6 +16,27 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return BlocBuilder<LoginCubit, LoginState>(builder: (context, state) {
+      if (state.currentPage == LoginPages.phoneNumberPage) {
+        return const LoginPhoneNumber();
+      } else if (state.currentPage == LoginPages.otpVerificationPage) {
+        return const OtpCodeScreen();
+      } else {
+        return const Center(
+          child: Text('Error in login page'),
+        );
+      }
+    });
+  }
+}
+
+class LoginPhoneNumber extends StatelessWidget {
+  const LoginPhoneNumber({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Styles.colorBackground,
       body: GestureDetector(
@@ -57,7 +78,9 @@ class LoginScreen extends StatelessWidget {
                   context.read<LoginCubit>().setPhoneNumber(text);
                 },
                 onCountryChanged: (selectedCountry) {
-                  context.read<LoginCubit>().setFlagCountryCode(selectedCountry);
+                  context
+                      .read<LoginCubit>()
+                      .setFlagCountryCode(selectedCountry);
                 },
               ),
               const Padding(padding: EdgeInsets.all(8)),
@@ -79,8 +102,8 @@ class LoginScreen extends StatelessWidget {
                   return TextButton(
                     style: TextButton.styleFrom(
                       backgroundColor: Styles.colorSecondary,
-                      padding:
-                          const EdgeInsets.symmetric(vertical: 8, horizontal: 40),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 8, horizontal: 40),
                       shape: const StadiumBorder(),
                     ),
                     onPressed: (state.phoneNumber == null)
@@ -89,15 +112,13 @@ class LoginScreen extends StatelessWidget {
                               content: Text('Please enter a phone number'),
                             );
 
-                            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(snackBar);
                           }
                         : () {
-                      context.read<LoginCubit>().verifyPhoneNumber();
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const OtpCodeScreen()),
-                            );
+                            context.read<LoginCubit>().verifyPhoneNumber();
+                            context.read<LoginCubit>().nextLoginPage();
+                           
                           },
                     child: const Text(
                       'Next',

@@ -42,48 +42,48 @@ class StateHomeScreen extends State<HomeScreen> {
         showUnselectedLabels: true,
         unselectedItemColor: Styles.colorTextDark,
         selectedItemColor: Styles.colorTextDark,
-        items: const [
+        items: [
           BottomNavigationBarItem(
               icon: Padding(
-                padding: EdgeInsets.all(9),
+                padding: const EdgeInsets.all(9),
                 child: Icon(
-                  Gomart.home,
+                 currentPage ==0?Gomart.homeHover: Gomart.home,
                   color: Styles.colorTextDark,
                 ),
               ),
               label: 'Home'),
           BottomNavigationBarItem(
               icon: Padding(
-                padding: EdgeInsets.all(8.0),
+                padding:const  EdgeInsets.all(8.0),
                 child: Icon(
-                  Gomart.heart,
+                  currentPage ==1?Gomart.heartHover: Gomart.heart,
                   color: Styles.colorBlack,
                 ),
               ),
               label: 'Saved'),
           BottomNavigationBarItem(
               icon: Padding(
-                padding: EdgeInsets.all(8.0),
+                padding:const EdgeInsets.all(8.0),
                 child: Icon(
-                  Gomart.wallet,
+                  currentPage ==2?Gomart.walletHover:  Gomart.wallet,
                   color: Styles.colorBlack,
                 ),
               ),
               label: 'Wallet'),
           BottomNavigationBarItem(
               icon: Padding(
-                padding: EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(8.0),
                 child: Icon(
-                  Gomart.message,
+                  currentPage ==3?Gomart.messageHover: Gomart.message,
                   color: Styles.colorBlack,
                 ),
               ),
               label: 'Message'),
           BottomNavigationBarItem(
               icon: Padding(
-                padding: EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(8.0),
                 child: Icon(
-                  Gomart.profile,
+                  currentPage ==4?Gomart.profileHover: Gomart.profile,
                   color: Styles.colorBlack,
                 ),
               ),

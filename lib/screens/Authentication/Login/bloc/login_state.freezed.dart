@@ -23,6 +23,7 @@ mixin _$LoginState {
   FlagCountryCodeModel? get selectedCountry =>
       throw _privateConstructorUsedError;
   bool? get loginSuccessful => throw _privateConstructorUsedError;
+  LoginPages? get currentPage => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $LoginStateCopyWith<LoginState> get copyWith =>
@@ -40,7 +41,8 @@ abstract class $LoginStateCopyWith<$Res> {
       String? verificationId,
       String? otp,
       FlagCountryCodeModel? selectedCountry,
-      bool? loginSuccessful});
+      bool? loginSuccessful,
+      LoginPages? currentPage});
 }
 
 /// @nodoc
@@ -59,6 +61,7 @@ class _$LoginStateCopyWithImpl<$Res> implements $LoginStateCopyWith<$Res> {
     Object? otp = freezed,
     Object? selectedCountry = freezed,
     Object? loginSuccessful = freezed,
+    Object? currentPage = freezed,
   }) {
     return _then(_value.copyWith(
       phoneNumber: phoneNumber == freezed
@@ -85,6 +88,10 @@ class _$LoginStateCopyWithImpl<$Res> implements $LoginStateCopyWith<$Res> {
           ? _value.loginSuccessful
           : loginSuccessful // ignore: cast_nullable_to_non_nullable
               as bool?,
+      currentPage: currentPage == freezed
+          ? _value.currentPage
+          : currentPage // ignore: cast_nullable_to_non_nullable
+              as LoginPages?,
     ));
   }
 }
@@ -102,7 +109,8 @@ abstract class _$$_LoginStateCopyWith<$Res>
       String? verificationId,
       String? otp,
       FlagCountryCodeModel? selectedCountry,
-      bool? loginSuccessful});
+      bool? loginSuccessful,
+      LoginPages? currentPage});
 }
 
 /// @nodoc
@@ -123,6 +131,7 @@ class __$$_LoginStateCopyWithImpl<$Res> extends _$LoginStateCopyWithImpl<$Res>
     Object? otp = freezed,
     Object? selectedCountry = freezed,
     Object? loginSuccessful = freezed,
+    Object? currentPage = freezed,
   }) {
     return _then(_$_LoginState(
       phoneNumber: phoneNumber == freezed
@@ -149,6 +158,10 @@ class __$$_LoginStateCopyWithImpl<$Res> extends _$LoginStateCopyWithImpl<$Res>
           ? _value.loginSuccessful
           : loginSuccessful // ignore: cast_nullable_to_non_nullable
               as bool?,
+      currentPage: currentPage == freezed
+          ? _value.currentPage
+          : currentPage // ignore: cast_nullable_to_non_nullable
+              as LoginPages?,
     ));
   }
 }
@@ -162,7 +175,8 @@ class _$_LoginState with DiagnosticableTreeMixin implements _LoginState {
       this.verificationId,
       this.otp,
       this.selectedCountry,
-      this.loginSuccessful});
+      this.loginSuccessful,
+      this.currentPage});
 
   @override
   final String? phoneNumber;
@@ -176,10 +190,12 @@ class _$_LoginState with DiagnosticableTreeMixin implements _LoginState {
   final FlagCountryCodeModel? selectedCountry;
   @override
   final bool? loginSuccessful;
+  @override
+  final LoginPages? currentPage;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'LoginState(phoneNumber: $phoneNumber, status: $status, verificationId: $verificationId, otp: $otp, selectedCountry: $selectedCountry, loginSuccessful: $loginSuccessful)';
+    return 'LoginState(phoneNumber: $phoneNumber, status: $status, verificationId: $verificationId, otp: $otp, selectedCountry: $selectedCountry, loginSuccessful: $loginSuccessful, currentPage: $currentPage)';
   }
 
   @override
@@ -192,7 +208,8 @@ class _$_LoginState with DiagnosticableTreeMixin implements _LoginState {
       ..add(DiagnosticsProperty('verificationId', verificationId))
       ..add(DiagnosticsProperty('otp', otp))
       ..add(DiagnosticsProperty('selectedCountry', selectedCountry))
-      ..add(DiagnosticsProperty('loginSuccessful', loginSuccessful));
+      ..add(DiagnosticsProperty('loginSuccessful', loginSuccessful))
+      ..add(DiagnosticsProperty('currentPage', currentPage));
   }
 
   @override
@@ -209,7 +226,9 @@ class _$_LoginState with DiagnosticableTreeMixin implements _LoginState {
             const DeepCollectionEquality()
                 .equals(other.selectedCountry, selectedCountry) &&
             const DeepCollectionEquality()
-                .equals(other.loginSuccessful, loginSuccessful));
+                .equals(other.loginSuccessful, loginSuccessful) &&
+            const DeepCollectionEquality()
+                .equals(other.currentPage, currentPage));
   }
 
   @override
@@ -220,7 +239,8 @@ class _$_LoginState with DiagnosticableTreeMixin implements _LoginState {
       const DeepCollectionEquality().hash(verificationId),
       const DeepCollectionEquality().hash(otp),
       const DeepCollectionEquality().hash(selectedCountry),
-      const DeepCollectionEquality().hash(loginSuccessful));
+      const DeepCollectionEquality().hash(loginSuccessful),
+      const DeepCollectionEquality().hash(currentPage));
 
   @JsonKey(ignore: true)
   @override
@@ -235,7 +255,8 @@ abstract class _LoginState implements LoginState {
       final String? verificationId,
       final String? otp,
       final FlagCountryCodeModel? selectedCountry,
-      final bool? loginSuccessful}) = _$_LoginState;
+      final bool? loginSuccessful,
+      final LoginPages? currentPage}) = _$_LoginState;
 
   @override
   String? get phoneNumber;
@@ -249,6 +270,8 @@ abstract class _LoginState implements LoginState {
   FlagCountryCodeModel? get selectedCountry;
   @override
   bool? get loginSuccessful;
+  @override
+  LoginPages? get currentPage;
   @override
   @JsonKey(ignore: true)
   _$$_LoginStateCopyWith<_$_LoginState> get copyWith =>

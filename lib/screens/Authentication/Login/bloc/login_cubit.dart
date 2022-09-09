@@ -19,8 +19,13 @@ class LoginCubit extends Cubit<LoginState> {
   void setFlagCountryCode(_) => emit(state.copyWith(selectedCountry: _));
 
   void setVerificationCode(_) => emit(state.copyWith(verificationId: _));
+
   void setOtpCode(_) => emit(state.copyWith(otp: sanitizeInput(_)));
+
   void setStatus(_) => emit(state.copyWith(status: _));
+
+  void nextLoginPage() =>
+      emit(state.copyWith(currentPage: LoginPages.otpVerificationPage));
 
   void prepareCredentialAndLogin() {
     // Create a PhoneAuthCredential with the code

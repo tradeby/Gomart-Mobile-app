@@ -14,10 +14,14 @@ class LoginState with _$LoginState {
     String? otp,
     FlagCountryCodeModel? selectedCountry,
     bool? loginSuccessful,
+    LoginPages? currentPage,
   }) = _LoginState;
 
   factory LoginState.initial() {
     return LoginState(
+        currentPage: LoginPages.phoneNumberPage,
         selectedCountry: FlagCountryCodeModel.getSupportedList[0]);
   }
 }
+
+enum LoginPages { phoneNumberPage, otpVerificationPage }

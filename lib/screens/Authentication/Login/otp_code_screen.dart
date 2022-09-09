@@ -40,7 +40,9 @@ class OtpCodeScreen extends StatelessWidget {
     return BlocListener<LoginCubit, LoginState>(
       listener: (context, state) {
         if (state.loginSuccessful != null && state.loginSuccessful == true) {
+          FocusManager.instance.primaryFocus?.unfocus();
           context.read<AuthenticationBloc>().add(AuthenticationLoggedIn());
+          Navigator.of(context).pop();
         } else if (state.loginSuccessful != null &&
             state.loginSuccessful == false) {
           var snackBar = SnackBar(

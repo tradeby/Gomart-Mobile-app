@@ -48,6 +48,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     debugDefaultTargetPlatformOverride = TargetPlatform.iOS;
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Gomart app',
       theme:
           ThemeData(primarySwatch: Colors.blue, platform: TargetPlatform.iOS),

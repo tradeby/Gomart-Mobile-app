@@ -2,8 +2,10 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:gomart/screens/ProductDetail/product_detail.dart';
+import 'package:gomart/screens/Search/search_input.dart';
 import 'package:gomart/screens/Search/search_results.dart';
 import 'package:gomart/screens/notifications/notifications.dart';
+import 'package:gomart/shared_components/fade_in_page_route.dart';
 import 'package:gomart/styles/custom_home_icons.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
@@ -50,19 +52,26 @@ class CustomPersistentHeader extends SliverPersistentHeaderDelegate {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                /*    Container(
-                  padding: const EdgeInsets.all(8),
-                  width: MediaQuery.of(context).size.width * 0.46,
-                  decoration: BoxDecoration(
-                      color: Styles.colorTextFieldBackground,
-                      borderRadius: BorderRadius.circular(5)),
-                  child: const Text(
-                    'Search here',
-                    style: TextStyle(
-                        fontSize: 12, color: Styles.colorTextFieldHint),
+                GestureDetector(
+                  onTap: () {
+                    //
+                    Navigator.of(context)
+                        .push(CustomPageRoute(const SearchInputScreen()));
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.all(8),
+                    width: MediaQuery.of(context).size.width * 0.46,
+                    decoration: BoxDecoration(
+                        color: Styles.colorTextFieldBackground,
+                        borderRadius: BorderRadius.circular(5)),
+                    child: const Text(
+                      'Search here',
+                      style: TextStyle(
+                          fontSize: 12, color: Styles.colorTextFieldHint),
+                    ),
                   ),
-                ),*/
-                SizedBox(
+                ),
+                /*SizedBox(
                   width: MediaQuery.of(context).size.width * 0.46,
                   height: 30,
                   child: TextField(
@@ -97,7 +106,7 @@ class CustomPersistentHeader extends SliverPersistentHeaderDelegate {
                       hintText: 'Search here',
                     ),
                   ),
-                ),
+                ),*/
                 Container(
                   padding: const EdgeInsets.all(8),
                   width: MediaQuery.of(context).size.width * 0.46,

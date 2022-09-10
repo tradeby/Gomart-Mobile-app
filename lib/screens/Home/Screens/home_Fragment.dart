@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:gomart/styles/custom_home_icons.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 import '../../../styles/styles.dart';
 
@@ -252,19 +254,28 @@ class ProductCard extends StatelessWidget {
                           ),
                         ),
                         const Padding(padding: EdgeInsets.all(4)),
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 4, horizontal: 10),
-                          decoration: BoxDecoration(
-                            color: Styles.colorSecondary,
-                            borderRadius: BorderRadius.circular(16),
-                          ),
-                          child: const Text(
-                            'Call',
-                            style: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.normal,
-                                color: Styles.colorBlack),
+                        InkWell(
+                          onTap: ()async{
+                            String url = "tel:$phoneNumber";
+                            if(await canLaunchUrlString(url)){
+                              await launchUrlString("tel:$phoneNumber");
+                            }
+
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 4, horizontal: 10),
+                            decoration: BoxDecoration(
+                              color: Styles.colorSecondary,
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                            child: const Text(
+                              'Call',
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.normal,
+                                  color: Styles.colorBlack),
+                            ),
                           ),
                         )
                       ],

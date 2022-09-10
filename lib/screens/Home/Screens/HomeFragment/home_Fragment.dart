@@ -10,7 +10,7 @@ import 'package:gomart/styles/custom_home_icons.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
-import '../../../styles/styles.dart';
+import '../../../../styles/styles.dart';
 
 class CustomPersistentHeader extends SliverPersistentHeaderDelegate {
   @override

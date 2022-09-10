@@ -23,6 +23,7 @@ class Gomart {
 
 
   static const IconData search = IconData(0xe800, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData filterOutline = IconData(0xe801, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData profile = IconData(0xe804, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData heart = IconData(0xe805, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData profileHover = IconData(0xe807, fontFamily: _kFontFam, fontPackage: _kFontPkg);

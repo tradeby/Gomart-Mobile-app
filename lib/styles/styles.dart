@@ -18,8 +18,10 @@ abstract class Styles {
   static const Color colorBarBottomSheet = Color(0xffD8D8D8);
   static const Color colorTextFieldBackground = Color(0xffF1F1F1);
   static const Color colorTextFieldHint = Color(0xff8A8686);
+  static const Color colorGray = Color(0xff8A8686);
 
   static const Color colorTextGomartText = Color(0xff606060);
+
 
 
 }

@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:gomart/shared_components/fade_in_page_route.dart';
 import 'package:gomart/styles/custom_home_icons.dart';
 import 'dart:math';
 import '../../styles/styles.dart';
 import '../Home/Screens/home_Fragment.dart';
+import 'search_input.dart';
 
 class SearchResults extends StatelessWidget {
-  const SearchResults({Key? key}) : super(key: key);
+  final String searchTerm;
+
+  const SearchResults({Key? key, required this.searchTerm}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +20,8 @@ class SearchResults extends StatelessWidget {
         child: SafeArea(
           child: CustomScrollView(slivers: [
             SliverPersistentHeader(
-                floating: true, delegate: SearchPersistentHeader()),
+                floating: true,
+                delegate: SearchPersistentHeader( searchTerm)),
             SliverList(
               delegate: SliverChildBuilderDelegate(
                   childCount: SampleProducts.listOfProducts.length,
@@ -32,6 +37,10 @@ class SearchResults extends StatelessWidget {
 }
 
 class SearchPersistentHeader extends SliverPersistentHeaderDelegate {
+  final String searchTerm;
+
+  SearchPersistentHeader(this.searchTerm);
+
   @override
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
@@ -45,23 +54,29 @@ class SearchPersistentHeader extends SliverPersistentHeaderDelegate {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const BackButton(),
-              Container(
-                padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 6),
-                height: 30,
-                width: MediaQuery.of(context).size.width * 0.75,
-                decoration: BoxDecoration(
-                    color: Styles.colorBackground,
-                    borderRadius: BorderRadius.circular(4)),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: const [
-                    Text('Auto Repairs'),
-                    Icon(
-                      Icons.close,
-                      size: 24,
-                    ),
-                  ],
+              GestureDetector(
+                onTap: (){
+                  Navigator.of(context)
+                      .push(CustomPageRoute(const SearchInputScreen()));
+                },
+                child: Container(
+                  padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 6),
+                  height: 30,
+                  width: MediaQuery.of(context).size.width * 0.75,
+                  decoration: BoxDecoration(
+                      color: Styles.colorBackground,
+                      borderRadius: BorderRadius.circular(4)),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(searchTerm),
+                      const Icon(
+                        Icons.close,
+                        size: 24,
+                      ),
+                    ],
+                  ),
                 ),
               ),
               IconButton(
@@ -114,13 +129,30 @@ class SearchPersistentHeader extends SliverPersistentHeaderDelegate {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: const [
-                                        FilterListItem(label: 'Computer Priting', isChecked: false,),
-                                        FilterListItem(label: 'Bakery & Catering', isChecked: true,),
-                                        FilterListItem(label: 'Auto-repair & servicing', isChecked: false,),
-                                        FilterListItem(label: 'Wedding planning', isChecked: false,),
-                                        FilterListItem(label: 'Vegetable Suppliers', isChecked:true,),
-                                        FilterListItem(label: 'Laptop wholesale', isChecked: false,),
-
+                                        FilterListItem(
+                                          label: 'Computer Priting',
+                                          isChecked: false,
+                                        ),
+                                        FilterListItem(
+                                          label: 'Bakery & Catering',
+                                          isChecked: true,
+                                        ),
+                                        FilterListItem(
+                                          label: 'Auto-repair & servicing',
+                                          isChecked: false,
+                                        ),
+                                        FilterListItem(
+                                          label: 'Wedding planning',
+                                          isChecked: false,
+                                        ),
+                                        FilterListItem(
+                                          label: 'Vegetable Suppliers',
+                                          isChecked: true,
+                                        ),
+                                        FilterListItem(
+                                          label: 'Laptop wholesale',
+                                          isChecked: false,
+                                        ),
                                       ],
                                     ),
                                   ),

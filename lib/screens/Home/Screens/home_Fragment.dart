@@ -1,6 +1,12 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:gomart/screens/ProductDetail/product_detail.dart';
+import 'package:gomart/screens/Search/search_results.dart';
+import 'package:gomart/screens/notifications/notifications.dart';
 import 'package:gomart/styles/custom_home_icons.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 import '../../../styles/styles.dart';
 
@@ -21,10 +27,16 @@ class CustomPersistentHeader extends SliverPersistentHeaderDelegate {
             ),
           ),
           leadingWidth: 200,
-          actions: const [
-            Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Icon(
+          actions: [
+            IconButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const NotificationsScreen()),
+                );
+              },
+              icon: const Icon(
                 Gomart.notificationBell,
                 color: Styles.colorTextDark,
                 size: 25,
@@ -38,7 +50,7 @@ class CustomPersistentHeader extends SliverPersistentHeaderDelegate {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Container(
+                /*    Container(
                   padding: const EdgeInsets.all(8),
                   width: MediaQuery.of(context).size.width * 0.46,
                   decoration: BoxDecoration(
@@ -48,6 +60,42 @@ class CustomPersistentHeader extends SliverPersistentHeaderDelegate {
                     'Search here',
                     style: TextStyle(
                         fontSize: 12, color: Styles.colorTextFieldHint),
+                  ),
+                ),*/
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.46,
+                  height: 30,
+                  child: TextField(
+                    textInputAction: TextInputAction.search,
+                    onChanged: (text) {},
+                    onSubmitted: (event) {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  const SearchResults()));
+                      if (kDebugMode) {
+                        print('Search submitted');
+                      }
+                    },
+                    style:
+                        const TextStyle(fontSize: 12, color: Styles.colorBlack),
+                    cursorColor: Styles.colorPrimary,
+                    textAlign: TextAlign.start,
+                    decoration: InputDecoration(
+                      hintStyle: const TextStyle(
+                          fontSize: 12, color: Styles.colorTextFieldHint),
+                      fillColor: Styles.colorTextFieldBackground,
+                      filled: true,
+                      contentPadding: const EdgeInsets.all(8),
+                      focusColor: Styles.colorWhite,
+                      hoverColor: Styles.colorWhite,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5),
+                        borderSide: BorderSide.none,
+                      ),
+                      hintText: 'Search here',
+                    ),
                   ),
                 ),
                 Container(
@@ -87,18 +135,21 @@ class HomeFragment extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Styles.colorBackground,
-      body: SafeArea(
-        child: CustomScrollView(slivers: [
-          SliverPersistentHeader(
-              floating: true, delegate: CustomPersistentHeader()),
-          SliverList(
-            delegate: SliverChildBuilderDelegate(
-                childCount: SampleProducts.listOfProducts.length,
-                (BuildContext context, int index) {
-              return SampleProducts.listOfProducts[index];
-            }),
-          )
-        ]),
+      body: GestureDetector(
+        onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+        child: SafeArea(
+          child: CustomScrollView(slivers: [
+            SliverPersistentHeader(
+                floating: true, delegate: CustomPersistentHeader()),
+            SliverList(
+              delegate: SliverChildBuilderDelegate(
+                  childCount: SampleProducts.listOfProducts.length,
+                  (BuildContext context, int index) {
+                return SampleProducts.listOfProducts[index];
+              }),
+            )
+          ]),
+        ),
       ),
     );
   }
@@ -132,149 +183,165 @@ class ProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        color: Styles.colorWhite,
-        margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 0),
-        padding: const EdgeInsets.all(8),
-        width: MediaQuery.of(context).size.width,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(
-              width: MediaQuery.of(context).size.width * 0.40,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  FadeInImage(
-                    width: MediaQuery.of(context).size.width * 0.36,
-                    height: MediaQuery.of(context).size.width * 0.28,
-                    placeholder:
-                        const AssetImage('assets/images/placeholder-image.png'),
-                    image: NetworkImage(productImageUrl),
-                    fit: BoxFit.fitWidth,
-                  ),
-                  const Padding(padding: EdgeInsets.all(8)),
-                  Row(
-                    children: [
-                      const Icon(
-                        Gomart.locationIcon,
-                        size: 16,
-                      ),
-                      Text(
-                        address,
-                        style: const TextStyle(
-                            color: Styles.colorTextDark, fontSize: 12),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-            const Padding(padding: EdgeInsets.all(8)),
-            SizedBox(
-              width: MediaQuery.of(context).size.width * 0.50,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    productName,
-                    style: const TextStyle(color: Styles.colorBlack),
-                  ),
-                  const Padding(padding: EdgeInsets.all(8)),
-                  Text(
-                    price ?? 'Contact us for price',
-                    style: const TextStyle(
-                      fontSize: 16,
-                      color: Styles.colorTextBlue,
+    return InkWell(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const ProductDetailScreen()),
+        );
+      },
+      child: Container(
+          color: Styles.colorWhite,
+          margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 0),
+          padding: const EdgeInsets.all(8),
+          width: MediaQuery.of(context).size.width,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.40,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    FadeInImage(
+                      width: MediaQuery.of(context).size.width * 0.36,
+                      height: MediaQuery.of(context).size.width * 0.28,
+                      placeholder: const AssetImage(
+                          'assets/images/placeholder-image.png'),
+                      image: NetworkImage(productImageUrl),
+                      fit: BoxFit.fitWidth,
                     ),
-                  ),
-                  const Padding(padding: EdgeInsets.all(6)),
-                  Text(
-                    companyName,
-                    style: const TextStyle(
-                        fontWeight: FontWeight.w500,
-                        color: Styles.colorTextDark),
-                  ),
-                  const Padding(padding: EdgeInsets.all(4)),
-                  openingAndClosingTime != null
-                      ? Row(
-                          children: [
-                            const Text('Hours: ',
-                                style: TextStyle(
-                                    fontSize: 10,
-                                    color: Styles.colorTextDark,
-                                    fontWeight: FontWeight.w500)),
-                            Text(
-                              openingAndClosingTime ?? '',
-                              style: const TextStyle(
-                                  fontSize: 10, color: Styles.colorTextDark),
-                            ),
-                          ],
-                        )
-                      : Row(
-                          children: [
-                            const Text(
-                              'Hours: ',
-                              style: TextStyle(
-                                  fontSize: 12, color: Styles.colorTextDark),
-                            ),
-                            Text(
-                              isOpen ? 'Open' : 'Closed',
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: isOpen
-                                      ? Styles.colorTextGreen
-                                      : Styles.colorTextRed),
-                            ),
-                            Text(
-                              isOpen
-                                  ? ' - Closes $closingTime'
-                                  : ' - Opens $closingTime',
-                              style: const TextStyle(
-                                  fontSize: 12, color: Styles.colorTextDark),
-                            ),
-                          ],
-                        ),
-                  const Padding(padding: EdgeInsets.all(8)),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 0, 8, 0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    const Padding(padding: EdgeInsets.all(8)),
+                    Row(
                       children: [
-                        Text(
-                          phoneNumber,
-                          style: const TextStyle(
-                            color: Styles.colorTextBlue,
-                            fontSize: 13,
-                          ),
+                        const Icon(
+                          Gomart.locationIcon,
+                          size: 16,
                         ),
-                        const Padding(padding: EdgeInsets.all(4)),
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 4, horizontal: 10),
-                          decoration: BoxDecoration(
-                            color: Styles.colorSecondary,
-                            borderRadius: BorderRadius.circular(16),
-                          ),
-                          child: const Text(
-                            'Call',
-                            style: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.normal,
-                                color: Styles.colorBlack),
-                          ),
-                        )
+                        Text(
+                          address,
+                          style: const TextStyle(
+                              color: Styles.colorTextDark, fontSize: 12),
+                        ),
                       ],
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            )
-          ],
-        ));
+              const Padding(padding: EdgeInsets.all(8)),
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.50,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      productName,
+                      style: const TextStyle(color: Styles.colorBlack),
+                    ),
+                    const Padding(padding: EdgeInsets.all(8)),
+                    Text(
+                      price ?? 'Contact us for price',
+                      style: const TextStyle(
+                        fontSize: 16,
+                        color: Styles.colorTextBlue,
+                      ),
+                    ),
+                    const Padding(padding: EdgeInsets.all(6)),
+                    Text(
+                      companyName,
+                      style: const TextStyle(
+                          fontWeight: FontWeight.w500,
+                          color: Styles.colorTextDark),
+                    ),
+                    const Padding(padding: EdgeInsets.all(4)),
+                    openingAndClosingTime != null
+                        ? Row(
+                            children: [
+                              const Text('Hours: ',
+                                  style: TextStyle(
+                                      fontSize: 10,
+                                      color: Styles.colorTextDark,
+                                      fontWeight: FontWeight.w500)),
+                              Text(
+                                openingAndClosingTime ?? '',
+                                style: const TextStyle(
+                                    fontSize: 10, color: Styles.colorTextDark),
+                              ),
+                            ],
+                          )
+                        : Row(
+                            children: [
+                              const Text(
+                                'Hours: ',
+                                style: TextStyle(
+                                    fontSize: 12, color: Styles.colorTextDark),
+                              ),
+                              Text(
+                                isOpen ? 'Open' : 'Closed',
+                                style: TextStyle(
+                                    fontSize: 12,
+                                    color: isOpen
+                                        ? Styles.colorTextGreen
+                                        : Styles.colorTextRed),
+                              ),
+                              Text(
+                                isOpen
+                                    ? ' - Closes $closingTime'
+                                    : ' - Opens $closingTime',
+                                style: const TextStyle(
+                                    fontSize: 12, color: Styles.colorTextDark),
+                              ),
+                            ],
+                          ),
+                    const Padding(padding: EdgeInsets.all(8)),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 0, 8, 0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            phoneNumber,
+                            style: const TextStyle(
+                              color: Styles.colorTextBlue,
+                              fontSize: 13,
+                            ),
+                          ),
+                          const Padding(padding: EdgeInsets.all(4)),
+                          InkWell(
+                            onTap: () async {
+                              String url = "tel:$phoneNumber";
+                              if (await canLaunchUrlString(url)) {
+                                await launchUrlString("tel:$phoneNumber");
+                              }
+                            },
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 4, horizontal: 10),
+                              decoration: BoxDecoration(
+                                color: Styles.colorSecondary,
+                                borderRadius: BorderRadius.circular(16),
+                              ),
+                              child: const Text(
+                                'Call',
+                                style: TextStyle(
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.normal,
+                                    color: Styles.colorBlack),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              )
+            ],
+          )),
+    );
   }
 }
 

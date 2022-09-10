@@ -4,9 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
-import 'package:gomart/screens/Home/Screens/home_Fragment.dart';
+import 'package:gomart/screens/Home/Screens/HomeFragment/home_Fragment.dart';
 import 'package:gomart/screens/Home/Screens/message.dart';
 import 'package:gomart/screens/Home/Screens/saved.dart';
+import 'package:gomart/screens/Home/Screens/profile.dart';
+import 'package:gomart/screens/Home/Screens/HomeFragment/home_Fragment.dart';
 
 import '../../data/bloc/authentication/authentication_bloc.dart';
 import '../../styles/custom_home_icons.dart';

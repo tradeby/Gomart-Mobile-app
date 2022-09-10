@@ -20,8 +20,7 @@ class SearchResults extends StatelessWidget {
         child: SafeArea(
           child: CustomScrollView(slivers: [
             SliverPersistentHeader(
-                floating: true,
-                delegate: SearchPersistentHeader( searchTerm)),
+                floating: true, delegate: SearchPersistentHeader(searchTerm)),
             SliverList(
               delegate: SliverChildBuilderDelegate(
                   childCount: SampleProducts.listOfProducts.length,
@@ -55,12 +54,13 @@ class SearchPersistentHeader extends SliverPersistentHeaderDelegate {
             children: [
               const BackButton(),
               GestureDetector(
-                onTap: (){
+                onTap: () {
                   Navigator.of(context)
                       .push(CustomPageRoute(const SearchInputScreen()));
                 },
                 child: Container(
-                  padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 6),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 3, horizontal: 6),
                   height: 30,
                   width: MediaQuery.of(context).size.width * 0.75,
                   decoration: BoxDecoration(
@@ -83,6 +83,7 @@ class SearchPersistentHeader extends SliverPersistentHeaderDelegate {
                   onPressed: () {
                     showModalBottomSheet<void>(
                       context: context,
+                    isScrollControlled: true,
                       shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.vertical(
                           top: Radius.circular(20),
@@ -95,7 +96,6 @@ class SearchPersistentHeader extends SliverPersistentHeaderDelegate {
                             Container(
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 30),
-                              height: 580,
                               color: Styles.colorWhite,
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
@@ -176,6 +176,7 @@ class SearchPersistentHeader extends SliverPersistentHeaderDelegate {
                                       ),
                                     ),
                                   ),
+                                  const Padding(padding: EdgeInsets.all(25)),
                                 ],
                               ),
                             ),
@@ -195,12 +196,17 @@ class SearchPersistentHeader extends SliverPersistentHeaderDelegate {
                                 ),
                               ),
                             ),
-                            const Positioned(
+                            Positioned(
                                 top: 10,
                                 right: 20,
-                                child: Icon(
-                                  Icons.close,
-                                  size: 24,
+                                child: IconButton(
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                  icon: const Icon(
+                                    Icons.close,
+                                    size: 24,
+                                  ),
                                 )),
                           ],
                         );

@@ -54,7 +54,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         appBarTheme: const AppBarTheme(
           systemOverlayStyle: SystemUiOverlayStyle(
-            statusBarColor: Colors.white,
+            statusBarColor: Colors.black,
           ),
         ),
       ),

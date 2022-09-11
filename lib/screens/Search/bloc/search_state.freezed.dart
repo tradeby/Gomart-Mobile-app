@@ -16,7 +16,11 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$SearchState {
-  String? get phoneNumber => throw _privateConstructorUsedError;
+  bool get searchInProgress => throw _privateConstructorUsedError;
+  bool get searchFailure => throw _privateConstructorUsedError;
+  bool get searchSuccess => throw _privateConstructorUsedError;
+  String? get searchTerm => throw _privateConstructorUsedError;
+  List<ProductModel> get searchResults => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SearchStateCopyWith<SearchState> get copyWith =>
@@ -28,7 +32,12 @@ abstract class $SearchStateCopyWith<$Res> {
   factory $SearchStateCopyWith(
           SearchState value, $Res Function(SearchState) then) =
       _$SearchStateCopyWithImpl<$Res>;
-  $Res call({String? phoneNumber});
+  $Res call(
+      {bool searchInProgress,
+      bool searchFailure,
+      bool searchSuccess,
+      String? searchTerm,
+      List<ProductModel> searchResults});
 }
 
 /// @nodoc
@@ -41,13 +50,33 @@ class _$SearchStateCopyWithImpl<$Res> implements $SearchStateCopyWith<$Res> {
 
   @override
   $Res call({
-    Object? phoneNumber = freezed,
+    Object? searchInProgress = freezed,
+    Object? searchFailure = freezed,
+    Object? searchSuccess = freezed,
+    Object? searchTerm = freezed,
+    Object? searchResults = freezed,
   }) {
     return _then(_value.copyWith(
-      phoneNumber: phoneNumber == freezed
-          ? _value.phoneNumber
-          : phoneNumber // ignore: cast_nullable_to_non_nullable
+      searchInProgress: searchInProgress == freezed
+          ? _value.searchInProgress
+          : searchInProgress // ignore: cast_nullable_to_non_nullable
+              as bool,
+      searchFailure: searchFailure == freezed
+          ? _value.searchFailure
+          : searchFailure // ignore: cast_nullable_to_non_nullable
+              as bool,
+      searchSuccess: searchSuccess == freezed
+          ? _value.searchSuccess
+          : searchSuccess // ignore: cast_nullable_to_non_nullable
+              as bool,
+      searchTerm: searchTerm == freezed
+          ? _value.searchTerm
+          : searchTerm // ignore: cast_nullable_to_non_nullable
               as String?,
+      searchResults: searchResults == freezed
+          ? _value.searchResults
+          : searchResults // ignore: cast_nullable_to_non_nullable
+              as List<ProductModel>,
     ));
   }
 }
@@ -59,7 +88,12 @@ abstract class _$$_SearchStateCopyWith<$Res>
           _$_SearchState value, $Res Function(_$_SearchState) then) =
       __$$_SearchStateCopyWithImpl<$Res>;
   @override
-  $Res call({String? phoneNumber});
+  $Res call(
+      {bool searchInProgress,
+      bool searchFailure,
+      bool searchSuccess,
+      String? searchTerm,
+      List<ProductModel> searchResults});
 }
 
 /// @nodoc
@@ -74,13 +108,33 @@ class __$$_SearchStateCopyWithImpl<$Res> extends _$SearchStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? phoneNumber = freezed,
+    Object? searchInProgress = freezed,
+    Object? searchFailure = freezed,
+    Object? searchSuccess = freezed,
+    Object? searchTerm = freezed,
+    Object? searchResults = freezed,
   }) {
     return _then(_$_SearchState(
-      phoneNumber: phoneNumber == freezed
-          ? _value.phoneNumber
-          : phoneNumber // ignore: cast_nullable_to_non_nullable
+      searchInProgress: searchInProgress == freezed
+          ? _value.searchInProgress
+          : searchInProgress // ignore: cast_nullable_to_non_nullable
+              as bool,
+      searchFailure: searchFailure == freezed
+          ? _value.searchFailure
+          : searchFailure // ignore: cast_nullable_to_non_nullable
+              as bool,
+      searchSuccess: searchSuccess == freezed
+          ? _value.searchSuccess
+          : searchSuccess // ignore: cast_nullable_to_non_nullable
+              as bool,
+      searchTerm: searchTerm == freezed
+          ? _value.searchTerm
+          : searchTerm // ignore: cast_nullable_to_non_nullable
               as String?,
+      searchResults: searchResults == freezed
+          ? _value._searchResults
+          : searchResults // ignore: cast_nullable_to_non_nullable
+              as List<ProductModel>,
     ));
   }
 }
@@ -88,14 +142,32 @@ class __$$_SearchStateCopyWithImpl<$Res> extends _$SearchStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_SearchState implements _SearchState {
-  const _$_SearchState({this.phoneNumber});
+  const _$_SearchState(
+      {required this.searchInProgress,
+      required this.searchFailure,
+      required this.searchSuccess,
+      this.searchTerm,
+      required final List<ProductModel> searchResults})
+      : _searchResults = searchResults;
 
   @override
-  final String? phoneNumber;
+  final bool searchInProgress;
+  @override
+  final bool searchFailure;
+  @override
+  final bool searchSuccess;
+  @override
+  final String? searchTerm;
+  final List<ProductModel> _searchResults;
+  @override
+  List<ProductModel> get searchResults {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_searchResults);
+  }
 
   @override
   String toString() {
-    return 'SearchState(phoneNumber: $phoneNumber)';
+    return 'SearchState(searchInProgress: $searchInProgress, searchFailure: $searchFailure, searchSuccess: $searchSuccess, searchTerm: $searchTerm, searchResults: $searchResults)';
   }
 
   @override
@@ -104,12 +176,25 @@ class _$_SearchState implements _SearchState {
         (other.runtimeType == runtimeType &&
             other is _$_SearchState &&
             const DeepCollectionEquality()
-                .equals(other.phoneNumber, phoneNumber));
+                .equals(other.searchInProgress, searchInProgress) &&
+            const DeepCollectionEquality()
+                .equals(other.searchFailure, searchFailure) &&
+            const DeepCollectionEquality()
+                .equals(other.searchSuccess, searchSuccess) &&
+            const DeepCollectionEquality()
+                .equals(other.searchTerm, searchTerm) &&
+            const DeepCollectionEquality()
+                .equals(other._searchResults, _searchResults));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(phoneNumber));
+      runtimeType,
+      const DeepCollectionEquality().hash(searchInProgress),
+      const DeepCollectionEquality().hash(searchFailure),
+      const DeepCollectionEquality().hash(searchSuccess),
+      const DeepCollectionEquality().hash(searchTerm),
+      const DeepCollectionEquality().hash(_searchResults));
 
   @JsonKey(ignore: true)
   @override
@@ -118,10 +203,23 @@ class _$_SearchState implements _SearchState {
 }
 
 abstract class _SearchState implements SearchState {
-  const factory _SearchState({final String? phoneNumber}) = _$_SearchState;
+  const factory _SearchState(
+      {required final bool searchInProgress,
+      required final bool searchFailure,
+      required final bool searchSuccess,
+      final String? searchTerm,
+      required final List<ProductModel> searchResults}) = _$_SearchState;
 
   @override
-  String? get phoneNumber;
+  bool get searchInProgress;
+  @override
+  bool get searchFailure;
+  @override
+  bool get searchSuccess;
+  @override
+  String? get searchTerm;
+  @override
+  List<ProductModel> get searchResults;
   @override
   @JsonKey(ignore: true)
   _$$_SearchStateCopyWith<_$_SearchState> get copyWith =>

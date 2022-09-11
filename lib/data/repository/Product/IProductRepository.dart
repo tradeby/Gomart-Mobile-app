@@ -17,5 +17,6 @@ abstract class IProductRepository {
 
   Future<ProductModel> getProductById(String productId);
 
+  Future<List<ProductModel>>  getSearchResultsBySearchTerm(String? searchTerm);
   Future<void> seedSampleData(List<ProductModel> data);
 }

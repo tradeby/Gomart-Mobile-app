@@ -1,6 +1,8 @@
+import 'package:algolia/algolia.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:gomart/service/algolia_service.dart';
 import 'package:gomart/service/bloc_service.dart';
 import 'package:gomart/service/firebase_service.dart';
 import 'package:injectable/injectable.dart';
@@ -18,4 +20,7 @@ abstract class AppModule {
 
   @injectable
   FirebaseAuth get auth => FirebaseAuth.instance;
+
+  @injectable
+  Algolia get algolia => AlgoliaService.algolia.instance;
 }

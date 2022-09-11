@@ -25,7 +25,8 @@ class SearchResults extends StatelessWidget {
               delegate: SliverChildBuilderDelegate(
                   childCount: SampleProducts.listOfProducts.length,
                   (BuildContext context, int index) {
-                return SampleProducts.listOfProducts[index];
+                return ProductCard(
+                    product: SampleProducts.listOfProducts[index]);
               }),
             )
           ]),
@@ -83,7 +84,7 @@ class SearchPersistentHeader extends SliverPersistentHeaderDelegate {
                   onPressed: () {
                     showModalBottomSheet<void>(
                       context: context,
-                    isScrollControlled: true,
+                      isScrollControlled: true,
                       shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.vertical(
                           top: Radius.circular(20),

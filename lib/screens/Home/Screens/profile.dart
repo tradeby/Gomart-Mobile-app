@@ -1,8 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gomart/data/bloc/authentication/authentication_bloc.dart';
+import 'package:gomart/screens/debug/bloc/debug_cubit.dart';
+import 'package:gomart/screens/debug/debug_algolia_results.dart';
 
 import '../../../styles/styles.dart';
 import '../../Authentication/Register/register_screen_upload_photo.dart';
@@ -24,8 +27,7 @@ class ProfileFragment extends StatelessWidget {
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height * 0.28,
             child: Padding(
-              padding:
-              const EdgeInsets.symmetric(horizontal: 30, vertical: 8),
+              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 8),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
@@ -33,19 +35,19 @@ class ProfileFragment extends StatelessWidget {
                     children: <Widget>[
                       (FirebaseAuth.instance.currentUser?.photoURL != null)
                           ? CircleAvatar(
-                        radius: 45,
-                        child: ClipOval(
-                            child: Image.network(
-                              FirebaseAuth.instance.currentUser?.photoURL
-                              as String,
-                              width: 120,
-                            )),
-                      )
+                              radius: 45,
+                              child: ClipOval(
+                                  child: Image.network(
+                                FirebaseAuth.instance.currentUser?.photoURL
+                                    as String,
+                                width: 120,
+                              )),
+                            )
                           : CharacterAvatar(
-                        ch: FirebaseAuth
-                            .instance.currentUser?.displayName ??
-                            'Null',
-                      ),
+                              ch: FirebaseAuth
+                                      .instance.currentUser?.displayName ??
+                                  'Null',
+                            ),
                       const Padding(padding: EdgeInsets.all(12)),
                       Column(
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -75,7 +77,7 @@ class ProfileFragment extends StatelessWidget {
               style: TextButton.styleFrom(
                 backgroundColor: Styles.colorPrimary,
                 padding:
-                const EdgeInsets.symmetric(vertical: 8, horizontal: 40),
+                    const EdgeInsets.symmetric(vertical: 8, horizontal: 40),
                 shape: const StadiumBorder(),
               ),
               onPressed: () {
@@ -84,7 +86,38 @@ class ProfileFragment extends StatelessWidget {
                     .read<AuthenticationBloc>()
                     .add(AuthenticationLoggedOut(context));
               },
-              child: const Text('Logout'))
+              child: const Text('Logout')),
+          (kDebugMode)
+              ? ElevatedButton(
+                  style: TextButton.styleFrom(
+                    backgroundColor: Styles.colorPrimary,
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 8, horizontal: 40),
+                    shape: const StadiumBorder(),
+                  ),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const DebugAlgoliaSearchScreen(),
+                      ),
+                    );
+                  },
+                  child: const Text('Debug algolia page'))
+              : Container(),
+          (kDebugMode)
+              ? ElevatedButton(
+                  style: TextButton.styleFrom(
+                    backgroundColor: Styles.colorPrimary,
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 8, horizontal: 40),
+                    shape: const StadiumBorder(),
+                  ),
+                  onPressed: () {
+                    context.read<DebugCubit>().seedSampleProducts();
+                  },
+                  child: const Text('Debug seed sample data'))
+              : Container()
         ],
       ),
     );

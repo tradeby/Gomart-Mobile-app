@@ -21,6 +21,7 @@ abstract class Styles {
   static const Color colorGray = Color(0xff8A8686);
 
   static const Color colorTextGomartText = Color(0xff606060);
+  static const Color colorSkeletalBackground= Color(0xfffafafa);
 
 
 

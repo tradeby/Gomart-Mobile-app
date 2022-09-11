@@ -1,6 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gomart/data/model/Product/product_model.dart';
+import 'package:gomart/screens/Home/Screens/HomeFragment/bloc/bloc.dart';
+import 'package:gomart/screens/Home/Screens/HomeFragment/bloc/bloc.dart';
 import 'package:gomart/screens/ProductDetail/product_detail.dart';
 import 'package:gomart/screens/Search/search_input.dart';
 import 'package:gomart/screens/Search/search_results.dart';
@@ -150,12 +154,36 @@ class HomeFragment extends StatelessWidget {
           child: CustomScrollView(slivers: [
             SliverPersistentHeader(
                 floating: true, delegate: CustomPersistentHeader()),
-            SliverList(
-              delegate: SliverChildBuilderDelegate(
-                  childCount: SampleProducts.listOfProducts.length,
-                  (BuildContext context, int index) {
-                return SampleProducts.listOfProducts[index];
-              }),
+            BlocBuilder<HomeCubit, HomeState>(
+              builder: (context, state) {
+                if (state.loadInProgress) {
+                  return SliverList(
+                    delegate: SliverChildBuilderDelegate(childCount: 3,
+                        (BuildContext context, int index) {
+                      return const ProductCardLoading();
+                    }),
+                  );
+                } else if (state.loadSuccess) {
+                  return SliverList(
+                    delegate: SliverChildBuilderDelegate(
+                        childCount: state.homeProducts?.length,
+                        (BuildContext context, int index) {
+                      return ProductCard(
+                        product: SampleProducts.toProductModel(
+                          state.homeProducts![index],
+                        ),
+                      );
+                    }),
+                  );
+                } else {
+                  return SliverList(
+                      delegate: SliverChildListDelegate([
+                    const Center(
+                      child: Text('Error encountered loading products'),
+                    ),
+                  ]));
+                }
+              },
             )
           ]),
         ),
@@ -164,31 +192,138 @@ class HomeFragment extends StatelessWidget {
   }
 }
 
-class ProductCard extends StatelessWidget {
-  final String productId;
-  final String productName;
-  final String? price;
-  final String phoneNumber;
-  final String address;
-  final bool isOpen;
-  final String closingTime;
-  final String? openingAndClosingTime;
-  final String productImageUrl;
-  final String companyName;
+class ProductCardLoading extends StatelessWidget {
+  const ProductCardLoading({Key? key}) : super(key: key);
 
-  const ProductCard(
-      {Key? key,
-      required this.productName,
-      this.price,
-      required this.phoneNumber,
-      required this.address,
-      required this.isOpen,
-      required this.closingTime,
-      required this.productId,
-      required this.productImageUrl,
-      required this.companyName,
-      this.openingAndClosingTime})
-      : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const ProductDetailScreen()),
+        );
+      },
+      child: Container(
+          color: Styles.colorSkeletalBackground,
+          margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 0),
+          padding: const EdgeInsets.all(8),
+          width: MediaQuery.of(context).size.width,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.40,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      width: MediaQuery.of(context).size.width * 0.36,
+                      height: MediaQuery.of(context).size.width * 0.28,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(4),
+                        color: Styles.colorBarBottomSheet,
+                      ),
+                    ),
+                    const Padding(padding: EdgeInsets.all(8)),
+                    Row(
+                      children: [
+                        Container(
+                          height: 12,
+                          width: 12,
+                          color: Styles.colorBarBottomSheet,
+                        ),
+                        const Padding(padding: EdgeInsets.all(4)),
+                        Container(
+                          height: 8,
+                          width: MediaQuery.of(context).size.width * 0.3,
+                          color: Styles.colorBarBottomSheet,
+                        )
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              const Padding(padding: EdgeInsets.all(8)),
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.50,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      height: 10,
+                      width: MediaQuery.of(context).size.width * 0.4,
+                      color: Styles.colorBarBottomSheet,
+                    ),
+                    const Padding(padding: EdgeInsets.all(4)),
+                    Container(
+                      height: 8,
+                      width: MediaQuery.of(context).size.width * 0.3,
+                      color: Styles.colorBarBottomSheet,
+                    ),
+                    const Padding(padding: EdgeInsets.all(12)),
+                    Container(
+                      height: 14,
+                      width: MediaQuery.of(context).size.width * 0.3,
+                      color: Styles.colorBarBottomSheet,
+                    ),
+                    const Padding(padding: EdgeInsets.all(12)),
+                    Row(
+                      children: [
+                        Container(
+                          height: 8,
+                          width: MediaQuery.of(context).size.width * 0.1,
+                          color: Styles.colorBarBottomSheet,
+                        ),
+                        const Padding(padding: EdgeInsets.all(4)),
+                        Container(
+                          height: 8,
+                          width: MediaQuery.of(context).size.width * 0.2,
+                          color: Styles.colorBarBottomSheet,
+                        ),
+                      ],
+                    ),
+                    const Padding(padding: EdgeInsets.all(8)),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 0, 8, 0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            height: 8,
+                            width: MediaQuery.of(context).size.width * 0.2,
+                            color: Styles.colorBarBottomSheet,
+                          ),
+                          const Padding(padding: EdgeInsets.all(4)),
+                          Container(
+                            height: 20,
+                            width: 50,
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 4, horizontal: 10),
+                            decoration: BoxDecoration(
+                              color: Styles.colorSecondary,
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              )
+            ],
+          )),
+    );
+  }
+}
+
+class ProductCard extends StatelessWidget {
+  final SampleProducts product;
+
+  const ProductCard({Key? key, required this.product}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -219,7 +354,7 @@ class ProductCard extends StatelessWidget {
                       height: MediaQuery.of(context).size.width * 0.28,
                       placeholder: const AssetImage(
                           'assets/images/placeholder-image.png'),
-                      image: NetworkImage(productImageUrl),
+                      image: NetworkImage(product.productImageUrl),
                       fit: BoxFit.fitWidth,
                     ),
                     const Padding(padding: EdgeInsets.all(8)),
@@ -230,7 +365,7 @@ class ProductCard extends StatelessWidget {
                           size: 16,
                         ),
                         Text(
-                          address,
+                          product.address,
                           style: const TextStyle(
                               color: Styles.colorTextDark, fontSize: 12),
                         ),
@@ -247,12 +382,12 @@ class ProductCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      productName,
+                      product.productName,
                       style: const TextStyle(color: Styles.colorBlack),
                     ),
                     const Padding(padding: EdgeInsets.all(8)),
                     Text(
-                      price ?? 'Contact us for price',
+                      product.price ?? 'Contact us for price',
                       style: const TextStyle(
                         fontSize: 16,
                         color: Styles.colorTextBlue,
@@ -260,13 +395,13 @@ class ProductCard extends StatelessWidget {
                     ),
                     const Padding(padding: EdgeInsets.all(6)),
                     Text(
-                      companyName,
+                      product.companyName,
                       style: const TextStyle(
                           fontWeight: FontWeight.w500,
                           color: Styles.colorTextDark),
                     ),
                     const Padding(padding: EdgeInsets.all(4)),
-                    openingAndClosingTime != null
+                    product.openingAndClosingTime != null
                         ? Row(
                             children: [
                               const Text('Hours: ',
@@ -275,7 +410,7 @@ class ProductCard extends StatelessWidget {
                                       color: Styles.colorTextDark,
                                       fontWeight: FontWeight.w500)),
                               Text(
-                                openingAndClosingTime ?? '',
+                                product.openingAndClosingTime ?? '',
                                 style: const TextStyle(
                                     fontSize: 10, color: Styles.colorTextDark),
                               ),
@@ -289,17 +424,17 @@ class ProductCard extends StatelessWidget {
                                     fontSize: 12, color: Styles.colorTextDark),
                               ),
                               Text(
-                                isOpen ? 'Open' : 'Closed',
+                                product.isOpen ? 'Open' : 'Closed',
                                 style: TextStyle(
                                     fontSize: 12,
-                                    color: isOpen
+                                    color: product.isOpen
                                         ? Styles.colorTextGreen
                                         : Styles.colorTextRed),
                               ),
                               Text(
-                                isOpen
-                                    ? ' - Closes $closingTime'
-                                    : ' - Opens $closingTime',
+                                product.isOpen
+                                    ? ' - Closes ${product.closingTime}'
+                                    : ' - Opens ${product.closingTime}',
                                 style: const TextStyle(
                                     fontSize: 12, color: Styles.colorTextDark),
                               ),
@@ -312,7 +447,7 @@ class ProductCard extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            phoneNumber,
+                            product.phoneNumber,
                             style: const TextStyle(
                               color: Styles.colorTextBlue,
                               fontSize: 13,
@@ -321,9 +456,10 @@ class ProductCard extends StatelessWidget {
                           const Padding(padding: EdgeInsets.all(4)),
                           InkWell(
                             onTap: () async {
-                              String url = "tel:$phoneNumber";
+                              String url = "tel:${product.phoneNumber}";
                               if (await canLaunchUrlString(url)) {
-                                await launchUrlString("tel:$phoneNumber");
+                                await launchUrlString(
+                                    "tel:${product.phoneNumber}");
                               }
                             },
                             child: Container(
@@ -355,8 +491,44 @@ class ProductCard extends StatelessWidget {
 }
 
 class SampleProducts {
-  static List<ProductCard> listOfProducts = const [
-    ProductCard(
+  final String productId;
+  final String productName;
+  final String? price;
+  final String phoneNumber;
+  final String address;
+  final bool isOpen;
+  final String closingTime;
+  final String? openingAndClosingTime;
+  final String productImageUrl;
+  final String companyName;
+
+  const SampleProducts(
+      {required this.productName,
+      this.price,
+      required this.phoneNumber,
+      required this.address,
+      required this.isOpen,
+      required this.closingTime,
+      required this.productId,
+      required this.productImageUrl,
+      required this.companyName,
+      this.openingAndClosingTime});
+
+  static SampleProducts toProductModel(ProductModel product) {
+    return SampleProducts(
+        productId: product.id ??'null',
+        productName: product.productName ??'null',
+        price: product.price,
+        phoneNumber: product.phoneNumber ??'null',
+        address: product.address ??'null',
+        companyName: product.companyName ??'null',
+        isOpen: false,
+        closingTime: product.closingTime??'null',
+        productImageUrl: product.productImageUrl??'null');
+  }
+
+  static List<SampleProducts> listOfProducts = const [
+    SampleProducts(
       productId: '001',
       productName: 'Butter Cream Cake 6 Inches',
       price: 'N5,000',
@@ -368,7 +540,7 @@ class SampleProducts {
       productImageUrl:
           'https://firebasestorage.googleapis.com/v0/b/gomart-apps.appspot.com/o/products-picture-sample%2Fimage3.png?alt=media&token=283e2392-5149-4a7b-a490-14bef689b532',
     ),
-    ProductCard(
+    SampleProducts(
       productId: '001',
       productName: 'Wholesale & Retail of Computers & Printing',
       phoneNumber: '08067397760',
@@ -379,7 +551,7 @@ class SampleProducts {
       productImageUrl:
           'https://firebasestorage.googleapis.com/v0/b/gomart-apps.appspot.com/o/products-picture-sample%2Fimage6.png?alt=media&token=283e2392-5149-4a7b-a490-14bef689b532',
     ),
-    ProductCard(
+    SampleProducts(
       productId: '001',
       productName: 'Auto Diagnosis',
       price: 'N6,000',
@@ -391,7 +563,7 @@ class SampleProducts {
       productImageUrl:
           'https://firebasestorage.googleapis.com/v0/b/gomart-apps.appspot.com/o/products-picture-sample%2Fimage1.png?alt=media&token=283e2392-5149-4a7b-a490-14bef689b532',
     ),
-    ProductCard(
+    SampleProducts(
       productId: '001',
       productName:
           'Committed to bringing you fresh,  healthy and neat fruits & veggies',
@@ -404,7 +576,7 @@ class SampleProducts {
       productImageUrl:
           'https://firebasestorage.googleapis.com/v0/b/gomart-apps.appspot.com/o/products-picture-sample%2Fimage2.png?alt=media&token=283e2392-5149-4a7b-a490-14bef689b532',
     ),
-    ProductCard(
+    SampleProducts(
       productId: '001',
       productName: 'Butter Cream Cake 6 Inches',
       price: 'N5,000',
@@ -416,7 +588,7 @@ class SampleProducts {
       productImageUrl:
           'https://firebasestorage.googleapis.com/v0/b/gomart-apps.appspot.com/o/products-picture-sample%2Fimage3.png?alt=media&token=283e2392-5149-4a7b-a490-14bef689b532',
     ),
-    ProductCard(
+    SampleProducts(
       productId: '001',
       productName: 'Wholesale & Retail of Computers & Printing',
       phoneNumber: '08067397760',
@@ -427,7 +599,7 @@ class SampleProducts {
       productImageUrl:
           'https://firebasestorage.googleapis.com/v0/b/gomart-apps.appspot.com/o/products-picture-sample%2Fimage6.png?alt=media&token=283e2392-5149-4a7b-a490-14bef689b532',
     ),
-    ProductCard(
+    SampleProducts(
       productId: '001',
       productName: 'Auto Diagnosis',
       price: 'N6,000',
@@ -439,7 +611,7 @@ class SampleProducts {
       productImageUrl:
           'https://firebasestorage.googleapis.com/v0/b/gomart-apps.appspot.com/o/products-picture-sample%2Fimage1.png?alt=media&token=283e2392-5149-4a7b-a490-14bef689b532',
     ),
-    ProductCard(
+    SampleProducts(
       productId: '001',
       productName:
           'Committed to bringing you fresh,  healthy and neat fruits & veggies',
@@ -452,7 +624,7 @@ class SampleProducts {
       productImageUrl:
           'https://firebasestorage.googleapis.com/v0/b/gomart-apps.appspot.com/o/products-picture-sample%2Fimage2.png?alt=media&token=283e2392-5149-4a7b-a490-14bef689b532',
     ),
-    ProductCard(
+    SampleProducts(
       productId: '001',
       productName: 'Butter Cream Cake 6 Inches',
       price: 'N5,000',
@@ -464,7 +636,7 @@ class SampleProducts {
       productImageUrl:
           'https://firebasestorage.googleapis.com/v0/b/gomart-apps.appspot.com/o/products-picture-sample%2Fimage3.png?alt=media&token=283e2392-5149-4a7b-a490-14bef689b532',
     ),
-    ProductCard(
+    SampleProducts(
       productId: '001',
       productName: 'Wholesale & Retail of Computers & Printing',
       phoneNumber: '08067397760',
@@ -475,7 +647,7 @@ class SampleProducts {
       productImageUrl:
           'https://firebasestorage.googleapis.com/v0/b/gomart-apps.appspot.com/o/products-picture-sample%2Fimage6.png?alt=media&token=283e2392-5149-4a7b-a490-14bef689b532',
     ),
-    ProductCard(
+    SampleProducts(
       productId: '001',
       productName: 'Auto Diagnosis',
       price: 'N6,000',
@@ -487,7 +659,7 @@ class SampleProducts {
       productImageUrl:
           'https://firebasestorage.googleapis.com/v0/b/gomart-apps.appspot.com/o/products-picture-sample%2Fimage1.png?alt=media&token=283e2392-5149-4a7b-a490-14bef689b532',
     ),
-    ProductCard(
+    SampleProducts(
       productId: '001',
       productName:
           'Committed to bringing you fresh,  healthy and neat fruits & veggies',

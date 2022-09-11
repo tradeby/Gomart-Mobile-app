@@ -16,7 +16,13 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$HomeState {
-  String? get phoneNumber => throw _privateConstructorUsedError;
+  bool get loadInProgress => throw _privateConstructorUsedError;
+  bool get loadFailure => throw _privateConstructorUsedError;
+  bool get loadSuccess => throw _privateConstructorUsedError;
+  String? get error => throw _privateConstructorUsedError;
+  List<ProductModel>? get homeProducts => throw _privateConstructorUsedError;
+  ProductRepositoryOutput? get productsOutput =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $HomeStateCopyWith<HomeState> get copyWith =>
@@ -27,7 +33,13 @@ mixin _$HomeState {
 abstract class $HomeStateCopyWith<$Res> {
   factory $HomeStateCopyWith(HomeState value, $Res Function(HomeState) then) =
       _$HomeStateCopyWithImpl<$Res>;
-  $Res call({String? phoneNumber});
+  $Res call(
+      {bool loadInProgress,
+      bool loadFailure,
+      bool loadSuccess,
+      String? error,
+      List<ProductModel>? homeProducts,
+      ProductRepositoryOutput? productsOutput});
 }
 
 /// @nodoc
@@ -40,13 +52,38 @@ class _$HomeStateCopyWithImpl<$Res> implements $HomeStateCopyWith<$Res> {
 
   @override
   $Res call({
-    Object? phoneNumber = freezed,
+    Object? loadInProgress = freezed,
+    Object? loadFailure = freezed,
+    Object? loadSuccess = freezed,
+    Object? error = freezed,
+    Object? homeProducts = freezed,
+    Object? productsOutput = freezed,
   }) {
     return _then(_value.copyWith(
-      phoneNumber: phoneNumber == freezed
-          ? _value.phoneNumber
-          : phoneNumber // ignore: cast_nullable_to_non_nullable
+      loadInProgress: loadInProgress == freezed
+          ? _value.loadInProgress
+          : loadInProgress // ignore: cast_nullable_to_non_nullable
+              as bool,
+      loadFailure: loadFailure == freezed
+          ? _value.loadFailure
+          : loadFailure // ignore: cast_nullable_to_non_nullable
+              as bool,
+      loadSuccess: loadSuccess == freezed
+          ? _value.loadSuccess
+          : loadSuccess // ignore: cast_nullable_to_non_nullable
+              as bool,
+      error: error == freezed
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
               as String?,
+      homeProducts: homeProducts == freezed
+          ? _value.homeProducts
+          : homeProducts // ignore: cast_nullable_to_non_nullable
+              as List<ProductModel>?,
+      productsOutput: productsOutput == freezed
+          ? _value.productsOutput
+          : productsOutput // ignore: cast_nullable_to_non_nullable
+              as ProductRepositoryOutput?,
     ));
   }
 }
@@ -57,7 +94,13 @@ abstract class _$$_HomeStateCopyWith<$Res> implements $HomeStateCopyWith<$Res> {
           _$_HomeState value, $Res Function(_$_HomeState) then) =
       __$$_HomeStateCopyWithImpl<$Res>;
   @override
-  $Res call({String? phoneNumber});
+  $Res call(
+      {bool loadInProgress,
+      bool loadFailure,
+      bool loadSuccess,
+      String? error,
+      List<ProductModel>? homeProducts,
+      ProductRepositoryOutput? productsOutput});
 }
 
 /// @nodoc
@@ -72,13 +115,38 @@ class __$$_HomeStateCopyWithImpl<$Res> extends _$HomeStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? phoneNumber = freezed,
+    Object? loadInProgress = freezed,
+    Object? loadFailure = freezed,
+    Object? loadSuccess = freezed,
+    Object? error = freezed,
+    Object? homeProducts = freezed,
+    Object? productsOutput = freezed,
   }) {
     return _then(_$_HomeState(
-      phoneNumber: phoneNumber == freezed
-          ? _value.phoneNumber
-          : phoneNumber // ignore: cast_nullable_to_non_nullable
+      loadInProgress: loadInProgress == freezed
+          ? _value.loadInProgress
+          : loadInProgress // ignore: cast_nullable_to_non_nullable
+              as bool,
+      loadFailure: loadFailure == freezed
+          ? _value.loadFailure
+          : loadFailure // ignore: cast_nullable_to_non_nullable
+              as bool,
+      loadSuccess: loadSuccess == freezed
+          ? _value.loadSuccess
+          : loadSuccess // ignore: cast_nullable_to_non_nullable
+              as bool,
+      error: error == freezed
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
               as String?,
+      homeProducts: homeProducts == freezed
+          ? _value._homeProducts
+          : homeProducts // ignore: cast_nullable_to_non_nullable
+              as List<ProductModel>?,
+      productsOutput: productsOutput == freezed
+          ? _value.productsOutput
+          : productsOutput // ignore: cast_nullable_to_non_nullable
+              as ProductRepositoryOutput?,
     ));
   }
 }
@@ -86,14 +154,38 @@ class __$$_HomeStateCopyWithImpl<$Res> extends _$HomeStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_HomeState implements _HomeState {
-  const _$_HomeState({this.phoneNumber});
+  const _$_HomeState(
+      {required this.loadInProgress,
+      required this.loadFailure,
+      required this.loadSuccess,
+      this.error,
+      final List<ProductModel>? homeProducts,
+      this.productsOutput})
+      : _homeProducts = homeProducts;
 
   @override
-  final String? phoneNumber;
+  final bool loadInProgress;
+  @override
+  final bool loadFailure;
+  @override
+  final bool loadSuccess;
+  @override
+  final String? error;
+  final List<ProductModel>? _homeProducts;
+  @override
+  List<ProductModel>? get homeProducts {
+    final value = _homeProducts;
+    if (value == null) return null;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  @override
+  final ProductRepositoryOutput? productsOutput;
 
   @override
   String toString() {
-    return 'HomeState(phoneNumber: $phoneNumber)';
+    return 'HomeState(loadInProgress: $loadInProgress, loadFailure: $loadFailure, loadSuccess: $loadSuccess, error: $error, homeProducts: $homeProducts, productsOutput: $productsOutput)';
   }
 
   @override
@@ -102,12 +194,27 @@ class _$_HomeState implements _HomeState {
         (other.runtimeType == runtimeType &&
             other is _$_HomeState &&
             const DeepCollectionEquality()
-                .equals(other.phoneNumber, phoneNumber));
+                .equals(other.loadInProgress, loadInProgress) &&
+            const DeepCollectionEquality()
+                .equals(other.loadFailure, loadFailure) &&
+            const DeepCollectionEquality()
+                .equals(other.loadSuccess, loadSuccess) &&
+            const DeepCollectionEquality().equals(other.error, error) &&
+            const DeepCollectionEquality()
+                .equals(other._homeProducts, _homeProducts) &&
+            const DeepCollectionEquality()
+                .equals(other.productsOutput, productsOutput));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(phoneNumber));
+      runtimeType,
+      const DeepCollectionEquality().hash(loadInProgress),
+      const DeepCollectionEquality().hash(loadFailure),
+      const DeepCollectionEquality().hash(loadSuccess),
+      const DeepCollectionEquality().hash(error),
+      const DeepCollectionEquality().hash(_homeProducts),
+      const DeepCollectionEquality().hash(productsOutput));
 
   @JsonKey(ignore: true)
   @override
@@ -116,10 +223,26 @@ class _$_HomeState implements _HomeState {
 }
 
 abstract class _HomeState implements HomeState {
-  const factory _HomeState({final String? phoneNumber}) = _$_HomeState;
+  const factory _HomeState(
+      {required final bool loadInProgress,
+      required final bool loadFailure,
+      required final bool loadSuccess,
+      final String? error,
+      final List<ProductModel>? homeProducts,
+      final ProductRepositoryOutput? productsOutput}) = _$_HomeState;
 
   @override
-  String? get phoneNumber;
+  bool get loadInProgress;
+  @override
+  bool get loadFailure;
+  @override
+  bool get loadSuccess;
+  @override
+  String? get error;
+  @override
+  List<ProductModel>? get homeProducts;
+  @override
+  ProductRepositoryOutput? get productsOutput;
   @override
   @JsonKey(ignore: true)
   _$$_HomeStateCopyWith<_$_HomeState> get copyWith =>

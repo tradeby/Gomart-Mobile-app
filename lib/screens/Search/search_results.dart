@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gomart/screens/Search/bloc/bloc.dart';
 import 'package:gomart/shared_components/fade_in_page_route.dart';
 import 'package:gomart/styles/custom_home_icons.dart';
 import 'dart:math';
@@ -13,6 +15,7 @@ class SearchResults extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    context.read<SearchCubit>().searchByQuery(searchTerm);
     return Scaffold(
       backgroundColor: Styles.colorBackground,
       body: GestureDetector(
@@ -21,13 +24,44 @@ class SearchResults extends StatelessWidget {
           child: CustomScrollView(slivers: [
             SliverPersistentHeader(
                 floating: true, delegate: SearchPersistentHeader(searchTerm)),
-            SliverList(
-              delegate: SliverChildBuilderDelegate(
-                  childCount: SampleProducts.listOfProducts.length,
-                  (BuildContext context, int index) {
-                return ProductCard(
-                    product: SampleProducts.listOfProducts[index]);
-              }),
+            BlocBuilder<SearchCubit, SearchState>(
+              builder: (context, state) {
+                if (state.searchInProgress) {
+                  return SliverList(
+                    delegate: SliverChildBuilderDelegate(childCount: 3,
+                        (BuildContext context, int index) {
+                      return const ProductCardLoading();
+                    }),
+                  );
+                } else if (state.searchSuccess) {
+                  if( state.searchResults.isEmpty ){
+                    return SliverList(
+                        delegate: SliverChildListDelegate([
+                          const Center(
+                            child: Text('No results'),
+                          ),
+                        ]));
+                  }
+                  return SliverList(
+                    delegate: SliverChildBuilderDelegate(
+                        childCount: state.searchResults?.length,
+                        (BuildContext context, int index) {
+                      return ProductCard(
+                        product: SampleProducts.toProductModel(
+                          state.searchResults![index],
+                        ),
+                      );
+                    }),
+                  );
+                } else {
+                  return SliverList(
+                      delegate: SliverChildListDelegate([
+                    const Center(
+                      child: Text('Error encountered loading products'),
+                    ),
+                  ]));
+                }
+              },
             )
           ]),
         ),

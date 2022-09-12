@@ -23,6 +23,9 @@ abstract class Styles {
   static const Color colorTextGomartText = Color(0xff606060);
   static const Color colorSkeletalBackground= Color(0xfffafafa);
 
+  static const Color colorHomeDropdownBorder= Color(0xffEBEBEB);
+  static const Color colorHomeDropdownFill= Color(0xffFDFDFD);
+
 
 
 }

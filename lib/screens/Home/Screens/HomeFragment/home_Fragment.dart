@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -15,6 +17,15 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 import '../../../../styles/styles.dart';
+
+class StateAndCities {
+  static List<String> states = [
+    'Abuja FCT',
+    'Kano',
+    'Kaduna',
+  ];
+  static List<String> cities = ['Wuse Zone 1 - Abuja', 'Gwarinpa', 'Darmanawa'];
+}
 
 class CustomPersistentHeader extends SliverPersistentHeaderDelegate {
   @override
@@ -111,16 +122,101 @@ class CustomPersistentHeader extends SliverPersistentHeaderDelegate {
                     ),
                   ),
                 ),*/
-                Container(
-                  padding: const EdgeInsets.all(8),
-                  width: MediaQuery.of(context).size.width * 0.46,
-                  decoration: BoxDecoration(
-                      color: Styles.colorTextFieldBackground,
-                      borderRadius: BorderRadius.circular(5)),
-                  child: const Text(
-                    'Where?',
-                    style: TextStyle(
-                        fontSize: 12, color: Styles.colorTextFieldHint),
+                GestureDetector(
+                  onTap: () {
+                    showGeneralDialog(
+                        context: context,
+                        barrierDismissible: true,
+                        barrierLabel: 'barrier text',
+                        transitionDuration: const Duration(milliseconds: 400),
+                        pageBuilder: (bc, ania, anis) {
+                          return Dialog(
+                            child: Container(
+                              padding: const EdgeInsets.all(16),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  const Padding(padding: EdgeInsets.all(8)),
+                                  const Text(
+                                    'Choose your location',
+                                    style: TextStyle(fontSize: 15),
+                                  ),
+                                  const Padding(padding: EdgeInsets.all(8)),
+                                  TextFieldDropdown(
+                                    options: StateAndCities.states,
+                                    currentSelectedValue:
+                                        StateAndCities.states[0],
+                                  ),
+                                  const Padding(padding: EdgeInsets.all(4)),
+                                  TextFieldDropdown(
+                                    options: StateAndCities.cities,
+                                    currentSelectedValue:
+                                    StateAndCities.cities[0],
+                                  ),
+                                  const Padding(padding: EdgeInsets.all(8)),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      TextButton(
+                                        style: TextButton.styleFrom(
+                                          backgroundColor:
+                                              Styles.colorBackground,
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 0, horizontal: 30),
+                                          shape: const StadiumBorder(),
+                                        ),
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                        child: const Text(
+                                          'Cancel',
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.normal,
+                                              color: Styles.colorBlack),
+                                        ),
+                                      ),
+                                      TextButton(
+                                        style: TextButton.styleFrom(
+                                          backgroundColor:
+                                              Styles.colorSecondary,
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 0, horizontal: 30),
+                                          shape: const StadiumBorder(),
+                                        ),
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                        child: const Text(
+                                          'Apply',
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.normal,
+                                              color: Styles.colorBlack),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  const Padding(padding: EdgeInsets.all(8)),
+                                ],
+                              ),
+                            ),
+                          );
+                        });
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.all(8),
+                    width: MediaQuery.of(context).size.width * 0.46,
+                    decoration: BoxDecoration(
+                        color: Styles.colorTextFieldBackground,
+                        borderRadius: BorderRadius.circular(5)),
+                    child: const Text(
+                      'Where?',
+                      style: TextStyle(
+                          fontSize: 12, color: Styles.colorTextFieldHint),
+                    ),
                   ),
                 ),
               ],
@@ -138,6 +234,79 @@ class CustomPersistentHeader extends SliverPersistentHeaderDelegate {
   @override
   bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) {
     return false;
+  }
+}
+
+class TextFieldDropdown extends StatefulWidget {
+  final String currentSelectedValue;
+  final List<String> options;
+
+  const TextFieldDropdown({
+    Key? key,
+    required this.currentSelectedValue,
+    required this.options,
+  }) : super(key: key);
+
+  @override
+  State<StatefulWidget> createState() => StateTextFieldDropdown();
+}
+
+class StateTextFieldDropdown extends State<TextFieldDropdown> {
+  late String _currentSelectedValue;
+
+  @override
+  void initState() {
+    _currentSelectedValue = widget.currentSelectedValue;
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
+      child: FormField<String>(
+        builder: (FormFieldState<String> state) {
+          return InputDecorator(
+            decoration: InputDecoration(
+                errorStyle:
+                    const TextStyle(color: Colors.redAccent, fontSize: 16.0),
+                hintText: 'Please select expense',
+                contentPadding: const EdgeInsets.symmetric(vertical: 0, horizontal:20),
+                fillColor: Styles.colorHomeDropdownFill,
+                filled: true,
+                enabledBorder: const OutlineInputBorder(
+                  // width: 0.0 produces a thin "hairline" border
+                  borderSide: BorderSide(color: Styles.colorHomeDropdownBorder, width: 0.0),
+                ),
+                border:
+                    OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(4),)),
+            isEmpty: _currentSelectedValue == '',
+            child: DropdownButtonHideUnderline(
+              child: DropdownButton<String>(
+                icon: Transform.rotate(
+                    angle: 270* pi/180,
+                    child: const Icon(Icons.arrow_back_ios_new, size: 22,)),
+                value: _currentSelectedValue,
+                isDense: true,
+                onChanged: (newValue) {
+                  setState(() {
+                    _currentSelectedValue = newValue!;
+                    state.didChange(newValue);
+                  });
+                },
+                items: widget.options.map((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList(),
+              ),
+            ),
+          );
+        },
+      ),
+    );
   }
 }
 
@@ -516,15 +685,15 @@ class SampleProducts {
 
   static SampleProducts toProductModel(ProductModel product) {
     return SampleProducts(
-        productId: product.id ??'null',
-        productName: product.productName ??'null',
+        productId: product.id ?? 'null',
+        productName: product.productName ?? 'null',
         price: product.price,
-        phoneNumber: product.phoneNumber ??'null',
-        address: product.address ??'null',
-        companyName: product.companyName ??'null',
+        phoneNumber: product.phoneNumber ?? 'null',
+        address: product.address ?? 'null',
+        companyName: product.companyName ?? 'null',
         isOpen: false,
-        closingTime: product.closingTime??'null',
-        productImageUrl: product.productImageUrl??'null');
+        closingTime: product.closingTime ?? 'null',
+        productImageUrl: product.productImageUrl ?? 'null');
   }
 
   static List<SampleProducts> listOfProducts = const [

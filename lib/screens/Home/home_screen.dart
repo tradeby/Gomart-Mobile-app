@@ -15,7 +15,7 @@ import '../../styles/custom_home_icons.dart';
 import '../Authentication/Register/register_screen_upload_photo.dart';
 import '../../styles/styles.dart';
 import 'Screens/profile.dart';
-import 'Screens/wallet.dart';
+import 'Screens/WalletFragment/wallet.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({

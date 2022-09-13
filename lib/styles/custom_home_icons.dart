@@ -24,8 +24,10 @@ class Gomart {
 
   static const IconData search = IconData(0xe800, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData filterOutline = IconData(0xe801, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData qrcodeScan = IconData(0xe802, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData profile = IconData(0xe804, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData heart = IconData(0xe805, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData transactionAutoRepair = IconData(0xe806, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData profileHover = IconData(0xe807, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData heartHover = IconData(0xe809, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData searchHover = IconData(0xe80a, fontFamily: _kFontFam, fontPackage: _kFontPkg);
@@ -37,4 +39,6 @@ class Gomart {
   static const IconData messageHover = IconData(0xe811, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData notificationBell = IconData(0xe812, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData locationIcon = IconData(0xe813, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData transactionShop = IconData(0xe815, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData transactionFood = IconData(0xe816, fontFamily: _kFontFam, fontPackage: _kFontPkg);
 }

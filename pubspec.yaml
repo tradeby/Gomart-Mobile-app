@@ -53,6 +53,8 @@ dependencies:
   url_launcher: ^6.1.5
   algolia: ^1.1.1
   shimmer: ^2.0.0
+  qr_flutter: ^4.0.0
+  mobile_scanner: ^2.0.0
 
 dev_dependencies:
   flutter_test:

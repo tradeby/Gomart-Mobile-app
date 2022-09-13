@@ -14,6 +14,7 @@ abstract class Styles {
   static const Color colorTextGreen = Color(0xff06AD17);
   static const Color colorTextRed = Color(0xffEC0E0E);
   static const Color colorTextBlack = Color(0xff000000);
+  static const Color colorTextLightGrey = Color(0xff9C9C9C);
 
   static const Color colorBarBottomSheet = Color(0xffD8D8D8);
   static const Color colorTextFieldBackground = Color(0xffF1F1F1);
@@ -25,6 +26,9 @@ abstract class Styles {
 
   static const Color colorHomeDropdownBorder= Color(0xffEBEBEB);
   static const Color colorHomeDropdownFill= Color(0xffFDFDFD);
+
+  static const Color colorButtonPay= Color(0xffD9EBF0);
+  static const Color colorTransactionItemLogoBg= Color(0xffE19164);
 
 
 

@@ -131,6 +131,15 @@ class StateScanQrScreen extends State<ScanQrScreen> {
                   }
                 }),
             _getOverlay(),
+            Center(
+              child: SizedBox(
+                height: MediaQuery.of(context).size.width *0.78,
+                width: MediaQuery.of(context).size.width *0.78,
+                child: CustomPaint(
+                  foregroundPainter: LinePainter(),
+                ),
+              ),
+            ),
           ],
         ));
   }
@@ -155,4 +164,25 @@ class InvertedClipper extends CustomClipper<Path> {
 
   @override
   bool shouldReclip(CustomClipper<Path> oldClipper) => true;
+}
+
+class LinePainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()..color=Styles.colorWhite
+      ..strokeWidth = 8;
+    const unit =4.0;
+    const length = 50.0;
+    canvas.drawLine(  const Offset(unit, length),const Offset(unit,0), paint);
+    canvas.drawLine(  const Offset(length,unit),  const Offset(0,unit), paint);
+    canvas.drawLine( Offset(length, size.height-unit),  Offset(0, size.height-unit), paint);
+    canvas.drawLine(Offset(size.width-unit, 0),  Offset(size.width-unit, length), paint);
+    canvas.drawLine( Offset(size.width-length, size.height-unit),  Offset(size.width, size.height-unit), paint);
+    canvas.drawLine( Offset(size.width-unit, size.height),  Offset(size.width-unit, size.height-length), paint);
+    canvas.drawLine( Offset(size.width, unit),  Offset(size.width-length, unit), paint);
+    canvas.drawLine(Offset(unit,size.height), Offset(unit,size.height-length),paint);
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate)=>false;
 }

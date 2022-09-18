@@ -15,8 +15,11 @@ import 'package:image_picker/image_picker.dart';
 import 'bloc/register_state.dart';
 
 class RegisterScreenUploadPhoto extends StatelessWidget {
+  final VoidCallback onRegisterOtpPressed;
+
   const RegisterScreenUploadPhoto({
     Key? key,
+    required this.onRegisterOtpPressed,
   }) : super(key: key);
 
   @override
@@ -63,7 +66,7 @@ class RegisterScreenUploadPhoto extends StatelessWidget {
               ],
             ),
             const Padding(padding: EdgeInsets.all(16)),
-            const SectionWithoutImage()
+            SectionWithoutImage(onRegisterOtpPressed: onRegisterOtpPressed)
           ],
         ),
       ),
@@ -72,7 +75,10 @@ class RegisterScreenUploadPhoto extends StatelessWidget {
 }
 
 class SectionWithoutImage extends StatelessWidget {
-  const SectionWithoutImage({Key? key}) : super(key: key);
+  final VoidCallback onRegisterOtpPressed;
+
+  const SectionWithoutImage({Key? key, required this.onRegisterOtpPressed})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -106,14 +112,7 @@ class SectionWithoutImage extends StatelessWidget {
                     const EdgeInsets.symmetric(vertical: 8, horizontal: 40),
                 shape: const StadiumBorder(),
               ),
-              onPressed: () {
-                context.read<RegistrationCubit>().verifyPhoneNumber();
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const RegisterOtpCodeScreen()),
-                );
-              },
+              onPressed: onRegisterOtpPressed,
               child: Text(
                 (state.photoUrl != null) ? 'Next' : 'Skip',
                 style: const TextStyle(

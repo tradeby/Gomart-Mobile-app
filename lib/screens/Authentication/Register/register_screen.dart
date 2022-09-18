@@ -7,8 +7,11 @@ import 'package:gomart/screens/Authentication/Register/register_screen_basic_inf
 import 'package:gomart/styles/styles.dart';
 
 class RegisterScreen extends StatelessWidget {
+  final VoidCallback onRegisterBasicInfoPressed;
+
   const RegisterScreen({
     Key? key,
+    required this.onRegisterBasicInfoPressed,
   }) : super(key: key);
 
   @override
@@ -24,7 +27,10 @@ class RegisterScreen extends StatelessWidget {
               children: <Widget>[
                 Container(
                   padding: const EdgeInsets.fromLTRB(0, 80, 0, 0),
-                  width: MediaQuery.of(context).size.width,
+                  width: MediaQuery
+                      .of(context)
+                      .size
+                      .width,
                   decoration: const BoxDecoration(
                     color: Styles.colorPrimary,
                     borderRadius: BorderRadius.only(
@@ -36,7 +42,8 @@ class RegisterScreen extends StatelessWidget {
                     children: <Widget>[
                       const Text(
                         'Find shops & services near you',
-                        style: TextStyle(color: Styles.colorWhite, fontSize: 18),
+                        style:
+                        TextStyle(color: Styles.colorWhite, fontSize: 18),
                       ),
                       const Padding(padding: EdgeInsets.all(16)),
                       Image.asset(
@@ -59,14 +66,18 @@ class RegisterScreen extends StatelessWidget {
                         .read<RegistrationCubit>()
                         .setFlagCountryCode(selectedCountry);
                   },
+                  initialPhoneNumber: '',
                 ),
                 const Padding(padding: EdgeInsets.all(8)),
                 const Padding(padding: EdgeInsets.all(8)),
                 SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.6,
+                  width: MediaQuery
+                      .of(context)
+                      .size
+                      .width * 0.6,
                   child: const Text(
                     'By entering your phone number, you agree to our '
-                    'Terms and Condition',
+                        'Terms and Condition',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Styles.colorTextDark,
@@ -86,21 +97,14 @@ class RegisterScreen extends StatelessWidget {
                       ),
                       onPressed: (state.phoneNumber == null)
                           ? () {
-                              const snackBar = SnackBar(
-                                content: Text('Please enter a phone number'),
-                              );
+                        const snackBar = SnackBar(
+                          content: Text('Please enter a phone number'),
+                        );
 
-                              ScaffoldMessenger.of(context)
-                                  .showSnackBar(snackBar);
-                            }
-                          : () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        const RegisterScreenAddBasicInfo()),
-                              );
-                            },
+                        ScaffoldMessenger.of(context)
+                            .showSnackBar(snackBar);
+                      }
+                          : onRegisterBasicInfoPressed,
                       child: const Text(
                         'Next',
                         style: TextStyle(
@@ -122,11 +126,12 @@ class RegisterScreen extends StatelessWidget {
 class PhoneNumberInput extends StatelessWidget {
   final ValueChanged<String>? onPhoneNumberChanged;
   final ValueChanged<FlagCountryCodeModel?>? onCountryChanged;
+  final String? initialPhoneNumber;
 
-  const PhoneNumberInput(
-      {Key? key,
-      required this.onPhoneNumberChanged,
-      required this.onCountryChanged})
+  const PhoneNumberInput({Key? key,
+    required this.onPhoneNumberChanged,
+    required this.onCountryChanged,
+    this.initialPhoneNumber})
       : super(key: key);
 
   @override
@@ -134,7 +139,10 @@ class PhoneNumberInput extends StatelessWidget {
     return BlocBuilder<RegistrationCubit, RegisterState>(
       builder: (context, state) {
         return Container(
-          width: MediaQuery.of(context).size.width * 0.68,
+          width: MediaQuery
+              .of(context)
+              .size
+              .width * 0.68,
           height: 40,
           decoration: BoxDecoration(
             color: Styles.colorWhite,
@@ -152,9 +160,10 @@ class PhoneNumberInput extends StatelessWidget {
                     underline: Container(),
                     items: List.generate(
                         FlagCountryCodeModel.getSupportedList.length,
-                        (index) => DropdownMenuItem(
+                            (index) =>
+                            DropdownMenuItem(
                               value:
-                                  FlagCountryCodeModel.getSupportedList[index],
+                              FlagCountryCodeModel.getSupportedList[index],
                               child: FlagCountryCode(
                                 model: FlagCountryCodeModel
                                     .getSupportedList[index],
@@ -165,25 +174,9 @@ class PhoneNumberInput extends StatelessWidget {
                   padding: EdgeInsets.symmetric(horizontal: 0, vertical: 8),
                   child: VerticalDivider(),
                 ),
-                SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.3,
-                    child: TextField(
-                      onChanged: onPhoneNumberChanged,
-                      keyboardType: TextInputType.number,
-                      textInputAction: TextInputAction.done,
-                      style: const TextStyle(fontSize: 14),
-                      decoration: const InputDecoration(
-                        hintText: 'Phone number',
-                        fillColor: Styles.colorWhite,
-                        filled: true,
-                        focusColor: Styles.colorWhite,
-                        hoverColor: Styles.colorWhite,
-                        contentPadding: EdgeInsets.fromLTRB(4, 8, 0, 0),
-                        border: OutlineInputBorder(
-                          borderSide: BorderSide.none,
-                        ),
-                      ),
-                    )),
+                PhoneNumberTextField(
+                    onPhoneNumberChanged: onPhoneNumberChanged,
+                initialText: initialPhoneNumber),
               ],
             ),
           ),
@@ -191,6 +184,59 @@ class PhoneNumberInput extends StatelessWidget {
       },
     );
   }
+}
+
+class PhoneNumberTextField extends StatefulWidget {
+  const PhoneNumberTextField({
+    Key? key,
+    required this.onPhoneNumberChanged, this.initialText,
+  }) : super(key: key);
+
+  final ValueChanged<String>? onPhoneNumberChanged;
+  final String? initialText;
+
+  @override
+  State<StatefulWidget> createState() => StatePhoneNumberTextField();
+
+
+}
+class StatePhoneNumberTextField extends State<PhoneNumberTextField> {
+  late final _textController;
+@override
+void initState() {
+  if(widget.initialText!=null){
+    _textController = TextEditingController(text: widget.initialText);
+  }
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+        width: MediaQuery
+            .of(context)
+            .size
+            .width * 0.3,
+        child: TextField(
+          controller: _textController,
+          onChanged: widget.onPhoneNumberChanged,
+          keyboardType: TextInputType.number,
+          textInputAction: TextInputAction.done,
+          style: const TextStyle(fontSize: 14),
+          decoration: const InputDecoration(
+            hintText: 'Phone number',
+            fillColor: Styles.colorWhite,
+            filled: true,
+            focusColor: Styles.colorWhite,
+            hoverColor: Styles.colorWhite,
+            contentPadding: EdgeInsets.fromLTRB(4, 8, 0, 0),
+            border: OutlineInputBorder(
+              borderSide: BorderSide.none,
+            ),
+          ),
+        ));
+  }
+
 }
 
 class FlagCountryCode extends StatelessWidget {
@@ -223,7 +269,10 @@ class PhoneNumberTextInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: MediaQuery.of(context).size.width * 0.6,
+      width: MediaQuery
+          .of(context)
+          .size
+          .width * 0.6,
       height: 40,
       child: TextField(
         keyboardType: TextInputType.phone,
@@ -234,7 +283,7 @@ class PhoneNumberTextInput extends StatelessWidget {
           fillColor: Styles.colorWhite,
           filled: true,
           contentPadding:
-              const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
+          const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
           focusColor: Styles.colorWhite,
           hoverColor: Styles.colorWhite,
           border: OutlineInputBorder(

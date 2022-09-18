@@ -10,8 +10,9 @@ import 'package:gomart/styles/styles.dart';
 import 'bloc/registration_cubit.dart';
 
 class RegisterScreenAddBasicInfo extends StatelessWidget {
+  final VoidCallback onRegisterUploadPhotoPressed;
   const RegisterScreenAddBasicInfo({
-    Key? key,
+    Key? key, required this.onRegisterUploadPhotoPressed,
   }) : super(key: key);
 
   @override
@@ -128,15 +129,7 @@ class RegisterScreenAddBasicInfo extends StatelessWidget {
                     ),
                     onPressed: (state.firstName != null &&
                             state.lastName != null)
-                        ? () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      const RegisterScreenUploadPhoto()),
-                            );
-                          }
-                        : () {
+                        ? onRegisterUploadPhotoPressed: () {
                             const snackBar = SnackBar(
                               content:
                                   Text('First name & Last name are required'),

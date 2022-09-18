@@ -1,8 +1,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
+import 'package:gomart/data/model/FlagCountryCode/flag_country_code.dart';
 import 'package:gomart/data/repository/User/IUserRepository.dart';
 import 'package:injectable/injectable.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../Register/bloc/registration_cubit.dart';
 import 'login_state.dart';
 
@@ -14,6 +16,35 @@ class LoginCubit extends Cubit<LoginState> {
   LoginCubit(this._firebaseAuth, this._userRepository)
       : super(LoginState.initial());
 
+  Future<void> checkForPreviousPhoneNumber() async {
+    final prefs = await SharedPreferences.getInstance();
+
+// Try reading data from the counter key. If it doesn't exist, return 0.
+    String? phoneNumber = prefs.getString('savedPhoneNumber');
+    String? flagCountryId = prefs.getString('flagCountryId');
+    if (kDebugMode) {
+      print(
+          '*********** getting phoneNumber and flag countryId $phoneNumber $flagCountryId');
+    }
+    if (phoneNumber != null) {
+      if (kDebugMode) {
+        print('*********** saved Phone number is not null');
+      }
+      setPhoneNumber(phoneNumber);
+      List<FlagCountryCodeModel> foundFlag = FlagCountryCodeModel
+          .getSupportedList
+          .where((flag) => flag.id == flagCountryId)
+          .toList();
+      if (foundFlag.isNotEmpty) {
+        setFlagCountryCode(foundFlag[0]);
+      }
+    }
+    //checkFor previous phoneNumber
+    //if found
+
+    //else do nothing
+  }
+
   void setPhoneNumber(_) => emit(state.copyWith(phoneNumber: sanitizeInput(_)));
 
   void setFlagCountryCode(_) => emit(state.copyWith(selectedCountry: _));
@@ -23,9 +54,6 @@ class LoginCubit extends Cubit<LoginState> {
   void setOtpCode(_) => emit(state.copyWith(otp: sanitizeInput(_)));
 
   void setStatus(_) => emit(state.copyWith(status: _));
-
-  void nextLoginPage() =>
-      emit(state.copyWith(currentPage: LoginPages.otpVerificationPage));
 
   void prepareCredentialAndLogin() {
     // Create a PhoneAuthCredential with the code
@@ -43,15 +71,19 @@ class LoginCubit extends Cubit<LoginState> {
       );
       if (kDebugMode) {
         print('********* Login successful !');
-        emit(state.copyWith(loginSuccessful: true));
-        setStatus('Login successful !');
       }
+      emit(state.copyWith(loginSuccessful: true));
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString('savedPhoneNumber', state.phoneNumber as String);
+      await prefs.setString(
+          'flagCountryId', state.selectedCountry?.id as String);
+      setStatus('Login successful !');
     } catch (e) {
       if (kDebugMode) {
-        setStatus(e);
-        emit(state.copyWith(loginSuccessful: false));
         print('********* Login failed !');
       }
+      setStatus(e);
+      emit(state.copyWith(loginSuccessful: false));
     }
   }
 

@@ -15,29 +15,7 @@ class RegisterOtpCodeScreen extends StatelessWidget {
   const RegisterOtpCodeScreen({
     Key? key,
   }) : super(key: key);
-  showLoaderDialog(BuildContext context) {
-    AlertDialog alert = AlertDialog(
-      content: Row(
-        children: [
-          const CircularProgressIndicator(
-            valueColor: AlwaysStoppedAnimation<Color>(Styles.colorPrimary),
-          ),
-          const Padding(padding: EdgeInsets.only(left: 12)),
-          Container(
-            margin: const EdgeInsets.only(left: 7),
-            child: const Text("Loading..."),
-          ),
-        ],
-      ),
-    );
-    showDialog(
-      barrierDismissible: false,
-      context: context,
-      builder: (BuildContext context) {
-        return alert;
-      },
-    );
-  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,6 +34,9 @@ class RegisterOtpCodeScreen extends StatelessWidget {
               );
 
               ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              context
+                  .read<AuthenticationBloc>()
+                  .add(AuthenticationLoggedOut(context));
             }
           },
           child: Center(
@@ -122,7 +103,8 @@ class RegisterOtpCodeScreen extends StatelessWidget {
                 ),
                 const Padding(padding: EdgeInsets.all(16)),
                 const Text('Enter the OTP code we just texted you',
-                    style: TextStyle(color: Styles.colorTextDark, fontSize: 16)),
+                    style:
+                        TextStyle(color: Styles.colorTextDark, fontSize: 16)),
                 const Padding(padding: EdgeInsets.all(12)),
                 SizedBox(
                   width: MediaQuery.of(context).size.width * 0.5,
@@ -130,7 +112,7 @@ class RegisterOtpCodeScreen extends StatelessWidget {
                   child: TextField(
                     onChanged: (text) =>
                         context.read<RegistrationCubit>().setOtpCode(text),
-                      keyboardType: TextInputType.number,
+                    keyboardType: TextInputType.number,
                     textInputAction: TextInputAction.done,
                     style: const TextStyle(fontSize: 14),
                     cursorColor: Styles.colorPrimary,
@@ -138,8 +120,8 @@ class RegisterOtpCodeScreen extends StatelessWidget {
                     decoration: InputDecoration(
                       fillColor: Styles.colorWhite,
                       filled: true,
-                      contentPadding:
-                          const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
+                      contentPadding: const EdgeInsets.symmetric(
+                          vertical: 0, horizontal: 20),
                       focusColor: Styles.colorWhite,
                       hoverColor: Styles.colorWhite,
                       border: OutlineInputBorder(
@@ -169,36 +151,57 @@ class RegisterOtpCodeScreen extends StatelessWidget {
                 const Padding(padding: EdgeInsets.all(8)),
                 BlocBuilder<RegistrationCubit, RegisterState>(
                   builder: (context, state) {
-                    return TextButton(
-                      style: TextButton.styleFrom(
-                        backgroundColor:
-                            (state.verificationId == null || state.otp == null)
-                                ? Styles.colorSecondary.withOpacity(0.4)
-                                : Styles.colorSecondary,
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 8, horizontal: 40),
-                        shape: const StadiumBorder(),
-                      ),
-                      onPressed:
-                          (state.verificationId == null || state.otp == null)
-                              ? null
-                              : () {
-                            showLoaderDialog(context);
-                                  context
-                                      .read<RegistrationCubit>()
-                                      .prepareCredentialAndLogin();
-                                },
-                      child: Text(
-                        'Get started',
-                        style: TextStyle(
-                          fontWeight: FontWeight.normal,
-                          color:
-                              (state.verificationId == null || state.otp == null)
-                                  ? Styles.colorBlack.withOpacity(0.6)
-                                  : Styles.colorBlack,
+                    if (state.verificationId == null) {
+                      return const Center(child: CircularProgressIndicator(
+                        valueColor:
+                        AlwaysStoppedAnimation<Color>(
+                            Styles.colorPrimary),
+
+                      ));
+                    } else {
+                      return TextButton(
+                        style: TextButton.styleFrom(
+                          backgroundColor: ( state.otp == null)
+                              ? Styles.colorSecondary.withOpacity(0.4)
+                              : Styles.colorSecondary,
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 8, horizontal: 40),
+                          shape: const StadiumBorder(),
                         ),
-                      ),
-                    );
+                        onPressed: (state.otp == null)
+                            ? null
+                            : () {
+                                var snackBar = SnackBar(
+                                  content: Row(
+                                    children: const [
+                                      CircularProgressIndicator(
+                                        valueColor:
+                                            AlwaysStoppedAnimation<Color>(
+                                                Styles.colorWhite),
+                                      ),
+                                      Text('Creating your account ....'),
+                                    ],
+                                  ),
+                                );
+
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(snackBar);
+                                context
+                                    .read<RegistrationCubit>()
+                                    .prepareCredentialAndLogin();
+                              },
+                        child: Text(
+                          'Get started',
+                          style: TextStyle(
+                            fontWeight: FontWeight.normal,
+                            color: (state.verificationId == null ||
+                                    state.otp == null)
+                                ? Styles.colorBlack.withOpacity(0.6)
+                                : Styles.colorBlack,
+                          ),
+                        ),
+                      );
+                    }
                   },
                 ),
               ],

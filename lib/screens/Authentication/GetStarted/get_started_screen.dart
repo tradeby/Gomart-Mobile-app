@@ -5,8 +5,10 @@ import 'package:gomart/screens/Authentication/Register/register_screen.dart';
 import 'package:gomart/styles/styles.dart';
 
 class GetStartedScreen extends StatefulWidget {
+  final VoidCallback onLoginPressed;
+  final VoidCallback onRegisterPressed;
   const GetStartedScreen({
-    Key? key,
+    Key? key, required this.onLoginPressed, required this.onRegisterPressed,
   }) : super(key: key);
 
   @override
@@ -74,12 +76,7 @@ class StateGetStartedScreen extends State<GetStartedScreen> {
             padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 40),
             shape: const StadiumBorder(),
           ),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const RegisterScreen()),
-            );
-          },
+          onPressed: widget.onRegisterPressed,
           child: const Text(
             'Sign up',
             style: TextStyle(
@@ -91,12 +88,7 @@ class StateGetStartedScreen extends State<GetStartedScreen> {
             padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 40),
             shape: const StadiumBorder(),
           ),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const LoginScreen()),
-            );
-          },
+          onPressed: widget.onLoginPressed,
           child: const Text(
             'Log in',
             style: TextStyle(

@@ -35,7 +35,7 @@ Future<void> main() async {
             create: (context) => locator<RegistrationCubit>(),
           ),
           BlocProvider<LoginCubit>(
-            create: (context) => locator<LoginCubit>(),
+            create: (context) => locator<LoginCubit>()..checkForPreviousPhoneNumber(),
           ),
           BlocProvider<DebugCubit>(
             create: (context) => locator<DebugCubit>(),

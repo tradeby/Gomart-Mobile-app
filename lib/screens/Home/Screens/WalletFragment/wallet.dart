@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gomart/screens/Home/Screens/WalletFragment/add_funds.dart';
 import 'package:gomart/screens/Home/Screens/WalletFragment/scan_qr_screen.dart';
 import 'package:gomart/styles/custom_home_icons.dart';
 import 'package:gomart/styles/styles.dart';
@@ -70,6 +71,12 @@ class WalletFragment extends StatelessWidget {
                             shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0))),
                           ),
                           onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const AddFunds(),
+                              ),
+                            );
                           },
                           child: Row(
                             children: const [

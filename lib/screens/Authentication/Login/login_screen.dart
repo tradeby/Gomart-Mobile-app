@@ -67,6 +67,7 @@ class LoginScreen extends StatelessWidget {
                           .read<LoginCubit>()
                           .setFlagCountryCode(selectedCountry);
                     },
+                    initialCountry: state.selectedCountry,
                     initialPhoneNumber: state.phoneNumber ?? '',
                   );
                 },

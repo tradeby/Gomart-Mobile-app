@@ -22,4 +22,7 @@ class FlagCountryCodeModel {
         countryCode: '+44',
         flag: 'assets/flags/gb.png'),
   ];
+
+  @override
+  String toString()=>'id:$id, countryName: $countryName, countryCode:$countryCode, flag: $flag';
 }

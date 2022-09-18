@@ -61,7 +61,7 @@ class RegistrationCubit extends Cubit<RegisterState> {
         print('********* Login successful !');
       }
       emit(state.copyWith(registrationSuccessful: true));
-      setStatus('Login successful !');
+      setStatus('Login successful countryId ${country.id})!');
       // obtain shared preferences
       final prefs = await SharedPreferences.getInstance();
       await prefs.setString('savedPhoneNumber', state.phoneNumber as String);

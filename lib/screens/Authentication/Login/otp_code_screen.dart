@@ -6,34 +6,10 @@ import 'package:gomart/screens/Authentication/Login/bloc/login_cubit.dart';
 import 'package:gomart/screens/Authentication/Login/bloc/login_state.dart';
 import 'package:gomart/styles/styles.dart';
 
-class OtpCodeScreen extends StatelessWidget {
-  const OtpCodeScreen({
+class LoginOtpCodeScreen extends StatelessWidget {
+  const LoginOtpCodeScreen({
     Key? key,
   }) : super(key: key);
-
-  showLoaderDialog(BuildContext context) {
-    AlertDialog alert = AlertDialog(
-      content: Row(
-        children: [
-          const CircularProgressIndicator(
-            valueColor: AlwaysStoppedAnimation<Color>(Styles.colorPrimary),
-          ),
-          const Padding(padding: EdgeInsets.only(left: 12)),
-          Container(
-            margin: const EdgeInsets.only(left: 7),
-            child: const Text("Loading..."),
-          ),
-        ],
-      ),
-    );
-    showDialog(
-      barrierDismissible: false,
-      context: context,
-      builder: (BuildContext context) {
-        return alert;
-      },
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -115,36 +91,53 @@ class OtpCodeScreen extends StatelessWidget {
                   const Padding(padding: EdgeInsets.all(8)),
                   BlocBuilder<LoginCubit, LoginState>(
                     builder: (context, state) {
-                      return TextButton(
-                        style: TextButton.styleFrom(
-                          backgroundColor: (state.verificationId == null ||
-                                  state.otp == null)
-                              ? Styles.colorSecondary.withOpacity(0.4)
-                              : Styles.colorSecondary,
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 8, horizontal: 40),
-                          shape: const StadiumBorder(),
-                        ),
-                        onPressed:
-                            (state.verificationId == null || state.otp == null)
-                                ? null
-                                : () {
-                                    showLoaderDialog(context);
-                                    context
-                                        .read<LoginCubit>()
-                                        .prepareCredentialAndLogin();
-                                  },
-                        child: Text(
-                          'Login',
-                          style: TextStyle(
-                            fontWeight: FontWeight.normal,
-                            color: (state.verificationId == null ||
+                      if (state.verificationId == null) {
+                        return const Center(
+                            child: CircularProgressIndicator(
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                              Styles.colorPrimary),
+                        ));
+                      } else {
+                        return TextButton(
+                          style: TextButton.styleFrom(
+                            backgroundColor: (state.verificationId == null ||
                                     state.otp == null)
-                                ? Styles.colorBlack.withOpacity(0.6)
-                                : Styles.colorBlack,
+                                ? Styles.colorSecondary.withOpacity(0.4)
+                                : Styles.colorSecondary,
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 8, horizontal: 40),
+                            shape: const StadiumBorder(),
                           ),
-                        ),
-                      );
+                          onPressed: (state.otp == null)
+                              ? null
+                              : () {
+                                  var snackBar = SnackBar(
+                                    content: Row(
+                                      children: const [
+                                        CircularProgressIndicator(),
+                                        Text('Logging you in...'),
+                                      ],
+                                    ),
+                                  );
+
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(snackBar);
+                                  context
+                                      .read<LoginCubit>()
+                                      .prepareCredentialAndLogin();
+                                },
+                          child: Text(
+                            'Login',
+                            style: TextStyle(
+                              fontWeight: FontWeight.normal,
+                              color: (state.verificationId == null ||
+                                      state.otp == null)
+                                  ? Styles.colorBlack.withOpacity(0.6)
+                                  : Styles.colorBlack,
+                            ),
+                          ),
+                        );
+                      }
                     },
                   ),
                 ],

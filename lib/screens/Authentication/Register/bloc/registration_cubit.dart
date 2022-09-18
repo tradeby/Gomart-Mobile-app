@@ -6,6 +6,7 @@ import 'package:gomart/data/model/FlagCountryCode/flag_country_code.dart';
 import 'package:gomart/data/repository/User/IUserRepository.dart';
 import 'package:gomart/screens/Authentication/Register/bloc/register_state.dart';
 import 'package:injectable/injectable.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 @Injectable()
 class RegistrationCubit extends Cubit<RegisterState> {
@@ -46,25 +47,32 @@ class RegistrationCubit extends Cubit<RegisterState> {
   Future<void> registerNewUser(PhoneAuthCredential credential) async {
     // call our user repository here!
     try {
+      FlagCountryCodeModel country =
+          state.selectedCountry as FlagCountryCodeModel;
       await _userRepository.register(
         firstName: state.firstName as String,
         lastName: state.lastName as String,
         phoneNumber: state.phoneNumber as String,
-        country: state.selectedCountry as FlagCountryCodeModel,
+        country: country,
         localPhotoUrl: state.photoUrl,
         credential: credential,
       );
       if (kDebugMode) {
         print('********* Login successful !');
-        emit(state.copyWith(registrationSuccessful: true));
-        setStatus('Login successful !');
       }
+      emit(state.copyWith(registrationSuccessful: true));
+      setStatus('Login successful !');
+      // obtain shared preferences
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString('savedPhoneNumber', state.phoneNumber as String);
+      await prefs.setString('flagCountryId', country.id);
     } catch (e) {
       if (kDebugMode) {
-        setStatus(e);
-        emit(state.copyWith(registrationSuccessful: false));
         print('********* Login failed !');
       }
+
+      setStatus(e);
+      emit(state.copyWith(registrationSuccessful: false));
     }
   }
 

@@ -10,33 +10,16 @@ import 'package:gomart/styles/styles.dart';
 import '../Register/register_screen.dart';
 
 class LoginScreen extends StatelessWidget {
+  final VoidCallback onLoginOtpPressed;
+
   const LoginScreen({
     Key? key,
+    required this.onLoginOtpPressed,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<LoginCubit, LoginState>(builder: (context, state) {
-      if (state.currentPage == LoginPages.phoneNumberPage) {
-        return const LoginPhoneNumber();
-      } else if (state.currentPage == LoginPages.otpVerificationPage) {
-        return const OtpCodeScreen();
-      } else {
-        return const Center(
-          child: Text('Error in login page'),
-        );
-      }
-    });
-  }
-}
 
-class LoginPhoneNumber extends StatelessWidget {
-  const LoginPhoneNumber({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Styles.colorBackground,
       body: GestureDetector(
@@ -73,14 +56,19 @@ class LoginPhoneNumber extends StatelessWidget {
               const Text('Sign in with your phone number',
                   style: TextStyle(color: Styles.colorTextDark)),
               const Padding(padding: EdgeInsets.all(8)),
-              PhoneNumberInput(
-                onPhoneNumberChanged: (text) {
-                  context.read<LoginCubit>().setPhoneNumber(text);
-                },
-                onCountryChanged: (selectedCountry) {
-                  context
-                      .read<LoginCubit>()
-                      .setFlagCountryCode(selectedCountry);
+              BlocBuilder<LoginCubit, LoginState>(
+                builder: (context, state) {
+                  return PhoneNumberInput(
+                    onPhoneNumberChanged: (text) {
+                      context.read<LoginCubit>().setPhoneNumber(text);
+                    },
+                    onCountryChanged: (selectedCountry) {
+                      context
+                          .read<LoginCubit>()
+                          .setFlagCountryCode(selectedCountry);
+                    },
+                    initialPhoneNumber: state.phoneNumber ?? '',
+                  );
                 },
               ),
               const Padding(padding: EdgeInsets.all(8)),
@@ -115,11 +103,7 @@ class LoginPhoneNumber extends StatelessWidget {
                             ScaffoldMessenger.of(context)
                                 .showSnackBar(snackBar);
                           }
-                        : () {
-                            context.read<LoginCubit>().verifyPhoneNumber();
-                            context.read<LoginCubit>().nextLoginPage();
-                           
-                          },
+                        : onLoginOtpPressed,
                     child: const Text(
                       'Next',
                       style: TextStyle(

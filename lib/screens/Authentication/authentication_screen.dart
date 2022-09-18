@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gomart/data/bloc/authentication/authentication_bloc.dart';
 import 'package:gomart/screens/Authentication/GetStarted/get_started_screen.dart';
 import 'package:gomart/screens/Authentication/Login/login_screen.dart';
+import 'package:gomart/screens/Authentication/authentication_flow.dart';
 import 'package:gomart/screens/SplashScreen/splash_screen.dart';
 
 import '../Home/home_screen.dart';
@@ -16,7 +17,9 @@ class Authentication extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<AuthenticationBloc, AuthenticationState>(
       listener: (context, state) {
-        print('This is a change of state $state');
+        if (kDebugMode) {
+          print('This is a change of state $state');
+        }
         if (state is AuthenticationLoggedOut) {
           Navigator.of(context).pop();
         }
@@ -31,7 +34,7 @@ class Authentication extends StatelessWidget {
               print('in getting started');
             }
 
-            return const GetStartedScreen();
+            return  const AuthenticationFlow();
           }
           if (authState is AuthenticationSuccess) {
             if (kDebugMode) {
@@ -40,7 +43,7 @@ class Authentication extends StatelessWidget {
             return const HomeScreen();
             //return const LoginScreen();
           } else {
-            return const GetStartedScreen();
+            return const AuthenticationFlow();
           }
         },
       ),

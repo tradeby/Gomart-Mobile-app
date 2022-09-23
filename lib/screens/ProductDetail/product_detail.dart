@@ -179,14 +179,29 @@ class ProductDetailScreen extends StatelessWidget {
                   )),
               Stack(
                 children: [
-                  Container(
-                    decoration: const BoxDecoration(
-                        color: Styles.colorBackground,
-                        image: DecorationImage(
-                            image: NetworkImage(
-                                'https://firebasestorage.googleapis.com/v0/b/gomart-apps.appspot.com/o/product-detail%2FcakeProduct.png?alt=media&token=21352a2f-4116-4c74-affa-2b063447ac96'),
-                            fit: BoxFit.cover)),
-                    height: 291,
+                  GestureDetector(
+                    onTap: (){
+                      Navigator.push(
+                        context,
+                        FadeRoute(
+                          page: ImagePreview(
+                            imageUrl: 'https://firebasestorage.googleapis.com/v0/b/gomart-apps.appspot.com/o/product-detail%2FcakeProduct.png?alt=media&token=21352a2f-4116-4c74-affa-2b063447ac96',
+                            heroTag: UniqueKey().toString(),
+                            productName: 'product.productName',
+                            productUrl: 'product.productUrl',
+                          ),
+                        ),
+                      );
+                    },
+                    child: Container(
+                      decoration: const BoxDecoration(
+                          color: Styles.colorBackground,
+                          image: DecorationImage(
+                              image: NetworkImage(
+                                  'https://firebasestorage.googleapis.com/v0/b/gomart-apps.appspot.com/o/product-detail%2FcakeProduct.png?alt=media&token=21352a2f-4116-4c74-affa-2b063447ac96'),
+                              fit: BoxFit.cover)),
+                      height: 291,
+                    ),
                   ),
                   Positioned(
                     bottom: 8,
@@ -470,7 +485,7 @@ class ProductDetailItemSmall extends StatelessWidget {
                   SizedBox(
                       width: MediaQuery.of(context).size.width * 0.8,
                       child: Text(productTitle)),
-                  Padding(padding: EdgeInsets.all(8)),
+                  const Padding(padding: EdgeInsets.all(8)),
                   Text(
                     price,
                     style: const TextStyle(color: Styles.colorPrimary),

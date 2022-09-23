@@ -22,7 +22,7 @@ class StateScanQrScreen extends State<ScanQrScreen> {
           backgroundColor: Colors.black,
           title: const Text(
             'Scan to Pay',
-            style: TextStyle(fontSize: 18),
+            style: TextStyle(fontSize: 16),
           ),
         ),
         body: Stack(

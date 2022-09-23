@@ -18,24 +18,38 @@ class WalletFragment extends StatelessWidget {
         elevation: 0.3,
         centerTitle: true,
         actions: [
-          IconButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const MyQrScreen(),
+          InkWell(
+            onTap: (){
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const MyQrScreen(),
+                ),
+              );
+            },
+            child: Row(
+              children: const [
+                Padding(padding: EdgeInsets.symmetric(horizontal: 4)),
+                Text(
+                  'Receive',
+                  style: TextStyle(
+                    color: Styles.colorPrimary,
                   ),
-                );
-              },
-              icon: const Icon(
-                Gomart.qrcodeScan,
-                color: Styles.colorPrimary,
-                size: 20,
-              ))
+                ),
+                Padding(padding: EdgeInsets.symmetric(horizontal: 4)),
+                Icon(
+                  Gomart.qrcodeScan,
+                  color: Styles.colorPrimary,
+                  size: 20,
+                ),
+                Padding(padding: EdgeInsets.symmetric(horizontal: 6)),
+              ],
+            ),
+          ),
         ],
         title: const Text(
           'Wallet',
-          style: TextStyle(color: Styles.colorBlack, fontSize: 15),
+          style: TextStyle(color: Styles.colorBlack, fontSize: 16),
         ),
       ),
       body: SingleChildScrollView(
@@ -59,7 +73,7 @@ class WalletFragment extends StatelessWidget {
                     ),
                     const Padding(padding: EdgeInsets.all(8)),
                     const Text(
-                      'N11,050',
+                      '₦11,050.00',
                       style: TextStyle(color: Styles.colorBlack, fontSize: 20),
                     ),
                     const Padding(padding: EdgeInsets.all(8)),
@@ -68,7 +82,9 @@ class WalletFragment extends StatelessWidget {
                       children: [
                         OutlinedButton(
                           style: ButtonStyle(
-                            shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0))),
+                            shape: MaterialStateProperty.all(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(30.0))),
                           ),
                           onPressed: () {
                             Navigator.push(
@@ -143,31 +159,31 @@ class WalletFragment extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: const [
                     Padding(
-                      padding: EdgeInsets.all(8.0),
+                      padding: EdgeInsets.symmetric(vertical: 8,horizontal: 12),
                       child: Text(
                         'Today',
                         style:
-                            TextStyle(color: Styles.colorPrimary, fontSize: 12),
+                            TextStyle(color: Styles.colorPrimary, fontSize: 14),
                       ),
                     ),
                     TransactionItem(
                       icon: Gomart.transactionFood,
                       vendorName: 'Gamji Restaurant',
-                      transactionAmount: '-N800',
+                      transactionAmount: '- ₦800',
                       transactionTime: '17:31',
                     ),
                     Divider(height: 1),
                     TransactionItem(
                       icon: Gomart.transactionAutoRepair,
                       vendorName: 'Eze Car Part Shop',
-                      transactionAmount: '-N23,000',
+                      transactionAmount: '- ₦23,000',
                       transactionTime: '14:09',
                     ),
                     Divider(height: 1),
                     TransactionItem(
                       icon: Gomart.transactionShop,
                       vendorName: 'Maitama Stores',
-                      transactionAmount: '-N15,350',
+                      transactionAmount: '- ₦15,350',
                       transactionTime: '11:25',
                     ),
                   ],
@@ -180,17 +196,17 @@ class WalletFragment extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: const [
                     Padding(
-                      padding: EdgeInsets.all(8.0),
+                      padding: EdgeInsets.symmetric(vertical: 8,horizontal: 12),
                       child: Text(
                         'Yesterday',
                         style:
-                            TextStyle(color: Styles.colorPrimary, fontSize: 12),
+                            TextStyle(color: Styles.colorPrimary, fontSize: 14),
                       ),
                     ),
                     TransactionItem(
                       icon: Icons.credit_card,
                       vendorName: 'Credit Added via 8852',
-                      transactionAmount: '+N50,000',
+                      transactionAmount: '+ ₦50,000',
                       transactionTime: '23:05',
                     )
                   ],
@@ -203,17 +219,17 @@ class WalletFragment extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: const [
                     Padding(
-                      padding: EdgeInsets.all(8.0),
+                      padding: EdgeInsets.symmetric(vertical: 8,horizontal: 12),
                       child: Text(
                         'Friday 5 August',
                         style:
-                            TextStyle(color: Styles.colorPrimary, fontSize: 12),
+                            TextStyle(color: Styles.colorPrimary, fontSize: 14),
                       ),
                     ),
                     TransactionItem(
                       icon: Gomart.transactionFood,
                       vendorName: '3ple F Bakers',
-                      transactionAmount: '-N7,500',
+                      transactionAmount: '- ₦7,500',
                       transactionTime: '09:15',
                     )
                   ],
@@ -224,7 +240,7 @@ class WalletFragment extends StatelessWidget {
                 child: Text(
                   'Load more...',
                   style: TextStyle(
-                    fontSize: 12,
+                    fontSize: 14,
                     color: Styles.colorPrimary,
                   ),
                 ),
@@ -247,13 +263,14 @@ class TransactionItem extends StatelessWidget {
     Key? key,
     required this.vendorName,
     required this.transactionTime,
-    required this.transactionAmount, required this.icon,
+    required this.transactionAmount,
+    required this.icon,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-        padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 8),
+        padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 12),
         color: Styles.colorWhite,
         width: MediaQuery.of(context).size.width,
         child: Row(
@@ -276,7 +293,7 @@ class TransactionItem extends StatelessWidget {
             const Padding(padding: EdgeInsets.all(8)),
             Container(
               padding: const EdgeInsets.symmetric(vertical: 4),
-              width: MediaQuery.of(context).size.width * 0.75,
+              width: MediaQuery.of(context).size.width * 0.76,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -287,18 +304,18 @@ class TransactionItem extends StatelessWidget {
                     children: [
                       Text(
                         vendorName,
-                        style: const TextStyle(fontSize: 12),
+                        style: const TextStyle(fontSize: 14),
                       ),
                       Text(
                         transactionTime,
                         style: const TextStyle(
-                            fontSize: 12, color: Styles.colorTextLightGrey),
+                            fontSize: 13, color: Styles.colorTextLightGrey),
                       ),
                     ],
                   ),
                   Text(
                     transactionAmount,
-                    style: const TextStyle(fontSize: 12),
+                    style: const TextStyle(fontSize: 14),
                   ),
                 ],
               ),

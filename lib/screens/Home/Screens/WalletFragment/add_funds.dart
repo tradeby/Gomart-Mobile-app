@@ -23,7 +23,7 @@ class StateAddFunds extends State<AddFunds> {
         centerTitle: true,
         title: const Text(
           'Add funds',
-          style: TextStyle(color: Styles.colorBlack, fontSize: 15),
+          style: TextStyle(color: Styles.colorBlack, fontSize: 16),
         ),
       ),
       body: Column(

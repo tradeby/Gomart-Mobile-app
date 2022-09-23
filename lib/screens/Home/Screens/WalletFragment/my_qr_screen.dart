@@ -18,7 +18,7 @@ class MyQrScreen extends StatelessWidget {
           'My Qr code',
           style: TextStyle(
             color: Styles.colorBlack,
-            fontSize: 15,
+            fontSize: 16,
             fontWeight: FontWeight.normal,
           ),
         ),

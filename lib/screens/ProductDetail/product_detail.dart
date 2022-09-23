@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:gomart/screens/Home/Screens/HomeFragment/home_Fragment.dart';
 import 'package:gomart/styles/custom_home_icons.dart';
 import 'package:gomart/styles/styles.dart';
+import 'package:photo_view/photo_view.dart';
+
+import 'fade_route.dart';
+import 'image_preview_screen.dart';
 
 class ProductDetailScreen extends StatelessWidget {
   const ProductDetailScreen({Key? key}) : super(key: key);
@@ -543,18 +547,45 @@ class GallaryImageItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Styles.colorBackground,
-        image:
-            DecorationImage(image: NetworkImage(imageUrl), fit: BoxFit.cover),
+    return GestureDetector(
+      onTap: (){
+        Navigator.push(
+          context,
+          FadeRoute(
+            page: ImagePreview(
+              imageUrl: imageUrl,
+              heroTag: UniqueKey().toString(),
+              productName: 'product.productName',
+              productUrl: 'product.productUrl',
+            ),
+          ),
+        );
+      },
+      child: Container(
+        decoration: BoxDecoration(
+          color: Styles.colorBackground,
+          image:
+              DecorationImage(image: NetworkImage(imageUrl), fit: BoxFit.cover),
+        ),
+        width: MediaQuery.of(context).size.width * 0.32,
+        height: MediaQuery.of(context).size.width * 0.32,
       ),
-      width: MediaQuery.of(context).size.width * 0.32,
-      height: MediaQuery.of(context).size.width * 0.32,
     );
   }
 }
 
+class PhotoViewer extends StatelessWidget{
+  final String imageUrl;
+
+  const PhotoViewer({Key? key, required this.imageUrl}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return PhotoView(
+      imageProvider: NetworkImage(imageUrl),
+    );
+  }
+}
 class ProdutButtonNav extends StatelessWidget {
   const ProdutButtonNav({
     Key? key,

@@ -700,6 +700,7 @@ class MapSampleState extends State<MapSample> {
             compassEnabled:false,
             mapToolbarEnabled:false,
             zoomControlsEnabled:false,
+            myLocationButtonEnabled:false,
             initialCameraPosition: _kGooglePlex,
             circles: {circles},
             onMapCreated: (GoogleMapController controller) {

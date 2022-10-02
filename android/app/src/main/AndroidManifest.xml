@@ -11,6 +11,8 @@
         android:label="gomart"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
+       <meta-data android:name="com.google.android.geo.API_KEY"
+           android:value="AIzaSyBVtProGIVF0H0MrhCjwMjc7UfBPvSieCM"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"

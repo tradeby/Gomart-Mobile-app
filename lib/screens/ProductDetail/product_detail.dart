@@ -1,7 +1,11 @@
+import 'dart:async';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:gomart/screens/Home/Screens/HomeFragment/home_Fragment.dart';
 import 'package:gomart/styles/custom_home_icons.dart';
 import 'package:gomart/styles/styles.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:photo_view/photo_view.dart';
 
 import 'fade_route.dart';
@@ -268,25 +272,56 @@ class ProductDetailScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              Container(
-                color: Styles.colorGray,
-                height: 73,
-                child: const Center(
-                  child: Text('Map section'),
+              GestureDetector(
+                onTap: (){
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const MapSample()),
+                  );
+
+                },
+                child: Container(
+                  color: Styles.colorGray,
+                  height: 80,
+                  child: const Center(
+                    child: Text('Map section'),
+                  ),
                 ),
               ),
               Container(
-                padding: EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+                padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
                 color: Styles.colorBackground,
                 child: Row(
-                  children: const [
-                    Icon(
+                  children: [
+                    const Icon(
                       Gomart.locationIcon,
                       size: 16,
                     ),
-                    Text(
+                    /*Text(
                       'Darmanawa, Kano  -  1.6 kilometers',
                       style: TextStyle(fontSize: 14),
+                    ),*/
+                    Row(
+                      children:  [
+                        const Text(
+                          'Darmanawa, Kano  - ',
+                          style: TextStyle(fontSize: 14),
+                        ),
+                        InkWell(
+                          onTap: (){
+                            if(kDebugMode){
+                              print("View distance");
+                            }
+                          },
+                          child: const Text(
+                            'View distance',
+                            style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              color: Styles.colorPrimary,
+                            ),
+                          ),
+                        )
+                      ],
                     ),
                   ],
                 ),
@@ -647,5 +682,49 @@ class ProdutButtonNav extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+class MapSample extends StatefulWidget {
+  const MapSample({Key? key}) : super(key: key);
+
+  @override
+  State<MapSample> createState() => MapSampleState();
+}
+
+class MapSampleState extends State<MapSample> {
+  final Completer<GoogleMapController> _controller = Completer();
+
+  static const CameraPosition _kGooglePlex = CameraPosition(
+    target: LatLng(37.42796133580664, -122.085749655962),
+    zoom: 14.4746,
+  );
+
+  static const CameraPosition _kLake = CameraPosition(
+      bearing: 192.8334901395799,
+      target: LatLng(37.43296265331129, -122.08832357078792),
+      tilt: 59.440717697143555,
+      zoom: 19.151926040649414);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: GoogleMap(
+        mapType: MapType.hybrid,
+        initialCameraPosition: _kGooglePlex,
+        onMapCreated: (GoogleMapController controller) {
+          _controller.complete(controller);
+        },
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: _goToTheLake,
+        label: const Text('To the lake!'),
+        icon: const Icon(Icons.directions_boat),
+      ),
+    );
+  }
+
+  Future<void> _goToTheLake() async {
+    final GoogleMapController controller = await _controller.future;
+    controller.animateCamera(CameraUpdate.newCameraPosition(_kLake));
   }
 }

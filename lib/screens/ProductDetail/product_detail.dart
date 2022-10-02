@@ -272,22 +272,7 @@ class ProductDetailScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              GestureDetector(
-                onTap: (){
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const MapSample()),
-                  );
-
-                },
-                child: Container(
-                  color: Styles.colorGray,
-                  height: 80,
-                  child: const Center(
-                    child: Text('Map section'),
-                  ),
-                ),
-              ),
+              const MapSample(),
               Container(
                 padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
                 color: Styles.colorBackground,
@@ -693,38 +678,36 @@ class MapSample extends StatefulWidget {
 
 class MapSampleState extends State<MapSample> {
   final Completer<GoogleMapController> _controller = Completer();
-
-  static const CameraPosition _kGooglePlex = CameraPosition(
-    target: LatLng(37.42796133580664, -122.085749655962),
-    zoom: 14.4746,
+  Circle circles = Circle(
+    circleId: CircleId('circle_id_${DateTime.now().millisecondsSinceEpoch}'),
+    center: const LatLng(12.0037545,8.5327996),
+    fillColor: const Color(0xffCADDE8).withOpacity(0.54),
+    strokeColor: const Color(0xff66B8CA),
+    strokeWidth: 2,
+    radius: 180,
   );
-
-  static const CameraPosition _kLake = CameraPosition(
-      bearing: 192.8334901395799,
-      target: LatLng(37.43296265331129, -122.08832357078792),
-      tilt: 59.440717697143555,
-      zoom: 19.151926040649414);
+  static const CameraPosition _kGooglePlex= CameraPosition(
+    target: LatLng(12.0037545,8.5327996),
+    zoom: 15.2,
+  );
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: GoogleMap(
-        mapType: MapType.hybrid,
-        initialCameraPosition: _kGooglePlex,
-        onMapCreated: (GoogleMapController controller) {
-          _controller.complete(controller);
-        },
-      ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: _goToTheLake,
-        label: const Text('To the lake!'),
-        icon: const Icon(Icons.directions_boat),
-      ),
+    return SizedBox(
+          height:90,
+          child: GoogleMap(
+            mapType: MapType.normal,
+            compassEnabled:false,
+            mapToolbarEnabled:false,
+            zoomControlsEnabled:false,
+            initialCameraPosition: _kGooglePlex,
+            circles: {circles},
+            onMapCreated: (GoogleMapController controller) {
+              _controller.complete(controller);
+            },
+          ),
+
     );
   }
 
-  Future<void> _goToTheLake() async {
-    final GoogleMapController controller = await _controller.future;
-    controller.animateCamera(CameraUpdate.newCameraPosition(_kLake));
-  }
 }

@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:math';
 
 import 'package:flutter/foundation.dart';
@@ -13,6 +14,7 @@ import 'package:gomart/screens/Search/search_results.dart';
 import 'package:gomart/screens/notifications/notifications.dart';
 import 'package:gomart/shared_components/fade_in_page_route.dart';
 import 'package:gomart/styles/custom_home_icons.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
@@ -152,7 +154,7 @@ class CustomPersistentHeader extends SliverPersistentHeaderDelegate {
                                   TextFieldDropdown(
                                     options: StateAndCities.cities,
                                     currentSelectedValue:
-                                    StateAndCities.cities[0],
+                                        StateAndCities.cities[0],
                                   ),
                                   const Padding(padding: EdgeInsets.all(8)),
                                   Row(
@@ -271,22 +273,27 @@ class StateTextFieldDropdown extends State<TextFieldDropdown> {
                 errorStyle:
                     const TextStyle(color: Colors.redAccent, fontSize: 16.0),
                 hintText: 'Please select expense',
-                contentPadding: const EdgeInsets.symmetric(vertical: 0, horizontal:20),
+                contentPadding:
+                    const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
                 fillColor: Styles.colorHomeDropdownFill,
                 filled: true,
                 enabledBorder: const OutlineInputBorder(
                   // width: 0.0 produces a thin "hairline" border
-                  borderSide: BorderSide(color: Styles.colorHomeDropdownBorder, width: 0.0),
+                  borderSide: BorderSide(
+                      color: Styles.colorHomeDropdownBorder, width: 0.0),
                 ),
-                border:
-                    OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(4),)),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(4),
+                )),
             isEmpty: _currentSelectedValue == '',
             child: DropdownButtonHideUnderline(
               child: DropdownButton<String>(
                 icon: Transform.rotate(
-                    angle: 270* pi/180,
-                    child: const Icon(Icons.arrow_back_ios_new, size: 22,)),
+                    angle: 270 * pi / 180,
+                    child: const Icon(
+                      Icons.arrow_back_ios_new,
+                      size: 22,
+                    )),
                 value: _currentSelectedValue,
                 isDense: true,
                 onChanged: (newValue) {
@@ -353,10 +360,49 @@ class HomeFragment extends StatelessWidget {
                   ]));
                 }
               },
-            )
+            ),
+            SliverList(
+                delegate: SliverChildListDelegate([
+              const HomeAdMobBanner(),
+            ]))
           ]),
         ),
       ),
+    );
+  }
+}
+
+class HomeAdMobBanner extends StatefulWidget {
+  const HomeAdMobBanner({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  State<StatefulWidget> createState() => StateHomeAdMobBanner();
+}
+
+class StateHomeAdMobBanner extends State<HomeAdMobBanner> {
+  BannerAd myBanner = BannerAd(
+    adUnitId: Platform.isIOS?'ca-app-pub-5077686252014732/6950999384':'ca-app-pub-5077686252014732/7090600180',
+    size: AdSize.banner,
+    request: const AdRequest(),
+    listener: const BannerAdListener(),
+  );
+
+  @override
+  void initState() {
+    myBanner.load();
+
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      alignment: Alignment.center,
+      width: myBanner.size.width.toDouble(),
+      height: myBanner.size.height.toDouble(),
+      child: AdWidget(ad: myBanner),
     );
   }
 }

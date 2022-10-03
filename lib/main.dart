@@ -12,6 +12,7 @@ import 'package:gomart/screens/Search/bloc/search_cubit.dart';
 import 'package:gomart/screens/debug/bloc/debug_cubit.dart';
 import 'package:gomart/styles/styles.dart';
 import 'package:gomart/service/bloc_service.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 //import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'injection.dart';
@@ -20,6 +21,7 @@ Future<void> main() async {
   //WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   //FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   WidgetsFlutterBinding.ensureInitialized();
+  MobileAds.instance.initialize();
   Bloc.observer = BlocDelegateObserver();
   await configureDependencies();
 

@@ -7,11 +7,16 @@ import 'package:gomart/service/bloc_service.dart';
 import 'package:gomart/service/firebase_service.dart';
 import 'package:injectable/injectable.dart';
 
+import 'mobile_ads_service.dart';
+
 @module
 abstract class AppModule {
   @preResolve
   Future<FirebaseService> get fireService => FirebaseService.init();
 
+  /*@singleton
+  MobileAdsService get mobileAdsService => MobileAdsService.init();
+*/
   @injectable
   FirebaseFirestore get store => FirebaseFirestore.instance;
 

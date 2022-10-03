@@ -60,6 +60,7 @@ dependencies:
   palette_generator: ^0.3.3+2
   share_plus: ^4.4.0
   google_maps_flutter: ^2.2.1
+  google_mobile_ads: ^2.0.1
 
 dev_dependencies:
   flutter_test:

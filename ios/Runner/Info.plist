@@ -20,6 +20,8 @@
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
 	<string>$(FLUTTER_BUILD_NAME)</string>
+	<key>GADApplicationIdentifier</key>
+    <string>ca-app-pub-5077686252014732~7086483336</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>LSApplicationQueriesSchemes</key>

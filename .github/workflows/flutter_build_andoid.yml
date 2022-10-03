@@ -64,27 +64,11 @@ jobs:
       
     - name: Navigate to where our apk is 
       run: cd build/app/outputs/flutter-apk/ && ls
-      
-    - name: Upload our apk artifact  
-      uses: actions/upload-artifact@v3
-      with:
-        name: android-apk
-        path: build/app/outputs/flutter-apk/app-release.apk
-        
-  deploy_app_distribution:
-    name: Deploy to app distribution
-    needs: build
-    runs-on: ubuntu-latest
 
-    steps:
-    - name: Download a single artifact
-      uses: actions/download-artifact@v3
-      with:
-        name: android-apk
     - name: upload artifact to Firebase App Distribution
       uses: wzieba/Firebase-Distribution-Github-Action@v1
       with:
         appId: ${{secrets.FIREBASE_ANDROID_APPID}}
         token: ${{secrets.FIREBASE_TOKEN}}
         groups: app_testers
-        file: app-release.apk
+        file: build/app/outputs/flutter-apk/app-release.apk

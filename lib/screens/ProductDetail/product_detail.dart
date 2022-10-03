@@ -6,6 +6,7 @@ import 'package:gomart/screens/Home/Screens/HomeFragment/home_Fragment.dart';
 import 'package:gomart/styles/custom_home_icons.dart';
 import 'package:gomart/styles/styles.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:photo_view/photo_view.dart';
 
 import 'fade_route.dart';
@@ -450,13 +451,14 @@ class ProductDetailScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     ProductCard(product: SampleProducts.listOfProducts[0]),
-                    Container(
+                 /*   Container(
                       color: Styles.colorGray,
                       height: 122,
                       child: const Center(
                         child: Text('sponsored link'),
                       ),
-                    ),
+                    ),*/
+                    const HomeAdMobBanner(bannerSize: AdSize.fullBanner),
                     ProductCard(product: SampleProducts.listOfProducts[2]),
                   ],
                 ),

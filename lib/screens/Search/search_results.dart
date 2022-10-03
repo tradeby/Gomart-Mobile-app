@@ -62,7 +62,11 @@ class SearchResults extends StatelessWidget {
                   ]));
                 }
               },
-            )
+            ),
+            SliverList(
+                delegate: SliverChildListDelegate([
+                  const HomeAdMobBanner()
+                ]))
           ]),
         ),
       ),

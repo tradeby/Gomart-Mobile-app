@@ -410,7 +410,9 @@ class StateHomeAdMobBanner extends State<HomeAdMobBanner> {
     );
   }
 }
+class TestingChat {
 
+}
 class ProductCardLoading extends StatelessWidget {
   const ProductCardLoading({Key? key}) : super(key: key);
 

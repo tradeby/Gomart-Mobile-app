@@ -2,7 +2,6 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
 
 
-
 class BlocDelegateObserver extends BlocObserver {
   @override
   void onChange(BlocBase bloc, Change change) {

@@ -22,6 +22,14 @@
           }
         },
         {
+          "client_id": "1066738259998-p2iu91j03en0nmdqlshbg2upcqhd3ha4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.gomart",
+            "certificate_hash": "07d301c45cc8673b394b4270064037a1a1a5fdf1"
+          }
+        },
+        {
           "client_id": "1066738259998-qirvsvjb1e97bhc3hdm124aji8cqfteo.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -47,7 +55,8 @@
             }
           ]
         }
-      }
+      },
+      "admob_app_id": "ca-app-pub-5077686252014732~3073665259"
     }
   ],
   "configuration_version": "1"

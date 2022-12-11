@@ -13,7 +13,8 @@ import 'package:gomart/screens/debug/bloc/debug_cubit.dart';
 import 'package:gomart/styles/styles.dart';
 import 'package:gomart/service/bloc_service.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-
+import 'package:firebase_app_check/firebase_app_check.dart';
+import 'package:firebase_core/firebase_core.dart';
 //import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'injection.dart';
 

@@ -60,7 +60,7 @@ jobs:
             cd android && ls
           
     - name: GetSha256
-      run: cd android && gradlew signingReport
+      run: cd android && ls && pwd && ./gradlew signingReport
       
     - name: Build flutter apk
       run: flutter build apk --build-name=1.2.0+${GITHUB_SHA::6} --build-number=${{ steps.buildnumber.outputs.build_number }}

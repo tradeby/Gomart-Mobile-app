@@ -14,19 +14,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "1066738259998-hd4l29tmbqc9ihv68tgnc3l3lt5vq3kl.apps.googleusercontent.com",
+          "client_id": "1066738259998-m8qrn6uosqnf6ckf31ilrf1h64tt8c0p.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.gomart",
             "certificate_hash": "e0599db344f90bf4e0794dfe12b9c89f8f090a58"
-          }
-        },
-        {
-          "client_id": "1066738259998-p2iu91j03en0nmdqlshbg2upcqhd3ha4.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.gomart",
-            "certificate_hash": "07d301c45cc8673b394b4270064037a1a1a5fdf1"
           }
         },
         {

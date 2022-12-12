@@ -9,14 +9,14 @@ class FirebaseService {
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
     );
-
+    if (kDebugMode) {
     await FirebaseAppCheck.instance.activate(
-        webRecaptchaSiteKey: 'recaptcha-v3-site-key',
+        webRecaptchaSiteKey: '6Les_nQjAAAAANPhLUiLL_Vu9ZNLXi7UTWnfVUxK',
         // Set androidProvider to `AndroidProvider.debug`
-        androidDebugProvider: false);
+        androidDebugProvider: true);
    /* print("********************************* activated app check");*/
 
-    if (kDebugMode) {
+
       print("************ our debug token is ${ "no token found"}");
     }
     return FirebaseService();

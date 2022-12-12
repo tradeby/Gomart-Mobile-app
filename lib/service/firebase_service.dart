@@ -13,7 +13,7 @@ class FirebaseService {
     await FirebaseAppCheck.instance.activate(
         webRecaptchaSiteKey: 'recaptcha-v3-site-key',
         // Set androidProvider to `AndroidProvider.debug`
-        androidDebugProvider: kDebugMode);
+        androidDebugProvider: false);
    /* print("********************************* activated app check");*/
 
     if (kDebugMode) {

@@ -110,6 +110,7 @@ class UserRepository implements IUserRepository {
   Future<void> signIn(
       {required PhoneAuthCredential credential}) async {
     try {
+
       await _firebaseAuth.signInWithCredential(credential);
       var user = _firebaseAuth.currentUser;
     } catch (e) {

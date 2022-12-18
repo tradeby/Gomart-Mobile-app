@@ -6,9 +6,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gomart/data/bloc/authentication/authentication_bloc.dart';
 import 'package:gomart/screens/debug/bloc/debug_cubit.dart';
 import 'package:gomart/screens/debug/debug_algolia_results.dart';
+import 'package:gomart/styles/custom_home_icons.dart';
 
-import '../../../styles/styles.dart';
-import '../../Authentication/Register/register_screen_upload_photo.dart';
+import '../../../../styles/styles.dart';
+import '../../../Authentication/Register/register_screen_upload_photo.dart';
 
 class ProfileFragment extends StatelessWidget {
   const ProfileFragment({Key? key}) : super(key: key);
@@ -75,7 +76,13 @@ class ProfileFragment extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.end,
                             mainAxisAlignment: MainAxisAlignment.end,
                             children:  [
-                             OutlinedButton(onPressed: (){}, child:  const Text('Edit'))
+                             OutlinedButton(onPressed: (){},
+                               style: OutlinedButton.styleFrom(
+                                 shape: const StadiumBorder(),
+                               ), child:  const Text('Edit',
+                               style: TextStyle(
+                                 color: Styles.colorTextBlack
+                               ),),)
                             ],
                           ),
                         )
@@ -86,16 +93,31 @@ class ProfileFragment extends StatelessWidget {
               ),
             ),
             const Padding(padding: EdgeInsets.all(20)),
-            OutlinedButton(onPressed: (){}, child:  const Text('Start selling')),
+            ElevatedButton(
+              style: TextButton.styleFrom(
+                backgroundColor: Styles.colorSecondary,
+                padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 40),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12)
+                ),
+                elevation: 0
+              ),
+              onPressed: (){},
+              child: const Text(
+                'Start selling',
+                style: TextStyle(
+                    fontWeight: FontWeight.normal, color: Styles.colorBlack),
+              ),
+            ),
             const Padding(padding: EdgeInsets.all(20)),
             Container(
               color: Styles.colorWhite,
               height: MediaQuery.of(context).size.height *0.3,
               child:    ListView(children: const [
-                ListTile(leading: Icon(Icons.help_center), title: Text('Help Center')),
-                ListTile(leading: Icon(Icons.help_center), title: Text('App Feedback')),
-                ListTile(leading: Icon(Icons.help_center), title: Text('About Gomart')),
-                ListTile(leading: Icon(Icons.help_center), title: Text('Logout'))
+                ListTile(leading: Icon(Gomart.accountHelpCenterIcon, color: Styles.colorBlack,), title: Text('Help Center')),
+                ListTile(leading: Icon(Gomart.accountAppFeedbackIcon, color: Styles.colorBlack), title: Text('App Feedback')),
+                ListTile(leading: Icon(Gomart.accountGomartIcon, color: Styles.colorBlack), title: Text('About Gomart')),
+                ListTile(leading: Icon(Gomart.accountLogoutIcon, color: Styles.colorBlack), title: Text('Logout'))
               ]),
             ),
             const Padding(padding: EdgeInsets.all(50)),

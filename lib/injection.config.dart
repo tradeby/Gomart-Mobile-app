@@ -20,7 +20,7 @@ import 'data/repository/User/UserRepository.dart' as _i11;
 import 'screens/Authentication/Login/bloc/login_cubit.dart' as _i12;
 import 'screens/Authentication/Register/bloc/registration_cubit.dart' as _i13;
 import 'screens/debug/bloc/debug_cubit.dart' as _i16;
-import 'screens/Home/Screens/HomeFragment/bloc/home_cubit.dart' as _i17;
+import 'screens/Home/Screens/Home/bloc/home_cubit.dart' as _i17;
 import 'screens/Search/bloc/search_cubit.dart' as _i14;
 import 'service/app_module.dart' as _i18;
 import 'service/firebase_service.dart'

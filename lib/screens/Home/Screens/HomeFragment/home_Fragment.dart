@@ -373,8 +373,10 @@ class HomeFragment extends StatelessWidget {
 }
 
 class HomeAdMobBanner extends StatefulWidget {
+  final AdSize? bannerSize;
   const HomeAdMobBanner({
     Key? key,
+    this.bannerSize
   }) : super(key: key);
 
   @override
@@ -382,15 +384,17 @@ class HomeAdMobBanner extends StatefulWidget {
 }
 
 class StateHomeAdMobBanner extends State<HomeAdMobBanner> {
-  BannerAd myBanner = BannerAd(
-    adUnitId: Platform.isIOS?'ca-app-pub-5077686252014732/6950999384':'ca-app-pub-5077686252014732/7090600180',
-    size: AdSize.banner,
-    request: const AdRequest(),
-    listener: const BannerAdListener(),
-  );
+  late BannerAd myBanner;
 
   @override
   void initState() {
+    myBanner = BannerAd(
+      // adUnitId: Platform.isIOS?'	ca-app-pub-3940256099942544/6300978111':'ca-app-pub-5077686252014732/7090600180',
+      adUnitId: 'ca-app-pub-3940256099942544/6300978111',
+      size: widget.bannerSize != null ? widget.bannerSize as AdSize: AdSize.banner,
+      request: const AdRequest(),
+      listener: const BannerAdListener(),
+    );
     myBanner.load();
 
     super.initState();
@@ -406,7 +410,9 @@ class StateHomeAdMobBanner extends State<HomeAdMobBanner> {
     );
   }
 }
+class TestingChat {
 
+}
 class ProductCardLoading extends StatelessWidget {
   const ProductCardLoading({Key? key}) : super(key: key);
 

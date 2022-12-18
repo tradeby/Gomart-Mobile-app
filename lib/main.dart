@@ -7,7 +7,7 @@ import 'package:gomart/data/bloc/authentication/authentication_bloc.dart';
 import 'package:gomart/screens/Authentication/Login/bloc/login_cubit.dart';
 import 'package:gomart/screens/Authentication/Register/bloc/registration_cubit.dart';
 import 'package:gomart/screens/Authentication/authentication_screen.dart';
-import 'package:gomart/screens/Home/Screens/HomeFragment/bloc/home_cubit.dart';
+import 'package:gomart/screens/Home/Screens/Home/bloc/home_cubit.dart';
 import 'package:gomart/screens/Search/bloc/search_cubit.dart';
 import 'package:gomart/screens/debug/bloc/debug_cubit.dart';
 import 'package:gomart/styles/styles.dart';

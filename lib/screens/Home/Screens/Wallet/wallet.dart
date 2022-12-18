@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:gomart/screens/Home/Screens/WalletFragment/add_funds.dart';
-import 'package:gomart/screens/Home/Screens/WalletFragment/scan_qr_screen.dart';
+import 'package:gomart/screens/Home/Screens/Wallet/add_funds.dart';
+import 'package:gomart/screens/Home/Screens/Wallet/scan_qr_screen.dart';
 import 'package:gomart/styles/custom_home_icons.dart';
 import 'package:gomart/styles/styles.dart';
 

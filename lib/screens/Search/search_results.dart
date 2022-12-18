@@ -5,7 +5,7 @@ import 'package:gomart/shared_components/fade_in_page_route.dart';
 import 'package:gomart/styles/custom_home_icons.dart';
 import 'dart:math';
 import '../../styles/styles.dart';
-import '../Home/Screens/HomeFragment/home_Fragment.dart';
+import '../Home/Screens/Home/home.dart';
 import 'search_input.dart';
 
 class SearchResults extends StatelessWidget {

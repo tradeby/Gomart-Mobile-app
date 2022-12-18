@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gomart/screens/Home/Screens/HomeFragment/home_Fragment.dart';
+import 'package:gomart/screens/Home/Screens/Home/home.dart';
 import 'package:gomart/screens/Search/search_results.dart';
 import 'package:gomart/styles/styles.dart';
 

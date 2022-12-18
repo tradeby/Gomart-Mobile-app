@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:gomart/screens/Home/Screens/HomeFragment/home_Fragment.dart';
+import 'package:gomart/screens/Home/Screens/Home/home.dart';
 import 'package:gomart/styles/custom_home_icons.dart';
 import 'package:gomart/styles/styles.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';

@@ -20,6 +20,7 @@ import 'injection.dart';
 Future<void> main() async {
   //WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   //FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+
   WidgetsFlutterBinding.ensureInitialized();
   MobileAds.instance.initialize();
   Bloc.observer = BlocDelegateObserver();

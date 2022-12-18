@@ -63,7 +63,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '1066738259998',
     projectId: 'gomart-apps',
     storageBucket: 'gomart-apps.appspot.com',
-    androidClientId: '1066738259998-hd4l29tmbqc9ihv68tgnc3l3lt5vq3kl.apps.googleusercontent.com',
+    androidClientId: '1066738259998-60gfn372prrmro5epp6iv22jl6hgcls6.apps.googleusercontent.com',
     iosClientId: '1066738259998-aq96mholj4dvtl4s0b2l2f6c6q8ca74f.apps.googleusercontent.com',
     iosBundleId: 'com.tradebyservices.gomart',
   );

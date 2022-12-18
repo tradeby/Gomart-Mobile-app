@@ -41,4 +41,9 @@ class Gomart {
   static const IconData locationIcon = IconData(0xe813, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData transactionShop = IconData(0xe815, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData transactionFood = IconData(0xe816, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData accountAppFeedbackIcon = IconData(0xe808, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData accountHelpCenterIcon = IconData(0xe814, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData accountLogoutIcon = IconData(0xe803, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData accountGomartIcon = IconData(0xe818, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+
 }

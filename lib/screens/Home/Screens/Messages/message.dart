@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../../styles/styles.dart';
-import '../Empty-state/empty_state_screen.dart';
+import '../../../../styles/styles.dart';
+import '../../../Empty-state/empty_state_screen.dart';
 
-class NotificationsScreen extends StatelessWidget {
-  const NotificationsScreen({Key? key}) : super(key: key);
+class MessageFragment extends StatelessWidget {
+  const MessageFragment({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,22 +13,21 @@ class NotificationsScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Styles.colorWhite,
         elevation: 0,
-        leading: const BackButton(color: Styles.colorBlack),
         centerTitle: true,
         title: const Text(
-          'Notifications',
+          'Messages',
           style: TextStyle(color: Styles.colorBlack, fontSize: 16),
         ),
       ),
       body: Column(
         children: const [
           Padding(padding: EdgeInsets.all(18)),
-           SingleChildScrollView(
+          SingleChildScrollView(
             child: EmptyStateScreen(
-              assetImageUrl: 'assets/images/empty_state_no_notifications.png',
-              title: 'Notifications',
+              assetImageUrl: 'assets/images/empty_state_no_messages.png',
+              title: 'No Messages',
               subTitle:
-              'You\'ll see notifications and updates here in the future.',
+                  'You\'ll see messages between you and sellers here. There isn\'t any message at the moment',
             ),
           ),
         ],

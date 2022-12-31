@@ -25,14 +25,15 @@ class ProfileFragment extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                IconButton(onPressed: (){}, icon: const Icon(Icons.settings)),
+                IconButton(onPressed: () {}, icon: const Icon(Icons.settings)),
               ],
             ),
             Container(
               padding: const EdgeInsets.fromLTRB(0, 4, 0, 0),
               width: MediaQuery.of(context).size.width,
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 8),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 30, vertical: 8),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
@@ -45,7 +46,7 @@ class ProfileFragment extends StatelessWidget {
                                     child: Image.network(
                                   FirebaseAuth.instance.currentUser?.photoURL
                                       as String,
-                                  width:60,
+                                  width: 60,
                                 )),
                               )
                             : CharacterAvatar(
@@ -75,14 +76,18 @@ class ProfileFragment extends StatelessWidget {
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.end,
                             mainAxisAlignment: MainAxisAlignment.end,
-                            children:  [
-                             OutlinedButton(onPressed: (){},
-                               style: OutlinedButton.styleFrom(
-                                 shape: const StadiumBorder(),
-                               ), child:  const Text('Edit',
-                               style: TextStyle(
-                                 color: Styles.colorTextBlack
-                               ),),)
+                            children: [
+                              OutlinedButton(
+                                onPressed: () {},
+                                style: OutlinedButton.styleFrom(
+                                  shape: const StadiumBorder(),
+                                ),
+                                child: const Text(
+                                  'Edit',
+                                  style:
+                                      TextStyle(color: Styles.colorTextBlack),
+                                ),
+                              )
                             ],
                           ),
                         )
@@ -95,14 +100,13 @@ class ProfileFragment extends StatelessWidget {
             const Padding(padding: EdgeInsets.all(20)),
             ElevatedButton(
               style: TextButton.styleFrom(
-                backgroundColor: Styles.colorSecondary,
-                padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 40),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12)
-                ),
-                elevation: 0
-              ),
-              onPressed: (){},
+                  backgroundColor: Styles.colorSecondary,
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 8, horizontal: 40),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12)),
+                  elevation: 0),
+              onPressed: () {},
               child: const Text(
                 'Start selling',
                 style: TextStyle(
@@ -112,43 +116,58 @@ class ProfileFragment extends StatelessWidget {
             const Padding(padding: EdgeInsets.all(20)),
             Container(
               color: Styles.colorWhite,
-              height: MediaQuery.of(context).size.height *0.3,
-              child:    ListView(children: const [
-                ListTile(leading: Icon(Gomart.accountHelpCenterIcon, color: Styles.colorBlack,), title: Text('Help Center')),
-                ListTile(leading: Icon(Gomart.accountAppFeedbackIcon, color: Styles.colorBlack), title: Text('App Feedback')),
-                ListTile(leading: Icon(Gomart.accountGomartIcon, color: Styles.colorBlack), title: Text('About Gomart')),
-                ListTile(leading: Icon(Gomart.accountLogoutIcon, color: Styles.colorBlack), title: Text('Logout'))
+              child: Column(children: const [
+                ListTile(
+                    leading: Icon(
+                      Gomart.accountHelpCenterIcon,
+                      color: Styles.colorBlack,
+                    ),
+                    title: Text('Help Center')),
+                ListTile(
+                    leading: Icon(Gomart.accountAppFeedbackIcon,
+                        color: Styles.colorBlack),
+                    title: Text('App Feedback')),
+                ListTile(
+                    leading: Icon(Gomart.accountGomartIcon,
+                        color: Styles.colorBlack),
+                    title: Text('About Gomart')),
+                ListTile(
+                    leading: Icon(Gomart.accountLogoutIcon,
+                        color: Styles.colorBlack),
+                    title: Text('Logout'))
               ]),
             ),
             const Padding(padding: EdgeInsets.all(50)),
             (kDebugMode && false)
                 ? ElevatedButton(
-                style: TextButton.styleFrom(
-                  backgroundColor: Styles.colorPrimary,
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 8, horizontal: 40),
-                  shape: const StadiumBorder(),
-                ),
-                onPressed: () {
-                  HapticFeedback.vibrate();
-                  context
-                      .read<AuthenticationBloc>()
-                      .add(AuthenticationLoggedOut(context));
-                },
-                child: const Text('Logout')):Container(),
+                    style: TextButton.styleFrom(
+                      backgroundColor: Styles.colorPrimary,
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 8, horizontal: 40),
+                      shape: const StadiumBorder(),
+                    ),
+                    onPressed: () {
+                      HapticFeedback.vibrate();
+                      context
+                          .read<AuthenticationBloc>()
+                          .add(AuthenticationLoggedOut(context));
+                    },
+                    child: const Text('Logout'))
+                : Container(),
             (kDebugMode && false)
                 ? ElevatedButton(
                     style: TextButton.styleFrom(
                       backgroundColor: Styles.colorPrimary,
-                      padding:
-                          const EdgeInsets.symmetric(vertical: 8, horizontal: 40),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 8, horizontal: 40),
                       shape: const StadiumBorder(),
                     ),
                     onPressed: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const DebugAlgoliaSearchScreen(),
+                          builder: (context) =>
+                              const DebugAlgoliaSearchScreen(),
                         ),
                       );
                     },
@@ -158,8 +177,8 @@ class ProfileFragment extends StatelessWidget {
                 ? ElevatedButton(
                     style: TextButton.styleFrom(
                       backgroundColor: Styles.colorPrimary,
-                      padding:
-                          const EdgeInsets.symmetric(vertical: 8, horizontal: 40),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 8, horizontal: 40),
                       shape: const StadiumBorder(),
                     ),
                     onPressed: () {

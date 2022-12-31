@@ -5,8 +5,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:gomart/screens/Home/Screens/Home/home.dart';
-import 'package:gomart/screens/Home/Screens/message.dart';
-import 'package:gomart/screens/Home/Screens/saved.dart';
+import 'package:gomart/screens/Home/Screens/Messages/message.dart';
+import 'package:gomart/screens/Home/Screens/Saved/saved.dart';
 import 'package:gomart/screens/Home/Screens/Account/profile.dart';
 import 'package:gomart/screens/Home/Screens/Home/home.dart';
 
@@ -16,6 +16,26 @@ import '../Authentication/Register/register_screen_upload_photo.dart';
 import '../../styles/styles.dart';
 import 'Screens/Account/profile.dart';
 import 'Screens/Wallet/wallet.dart';
+
+class SampleWidget extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() => StateSampleWidget();
+
+}
+
+class StateSampleWidget extends State<SampleWidget> {
+  @override
+  Widget build(BuildContext context) {
+    return const Scaffold(
+        body: SingleChildScrollView(
+          child: Center(
+            child: Text('Hello world sample shit'),
+          ),
+        )
+    );
+  }
+
+}
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({
@@ -33,9 +53,10 @@ class StateHomeScreen extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
-        onTap: (currentIndex) => setState(() {
-          currentPage = currentIndex;
-        }),
+        onTap: (currentIndex) =>
+            setState(() {
+              currentPage = currentIndex;
+            }),
         type: BottomNavigationBarType.fixed,
         currentIndex: currentPage,
         selectedFontSize: 12,
@@ -49,25 +70,25 @@ class StateHomeScreen extends State<HomeScreen> {
               icon: Padding(
                 padding: const EdgeInsets.all(9),
                 child: Icon(
-                 currentPage ==0?Gomart.homeHover: Gomart.home,
+                  currentPage == 0 ? Gomart.homeHover : Gomart.home,
                   color: Styles.colorTextDark,
                 ),
               ),
               label: 'Home'),
           BottomNavigationBarItem(
               icon: Padding(
-                padding:const  EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(8.0),
                 child: Icon(
-                  currentPage ==1?Gomart.heartHover: Gomart.heart,
+                  currentPage == 1 ? Gomart.heartHover : Gomart.heart,
                   color: Styles.colorBlack,
                 ),
               ),
               label: 'Saved'),
           BottomNavigationBarItem(
               icon: Padding(
-                padding:const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(8.0),
                 child: Icon(
-                  currentPage ==2?Gomart.walletHover:  Gomart.wallet,
+                  currentPage == 2 ? Gomart.walletHover : Gomart.wallet,
                   color: Styles.colorBlack,
                 ),
               ),
@@ -76,7 +97,7 @@ class StateHomeScreen extends State<HomeScreen> {
               icon: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Icon(
-                  currentPage ==3?Gomart.messageHover: Gomart.message,
+                  currentPage == 3 ? Gomart.messageHover : Gomart.message,
                   color: Styles.colorBlack,
                 ),
               ),
@@ -85,7 +106,7 @@ class StateHomeScreen extends State<HomeScreen> {
               icon: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Icon(
-                  currentPage ==4?Gomart.profileHover: Gomart.profile,
+                  currentPage == 4 ? Gomart.profileHover : Gomart.profile,
                   color: Styles.colorBlack,
                 ),
               ),

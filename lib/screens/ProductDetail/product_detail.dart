@@ -67,7 +67,7 @@ class ProductDetailScreen extends StatelessWidget {
                             borderRadius: BorderRadius.circular(60),
                             color: Styles.colorGray),
                       ),
-                      Padding(padding: EdgeInsets.all(8)),
+                      const Padding(padding: EdgeInsets.all(8)),
                       Container(
                         color: Styles.colorWhite,
                         width: MediaQuery.of(context).size.width * 0.762,

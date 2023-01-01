@@ -128,22 +128,22 @@ class SectionWithoutImage extends StatelessWidget {
 
 class CharacterAvatar extends StatelessWidget {
   final String ch;
-
-  const CharacterAvatar({Key? key, required this.ch}) : super(key: key);
+ final double heightWidth;
+  const CharacterAvatar({Key? key, required this.ch, this.heightWidth=60}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 60,
-      width: 60,
+      height: heightWidth,
+      width: heightWidth,
       child: Material(
         color: resolveColor(ch),
         borderRadius: BorderRadius.circular(50),
         child: Center(
           child: Text(
             ch[0],
-            style: const TextStyle(
-              fontSize: 40,
+            style:  TextStyle(
+              fontSize: heightWidth==60?40:heightWidth-10,
               color: Colors.white,
             ),
             textAlign: TextAlign.center,

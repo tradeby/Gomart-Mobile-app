@@ -68,9 +68,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
         appBarTheme: const AppBarTheme(
-          systemOverlayStyle: SystemUiOverlayStyle(
-            statusBarColor: Colors.black,
-          ),
+          systemOverlayStyle:  SystemUiOverlayStyle.light,
         ),
       ),
       home: const Authentication(),

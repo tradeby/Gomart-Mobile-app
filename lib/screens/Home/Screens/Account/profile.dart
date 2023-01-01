@@ -10,6 +10,7 @@ import 'package:gomart/styles/custom_home_icons.dart';
 
 import '../../../../styles/styles.dart';
 import '../../../Authentication/Register/register_screen_upload_photo.dart';
+import 'edit_business_screen.dart';
 
 class ProfileFragment extends StatelessWidget {
   const ProfileFragment({Key? key}) : super(key: key);
@@ -106,7 +107,10 @@ class ProfileFragment extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12)),
                   elevation: 0),
-              onPressed: () {},
+              onPressed: () {Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const EditBusinessScreen()),
+              );},
               child: const Text(
                 'Start selling',
                 style: TextStyle(

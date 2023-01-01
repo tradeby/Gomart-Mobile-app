@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -52,66 +54,74 @@ class StateHomeScreen extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: BottomNavigationBar(
-        onTap: (currentIndex) =>
-            setState(() {
-              currentPage = currentIndex;
-            }),
-        type: BottomNavigationBarType.fixed,
-        currentIndex: currentPage,
-        selectedFontSize: 12,
-        selectedLabelStyle: const TextStyle(fontWeight: FontWeight.w500),
-        showSelectedLabels: true,
-        showUnselectedLabels: true,
-        unselectedItemColor: Styles.colorTextDark,
-        selectedItemColor: Styles.colorTextDark,
-        items: [
-          BottomNavigationBarItem(
-              icon: Padding(
-                padding: const EdgeInsets.all(9),
-                child: Icon(
-                  currentPage == 0 ? Gomart.homeHover : Gomart.home,
-                  color: Styles.colorTextDark,
+      bottomNavigationBar: AnnotatedRegion<SystemUiOverlayStyle>(
+          value: const SystemUiOverlayStyle(
+            systemNavigationBarColor: Styles.colorWhite, // navigation bar color
+            statusBarColor:Styles.colorWhite, // status bar color
+            statusBarIconBrightness:Brightness.dark,// status bar icons' color
+            systemNavigationBarIconBrightness:Brightness.dark, //navigation bar icons' color
+          ),
+        child: BottomNavigationBar(
+          onTap: (currentIndex) =>
+              setState(() {
+                currentPage = currentIndex;
+              }),
+          type: BottomNavigationBarType.fixed,
+          currentIndex: currentPage,
+          selectedFontSize: 12,
+          selectedLabelStyle: const TextStyle(fontWeight: FontWeight.w500),
+          showSelectedLabels: true,
+          showUnselectedLabels: true,
+          unselectedItemColor: Styles.colorTextDark,
+          selectedItemColor: Styles.colorTextDark,
+          items: [
+            BottomNavigationBarItem(
+                icon: Padding(
+                  padding: const EdgeInsets.all(9),
+                  child: Icon(
+                    currentPage == 0 ? Gomart.homeHover : Gomart.home,
+                    color: Styles.colorTextDark,
+                  ),
                 ),
-              ),
-              label: 'Home'),
-          BottomNavigationBarItem(
-              icon: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Icon(
-                  currentPage == 1 ? Gomart.heartHover : Gomart.heart,
-                  color: Styles.colorBlack,
+                label: 'Home'),
+            BottomNavigationBarItem(
+                icon: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Icon(
+                    currentPage == 1 ? Gomart.heartHover : Gomart.heart,
+                    color: Styles.colorBlack,
+                  ),
                 ),
-              ),
-              label: 'Saved'),
-          BottomNavigationBarItem(
-              icon: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Icon(
-                  currentPage == 2 ? Gomart.walletHover : Gomart.wallet,
-                  color: Styles.colorBlack,
+                label: 'Saved'),
+            BottomNavigationBarItem(
+                icon: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Icon(
+                    currentPage == 2 ? Gomart.walletHover : Gomart.wallet,
+                    color: Styles.colorBlack,
+                  ),
                 ),
-              ),
-              label: 'Wallet'),
-          BottomNavigationBarItem(
-              icon: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Icon(
-                  currentPage == 3 ? Gomart.messageHover : Gomart.message,
-                  color: Styles.colorBlack,
+                label: 'Wallet'),
+            BottomNavigationBarItem(
+                icon: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Icon(
+                    currentPage == 3 ? Gomart.messageHover : Gomart.message,
+                    color: Styles.colorBlack,
+                  ),
                 ),
-              ),
-              label: 'Message'),
-          BottomNavigationBarItem(
-              icon: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Icon(
-                  currentPage == 4 ? Gomart.profileHover : Gomart.profile,
-                  color: Styles.colorBlack,
+                label: 'Message'),
+            BottomNavigationBarItem(
+                icon: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Icon(
+                    currentPage == 4 ? Gomart.profileHover : Gomart.profile,
+                    color: Styles.colorBlack,
+                  ),
                 ),
-              ),
-              label: 'Account'),
-        ],
+                label: 'Account'),
+          ],
+        ),
       ),
       body: _currentPage(),
     );

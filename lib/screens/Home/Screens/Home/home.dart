@@ -322,50 +322,53 @@ class HomeFragment extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Styles.colorBackground,
-      body: GestureDetector(
-        onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-        child: SafeArea(
-          child: CustomScrollView(slivers: [
-            SliverPersistentHeader(
-                floating: true, delegate: CustomPersistentHeader()),
-            BlocBuilder<HomeCubit, HomeState>(
-              builder: (context, state) {
-                if (state.loadInProgress) {
-                  return SliverList(
-                    delegate: SliverChildBuilderDelegate(childCount: 3,
-                        (BuildContext context, int index) {
-                      return const ProductCardLoading();
-                    }),
-                  );
-                } else if (state.loadSuccess) {
-                  return SliverList(
-                    delegate: SliverChildBuilderDelegate(
-                        childCount: state.homeProducts?.length,
-                        (BuildContext context, int index) {
-                      return ProductCard(
-                        product: SampleProducts.toProductModel(
-                          state.homeProducts![index],
-                        ),
-                      );
-                    }),
-                  );
-                } else {
-                  return SliverList(
-                      delegate: SliverChildListDelegate([
-                    const Center(
-                      child: Text('Error encountered loading products'),
-                    ),
-                  ]));
-                }
-              },
-            ),
-            SliverList(
-                delegate: SliverChildListDelegate([
-              const HomeAdMobBanner(),
-            ]))
-          ]),
+    return Container(
+      color: Styles.colorBackground,
+      child: Scaffold(
+        backgroundColor: Styles.colorBackground,
+        body: GestureDetector(
+          onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+          child: SafeArea(
+            child: CustomScrollView(slivers: [
+              SliverPersistentHeader(
+                  floating: true, delegate: CustomPersistentHeader()),
+              BlocBuilder<HomeCubit, HomeState>(
+                builder: (context, state) {
+                  if (state.loadInProgress) {
+                    return SliverList(
+                      delegate: SliverChildBuilderDelegate(childCount: 3,
+                          (BuildContext context, int index) {
+                        return const ProductCardLoading();
+                      }),
+                    );
+                  } else if (state.loadSuccess) {
+                    return SliverList(
+                      delegate: SliverChildBuilderDelegate(
+                          childCount: state.homeProducts?.length,
+                          (BuildContext context, int index) {
+                        return ProductCard(
+                          product: SampleProducts.toProductModel(
+                            state.homeProducts![index],
+                          ),
+                        );
+                      }),
+                    );
+                  } else {
+                    return SliverList(
+                        delegate: SliverChildListDelegate([
+                      const Center(
+                        child: Text('Error encountered loading products'),
+                      ),
+                    ]));
+                  }
+                },
+              ),
+              SliverList(
+                  delegate: SliverChildListDelegate([
+                const HomeAdMobBanner(),
+              ]))
+            ]),
+          ),
         ),
       ),
     );

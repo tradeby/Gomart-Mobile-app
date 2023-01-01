@@ -31,6 +31,6 @@ abstract class Styles {
   static const Color colorButtonGrey= Color(0xffE8E8E8);
   static const Color colorTransactionItemLogoBg= Color(0xffE19164);
 
-
+  static const Color colorPromoteAdsPremium = Color(0xffC3E9D2);
 
 }

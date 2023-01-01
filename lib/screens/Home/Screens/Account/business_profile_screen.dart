@@ -5,6 +5,7 @@ import 'package:gomart/styles/styles.dart';
 import '../../../../styles/custom_home_icons.dart';
 import '../../../Authentication/Register/register_screen_upload_photo.dart';
 import '../../../ProductDetail/product_detail.dart';
+import 'manage_product_screen.dart';
 
 class BusinessProfileScreen extends StatelessWidget {
   const BusinessProfileScreen({Key? key}) : super(key: key);
@@ -98,7 +99,7 @@ class BusinessProfileScreen extends StatelessWidget {
               ),
               Container(
                   color: Styles.colorWhite,
-                  padding: const EdgeInsets.all(8),
+                  padding: const EdgeInsets.all(6),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -116,12 +117,28 @@ class BusinessProfileScreen extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(60),
                                 color: Styles.colorGray),
                           ),
-                          const Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: Text(
-                              'Edit',
-                              style: TextStyle(
-                                  color: Styles.colorTextBlack, fontSize: 12),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 4),
+                            child: SizedBox(
+                              height: 20,
+                              width: 60,
+                              child: OutlinedButton(
+                                onPressed: () {},
+                                style: OutlinedButton.styleFrom(
+                                    shape: const StadiumBorder(),
+                                    side: const BorderSide(
+                                      color: Styles.colorGray,
+                                      style: BorderStyle.solid,
+                                      width: 1,
+                                    )),
+                                child: Text(
+                                  'Edit',
+                                  style: TextStyle(
+                                      color: Styles.colorTextBlack
+                                          .withOpacity(0.8),
+                                      fontSize: 11),
+                                ),
+                              ),
                             ),
                           ),
                         ],
@@ -226,7 +243,6 @@ class BusinessProfileScreen extends StatelessWidget {
                       )
                     ],
                   )),
-
               const MapSample(),
               Container(
                 padding:
@@ -269,27 +285,41 @@ class BusinessProfileScreen extends StatelessWidget {
               ),
               Container(
                 color: Styles.colorWhite,
-                padding: const EdgeInsets.symmetric(horizontal: 8),
+                margin: const EdgeInsets.symmetric(vertical: 8),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     const Text(
-                      'Add Gallery Photos',
+                      'Add Store Gallery Photos',
                       style: TextStyle(fontSize: 12, color: Styles.colorGray),
+                    ),
+                    const Padding(padding: EdgeInsets.all(4)),
+                    Container(
+                      padding: const EdgeInsets.all(12),
+                      height: MediaQuery.of(context).size.width * 0.55,
+                      width: MediaQuery.of(context).size.width * 0.95,
+                      alignment: Alignment.topRight,
+                      decoration: const BoxDecoration(
+                          color: Styles.colorBackground,
+                          borderRadius: BorderRadius.all(Radius.circular(4))),
+                      child: const Icon(Gomart.trashCanIcon,
+                          color: Styles.colorGray),
                     ),
                     const Padding(padding: EdgeInsets.all(4)),
                     Row(
                       children: List.generate(
                         7,
-                        (index) => const GallaryItemBox(),
+                        (index) => index == 0
+                            ? const AddNewGallaryItemBox()
+                            : GallaryItemBox(isLastItem: ((index + 1 == 7))),
                       ),
                     )
                   ],
                 ),
               ),
-
-              const Padding(padding: EdgeInsets.all(4)),
               Container(
                 color: Styles.colorWhite,
                 padding: const EdgeInsets.all(8),
@@ -298,19 +328,31 @@ class BusinessProfileScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Container(
-                        height: 30,
-                        padding: const EdgeInsets.symmetric(horizontal: 8),
-                        alignment: Alignment.centerLeft,
+                        padding: const EdgeInsets.all(8),
                         decoration: BoxDecoration(
-                          color: Styles.colorGray.withOpacity(0.4),
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(4)),
-                        ),
-                        child: const Text('Search all 29 items')),
+                            color: Styles.colorBackground,
+                            borderRadius: BorderRadius.circular(4)),
+                        child: const Text(
+                          'Search all 29 items',
+                          style: TextStyle(
+                              fontSize: 12, color: Styles.colorTextLightGrey),
+                        )),
                     const Padding(padding: EdgeInsets.all(8)),
-                    const ProductWithEditBtn(),
+                    const ProductDetailItem(
+                      imageUrl:
+                          'https://firebasestorage.googleapis.com/v0/b/gomart-apps.appspot.com/o/product-detail%2Fproduct1.png?alt=media&token=10cb319c-9d42-46c9-916c-c124ec190920',
+                      productTitle:
+                          'Fill Your Own Box of 12 Cupcakes I Mix & Match Your Favorite Flavours',
+                      price: 'N8,000',
+                    ),
                     const Padding(padding: EdgeInsets.all(6)),
-                    const ProductWithEditBtn(),
+                    const ProductDetailItem(
+                      imageUrl:
+                          'https://firebasestorage.googleapis.com/v0/b/gomart-apps.appspot.com/o/product-detail%2Fproduct2.png?alt=media&token=c1a89179-590e-4d51-aedd-003623274e0d',
+                      productTitle:
+                          'Fill Your Own Box of 12 Cupcakes I Mix & Match Your Favorite Flavours',
+                      price: 'N6,000',
+                    ),
                     const Padding(padding: EdgeInsets.all(6)),
                     Center(
                       child: ElevatedButton(
@@ -332,33 +374,112 @@ class BusinessProfileScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-              )
-              /*  ElevatedButton(
-                style: TextButton.styleFrom(
-                    backgroundColor: Styles.colorSecondary,
-                    padding:
-                    const EdgeInsets.symmetric(vertical: 8, horizontal: 40),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12)),
-                    elevation: 0),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const ManageProductScreen()),
-                  );
-                },
-                child: const Text(
-                  'Manage Product',
-                  style: TextStyle(
-                      fontWeight: FontWeight.normal, color: Styles.colorBlack),
-                ),
-              ),*/
-              // const Padding(padding: EdgeInsets.all(12))
+              ),
+              const Padding(padding: EdgeInsets.all(12))
             ],
           ),
         ),
       ),
+    );
+  }
+}
+
+class ProductDetailItem extends StatelessWidget {
+  final String imageUrl;
+  final String productTitle;
+  final String price;
+
+  const ProductDetailItem({
+    Key? key,
+    required this.imageUrl,
+    required this.productTitle,
+    required this.price,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        SizedBox(
+          height: 100,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Image.network(
+                imageUrl,
+                height: 100,
+                width: 100,
+                fit: BoxFit.cover,
+                // color: Styles.colorBackground,
+              ),
+              const Padding(padding: EdgeInsets.all(8)),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.65,
+                      child: Text(productTitle)),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        price,
+                        style: const TextStyle(color: Styles.colorPrimary),
+                      ),
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.65,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text(
+                              'Updated 2 days ago',
+                              style: TextStyle(
+                                  fontSize: 12, color: Styles.colorGray),
+                            ),
+                            SizedBox(
+                              height: 20,
+                              width: 60,
+                              child: OutlinedButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const ManageProductScreen()),
+                                  );
+                                },
+                                style: OutlinedButton.styleFrom(
+                                    shape: const StadiumBorder(),
+                                    side: const BorderSide(
+                                      color: Styles.colorGray,
+                                      style: BorderStyle.solid,
+                                      width: 1,
+                                    )),
+                                child: Text(
+                                  'Edit',
+                                  style: TextStyle(
+                                      color: Styles.colorTextBlack
+                                          .withOpacity(0.8),
+                                      fontSize: 11),
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      )
+                    ],
+                  )
+                ],
+              )
+            ],
+          ),
+        ),
+        const Divider()
+      ],
     );
   }
 }
@@ -374,7 +495,8 @@ class ProductWithEditBtn extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Container(color: Styles.colorGray.withOpacity(0.4), height: 92, width: 90),
+        Container(
+            color: Styles.colorGray.withOpacity(0.4), height: 92, width: 90),
         const Padding(padding: EdgeInsets.all(4)),
         Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -386,21 +508,20 @@ class ProductWithEditBtn extends StatelessWidget {
                   'Fill your Own Box of 12 Cupcakes I Mix & Match Your Favorite Flavours'),
             ),
             const Padding(padding: EdgeInsets.all(12)),
-            const Text('N8,000',
-            style: TextStyle(
-              color: Styles.colorPrimary
-            ),),
-
+            const Text(
+              'N8,000',
+              style: TextStyle(color: Styles.colorPrimary),
+            ),
             SizedBox(
               width: MediaQuery.of(context).size.width * 0.7,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('Updated 2 days ago',
-                  style: TextStyle(
-                    fontSize: 12,color: Styles.colorGray
-                  ),),
+                  const Text(
+                    'Updated 2 days ago',
+                    style: TextStyle(fontSize: 12, color: Styles.colorGray),
+                  ),
                   SizedBox(
                     height: 20,
                     width: 60,
@@ -432,7 +553,28 @@ class ProductWithEditBtn extends StatelessWidget {
 }
 
 class GallaryItemBox extends StatelessWidget {
+  final bool isLastItem;
+
   const GallaryItemBox({
+    Key? key,
+    this.isLastItem = false,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.fromLTRB(0, 0, isLastItem ? 0 : 7, 0),
+      height: 46,
+      width: 46,
+      decoration: const BoxDecoration(
+          color: Styles.colorBackground,
+          borderRadius: BorderRadius.all(Radius.circular(4))),
+    );
+  }
+}
+
+class AddNewGallaryItemBox extends StatelessWidget {
+  const AddNewGallaryItemBox({
     Key? key,
   }) : super(key: key);
 
@@ -442,9 +584,11 @@ class GallaryItemBox extends StatelessWidget {
       margin: const EdgeInsets.fromLTRB(0, 0, 7, 0),
       height: 46,
       width: 46,
+      alignment: Alignment.center,
       decoration: BoxDecoration(
           color: Styles.colorGray.withOpacity(0.4),
           borderRadius: const BorderRadius.all(Radius.circular(4))),
+      child: const Icon(Icons.add_circle_sharp, color: Styles.colorPrimary),
     );
   }
 }

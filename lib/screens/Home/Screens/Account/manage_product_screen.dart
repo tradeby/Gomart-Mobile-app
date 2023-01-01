@@ -205,10 +205,10 @@ class ManageProductScreen extends StatelessWidget {
                             color: Styles.colorPrimary,
                           ),
                           const Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 8)),
+                              padding: EdgeInsets.symmetric(horizontal: 4)),
                           Container(
                             padding: const EdgeInsets.symmetric(
-                                horizontal: 12, vertical: 4),
+                                horizontal: 10, vertical: 4),
                             decoration: BoxDecoration(
                               color: Styles.colorGray.withOpacity(0.2),
                               borderRadius:
@@ -249,14 +249,14 @@ class ManageProductScreen extends StatelessWidget {
                             color: Styles.colorPrimary,
                           ),
                           const Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 8)),
+                              padding: EdgeInsets.symmetric(horizontal: 4)),
                           Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Container(
                                 padding: const EdgeInsets.symmetric(
-                                    horizontal: 12, vertical: 4),
+                                    horizontal: 10, vertical: 4),
                                 decoration: const BoxDecoration(
                                   color: Styles.colorSecondary,
                                   borderRadius:
@@ -368,14 +368,14 @@ class ManageProductScreen extends StatelessWidget {
                             color: Styles.colorPrimary,
                           ),
                           const Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 8)),
+                              padding: EdgeInsets.symmetric(horizontal: 4)),
                           Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Container(
                                 padding: const EdgeInsets.symmetric(
-                                    horizontal: 18, vertical: 4),
+                                    horizontal:10, vertical: 4),
                                 decoration: const BoxDecoration(
                                   color: Styles.colorPromoteAdsPremium,
                                   borderRadius:

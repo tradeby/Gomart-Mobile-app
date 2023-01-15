@@ -396,6 +396,8 @@ class EditBusinessScreen extends StatelessWidget {
                           const BusinessProfileScreen()),
                     );
                   },
+
+
                   child: const Text(
                     'Save',
                     style: TextStyle(

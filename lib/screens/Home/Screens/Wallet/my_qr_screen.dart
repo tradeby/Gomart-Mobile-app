@@ -22,7 +22,7 @@ class MyQrScreen extends StatelessWidget {
             fontWeight: FontWeight.normal,
           ),
         ),
-        elevation: 0,
+        elevation: 1,
         backgroundColor: Styles.colorWhite,
       ),
       backgroundColor: Styles.colorBackground,

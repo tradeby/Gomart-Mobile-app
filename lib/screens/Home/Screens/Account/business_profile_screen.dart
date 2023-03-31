@@ -94,12 +94,40 @@ class BusinessProfileScreen extends StatelessWidget {
                               borderRadius: BorderRadius.circular(50)),
                           child: const BackButton(
                             color: Styles.colorWhite,
-                          )))
+                          ))),
+                  Positioned(
+                    top: 5,
+                    right: 5,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 4),
+                      child: SizedBox(
+                        height: 20,
+                        width: 60,
+                        child: OutlinedButton(
+                          onPressed: () {},
+                          style: OutlinedButton.styleFrom(
+                            backgroundColor: Styles.colorWhite,
+                              shape: const StadiumBorder(),
+                              side: const BorderSide(
+                                color: Styles.colorGray,
+                                style: BorderStyle.solid,
+                                width: 1,
+                              )),
+                          child: Text(
+                            'Edit',
+                            style: TextStyle(
+                                color: Styles.colorTextBlack.withOpacity(0.8),
+                                fontSize: 11),
+                          ),
+                        ),
+                      ),
+                    ),
+                  )
                 ],
               ),
               Container(
                   color: Styles.colorWhite,
-                  padding: const EdgeInsets.all(6),
+                  padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 6),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -116,30 +144,6 @@ class BusinessProfileScreen extends StatelessWidget {
                                     fit: BoxFit.cover),
                                 borderRadius: BorderRadius.circular(60),
                                 color: Styles.colorGray),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 4),
-                            child: SizedBox(
-                              height: 20,
-                              width: 60,
-                              child: OutlinedButton(
-                                onPressed: () {},
-                                style: OutlinedButton.styleFrom(
-                                    shape: const StadiumBorder(),
-                                    side: const BorderSide(
-                                      color: Styles.colorGray,
-                                      style: BorderStyle.solid,
-                                      width: 1,
-                                    )),
-                                child: Text(
-                                  'Edit',
-                                  style: TextStyle(
-                                      color: Styles.colorTextBlack
-                                          .withOpacity(0.8),
-                                      fontSize: 11),
-                                ),
-                              ),
-                            ),
                           ),
                         ],
                       ),
@@ -160,22 +164,11 @@ class BusinessProfileScreen extends StatelessWidget {
                                     Row(
                                       children: const [
                                         Icon(Icons.star,
-                                            size: 12,
-                                            color: Styles.colorSecondary),
-                                        Icon(Icons.star,
-                                            size: 12,
-                                            color: Styles.colorSecondary),
-                                        Icon(Icons.star,
-                                            size: 12,
-                                            color: Styles.colorSecondary),
-                                        Icon(Icons.star,
-                                            size: 12,
-                                            color: Styles.colorSecondary),
-                                        Icon(Icons.star,
-                                            size: 12,
+                                            size: 15,
                                             color: Styles.colorSecondary),
                                       ],
                                     ),
+                                    const Padding(padding: EdgeInsets.all(1)),
                                     const Text(
                                       '(52 Reviews)',
                                       style: TextStyle(

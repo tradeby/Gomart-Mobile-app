@@ -23,14 +23,14 @@ class ProfileFragment extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            Row(
+         /*   Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 IconButton(onPressed: () {}, icon: const Icon(Icons.settings)),
               ],
-            ),
+            ),*/
             Container(
-              padding: const EdgeInsets.fromLTRB(0, 4, 0, 0),
+              padding: const EdgeInsets.fromLTRB(0, 40, 0, 0),
               width: MediaQuery.of(context).size.width,
               child: Padding(
                 padding:

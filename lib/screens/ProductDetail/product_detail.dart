@@ -14,15 +14,37 @@ import 'package:photo_view/photo_view.dart';
 import 'fade_route.dart';
 import 'image_preview_screen.dart';
 
-class ProductDetailScreen extends StatelessWidget {
-  const ProductDetailScreen({Key? key}) : super(key: key);
+class ProductDetailScreen extends StatefulWidget {
+  final SampleProducts product;
+
+  const ProductDetailScreen({Key? key, required this.product})
+      : super(key: key);
+
+  @override
+  State<StatefulWidget> createState() => ProductDetailScreenState();
+}
+
+class ProductDetailScreenState extends State<ProductDetailScreen> {
+  bool loading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    // Wait for 2 seconds before executing the code below
+    Future.delayed(const Duration(milliseconds: 800), () {
+      setState(() {
+        loading = false;
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    return const AnnotatedRegion<SystemUiOverlayStyle>(
-      value: SystemUiOverlayStyle.light,
-      child: ProductDetailLoading(),
-    );
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+        value: SystemUiOverlayStyle.light,
+        child: loading
+            ? const ProductDetailLoading()
+            : ProductDetail(product: widget.product));
   }
 }
 
@@ -103,15 +125,13 @@ class ProductDetailLoading extends StatelessWidget {
                             const Padding(padding: EdgeInsets.all(4)),
                             Container(
                               height: 10,
-                              width:
-                              MediaQuery.of(context).size.width * 0.4,
+                              width: MediaQuery.of(context).size.width * 0.4,
                               color: Styles.colorBarBottomSheet,
                             ),
                             const Padding(padding: EdgeInsets.all(2)),
                             Container(
                               height: 10,
-                              width:
-                              MediaQuery.of(context).size.width * 0.2,
+                              width: MediaQuery.of(context).size.width * 0.2,
                               color: Styles.colorBarBottomSheet,
                             ),
                             const Padding(padding: EdgeInsets.all(2)),
@@ -121,7 +141,7 @@ class ProductDetailLoading extends StatelessWidget {
                                 Container(
                                   height: 10,
                                   width:
-                                  MediaQuery.of(context).size.width * 0.5,
+                                      MediaQuery.of(context).size.width * 0.5,
                                   color: Styles.colorBarBottomSheet,
                                 ),
                                 Column(
@@ -164,8 +184,8 @@ class ProductDetailLoading extends StatelessWidget {
                 children: [
                   Container(
                     decoration: const BoxDecoration(
-                        color: Styles.colorBackground,
-                   ),
+                      color: Styles.colorBackground,
+                    ),
                     height: 291,
                   ),
                   Positioned(
@@ -260,9 +280,9 @@ class ProductDetailLoading extends StatelessWidget {
 }
 
 class ProductDetail extends StatelessWidget {
-  const ProductDetail({
-    Key? key,
-  }) : super(key: key);
+  final SampleProducts product;
+
+  const ProductDetail({Key? key, required this.product}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -328,9 +348,9 @@ class ProductDetail extends StatelessWidget {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                const Text(
-                                  '3ple F Bakers',
-                                  style: TextStyle(
+                                Text(
+                                  product.companyName,
+                                  style: const TextStyle(
                                     fontSize: 15,
                                   ),
                                 ),
@@ -463,11 +483,10 @@ class ProductDetail extends StatelessWidget {
                       );
                     },
                     child: Container(
-                      decoration: const BoxDecoration(
+                      decoration: BoxDecoration(
                           color: Styles.colorBackground,
                           image: DecorationImage(
-                              image: NetworkImage(
-                                  'https://firebasestorage.googleapis.com/v0/b/gomart-apps.appspot.com/o/product-detail%2FcakeProduct.png?alt=media&token=21352a2f-4116-4c74-affa-2b063447ac96'),
+                              image: NetworkImage(product.productImageUrl),
                               fit: BoxFit.cover)),
                       height: 291,
                     ),
@@ -504,17 +523,22 @@ class ProductDetail extends StatelessWidget {
               ),
               Container(
                 color: Styles.colorWhite,
-                padding: const EdgeInsets.all(8),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 8),
                 child: Column(
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: const [
-                        Text(
-                          'Vanilla Sponge Cake 6 inche',
-                          style: TextStyle(fontWeight: FontWeight.w500),
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.8,
+                          child: Text(
+                            product.productName,
+                            style: const TextStyle(fontWeight: FontWeight.w500),
+                          ),
                         ),
-                        Text(
+                        const Text(
                           'N5,000',
                           style: TextStyle(
                             fontWeight: FontWeight.w500,

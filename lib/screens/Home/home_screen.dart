@@ -73,50 +73,45 @@ class StateHomeScreen extends State<HomeScreen> {
           showSelectedLabels: true,
           showUnselectedLabels: true,
           unselectedItemColor: Styles.colorTextDark,
-          selectedItemColor: Styles.colorTextDark,
+          selectedItemColor: Styles.colorPrimary,
           items: [
             BottomNavigationBarItem(
                 icon: Padding(
                   padding: const EdgeInsets.all(9),
-                  child: Icon(
-                    currentPage == 0 ? Gomart.homeHover : Gomart.home,
-                    color: Styles.colorTextDark,
+                  child: Icon( Gomart.home,
+                    color: currentPage == 0 ?Styles.colorPrimary: Styles.colorBlack,
                   ),
                 ),
                 label: 'Home'),
             BottomNavigationBarItem(
                 icon: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Icon(
-                    currentPage == 1 ? Gomart.heartHover : Gomart.heart,
-                    color: Styles.colorBlack,
+                  child: Icon(Gomart.heart,
+                    color: currentPage == 1 ?Styles.colorPrimary: Styles.colorBlack,
                   ),
                 ),
                 label: 'Saved'),
             BottomNavigationBarItem(
                 icon: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Icon(
-                    currentPage == 2 ? Gomart.walletHover : Gomart.wallet,
-                    color: Styles.colorBlack,
+                  child: Icon( Gomart.wallet,
+                    color: currentPage == 2 ?Styles.colorPrimary: Styles.colorBlack,
                   ),
                 ),
                 label: 'Wallet'),
             BottomNavigationBarItem(
                 icon: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Icon(
-                    currentPage == 3 ? Gomart.messageHover : Gomart.message,
-                    color: Styles.colorBlack,
+                  child: Icon( Gomart.message,
+                    color: currentPage == 3 ?Styles.colorPrimary: Styles.colorBlack,
                   ),
                 ),
                 label: 'Message'),
             BottomNavigationBarItem(
                 icon: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Icon(
-                    currentPage == 4 ? Gomart.profileHover : Gomart.profile,
-                    color: Styles.colorBlack,
+                  child: Icon( Gomart.profile,
+                    color: currentPage == 4 ?Styles.colorPrimary: Styles.colorBlack,
                   ),
                 ),
                 label: 'Account'),

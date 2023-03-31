@@ -55,7 +55,7 @@ class ProductDetailScreen extends StatelessWidget {
                 ),
                 Container(
                     color: Styles.colorWhite,
-                    padding: const EdgeInsets.all(8),
+                    padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 8),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -88,22 +88,11 @@ class ProductDetailScreen extends StatelessWidget {
                                       Row(
                                         children: const [
                                           Icon(Icons.star,
-                                              size: 12,
-                                              color: Styles.colorSecondary),
-                                          Icon(Icons.star,
-                                              size: 12,
-                                              color: Styles.colorSecondary),
-                                          Icon(Icons.star,
-                                              size: 12,
-                                              color: Styles.colorSecondary),
-                                          Icon(Icons.star,
-                                              size: 12,
-                                              color: Styles.colorSecondary),
-                                          Icon(Icons.star,
-                                              size: 12,
+                                              size: 15,
                                               color: Styles.colorSecondary),
                                         ],
                                       ),
+                                      const Padding(padding: EdgeInsets.all(1)),
                                       const Text(
                                         '(52 Reviews)',
                                         style: TextStyle(
@@ -154,16 +143,16 @@ class ProductDetailScreen extends StatelessWidget {
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     crossAxisAlignment: CrossAxisAlignment.end,
                                     children: [
-                                      const Text(
+                                    /*  const Text(
                                         '1,121 Followers',
                                         style: TextStyle(
                                           fontSize: 12,
                                         ),
                                       ),
-                                      const Padding(padding: EdgeInsets.all(2)),
+                                      const Padding(padding: EdgeInsets.all(2)),*/
                                       Container(
                                         padding: const EdgeInsets.symmetric(
-                                            vertical: 2, horizontal: 24),
+                                            vertical: 6, horizontal: 24),
                                         decoration: BoxDecoration(
                                           color: Styles.colorSecondary,
                                           borderRadius: BorderRadius.circular(8),
@@ -454,16 +443,10 @@ class ProductDetailScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      ProductCard(product: SampleProducts.listOfProducts[0]),
-                   /*   Container(
-                        color: Styles.colorGray,
-                        height: 122,
-                        child: const Center(
-                          child: Text('sponsored link'),
-                        ),
-                      ),*/
+                      ProductCardSponsored(product: SampleProducts.listOfProducts[0]),
+                      ProductCardSponsored(product: SampleProducts.listOfProducts[1]),
                       const HomeAdMobBanner(bannerSize: AdSize.fullBanner),
-                      ProductCard(product: SampleProducts.listOfProducts[2]),
+                      ProductCardSponsored(product: SampleProducts.listOfProducts[2]),
                     ],
                   ),
                 ),

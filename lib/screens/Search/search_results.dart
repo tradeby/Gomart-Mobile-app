@@ -44,11 +44,13 @@ class SearchResults extends StatelessWidget {
                   }
                   return SliverList(
                     delegate: SliverChildBuilderDelegate(
-                        childCount: state.searchResults.length,
+                        childCount: state.searchResults.length+1,
                         (BuildContext context, int index) {
-                      return ProductCard(
+                      return index == 0? ProductCardSponsored(product: SampleProducts.listOfProducts[2]
+                      ):
+                      ProductCard(
                         product: SampleProducts.toProductModel(
-                          state.searchResults[index],
+                          state.searchResults[index-1],
                         ),
                       );
                     }),

@@ -377,10 +377,8 @@ class HomeFragment extends StatelessWidget {
 
 class HomeAdMobBanner extends StatefulWidget {
   final AdSize? bannerSize;
-  const HomeAdMobBanner({
-    Key? key,
-    this.bannerSize
-  }) : super(key: key);
+
+  const HomeAdMobBanner({Key? key, this.bannerSize}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => StateHomeAdMobBanner();
@@ -394,7 +392,9 @@ class StateHomeAdMobBanner extends State<HomeAdMobBanner> {
     myBanner = BannerAd(
       // adUnitId: Platform.isIOS?'	ca-app-pub-3940256099942544/6300978111':'ca-app-pub-5077686252014732/7090600180',
       adUnitId: 'ca-app-pub-3940256099942544/6300978111',
-      size: widget.bannerSize != null ? widget.bannerSize as AdSize: AdSize.banner,
+      size: widget.bannerSize != null
+          ? widget.bannerSize as AdSize
+          : AdSize.banner,
       request: const AdRequest(),
       listener: const BannerAdListener(),
     );
@@ -413,9 +413,9 @@ class StateHomeAdMobBanner extends State<HomeAdMobBanner> {
     );
   }
 }
-class TestingChat {
 
-}
+class TestingChat {}
+
 class ProductCardLoading extends StatelessWidget {
   const ProductCardLoading({Key? key}) : super(key: key);
 
@@ -563,109 +563,334 @@ class ProductCard extends StatelessWidget {
           margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 0),
           padding: const EdgeInsets.all(8),
           width: MediaQuery.of(context).size.width,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
+          child: Column(
             children: [
-              SizedBox(
-                width: MediaQuery.of(context).size.width * 0.40,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    FadeInImage(
-                      width: MediaQuery.of(context).size.width * 0.36,
-                      height: MediaQuery.of(context).size.width * 0.28,
-                      placeholder: const AssetImage(
-                          'assets/images/placeholder-image.png'),
-                      image: NetworkImage(product.productImageUrl),
-                      fit: BoxFit.fitWidth,
-                    ),
-                    const Padding(padding: EdgeInsets.all(8)),
-                    Row(
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.40,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Icon(
-                          Gomart.locationIcon,
-                          size: 16,
+                        FadeInImage(
+                          width: MediaQuery.of(context).size.width * 0.36,
+                          height: MediaQuery.of(context).size.width * 0.28,
+                          placeholder: const AssetImage(
+                              'assets/images/placeholder-image.png'),
+                          image: NetworkImage(product.productImageUrl),
+                          fit: BoxFit.fitWidth,
                         ),
-                        Text(
-                          product.address,
-                          style: const TextStyle(
-                              color: Styles.colorTextDark, fontSize: 12),
-                        ),
+
                       ],
                     ),
-                  ],
-                ),
+                  ),
+                  const Padding(padding: EdgeInsets.all(8)),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.50,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          product.productName,
+                          style: const TextStyle(color: Styles.colorBlack),
+                        ),
+                        const Padding(padding: EdgeInsets.all(8)),
+                        Text(
+                          product.price ?? 'Contact us for price',
+                          style: const TextStyle(
+                            fontSize: 16,
+                            color: Styles.colorTextBlue,
+                          ),
+                        ),
+                        const Padding(padding: EdgeInsets.all(6)),
+                        Text(
+                          product.companyName,
+                          style: const TextStyle(
+                              fontWeight: FontWeight.w500,
+                              color: Styles.colorTextDark),
+                        ),
+                        const Padding(padding: EdgeInsets.all(4)),
+                        product.openingAndClosingTime != null
+                            ? Row(
+                                children: [
+                                  const Text('Hours: ',
+                                      style: TextStyle(
+                                          fontSize: 10,
+                                          color: Styles.colorTextDark,
+                                          fontWeight: FontWeight.w500)),
+                                  Text(
+                                    product.openingAndClosingTime ?? '',
+                                    style: const TextStyle(
+                                        fontSize: 10,
+                                        color: Styles.colorTextDark),
+                                  ),
+                                ],
+                              )
+                            : Row(
+                                children: [
+                                  const Text(
+                                    'Hours: ',
+                                    style: TextStyle(
+                                        fontSize: 12,
+                                        color: Styles.colorTextDark),
+                                  ),
+                                  Text(
+                                    product.isOpen ? 'Open' : 'Closed',
+                                    style: TextStyle(
+                                        fontSize: 12,
+                                        color: product.isOpen
+                                            ? Styles.colorTextGreen
+                                            : Styles.colorTextRed),
+                                  ),
+                                  Text(
+                                    product.isOpen
+                                        ? ' - Closes ${product.closingTime}'
+                                        : ' - Opens ${product.closingTime}',
+                                    style: const TextStyle(
+                                        fontSize: 12,
+                                        color: Styles.colorTextDark),
+                                  ),
+                                ],
+                              ),
+                        const Padding(padding: EdgeInsets.all(8)),
+
+                      ],
+                    ),
+                  )
+                ],
               ),
-              const Padding(padding: EdgeInsets.all(8)),
-              SizedBox(
-                width: MediaQuery.of(context).size.width * 0.50,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      product.productName,
-                      style: const TextStyle(color: Styles.colorBlack),
-                    ),
-                    const Padding(padding: EdgeInsets.all(8)),
-                    Text(
-                      product.price ?? 'Contact us for price',
-                      style: const TextStyle(
-                        fontSize: 16,
-                        color: Styles.colorTextBlue,
-                      ),
-                    ),
-                    const Padding(padding: EdgeInsets.all(6)),
-                    Text(
-                      product.companyName,
-                      style: const TextStyle(
-                          fontWeight: FontWeight.w500,
-                          color: Styles.colorTextDark),
-                    ),
-                    const Padding(padding: EdgeInsets.all(4)),
-                    product.openingAndClosingTime != null
-                        ? Row(
-                            children: [
-                              const Text('Hours: ',
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.40,
+                      child:Row(
+                        children: [
+                          const Icon(
+                            Gomart.locationIcon,
+                            size: 16,
+                          ),
+                          Text(
+                            product.address,
+                            style: const TextStyle(
+                                color: Styles.colorTextDark, fontSize: 12),
+                          ),
+                        ],
+                      )),
+                  const Padding(padding: EdgeInsets.all(8)),
+                  SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.50,
+                      child:  Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 0, 8, 0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              product.phoneNumber,
+                              style: const TextStyle(
+                                color: Styles.colorTextBlue,
+                                fontSize: 13,
+                              ),
+                            ),
+                            const Padding(padding: EdgeInsets.all(4)),
+                            InkWell(
+                              onTap: () async {
+                                String url = "tel:${product.phoneNumber}";
+                                if (await canLaunchUrlString(url)) {
+                                  await launchUrlString(
+                                      "tel:${product.phoneNumber}");
+                                }
+                              },
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 4, horizontal: 10),
+                                decoration: BoxDecoration(
+                                  color: Styles.colorSecondary,
+                                  borderRadius: BorderRadius.circular(16),
+                                ),
+                                child: const Text(
+                                  'Call',
                                   style: TextStyle(
-                                      fontSize: 10,
-                                      color: Styles.colorTextDark,
-                                      fontWeight: FontWeight.w500)),
-                              Text(
-                                product.openingAndClosingTime ?? '',
-                                style: const TextStyle(
-                                    fontSize: 10, color: Styles.colorTextDark),
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.normal,
+                                      color: Styles.colorBlack),
+                                ),
                               ),
-                            ],
-                          )
-                        : Row(
-                            children: [
-                              const Text(
-                                'Hours: ',
-                                style: TextStyle(
-                                    fontSize: 12, color: Styles.colorTextDark),
-                              ),
-                              Text(
-                                product.isOpen ? 'Open' : 'Closed',
-                                style: TextStyle(
-                                    fontSize: 12,
-                                    color: product.isOpen
-                                        ? Styles.colorTextGreen
-                                        : Styles.colorTextRed),
-                              ),
-                              Text(
-                                product.isOpen
-                                    ? ' - Closes ${product.closingTime}'
-                                    : ' - Opens ${product.closingTime}',
-                                style: const TextStyle(
-                                    fontSize: 12, color: Styles.colorTextDark),
-                              ),
+                            )
+                          ],
+                        ),
+                      ),)
+                ],
+              )
+            ],
+          )),
+    );
+  }
+}
+
+class ProductCardSponsored extends StatelessWidget {
+  final SampleProducts product;
+
+  const ProductCardSponsored({Key? key, required this.product}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const ProductDetailScreen()),
+        );
+      },
+      child: Container(
+          color: Styles.colorWhite,
+          margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 0),
+          padding: const EdgeInsets.all(8),
+          width: MediaQuery.of(context).size.width,
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.40,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        FadeInImage(
+                          width: MediaQuery.of(context).size.width * 0.36,
+                          height: MediaQuery.of(context).size.width * 0.28,
+                          placeholder: const AssetImage(
+                              'assets/images/placeholder-image.png'),
+                          image: NetworkImage(product.productImageUrl),
+                          fit: BoxFit.fitWidth,
+                        ),
+
+                      ],
+                    ),
+                  ),
+                  const Padding(padding: EdgeInsets.all(8)),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.50,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          product.productName,
+                          style: const TextStyle(color: Styles.colorBlack),
+                        ),
+                        const Padding(padding: EdgeInsets.all(2)),
+                        Container(
+                          padding: const EdgeInsets.all(2),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(2),
+                            color: Colors.white,
+                            boxShadow: const [
+                              BoxShadow(color: Styles.colorPrimary, spreadRadius: 1),
                             ],
                           ),
-                    const Padding(padding: EdgeInsets.all(8)),
-                    Padding(
+                          child: const Text('Sponsored',
+                            style:  TextStyle(color: Styles.colorPrimary,
+                            fontSize: 10,
+                            ),
+                          ),
+                        ),
+                        const Padding(padding: EdgeInsets.all(8)),
+                        Text(
+                          product.price ?? 'Contact us for price',
+                          style: const TextStyle(
+                            fontSize: 16,
+                            color: Styles.colorTextBlue,
+                          ),
+                        ),
+                        const Padding(padding: EdgeInsets.all(6)),
+                        Text(
+                          product.companyName,
+                          style: const TextStyle(
+                              fontWeight: FontWeight.w500,
+                              color: Styles.colorTextDark),
+                        ),
+                        const Padding(padding: EdgeInsets.all(4)),
+                        product.openingAndClosingTime != null
+                            ? Row(
+                          children: [
+                            const Text('Hours: ',
+                                style: TextStyle(
+                                    fontSize: 10,
+                                    color: Styles.colorTextDark,
+                                    fontWeight: FontWeight.w500)),
+                            Text(
+                              product.openingAndClosingTime ?? '',
+                              style: const TextStyle(
+                                  fontSize: 10,
+                                  color: Styles.colorTextDark),
+                            ),
+                          ],
+                        )
+                            : Row(
+                          children: [
+                            const Text(
+                              'Hours: ',
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: Styles.colorTextDark),
+                            ),
+                            Text(
+                              product.isOpen ? 'Open' : 'Closed',
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: product.isOpen
+                                      ? Styles.colorTextGreen
+                                      : Styles.colorTextRed),
+                            ),
+                            Text(
+                              product.isOpen
+                                  ? ' - Closes ${product.closingTime}'
+                                  : ' - Opens ${product.closingTime}',
+                              style: const TextStyle(
+                                  fontSize: 12,
+                                  color: Styles.colorTextDark),
+                            ),
+                          ],
+                        ),
+                        const Padding(padding: EdgeInsets.all(2)),
+
+                      ],
+                    ),
+                  )
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.40,
+                      child:Row(
+                        children: [
+                          const Icon(
+                            Gomart.locationIcon,
+                            size: 16,
+                          ),
+                          Text(
+                            product.address,
+                            style: const TextStyle(
+                                color: Styles.colorTextDark, fontSize: 12),
+                          ),
+                        ],
+                      )),
+                  const Padding(padding: EdgeInsets.all(8)),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.50,
+                    child:  Padding(
                       padding: const EdgeInsets.fromLTRB(0, 0, 8, 0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -704,9 +929,8 @@ class ProductCard extends StatelessWidget {
                           )
                         ],
                       ),
-                    ),
-                  ],
-                ),
+                    ),)
+                ],
               )
             ],
           )),

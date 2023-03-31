@@ -71,7 +71,7 @@ class RecentlyViewedTab extends StatelessWidget {
           child: ListView.builder(
               itemCount: 1,
               itemBuilder: (item, count)=>
-                  ProductCard(product: SampleProducts.listOfProducts[count+3],)),
+                  ProductCard(product: SampleProducts.listOfProducts[count+0],)),
         ),
       ) ,
     );
@@ -209,13 +209,13 @@ class BusinessListItem extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: const [
-                          Text(
+                         /* Text(
                             'Hours: Open . Closes 5pm',
                             style: TextStyle(
                               fontSize: 12,
                             ),
-                          ),
-                          const Padding(padding: EdgeInsets.all(2)),
+                          ),*/
+                          Padding(padding: EdgeInsets.all(2)),
                           Text(
                             'Members since August 2022',
                             style: TextStyle(
@@ -237,7 +237,7 @@ class BusinessListItem extends StatelessWidget {
                           const Padding(padding: EdgeInsets.all(2)),
                           Container(
                             padding: const EdgeInsets.symmetric(
-                                vertical: 2, horizontal: 18),
+                                vertical: 6, horizontal: 16),
                             decoration: BoxDecoration(
                               color: Styles.colorButtonGrey,
                               borderRadius: BorderRadius.circular(8),

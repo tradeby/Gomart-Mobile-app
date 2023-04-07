@@ -27,8 +27,8 @@ class StateScanQrScreen extends State<ScanQrScreen> {
         ),
         body: Stack(
           children: [
-            MobileScanner(
-                allowDuplicates: false,
+           /* MobileScanner(
+                //allowDuplicates: false,
                 controller: cameraController,
                 onDetect: (barcode, args) {
                   if (barcode.rawValue == null) {
@@ -129,7 +129,7 @@ class StateScanQrScreen extends State<ScanQrScreen> {
                           );
                         });
                   }
-                }),
+                }),*/
             _getOverlay(),
             Center(
               child: SizedBox(

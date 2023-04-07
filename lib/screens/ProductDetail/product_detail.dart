@@ -31,7 +31,7 @@ class ProductDetailScreenState extends State<ProductDetailScreen> {
   void initState() {
     super.initState();
     // Wait for 2 seconds before executing the code below
-    Future.delayed(const Duration(milliseconds: 800), () {
+    Future.delayed(const Duration(milliseconds: 400), () {
       setState(() {
         loading = false;
       });
@@ -41,7 +41,12 @@ class ProductDetailScreenState extends State<ProductDetailScreen> {
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
-        value: SystemUiOverlayStyle.light,
+        value: const SystemUiOverlayStyle(
+          systemNavigationBarColor: Styles.colorWhite, // navigation bar color
+          statusBarColor:Styles.colorWhite, // status bar color
+          statusBarIconBrightness:Brightness.dark,// status bar icons' color
+          systemNavigationBarIconBrightness:Brightness.dark, //navigation bar icons' color
+        ),
         child: loading
             ? const ProductDetailLoading()
             : ProductDetail(product: widget.product));

@@ -39,11 +39,10 @@ class CustomPersistentHeader extends SliverPersistentHeaderDelegate {
           backgroundColor: Styles.colorWhite,
           elevation: 0,
           leading: Padding(
-            padding: const EdgeInsets.fromLTRB(12, 0, 0, 0),
+            padding: const EdgeInsets.fromLTRB(0, 4, 0, 4),
             child: Image.asset(
               'assets/icon/gomart-logo--with-text-home-screen.png',
-              height: 34,
-            ),
+            )
           ),
           leadingWidth: 200,
           actions: [

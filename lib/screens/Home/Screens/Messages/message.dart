@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:stream_chat_flutter/stream_chat_flutter.dart';
 import '../../../../styles/styles.dart';
 import '../../../Empty-state/empty_state_screen.dart';
@@ -63,30 +64,38 @@ class _MessageFragmentState extends State<MessageFragment> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Styles.colorWhite,
-        elevation: 0.2,
-        centerTitle: true,
-        title: const Text(
-          'Messages',
-          style: TextStyle(color: Styles.colorBlack, fontSize: 16),
-        ),
+    return  AnnotatedRegion<SystemUiOverlayStyle>(
+      value: const SystemUiOverlayStyle(
+        systemNavigationBarColor: Styles.colorWhite, // navigation bar color
+        statusBarColor:Styles.colorWhite, // status bar color
+        statusBarIconBrightness:Brightness.dark,// status bar icons' color
+        systemNavigationBarIconBrightness:Brightness.dark, //navigation bar icons' color
       ),
-      body: StreamChannelListView(
-        controller: _listController,
-        onChannelTap: (channel) {
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) {
-                return StreamChannel(
-                  channel: channel,
-                  child: const ChannelPage(),
-                );
-              },
-            ),
-          );
-        },
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Styles.colorWhite,
+          elevation: 0.2,
+          centerTitle: true,
+          title: const Text(
+            'Messages',
+            style: TextStyle(color: Styles.colorBlack, fontSize: 16),
+          ),
+        ),
+        body: StreamChannelListView(
+          controller: _listController,
+          onChannelTap: (channel) {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) {
+                  return StreamChannel(
+                    channel: channel,
+                    child: const ChannelPage(),
+                  );
+                },
+              ),
+            );
+          },
+        ),
       ),
     );
   }

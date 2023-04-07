@@ -74,7 +74,7 @@ jobs:
               # create export options
               EXPORT_PLIST_PATH=$RUNNER_TEMP/ExportOptions.plist
               echo -n "$EXPORT_PLIST" | base64 --decode --output $EXPORT_PLIST_PATH
-              flutter build ipa --export-options-plist=$EXPORT_PLIST_PATH --build-name=1.2.0+${GITHUB_SHA::6} --build-number=${{ steps.buildnumber.outputs.build_number }}
+              flutter build ipa --export-options-plist=$EXPORT_PLIST_PATH --build-name=1.2.0+${{ steps.buildnumber.outputs.build_number }} --build-number=${{ steps.buildnumber.outputs.build_number }}
       - name: Decode auth. api key file and save it
         env:
           API_KEY_BASE64: ${{ secrets.APPSTORE_API_PRIVATE_KEY }}

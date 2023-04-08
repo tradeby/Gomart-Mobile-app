@@ -26,13 +26,16 @@ Future<void> main() async {
   Bloc.observer = BlocDelegateObserver();
   await configureDependencies();
   final client = StreamChatClient(
-    'b67pax5b2wdq',
+    'mkx4q8pu4yd4',
     logLevel: Level.INFO,
   );
 
   await client.connectUser(
-    User(id: 'tutorial-flutter'),
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoidHV0b3JpYWwtZmx1dHRlciJ9.S-MJpoSwDiqyXpUURgO5wVqJ4vKlIVFLSEyrFYCOE1c',
+    User(id: 'msjahun',extraData: const {
+      "name": "John Doe",
+      "image": "https://i.imgur.com/fR9Jz14.png",
+    }),
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoibXNqYWh1biJ9.0-lWg_JCl-hiJCs2OG8kR8nqgVtxAVjTbVr4Wz8Xsh8',
   );
   runApp(
     Phoenix(

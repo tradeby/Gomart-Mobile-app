@@ -10,7 +10,8 @@ import 'package:gomart/styles/styles.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:photo_view/photo_view.dart';
-
+import 'package:stream_chat_flutter/stream_chat_flutter.dart';
+import '../Home/Screens/Messages/message.dart';
 import 'fade_route.dart';
 import 'image_preview_screen.dart';
 
@@ -43,9 +44,10 @@ class ProductDetailScreenState extends State<ProductDetailScreen> {
     return AnnotatedRegion<SystemUiOverlayStyle>(
         value: const SystemUiOverlayStyle(
           systemNavigationBarColor: Styles.colorWhite, // navigation bar color
-          statusBarColor:Styles.colorWhite, // status bar color
-          statusBarIconBrightness:Brightness.dark,// status bar icons' color
-          systemNavigationBarIconBrightness:Brightness.dark, //navigation bar icons' color
+          statusBarColor: Styles.colorWhite, // status bar color
+          statusBarIconBrightness: Brightness.dark, // status bar icons' color
+          systemNavigationBarIconBrightness:
+              Brightness.dark, //navigation bar icons' color
         ),
         child: loading
             ? const ProductDetailLoading()
@@ -941,22 +943,100 @@ class ProdutButtonNav extends StatelessWidget {
                   color: Styles.colorBlack),
             ),
           ),
-          TextButton(
-            style: TextButton.styleFrom(
-              backgroundColor: Styles.colorSecondary,
-              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 70),
-              shape: const StadiumBorder(),
-            ),
-            onPressed: () {},
-            child: const Text(
-              'Chat',
-              style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.normal,
-                  color: Styles.colorBlack),
+          const ChatButton(),
+        ],
+      ),
+    );
+  }
+}
+
+class ChatButton extends StatefulWidget {
+  const ChatButton({super.key});
+
+  @override
+  State<StatefulWidget> createState() => ChatButtonState();
+}
+
+class ChatButtonState extends State<ChatButton> {
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+      style: TextButton.styleFrom(
+        backgroundColor: Styles.colorSecondary,
+        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 70),
+        shape: const StadiumBorder(),
+      ),
+/*      onPressed: () async {
+        final otherUser = User(
+          id: 'OTHER_USER_ID',
+          extraData: const {
+            'name': 'OTHER_USER_NAME',
+          },
+        );
+        final client = StreamChat.of(context).client;
+        final channel = client.channel(
+          'messaging',
+          extraData: {
+            'members': [otherUser.id, client.state.user!.id],
+          },
+        );
+
+        await channel.watch();
+
+        final result = await Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => StreamChat(
+              client: client,
+              child: ChannelPage(
+                channel: channel,
+              ),
             ),
           ),
-        ],
+        );
+
+        if (result != null) {
+          await channel.sendMessage(Message(
+            text: result,
+            user: client.state.user!,
+          ));
+        }
+      },*/
+      onPressed: () async {
+        final client = StreamChat.of(context).client;
+        final channel = client.channel(
+          'messaging',
+          id: 'reSureAutoServiceId',
+          extraData: {
+            'name': 'Resure Auto Service',
+            'members': [ 'msjahun'],
+          },
+        );
+
+       await channel.watch();
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) {
+              return StreamChannel(
+                channel: channel,
+                child: const ChannelPage(),
+              );
+            },
+          ),
+        );
+      },
+      child: const Text(
+        'Chat',
+        style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.normal,
+            color: Styles.colorBlack),
       ),
     );
   }

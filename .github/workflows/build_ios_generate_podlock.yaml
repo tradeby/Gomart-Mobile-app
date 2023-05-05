@@ -55,7 +55,7 @@ jobs:
       - name: Flutter doctor
         run: flutter doctor
       - name: Clear Pods
-        run: cd ios && rm -rf Pods && rm Podfile.lock
+        run: cd ios && rm -rf Pods
       - name: Install flutter dependencies
         run: flutter pub get
       - name: Pod install

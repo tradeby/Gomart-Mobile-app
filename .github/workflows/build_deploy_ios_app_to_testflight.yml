@@ -56,8 +56,7 @@ jobs:
           architecture: x64
       - name: Flutter doctor
         run: flutter doctor
-      - name: Clear Pods
-        run: cd ios && rm -rf Pods && rm -f Podfile.lock
+
       - name: Flutter pub get
         run: flutter pub get
         

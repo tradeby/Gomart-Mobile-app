@@ -59,7 +59,7 @@ dependencies:
   photo_view: ^0.14.0
   palette_generator: ^0.3.3+2
   share_plus: ^4.4.0
-  google_maps_flutter: ^2.2.1
+  google_maps_flutter: ^2.2.6
   google_mobile_ads: ^2.0.1
   stream_chat_flutter: ^5.3.0
 

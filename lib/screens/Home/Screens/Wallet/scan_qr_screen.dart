@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gomart/styles/custom_home_icons.dart';
 import 'package:gomart/styles/styles.dart';
-import 'package:mobile_scanner/mobile_scanner.dart';
+/*import 'package:mobile_scanner/mobile_scanner.dart';*/
 
 class ScanQrScreen extends StatefulWidget {
   const ScanQrScreen({Key? key}) : super(key: key);
@@ -11,7 +11,7 @@ class ScanQrScreen extends StatefulWidget {
 }
 
 class StateScanQrScreen extends State<ScanQrScreen> {
-  MobileScannerController cameraController = MobileScannerController();
+/*  MobileScannerController cameraController = MobileScannerController();*/
 
   @override
   Widget build(BuildContext context) {

@@ -20,7 +20,7 @@ class BusinessProfileScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Container(
+           /*   Container(
                 padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 2),
                 width: MediaQuery.of(context).size.width,
                 child: Padding(
@@ -73,7 +73,7 @@ class BusinessProfileScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-              ),
+              ),*/
               Stack(
                 children: [
                   Container(
@@ -287,7 +287,7 @@ class BusinessProfileScreen extends StatelessWidget {
                   children: [
                     const Text(
                       'Add Store Gallery Photos',
-                      style: TextStyle(fontSize: 12, color: Styles.colorGray),
+                      style: TextStyle( color: Styles.colorGray),
                     ),
                     const Padding(padding: EdgeInsets.all(4)),
                     Container(
@@ -579,7 +579,7 @@ class AddNewGallaryItemBox extends StatelessWidget {
       width: 46,
       alignment: Alignment.center,
       decoration: BoxDecoration(
-          color: Styles.colorGray.withOpacity(0.4),
+          color: Styles.colorGray.withOpacity(0.1),
           borderRadius: const BorderRadius.all(Radius.circular(4))),
       child: const Icon(Icons.add_circle_sharp, color: Styles.colorPrimary),
     );

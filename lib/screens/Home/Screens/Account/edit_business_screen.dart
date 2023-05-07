@@ -341,7 +341,7 @@ class EditBusinessScreen extends StatelessWidget {
                   children: [
                     const Text(
                       'Add Store Gallery Photos',
-                      style: TextStyle(fontSize: 12, color: Styles.colorGray),
+                      style: TextStyle( color: Styles.colorTextBlack),
                     ),
                     const Padding(padding: EdgeInsets.all(4)),
                     Container(

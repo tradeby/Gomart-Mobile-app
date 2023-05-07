@@ -20,6 +20,7 @@ abstract class Styles {
   static const Color colorTextFieldBackground = Color(0xffF1F1F1);
   static const Color colorTextFieldHint = Color(0xff8A8686);
   static const Color colorGray = Color(0xff8A8686);
+  static const Color colorTextFieldBorder = Color(0xffAEAEAE);
 
   static const Color colorTextGomartText = Color(0xff606060);
   static const Color colorSkeletalBackground= Color(0xfffafafa);

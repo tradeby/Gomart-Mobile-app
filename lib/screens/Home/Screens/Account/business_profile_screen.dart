@@ -20,7 +20,7 @@ class BusinessProfileScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Container(
+           /*   Container(
                 padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 2),
                 width: MediaQuery.of(context).size.width,
                 child: Padding(
@@ -73,7 +73,7 @@ class BusinessProfileScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-              ),
+              ),*/
               Stack(
                 children: [
                   Container(

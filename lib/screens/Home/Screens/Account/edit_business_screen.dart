@@ -16,14 +16,14 @@ class EditBusinessScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Styles.colorBackground,
+      backgroundColor: Styles.colorWhite,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Container(
+              /*  Container(
                 padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 2),
                 width: MediaQuery.of(context).size.width,
                 child: Padding(
@@ -76,12 +76,12 @@ class EditBusinessScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-              ),
+              ),*/
               Stack(
                 children: [
                   Container(
                     decoration: BoxDecoration(
-                      color: Styles.colorGray.withOpacity(0.3),
+                      color: Styles.colorGray.withOpacity(0.08),
                     ),
                     height: 114,
                     child: Center(
@@ -129,64 +129,66 @@ class EditBusinessScreen extends StatelessWidget {
                           height: 30,
                           width: 30,
                           decoration: BoxDecoration(
-                              color: Styles.colorGray.withOpacity(0.2),
+                              color:Styles.colorGray.withOpacity(0.08),
                               borderRadius: BorderRadius.circular(60)),
-                          child: const Icon(Icons.camera_alt_outlined,
-                              size: 34, color: Styles.colorGray),
+                          child: const Center(child: Text('Logo')),
                         )),
                     Container(
                       width: MediaQuery.of(context).size.width * 0.72,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                            'Business',
-                            style: TextStyle(color: Styles.colorGray),
+                        children: const [
+                          Text(
+                            'Business name',
+                            style: TextStyle(color: Styles.colorTextBlack),
                           ),
-                          const Padding(padding: EdgeInsets.all(2)),
-                          Container(
-                            height: 35,
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                color: Styles.colorGray,
-                                width: 1,
-                              ),
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(10)),
-                            ),
-                          )
+                          Padding(padding: EdgeInsets.all(2)),
+                          BTextField()
                         ],
                       ),
                     ),
                   ],
                 ),
               ),
-              Container(
-                padding: EdgeInsets.all(8),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      'Phone number',
-                      style: TextStyle(color: Styles.colorGray),
-                    ),
-                    const Padding(padding: EdgeInsets.all(2)),
-                    Container(
-                      height: 35,
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Styles.colorGray,
-                          width: 1,
+              Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          width: MediaQuery.of(context).size.width * 0.46,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: const [
+                              Text(
+                                'Phone number',
+                                style: TextStyle(color: Styles.colorTextBlack),
+                              ),
+                              Padding(padding: EdgeInsets.all(2)),
+                              BTextField()
+                            ],
+                          ),
                         ),
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(10)),
-                      ),
-                    )
-                  ],
-                ),
-              ),
+                        Container(
+                          width: MediaQuery.of(context).size.width * 0.46,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: const [
+                              Text(
+                                'Email address',
+                                style: TextStyle(color: Styles.colorTextBlack),
+                              ),
+                              Padding(padding: EdgeInsets.all(2)),
+                              BTextField()
+                            ],
+                          ),
+                        )
+                      ])),
+
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
@@ -194,84 +196,56 @@ class EditBusinessScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
-                      width: MediaQuery.of(context).size.width * 0.46,
+                      width: MediaQuery.of(context).size.width * 0.30,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
+                        children: const [
+                          Text(
                             'Opening hours',
-                            style: TextStyle(color: Styles.colorGray),
-                          ),
-                          const Padding(padding: EdgeInsets.all(2)),
-                          Container(
-                            height: 35,
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                color: Styles.colorGray,
-                                width: 1,
-                              ),
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(10)),
+                            style: TextStyle(color: Styles.colorTextBlack
                             ),
-                          )
+                          ),
+                          Padding(padding: EdgeInsets.all(2)),
+                          BTextField()
                         ],
                       ),
                     ),
                     Container(
-                      width: MediaQuery.of(context).size.width * 0.46,
+                      width: MediaQuery.of(context).size.width * 0.30,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
+                        children: const [
+                          Text(
                             'Closing hours',
-                            style: TextStyle(color: Styles.colorGray),
+                            style: TextStyle(color: Styles.colorTextBlack),
                           ),
-                          const Padding(padding: EdgeInsets.all(2)),
-                          Container(
-                            height: 35,
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                color: Styles.colorGray,
-                                width: 1,
-                              ),
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(10)),
-                            ),
-                          )
+                          Padding(padding: EdgeInsets.all(2)),
+                          BTextField()
+                        ],
+                      ),
+                    ),
+                    Container(
+                      width: MediaQuery.of(context).size.width * 0.30,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: const [
+                          Text(
+                            'Days open',
+                            style: TextStyle(color: Styles.colorTextBlack),
+                          ),
+                          Padding(padding: EdgeInsets.all(2)),
+                          BTextField()
                         ],
                       ),
                     ),
                   ],
                 ),
               ),
-              Container(
-                padding: EdgeInsets.all(8),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      'Address',
-                      style: TextStyle(color: Styles.colorGray),
-                    ),
-                    const Padding(padding: EdgeInsets.all(2)),
-                    Container(
-                      height: 35,
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Styles.colorGray,
-                          width: 1,
-                        ),
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(10)),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              Padding(
+
+             /* Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -330,15 +304,30 @@ class EditBusinessScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              const Padding(padding: EdgeInsets.all(6)),
+              const Padding(padding: EdgeInsets.all(6)),*/
               const MapEditBusiness(),
               Container(
                 padding:
                     const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
                 color: Styles.colorWhite,
                 child: const Text(
-                  'Pick your map location',
+                  'Use my current location as my address',
                   style: TextStyle(fontSize: 14, color: Styles.colorPrimary),
+                ),
+              ),
+              Container(
+                padding: EdgeInsets.all(8),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: const [
+                    Text(
+                      'Enter address',
+                      style: TextStyle(color: Styles.colorTextBlack),
+                    ),
+                    Padding(padding: EdgeInsets.all(2)),
+                    BTextField()
+                  ],
                 ),
               ),
               Container(
@@ -380,29 +369,29 @@ class EditBusinessScreen extends StatelessWidget {
               ),
               const Padding(padding: EdgeInsets.all(6)),
               Center(
-                child: ElevatedButton(
-                  style: TextButton.styleFrom(
-                      backgroundColor: Styles.colorSecondary,
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 8, horizontal: 40),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12)),
-                      elevation: 0),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                          const BusinessProfileScreen()),
-                    );
-                  },
-
-
-                  child: const Text(
-                    'Save',
-                    style: TextStyle(
-                        fontWeight: FontWeight.normal,
-                        color: Styles.colorBlack),
+                child: SizedBox(
+                  width: MediaQuery.of(context).size.width*0.94,
+                  child: ElevatedButton(
+                    style: TextButton.styleFrom(
+                        backgroundColor: Styles.colorSecondary,
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 8, horizontal: 80),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12)),
+                        elevation: 0),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const BusinessProfileScreen()),
+                      );
+                    },
+                    child: const Text(
+                      'Save',
+                      style: TextStyle(
+                          fontWeight: FontWeight.normal,
+                          color: Styles.colorBlack),
+                    ),
                   ),
                 ),
               ),
@@ -410,6 +399,27 @@ class EditBusinessScreen extends StatelessWidget {
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class BTextField extends StatelessWidget {
+  const BTextField({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 32,
+      decoration: BoxDecoration(
+        border: Border.all(
+          color: Styles.colorTextFieldBorder,
+          width: 0.8,
+        ),
+        borderRadius:
+            const BorderRadius.all(Radius.circular(5)),
       ),
     );
   }

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../styles/custom_home_icons.dart';
 import '../../../../styles/styles.dart';
 import 'business_profile_screen.dart';
+import 'edit_business_screen.dart';
 
 class ManageProductScreen extends StatelessWidget {
   const ManageProductScreen({Key? key}) : super(key: key);
@@ -75,26 +76,16 @@ class ManageProductScreen extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      'Title',
+                  children: const [
+                    Text(
+                      'Ad title',
                       style: TextStyle(
                         color: Styles.colorGray,
                         fontSize: 15,
                       ),
                     ),
-                    const Padding(padding: EdgeInsets.all(4)),
-                    Container(
-                      height: 40,
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Styles.colorGray,
-                          width: 1,
-                        ),
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(10)),
-                      ),
-                    )
+                    Padding(padding: EdgeInsets.all(4)),
+                    BTextField()
                   ],
                 ),
               ),
@@ -105,7 +96,7 @@ class ManageProductScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text(
-                      'Details',
+                      'Description',
                       style: TextStyle(
                         color: Styles.colorGray,
                         fontSize: 15,
@@ -116,11 +107,11 @@ class ManageProductScreen extends StatelessWidget {
                       height: 80,
                       decoration: BoxDecoration(
                         border: Border.all(
-                          color: Styles.colorGray,
-                          width: 1,
+                          color: Styles.colorTextFieldBorder,
+                          width: 0.8,
                         ),
                         borderRadius:
-                            const BorderRadius.all(Radius.circular(10)),
+                            const BorderRadius.all(Radius.circular(5)),
                       ),
                     )
                   ],
@@ -143,28 +134,39 @@ class ManageProductScreen extends StatelessWidget {
                     Stack(
                       children: [
                         Container(
-                          height: 40,
+                          height: 32,
                           decoration: BoxDecoration(
                             border: Border.all(
-                              color: Styles.colorGray,
-                              width: 1,
+                              color: Styles.colorTextFieldBorder,
+                              width: 0.8,
                             ),
                             borderRadius:
-                                const BorderRadius.all(Radius.circular(10)),
+                                const BorderRadius.all(Radius.circular(5)),
                           ),
                         ),
                         Positioned(
-                          top: 1.5,
-                          left: 1.5,
+                          top: 1.3,
+                          left: 1.2,
                           child: Container(
-                            padding: const EdgeInsets.all(12),
-                            color: Styles.colorButtonPay,
-                            height: 37,
+                            decoration: const BoxDecoration(
+                              color: Styles.colorButtonPay,
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(5),
+                                topRight: Radius.circular(5),
+                                bottomLeft: Radius.circular(5),
+                                bottomRight: Radius.circular(5),
+                              ),
+
+                            ),
+                            height: 30,
                             width: 37,
-                            child: const Text(
-                              'N',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w700, fontSize: 16),
+                            child: const Center(
+                              child: Text(
+                                '₦',
+                                style: TextStyle(
+                                  color: Styles.colorTextBlack,
+                                    fontWeight: FontWeight.w700, fontSize: 16),
+                              ),
                             ),
                           ),
                         )
@@ -192,7 +194,7 @@ class ManageProductScreen extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
                       decoration: BoxDecoration(
                         border: Border.all(
-                          color: Styles.colorGray,
+                          color: Styles.colorTextFieldBorder,
                           width: 0.8,
                         ),
                         borderRadius:
@@ -234,7 +236,7 @@ class ManageProductScreen extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                       decoration: BoxDecoration(
                         border: Border.all(
-                          color: Styles.colorGray,
+                          color: Styles.colorTextFieldBorder,
                           width: 0.8,
                         ),
                         borderRadius:
@@ -353,7 +355,7 @@ class ManageProductScreen extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                       decoration: BoxDecoration(
                         border: Border.all(
-                          color: Styles.colorGray,
+                          color: Styles.colorTextFieldBorder,
                           width: 0.8,
                         ),
                         borderRadius:
@@ -396,9 +398,9 @@ class ManageProductScreen extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Container(
+                              SizedBox(
                                 width: MediaQuery.of(context).size.width* 0.5,
-                                child: Text(
+                                child: const Text(
                                   'Have your Ad on home and suggested on similar post',
                                   style: TextStyle(
                                       color: Styles.colorGray,
@@ -451,23 +453,33 @@ class ManageProductScreen extends StatelessWidget {
                     ),
                     const Padding(padding: EdgeInsets.all(6)),
                     Center(
-                      child: ElevatedButton(
-                        style: TextButton.styleFrom(
-                            backgroundColor: Styles.colorSecondary,
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 8, horizontal: 40),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(12)),
-                            elevation: 0),
-                        onPressed: () {},
-                        child: const Text(
-                          'Save',
-                          style: TextStyle(
-                              fontWeight: FontWeight.normal,
-                              color: Styles.colorBlack),
+                      child: SizedBox(
+                        width: MediaQuery.of(context).size.width*0.94,
+                        child: ElevatedButton(
+                          style: TextButton.styleFrom(
+                              backgroundColor: Styles.colorSecondary,
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 8, horizontal: 80),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12)),
+                              elevation: 0),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const BusinessProfileScreen()),
+                            );
+                          },
+                          child: const Text(
+                            'Save',
+                            style: TextStyle(
+                                fontWeight: FontWeight.normal,
+                                color: Styles.colorBlack),
+                          ),
                         ),
                       ),
                     ),
+                    const Padding(padding: EdgeInsets.all(12))
                   ],
                 ),
               ),

@@ -13,7 +13,7 @@ abstract class Styles {
   static const Color colorTextBlue = Color(0xff007C98);
   static const Color colorTextGreen = Color(0xff06AD17);
   static const Color colorTextRed = Color(0xffEC0E0E);
-  static const Color colorTextBlack = Color(0xff000000);
+  static const Color colorTextBlack = Color(0xcc000000);
   static const Color colorTextLightGrey = Color(0xff9C9C9C);
 
   static const Color colorBarBottomSheet = Color(0xffD8D8D8);

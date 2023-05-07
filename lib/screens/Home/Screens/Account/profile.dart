@@ -23,13 +23,68 @@ class ProfileFragment extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
+              Container(
+                color: Styles.colorWhite,
+                padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 2),
+                width: MediaQuery.of(context).size.width,
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Row(
+                        children: <Widget>[
+                          (FirebaseAuth.instance.currentUser?.photoURL != null)
+                              ? CircleAvatar(
+                                  radius: 30,
+                                  child: ClipOval(
+                                      child: Image.network(
+                                    FirebaseAuth.instance.currentUser?.photoURL
+                                        as String,
+                                    width: 60,
+                                  )),
+                                )
+                              : CharacterAvatar(
+                                  heightWidth: 30,
+                                  ch: FirebaseAuth
+                                          .instance.currentUser?.displayName ??
+                                      'Null',
+                                ),
+                          const Padding(padding: EdgeInsets.all(4)),
+                          Text(
+                            '${FirebaseAuth.instance.currentUser?.displayName}',
+                            style: const TextStyle(
+                                fontSize: 14, fontWeight: FontWeight.w400),
+                          ),
+                          Expanded(
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: const [
+                                Text(
+                                  'Settings',
+                                  style:
+                                      TextStyle(color: Styles.colorTextBlack),
+                                ),
+                                Padding(padding: EdgeInsets.all(4)),
+                                Icon(Icons.settings)
+                              ],
+                            ),
+                          )
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+              ),
          /*   Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 IconButton(onPressed: () {}, icon: const Icon(Icons.settings)),
               ],
             ),*/
-            Container(
+        /*    Container(
               padding: const EdgeInsets.fromLTRB(0, 40, 0, 0),
               width: MediaQuery.of(context).size.width,
               child: Padding(
@@ -98,47 +153,54 @@ class ProfileFragment extends StatelessWidget {
                 ),
               ),
             ),
-            const Padding(padding: EdgeInsets.all(20)),
-            ElevatedButton(
-              style: TextButton.styleFrom(
-                  backgroundColor: Styles.colorSecondary,
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 8, horizontal: 40),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12)),
-                  elevation: 0),
-              onPressed: () {Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const EditBusinessScreen()),
-              );},
-              child: const Text(
-                'Start selling',
-                style: TextStyle(
-                    fontWeight: FontWeight.normal, color: Styles.colorBlack),
+           ,*/ const Padding(padding: EdgeInsets.all(5)),
+            SizedBox(
+              width: MediaQuery.of(context).size.width*0.94,
+              child: ElevatedButton(
+                style: TextButton.styleFrom(
+                    backgroundColor: Styles.colorSecondary,
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 8, horizontal: 40),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12)),
+                    elevation: 0),
+                onPressed: () {Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const EditBusinessScreen()),
+                );},
+                child: const Text(
+                  'Start selling on Gomart',
+                  style: TextStyle(
+                      fontWeight: FontWeight.normal, color: Styles.colorBlack),
+                ),
               ),
             ),
-            const Padding(padding: EdgeInsets.all(20)),
+            const Padding(padding: EdgeInsets.all(5)),
             Container(
               color: Styles.colorWhite,
-              child: Column(children: const [
+              child: Column(children:  [
                 ListTile(
-                    leading: Icon(
+                  onTap: (){},
+                    leading: const Icon(
                       Gomart.accountHelpCenterIcon,
                       color: Styles.colorBlack,
                     ),
-                    title: Text('Help Center')),
+                    title: const Text('Help Center')),
                 ListTile(
-                    leading: Icon(Gomart.accountAppFeedbackIcon,
+                    onTap: (){},
+                    leading: const Icon(Gomart.accountAppFeedbackIcon,
                         color: Styles.colorBlack),
-                    title: Text('App Feedback')),
+                    title: const Text('App Feedback')),
                 ListTile(
-                    leading: Icon(Gomart.accountGomartIcon,
+                    onTap: (){},
+                    leading: const Icon(Gomart.accountGomartIcon,
                         color: Styles.colorBlack),
-                    title: Text('About Gomart')),
+                    title: const Text('About Gomart')),
                 ListTile(
-                    leading: Icon(Gomart.accountLogoutIcon,
+                    onTap: (){},
+                    leading: const Icon(Gomart.accountLogoutIcon,
                         color: Styles.colorBlack),
-                    title: Text('Logout'))
+                    title: const Text('Logout'))
               ]),
             ),
             const Padding(padding: EdgeInsets.all(50)),

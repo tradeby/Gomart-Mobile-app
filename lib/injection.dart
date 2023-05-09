@@ -6,6 +6,6 @@ import 'injection.config.dart';
 
 final locator = GetIt.instance;
 
-@InjectableInit()
-Future<void> configureDependencies() async=> await $initGetIt(locator);
+@InjectableInit(asExtension: false)
+Future<void> configureDependencies() async=> await init(locator);
 

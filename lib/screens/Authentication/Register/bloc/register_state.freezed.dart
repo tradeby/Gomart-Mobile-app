@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'register_state.dart';
 
@@ -37,7 +37,8 @@ mixin _$RegisterState {
 abstract class $RegisterStateCopyWith<$Res> {
   factory $RegisterStateCopyWith(
           RegisterState value, $Res Function(RegisterState) then) =
-      _$RegisterStateCopyWithImpl<$Res>;
+      _$RegisterStateCopyWithImpl<$Res, RegisterState>;
+  @useResult
   $Res call(
       {String? firstName,
       String? lastName,
@@ -52,14 +53,16 @@ abstract class $RegisterStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$RegisterStateCopyWithImpl<$Res>
+class _$RegisterStateCopyWithImpl<$Res, $Val extends RegisterState>
     implements $RegisterStateCopyWith<$Res> {
   _$RegisterStateCopyWithImpl(this._value, this._then);
 
-  final RegisterState _value;
   // ignore: unused_field
-  final $Res Function(RegisterState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? firstName = freezed,
@@ -74,47 +77,47 @@ class _$RegisterStateCopyWithImpl<$Res>
     Object? registrationSuccessful = freezed,
   }) {
     return _then(_value.copyWith(
-      firstName: firstName == freezed
+      firstName: freezed == firstName
           ? _value.firstName
           : firstName // ignore: cast_nullable_to_non_nullable
               as String?,
-      lastName: lastName == freezed
+      lastName: freezed == lastName
           ? _value.lastName
           : lastName // ignore: cast_nullable_to_non_nullable
               as String?,
-      dateOfBirth: dateOfBirth == freezed
+      dateOfBirth: freezed == dateOfBirth
           ? _value.dateOfBirth
           : dateOfBirth // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      phoneNumber: phoneNumber == freezed
+      phoneNumber: freezed == phoneNumber
           ? _value.phoneNumber
           : phoneNumber // ignore: cast_nullable_to_non_nullable
               as String?,
-      photoUrl: photoUrl == freezed
+      photoUrl: freezed == photoUrl
           ? _value.photoUrl
           : photoUrl // ignore: cast_nullable_to_non_nullable
               as String?,
-      status: status == freezed
+      status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as String?,
-      verificationId: verificationId == freezed
+      verificationId: freezed == verificationId
           ? _value.verificationId
           : verificationId // ignore: cast_nullable_to_non_nullable
               as String?,
-      otp: otp == freezed
+      otp: freezed == otp
           ? _value.otp
           : otp // ignore: cast_nullable_to_non_nullable
               as String?,
-      selectedCountry: selectedCountry == freezed
+      selectedCountry: freezed == selectedCountry
           ? _value.selectedCountry
           : selectedCountry // ignore: cast_nullable_to_non_nullable
               as FlagCountryCodeModel?,
-      registrationSuccessful: registrationSuccessful == freezed
+      registrationSuccessful: freezed == registrationSuccessful
           ? _value.registrationSuccessful
           : registrationSuccessful // ignore: cast_nullable_to_non_nullable
               as bool?,
-    ));
+    ) as $Val);
   }
 }
 
@@ -125,6 +128,7 @@ abstract class _$$_RegisterStateCopyWith<$Res>
           _$_RegisterState value, $Res Function(_$_RegisterState) then) =
       __$$_RegisterStateCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String? firstName,
       String? lastName,
@@ -140,15 +144,13 @@ abstract class _$$_RegisterStateCopyWith<$Res>
 
 /// @nodoc
 class __$$_RegisterStateCopyWithImpl<$Res>
-    extends _$RegisterStateCopyWithImpl<$Res>
+    extends _$RegisterStateCopyWithImpl<$Res, _$_RegisterState>
     implements _$$_RegisterStateCopyWith<$Res> {
   __$$_RegisterStateCopyWithImpl(
       _$_RegisterState _value, $Res Function(_$_RegisterState) _then)
-      : super(_value, (v) => _then(v as _$_RegisterState));
+      : super(_value, _then);
 
-  @override
-  _$_RegisterState get _value => super._value as _$_RegisterState;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? firstName = freezed,
@@ -163,43 +165,43 @@ class __$$_RegisterStateCopyWithImpl<$Res>
     Object? registrationSuccessful = freezed,
   }) {
     return _then(_$_RegisterState(
-      firstName: firstName == freezed
+      firstName: freezed == firstName
           ? _value.firstName
           : firstName // ignore: cast_nullable_to_non_nullable
               as String?,
-      lastName: lastName == freezed
+      lastName: freezed == lastName
           ? _value.lastName
           : lastName // ignore: cast_nullable_to_non_nullable
               as String?,
-      dateOfBirth: dateOfBirth == freezed
+      dateOfBirth: freezed == dateOfBirth
           ? _value.dateOfBirth
           : dateOfBirth // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      phoneNumber: phoneNumber == freezed
+      phoneNumber: freezed == phoneNumber
           ? _value.phoneNumber
           : phoneNumber // ignore: cast_nullable_to_non_nullable
               as String?,
-      photoUrl: photoUrl == freezed
+      photoUrl: freezed == photoUrl
           ? _value.photoUrl
           : photoUrl // ignore: cast_nullable_to_non_nullable
               as String?,
-      status: status == freezed
+      status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as String?,
-      verificationId: verificationId == freezed
+      verificationId: freezed == verificationId
           ? _value.verificationId
           : verificationId // ignore: cast_nullable_to_non_nullable
               as String?,
-      otp: otp == freezed
+      otp: freezed == otp
           ? _value.otp
           : otp // ignore: cast_nullable_to_non_nullable
               as String?,
-      selectedCountry: selectedCountry == freezed
+      selectedCountry: freezed == selectedCountry
           ? _value.selectedCountry
           : selectedCountry // ignore: cast_nullable_to_non_nullable
               as FlagCountryCodeModel?,
-      registrationSuccessful: registrationSuccessful == freezed
+      registrationSuccessful: freezed == registrationSuccessful
           ? _value.registrationSuccessful
           : registrationSuccessful // ignore: cast_nullable_to_non_nullable
               as bool?,
@@ -271,39 +273,43 @@ class _$_RegisterState with DiagnosticableTreeMixin implements _RegisterState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_RegisterState &&
-            const DeepCollectionEquality().equals(other.firstName, firstName) &&
-            const DeepCollectionEquality().equals(other.lastName, lastName) &&
-            const DeepCollectionEquality()
-                .equals(other.dateOfBirth, dateOfBirth) &&
-            const DeepCollectionEquality()
-                .equals(other.phoneNumber, phoneNumber) &&
-            const DeepCollectionEquality().equals(other.photoUrl, photoUrl) &&
-            const DeepCollectionEquality().equals(other.status, status) &&
-            const DeepCollectionEquality()
-                .equals(other.verificationId, verificationId) &&
-            const DeepCollectionEquality().equals(other.otp, otp) &&
-            const DeepCollectionEquality()
-                .equals(other.selectedCountry, selectedCountry) &&
-            const DeepCollectionEquality()
-                .equals(other.registrationSuccessful, registrationSuccessful));
+            (identical(other.firstName, firstName) ||
+                other.firstName == firstName) &&
+            (identical(other.lastName, lastName) ||
+                other.lastName == lastName) &&
+            (identical(other.dateOfBirth, dateOfBirth) ||
+                other.dateOfBirth == dateOfBirth) &&
+            (identical(other.phoneNumber, phoneNumber) ||
+                other.phoneNumber == phoneNumber) &&
+            (identical(other.photoUrl, photoUrl) ||
+                other.photoUrl == photoUrl) &&
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.verificationId, verificationId) ||
+                other.verificationId == verificationId) &&
+            (identical(other.otp, otp) || other.otp == otp) &&
+            (identical(other.selectedCountry, selectedCountry) ||
+                other.selectedCountry == selectedCountry) &&
+            (identical(other.registrationSuccessful, registrationSuccessful) ||
+                other.registrationSuccessful == registrationSuccessful));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(firstName),
-      const DeepCollectionEquality().hash(lastName),
-      const DeepCollectionEquality().hash(dateOfBirth),
-      const DeepCollectionEquality().hash(phoneNumber),
-      const DeepCollectionEquality().hash(photoUrl),
-      const DeepCollectionEquality().hash(status),
-      const DeepCollectionEquality().hash(verificationId),
-      const DeepCollectionEquality().hash(otp),
-      const DeepCollectionEquality().hash(selectedCountry),
-      const DeepCollectionEquality().hash(registrationSuccessful));
+      firstName,
+      lastName,
+      dateOfBirth,
+      phoneNumber,
+      photoUrl,
+      status,
+      verificationId,
+      otp,
+      selectedCountry,
+      registrationSuccessful);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_RegisterStateCopyWith<_$_RegisterState> get copyWith =>
       __$$_RegisterStateCopyWithImpl<_$_RegisterState>(this, _$identity);
 }

@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'home_state.dart';
 
@@ -32,7 +32,8 @@ mixin _$HomeState {
 /// @nodoc
 abstract class $HomeStateCopyWith<$Res> {
   factory $HomeStateCopyWith(HomeState value, $Res Function(HomeState) then) =
-      _$HomeStateCopyWithImpl<$Res>;
+      _$HomeStateCopyWithImpl<$Res, HomeState>;
+  @useResult
   $Res call(
       {bool loadInProgress,
       bool loadFailure,
@@ -43,48 +44,51 @@ abstract class $HomeStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$HomeStateCopyWithImpl<$Res> implements $HomeStateCopyWith<$Res> {
+class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
+    implements $HomeStateCopyWith<$Res> {
   _$HomeStateCopyWithImpl(this._value, this._then);
 
-  final HomeState _value;
   // ignore: unused_field
-  final $Res Function(HomeState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? loadInProgress = freezed,
-    Object? loadFailure = freezed,
-    Object? loadSuccess = freezed,
+    Object? loadInProgress = null,
+    Object? loadFailure = null,
+    Object? loadSuccess = null,
     Object? error = freezed,
     Object? homeProducts = freezed,
     Object? productsOutput = freezed,
   }) {
     return _then(_value.copyWith(
-      loadInProgress: loadInProgress == freezed
+      loadInProgress: null == loadInProgress
           ? _value.loadInProgress
           : loadInProgress // ignore: cast_nullable_to_non_nullable
               as bool,
-      loadFailure: loadFailure == freezed
+      loadFailure: null == loadFailure
           ? _value.loadFailure
           : loadFailure // ignore: cast_nullable_to_non_nullable
               as bool,
-      loadSuccess: loadSuccess == freezed
+      loadSuccess: null == loadSuccess
           ? _value.loadSuccess
           : loadSuccess // ignore: cast_nullable_to_non_nullable
               as bool,
-      error: error == freezed
+      error: freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as String?,
-      homeProducts: homeProducts == freezed
+      homeProducts: freezed == homeProducts
           ? _value.homeProducts
           : homeProducts // ignore: cast_nullable_to_non_nullable
               as List<ProductModel>?,
-      productsOutput: productsOutput == freezed
+      productsOutput: freezed == productsOutput
           ? _value.productsOutput
           : productsOutput // ignore: cast_nullable_to_non_nullable
               as ProductRepositoryOutput?,
-    ));
+    ) as $Val);
   }
 }
 
@@ -94,6 +98,7 @@ abstract class _$$_HomeStateCopyWith<$Res> implements $HomeStateCopyWith<$Res> {
           _$_HomeState value, $Res Function(_$_HomeState) then) =
       __$$_HomeStateCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {bool loadInProgress,
       bool loadFailure,
@@ -104,46 +109,45 @@ abstract class _$$_HomeStateCopyWith<$Res> implements $HomeStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_HomeStateCopyWithImpl<$Res> extends _$HomeStateCopyWithImpl<$Res>
+class __$$_HomeStateCopyWithImpl<$Res>
+    extends _$HomeStateCopyWithImpl<$Res, _$_HomeState>
     implements _$$_HomeStateCopyWith<$Res> {
   __$$_HomeStateCopyWithImpl(
       _$_HomeState _value, $Res Function(_$_HomeState) _then)
-      : super(_value, (v) => _then(v as _$_HomeState));
+      : super(_value, _then);
 
-  @override
-  _$_HomeState get _value => super._value as _$_HomeState;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? loadInProgress = freezed,
-    Object? loadFailure = freezed,
-    Object? loadSuccess = freezed,
+    Object? loadInProgress = null,
+    Object? loadFailure = null,
+    Object? loadSuccess = null,
     Object? error = freezed,
     Object? homeProducts = freezed,
     Object? productsOutput = freezed,
   }) {
     return _then(_$_HomeState(
-      loadInProgress: loadInProgress == freezed
+      loadInProgress: null == loadInProgress
           ? _value.loadInProgress
           : loadInProgress // ignore: cast_nullable_to_non_nullable
               as bool,
-      loadFailure: loadFailure == freezed
+      loadFailure: null == loadFailure
           ? _value.loadFailure
           : loadFailure // ignore: cast_nullable_to_non_nullable
               as bool,
-      loadSuccess: loadSuccess == freezed
+      loadSuccess: null == loadSuccess
           ? _value.loadSuccess
           : loadSuccess // ignore: cast_nullable_to_non_nullable
               as bool,
-      error: error == freezed
+      error: freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as String?,
-      homeProducts: homeProducts == freezed
+      homeProducts: freezed == homeProducts
           ? _value._homeProducts
           : homeProducts // ignore: cast_nullable_to_non_nullable
               as List<ProductModel>?,
-      productsOutput: productsOutput == freezed
+      productsOutput: freezed == productsOutput
           ? _value.productsOutput
           : productsOutput // ignore: cast_nullable_to_non_nullable
               as ProductRepositoryOutput?,
@@ -176,6 +180,7 @@ class _$_HomeState implements _HomeState {
   List<ProductModel>? get homeProducts {
     final value = _homeProducts;
     if (value == null) return null;
+    if (_homeProducts is EqualUnmodifiableListView) return _homeProducts;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -193,31 +198,32 @@ class _$_HomeState implements _HomeState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_HomeState &&
-            const DeepCollectionEquality()
-                .equals(other.loadInProgress, loadInProgress) &&
-            const DeepCollectionEquality()
-                .equals(other.loadFailure, loadFailure) &&
-            const DeepCollectionEquality()
-                .equals(other.loadSuccess, loadSuccess) &&
-            const DeepCollectionEquality().equals(other.error, error) &&
+            (identical(other.loadInProgress, loadInProgress) ||
+                other.loadInProgress == loadInProgress) &&
+            (identical(other.loadFailure, loadFailure) ||
+                other.loadFailure == loadFailure) &&
+            (identical(other.loadSuccess, loadSuccess) ||
+                other.loadSuccess == loadSuccess) &&
+            (identical(other.error, error) || other.error == error) &&
             const DeepCollectionEquality()
                 .equals(other._homeProducts, _homeProducts) &&
-            const DeepCollectionEquality()
-                .equals(other.productsOutput, productsOutput));
+            (identical(other.productsOutput, productsOutput) ||
+                other.productsOutput == productsOutput));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(loadInProgress),
-      const DeepCollectionEquality().hash(loadFailure),
-      const DeepCollectionEquality().hash(loadSuccess),
-      const DeepCollectionEquality().hash(error),
+      loadInProgress,
+      loadFailure,
+      loadSuccess,
+      error,
       const DeepCollectionEquality().hash(_homeProducts),
-      const DeepCollectionEquality().hash(productsOutput));
+      productsOutput);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_HomeStateCopyWith<_$_HomeState> get copyWith =>
       __$$_HomeStateCopyWithImpl<_$_HomeState>(this, _$identity);
 }

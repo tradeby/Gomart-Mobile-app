@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'search_state.dart';
 
@@ -31,7 +31,8 @@ mixin _$SearchState {
 abstract class $SearchStateCopyWith<$Res> {
   factory $SearchStateCopyWith(
           SearchState value, $Res Function(SearchState) then) =
-      _$SearchStateCopyWithImpl<$Res>;
+      _$SearchStateCopyWithImpl<$Res, SearchState>;
+  @useResult
   $Res call(
       {bool searchInProgress,
       bool searchFailure,
@@ -41,43 +42,46 @@ abstract class $SearchStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$SearchStateCopyWithImpl<$Res> implements $SearchStateCopyWith<$Res> {
+class _$SearchStateCopyWithImpl<$Res, $Val extends SearchState>
+    implements $SearchStateCopyWith<$Res> {
   _$SearchStateCopyWithImpl(this._value, this._then);
 
-  final SearchState _value;
   // ignore: unused_field
-  final $Res Function(SearchState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? searchInProgress = freezed,
-    Object? searchFailure = freezed,
-    Object? searchSuccess = freezed,
+    Object? searchInProgress = null,
+    Object? searchFailure = null,
+    Object? searchSuccess = null,
     Object? searchTerm = freezed,
-    Object? searchResults = freezed,
+    Object? searchResults = null,
   }) {
     return _then(_value.copyWith(
-      searchInProgress: searchInProgress == freezed
+      searchInProgress: null == searchInProgress
           ? _value.searchInProgress
           : searchInProgress // ignore: cast_nullable_to_non_nullable
               as bool,
-      searchFailure: searchFailure == freezed
+      searchFailure: null == searchFailure
           ? _value.searchFailure
           : searchFailure // ignore: cast_nullable_to_non_nullable
               as bool,
-      searchSuccess: searchSuccess == freezed
+      searchSuccess: null == searchSuccess
           ? _value.searchSuccess
           : searchSuccess // ignore: cast_nullable_to_non_nullable
               as bool,
-      searchTerm: searchTerm == freezed
+      searchTerm: freezed == searchTerm
           ? _value.searchTerm
           : searchTerm // ignore: cast_nullable_to_non_nullable
               as String?,
-      searchResults: searchResults == freezed
+      searchResults: null == searchResults
           ? _value.searchResults
           : searchResults // ignore: cast_nullable_to_non_nullable
               as List<ProductModel>,
-    ));
+    ) as $Val);
   }
 }
 
@@ -88,6 +92,7 @@ abstract class _$$_SearchStateCopyWith<$Res>
           _$_SearchState value, $Res Function(_$_SearchState) then) =
       __$$_SearchStateCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {bool searchInProgress,
       bool searchFailure,
@@ -97,41 +102,40 @@ abstract class _$$_SearchStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_SearchStateCopyWithImpl<$Res> extends _$SearchStateCopyWithImpl<$Res>
+class __$$_SearchStateCopyWithImpl<$Res>
+    extends _$SearchStateCopyWithImpl<$Res, _$_SearchState>
     implements _$$_SearchStateCopyWith<$Res> {
   __$$_SearchStateCopyWithImpl(
       _$_SearchState _value, $Res Function(_$_SearchState) _then)
-      : super(_value, (v) => _then(v as _$_SearchState));
+      : super(_value, _then);
 
-  @override
-  _$_SearchState get _value => super._value as _$_SearchState;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? searchInProgress = freezed,
-    Object? searchFailure = freezed,
-    Object? searchSuccess = freezed,
+    Object? searchInProgress = null,
+    Object? searchFailure = null,
+    Object? searchSuccess = null,
     Object? searchTerm = freezed,
-    Object? searchResults = freezed,
+    Object? searchResults = null,
   }) {
     return _then(_$_SearchState(
-      searchInProgress: searchInProgress == freezed
+      searchInProgress: null == searchInProgress
           ? _value.searchInProgress
           : searchInProgress // ignore: cast_nullable_to_non_nullable
               as bool,
-      searchFailure: searchFailure == freezed
+      searchFailure: null == searchFailure
           ? _value.searchFailure
           : searchFailure // ignore: cast_nullable_to_non_nullable
               as bool,
-      searchSuccess: searchSuccess == freezed
+      searchSuccess: null == searchSuccess
           ? _value.searchSuccess
           : searchSuccess // ignore: cast_nullable_to_non_nullable
               as bool,
-      searchTerm: searchTerm == freezed
+      searchTerm: freezed == searchTerm
           ? _value.searchTerm
           : searchTerm // ignore: cast_nullable_to_non_nullable
               as String?,
-      searchResults: searchResults == freezed
+      searchResults: null == searchResults
           ? _value._searchResults
           : searchResults // ignore: cast_nullable_to_non_nullable
               as List<ProductModel>,
@@ -161,6 +165,7 @@ class _$_SearchState implements _SearchState {
   final List<ProductModel> _searchResults;
   @override
   List<ProductModel> get searchResults {
+    if (_searchResults is EqualUnmodifiableListView) return _searchResults;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_searchResults);
   }
@@ -175,14 +180,14 @@ class _$_SearchState implements _SearchState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_SearchState &&
-            const DeepCollectionEquality()
-                .equals(other.searchInProgress, searchInProgress) &&
-            const DeepCollectionEquality()
-                .equals(other.searchFailure, searchFailure) &&
-            const DeepCollectionEquality()
-                .equals(other.searchSuccess, searchSuccess) &&
-            const DeepCollectionEquality()
-                .equals(other.searchTerm, searchTerm) &&
+            (identical(other.searchInProgress, searchInProgress) ||
+                other.searchInProgress == searchInProgress) &&
+            (identical(other.searchFailure, searchFailure) ||
+                other.searchFailure == searchFailure) &&
+            (identical(other.searchSuccess, searchSuccess) ||
+                other.searchSuccess == searchSuccess) &&
+            (identical(other.searchTerm, searchTerm) ||
+                other.searchTerm == searchTerm) &&
             const DeepCollectionEquality()
                 .equals(other._searchResults, _searchResults));
   }
@@ -190,14 +195,15 @@ class _$_SearchState implements _SearchState {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(searchInProgress),
-      const DeepCollectionEquality().hash(searchFailure),
-      const DeepCollectionEquality().hash(searchSuccess),
-      const DeepCollectionEquality().hash(searchTerm),
+      searchInProgress,
+      searchFailure,
+      searchSuccess,
+      searchTerm,
       const DeepCollectionEquality().hash(_searchResults));
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_SearchStateCopyWith<_$_SearchState> get copyWith =>
       __$$_SearchStateCopyWithImpl<_$_SearchState>(this, _$identity);
 }

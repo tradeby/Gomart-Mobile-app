@@ -10,7 +10,7 @@ import 'package:gomart/styles/custom_home_icons.dart';
 
 import '../../../../styles/styles.dart';
 import '../../../Authentication/Register/register_screen_upload_photo.dart';
-import 'edit_business_screen.dart';
+import 'EditBusiness/edit_business_screen.dart';
 
 class ProfileFragment extends StatelessWidget {
   const ProfileFragment({Key? key}) : super(key: key);

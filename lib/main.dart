@@ -7,6 +7,7 @@ import 'package:gomart/data/bloc/authentication/authentication_bloc.dart';
 import 'package:gomart/screens/Authentication/Login/bloc/login_cubit.dart';
 import 'package:gomart/screens/Authentication/Register/bloc/registration_cubit.dart';
 import 'package:gomart/screens/Authentication/authentication_screen.dart';
+import 'package:gomart/screens/Home/Screens/Account/EditBusiness/bloc/business_cubit.dart';
 import 'package:gomart/screens/Home/Screens/Home/bloc/home_cubit.dart';
 import 'package:gomart/screens/Search/bloc/search_cubit.dart';
 import 'package:gomart/screens/debug/bloc/debug_cubit.dart';
@@ -59,6 +60,9 @@ Future<void> main() async {
           ),
           BlocProvider<SearchCubit>(
             create: (context) => locator<SearchCubit>(),
+          ) ,
+          BlocProvider<BusinessCubit>(
+            create: (context) => locator<BusinessCubit>(),
           )
         ],
         child: MyApp( client: client,),

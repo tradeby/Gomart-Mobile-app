@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'login_state.dart';
 
@@ -33,7 +33,8 @@ mixin _$LoginState {
 abstract class $LoginStateCopyWith<$Res> {
   factory $LoginStateCopyWith(
           LoginState value, $Res Function(LoginState) then) =
-      _$LoginStateCopyWithImpl<$Res>;
+      _$LoginStateCopyWithImpl<$Res, LoginState>;
+  @useResult
   $Res call(
       {String? phoneNumber,
       String? status,
@@ -44,13 +45,16 @@ abstract class $LoginStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$LoginStateCopyWithImpl<$Res> implements $LoginStateCopyWith<$Res> {
+class _$LoginStateCopyWithImpl<$Res, $Val extends LoginState>
+    implements $LoginStateCopyWith<$Res> {
   _$LoginStateCopyWithImpl(this._value, this._then);
 
-  final LoginState _value;
   // ignore: unused_field
-  final $Res Function(LoginState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? phoneNumber = freezed,
@@ -61,31 +65,31 @@ class _$LoginStateCopyWithImpl<$Res> implements $LoginStateCopyWith<$Res> {
     Object? loginSuccessful = freezed,
   }) {
     return _then(_value.copyWith(
-      phoneNumber: phoneNumber == freezed
+      phoneNumber: freezed == phoneNumber
           ? _value.phoneNumber
           : phoneNumber // ignore: cast_nullable_to_non_nullable
               as String?,
-      status: status == freezed
+      status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as String?,
-      verificationId: verificationId == freezed
+      verificationId: freezed == verificationId
           ? _value.verificationId
           : verificationId // ignore: cast_nullable_to_non_nullable
               as String?,
-      otp: otp == freezed
+      otp: freezed == otp
           ? _value.otp
           : otp // ignore: cast_nullable_to_non_nullable
               as String?,
-      selectedCountry: selectedCountry == freezed
+      selectedCountry: freezed == selectedCountry
           ? _value.selectedCountry
           : selectedCountry // ignore: cast_nullable_to_non_nullable
               as FlagCountryCodeModel?,
-      loginSuccessful: loginSuccessful == freezed
+      loginSuccessful: freezed == loginSuccessful
           ? _value.loginSuccessful
           : loginSuccessful // ignore: cast_nullable_to_non_nullable
               as bool?,
-    ));
+    ) as $Val);
   }
 }
 
@@ -96,6 +100,7 @@ abstract class _$$_LoginStateCopyWith<$Res>
           _$_LoginState value, $Res Function(_$_LoginState) then) =
       __$$_LoginStateCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String? phoneNumber,
       String? status,
@@ -106,15 +111,14 @@ abstract class _$$_LoginStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_LoginStateCopyWithImpl<$Res> extends _$LoginStateCopyWithImpl<$Res>
+class __$$_LoginStateCopyWithImpl<$Res>
+    extends _$LoginStateCopyWithImpl<$Res, _$_LoginState>
     implements _$$_LoginStateCopyWith<$Res> {
   __$$_LoginStateCopyWithImpl(
       _$_LoginState _value, $Res Function(_$_LoginState) _then)
-      : super(_value, (v) => _then(v as _$_LoginState));
+      : super(_value, _then);
 
-  @override
-  _$_LoginState get _value => super._value as _$_LoginState;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? phoneNumber = freezed,
@@ -125,27 +129,27 @@ class __$$_LoginStateCopyWithImpl<$Res> extends _$LoginStateCopyWithImpl<$Res>
     Object? loginSuccessful = freezed,
   }) {
     return _then(_$_LoginState(
-      phoneNumber: phoneNumber == freezed
+      phoneNumber: freezed == phoneNumber
           ? _value.phoneNumber
           : phoneNumber // ignore: cast_nullable_to_non_nullable
               as String?,
-      status: status == freezed
+      status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as String?,
-      verificationId: verificationId == freezed
+      verificationId: freezed == verificationId
           ? _value.verificationId
           : verificationId // ignore: cast_nullable_to_non_nullable
               as String?,
-      otp: otp == freezed
+      otp: freezed == otp
           ? _value.otp
           : otp // ignore: cast_nullable_to_non_nullable
               as String?,
-      selectedCountry: selectedCountry == freezed
+      selectedCountry: freezed == selectedCountry
           ? _value.selectedCountry
           : selectedCountry // ignore: cast_nullable_to_non_nullable
               as FlagCountryCodeModel?,
-      loginSuccessful: loginSuccessful == freezed
+      loginSuccessful: freezed == loginSuccessful
           ? _value.loginSuccessful
           : loginSuccessful // ignore: cast_nullable_to_non_nullable
               as bool?,
@@ -200,30 +204,25 @@ class _$_LoginState with DiagnosticableTreeMixin implements _LoginState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_LoginState &&
-            const DeepCollectionEquality()
-                .equals(other.phoneNumber, phoneNumber) &&
-            const DeepCollectionEquality().equals(other.status, status) &&
-            const DeepCollectionEquality()
-                .equals(other.verificationId, verificationId) &&
-            const DeepCollectionEquality().equals(other.otp, otp) &&
-            const DeepCollectionEquality()
-                .equals(other.selectedCountry, selectedCountry) &&
-            const DeepCollectionEquality()
-                .equals(other.loginSuccessful, loginSuccessful));
+            (identical(other.phoneNumber, phoneNumber) ||
+                other.phoneNumber == phoneNumber) &&
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.verificationId, verificationId) ||
+                other.verificationId == verificationId) &&
+            (identical(other.otp, otp) || other.otp == otp) &&
+            (identical(other.selectedCountry, selectedCountry) ||
+                other.selectedCountry == selectedCountry) &&
+            (identical(other.loginSuccessful, loginSuccessful) ||
+                other.loginSuccessful == loginSuccessful));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(phoneNumber),
-      const DeepCollectionEquality().hash(status),
-      const DeepCollectionEquality().hash(verificationId),
-      const DeepCollectionEquality().hash(otp),
-      const DeepCollectionEquality().hash(selectedCountry),
-      const DeepCollectionEquality().hash(loginSuccessful));
+  int get hashCode => Object.hash(runtimeType, phoneNumber, status,
+      verificationId, otp, selectedCountry, loginSuccessful);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_LoginStateCopyWith<_$_LoginState> get copyWith =>
       __$$_LoginStateCopyWithImpl<_$_LoginState>(this, _$identity);
 }

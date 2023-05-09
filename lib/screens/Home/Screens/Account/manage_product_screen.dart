@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../styles/custom_home_icons.dart';
 import '../../../../styles/styles.dart';
 import 'business_profile_screen.dart';
-import 'edit_business_screen.dart';
+import 'EditBusiness/edit_business_screen.dart';
 
 class ManageProductScreen extends StatelessWidget {
   const ManageProductScreen({Key? key}) : super(key: key);

@@ -26,14 +26,14 @@ abstract class BusinessState with _$BusinessState {
 class BusinessCubit extends Cubit<BusinessState> {
   BusinessCubit() : super(BusinessState.initial());
 
-  void setBannerImage(croppedImagePath) =>
-      emit(state.copyWith(bannerUrl: croppedImagePath,gallaryPhotos: state.gallaryPhotos + [croppedImagePath ]));
+  void setBannerImage(croppedImagePath) => emit(state.copyWith(
+      bannerUrl: croppedImagePath, gallaryPhotos: state.gallaryPhotos));
 
-  void setLogoImage(croppedImagePath) =>
-      emit(state.copyWith(logoUrl: croppedImagePath, gallaryPhotos: state.gallaryPhotos + [croppedImagePath ]));
+  void setLogoImage(croppedImagePath) => emit(state.copyWith(
+      logoUrl: croppedImagePath, gallaryPhotos: state.gallaryPhotos));
 
-  void setGalleryImages(List<String> images) =>
-      emit(state.copyWith(gallaryPhotos: state.gallaryPhotos + images));
+  void setGalleryImage(String image) =>
+      emit(state.copyWith(gallaryPhotos: state.gallaryPhotos + [image]));
 
   void setGallaryIndex(int index) => emit(state.copyWith(gallaryIndex: index));
 }

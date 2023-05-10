@@ -1,10 +1,17 @@
+import 'dart:io';
+
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gomart/screens/Home/Screens/Account/EditBusiness/edit_business_screen.dart';
 import 'package:gomart/styles/styles.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../../../styles/custom_home_icons.dart';
 import '../../../Authentication/Register/register_screen_upload_photo.dart';
 import '../../../ProductDetail/product_detail.dart';
+import 'EditBusiness/bloc/business_cubit.dart';
 import 'manage_product_screen.dart';
 
 class BusinessProfileScreen extends StatelessWidget {
@@ -14,13 +21,24 @@ class BusinessProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Styles.colorBackground,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => const ManageProductScreen()),
+          );
+        },
+        backgroundColor: Styles.colorPrimary,
+        child: const Icon(Icons.add),
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-           /*   Container(
+              /*   Container(
                 padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 2),
                 width: MediaQuery.of(context).size.width,
                 child: Padding(
@@ -90,7 +108,7 @@ class BusinessProfileScreen extends StatelessWidget {
                       left: 5,
                       child: Container(
                           decoration: BoxDecoration(
-                              color: Styles.colorBlack.withOpacity(0.4),
+                              color: Styles.colorBlack.withOpacity(0.2),
                               borderRadius: BorderRadius.circular(50)),
                           child: const BackButton(
                             color: Styles.colorWhite,
@@ -100,7 +118,77 @@ class BusinessProfileScreen extends StatelessWidget {
                     right: 5,
                     child: Padding(
                       padding: const EdgeInsets.symmetric(vertical: 4),
-                      child: SizedBox(
+                      child: PopupMenuButton<String>(
+                        color: Styles.colorWhite,
+                        elevation: 2,
+                        shadowColor: Styles.colorBlack,
+                        icon: Container(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 4, horizontal: 4),
+                          decoration: BoxDecoration(
+                              color: Styles.colorBlack.withOpacity(0.2),
+                              borderRadius: BorderRadius.circular(50)),
+                          child:
+                              Icon(Icons.more_vert, color: Styles.colorWhite),
+                        ),
+                        onSelected: (String result) {
+                          switch (result) {
+                            case 'filter1':
+                              print('filter 1 clicked');
+                              break;
+                            case 'filter2':
+                              print('filter 2 clicked');
+                              break;
+                            case 'clearFilters':
+                              print('Clear filters');
+                              break;
+                            default:
+                          }
+                        },
+                        itemBuilder: (BuildContext context) =>
+                            <PopupMenuEntry<String>>[
+                          const PopupMenuItem<String>(
+                            value: 'filter1',
+                            child: Text('Edit Business'),
+                          ),
+                          const PopupMenuItem<String>(
+                            value: 'filter1',
+                            child: Text('Settings'),
+                          ),
+                        ],
+                      ),
+                      /*PopupMenuButton<String>(
+                          onSelected: (String result) {
+                            switch (result) {
+                              case 'option1':
+                                print('option 1 clicked');
+                                break;
+                              case 'option2':
+                                print('option 2 clicked');
+                                break;
+                              case 'delete':
+                                print('I want to delete');
+                                break;
+                              default:
+                            }
+                          },
+                          itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
+                            const PopupMenuItem<String>(
+                              value: 'option1',
+                              child: Text('Option 1'),
+                            ),
+                            const PopupMenuItem<String>(
+                              value: 'option2',
+                              child: Text('Option 2'),
+                            ),
+                            const PopupMenuItem<String>(
+                              value: 'delete',
+                              child: Text('Delete'),
+                            ),
+                          ],
+                        )
+                        ]*/
+                      /* child: SizedBox(
                         height: 20,
                         width: 60,
                         child: OutlinedButton(
@@ -114,20 +202,21 @@ class BusinessProfileScreen extends StatelessWidget {
                                 width: 1,
                               )),
                           child: Text(
-                            'Edit',
+                            'Modify business',
                             style: TextStyle(
                                 color: Styles.colorTextBlack.withOpacity(0.8),
                                 fontSize: 11),
                           ),
                         ),
-                      ),
+                      ),*/
                     ),
                   )
                 ],
               ),
               Container(
                   color: Styles.colorWhite,
-                  padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 6),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 10, horizontal: 6),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -287,7 +376,7 @@ class BusinessProfileScreen extends StatelessWidget {
                   children: [
                     const Text(
                       'Add Store Gallery Photos',
-                      style: TextStyle( color: Styles.colorGray),
+                      style: TextStyle(color: Styles.colorGray),
                     ),
                     const Padding(padding: EdgeInsets.all(4)),
                     Container(
@@ -307,7 +396,9 @@ class BusinessProfileScreen extends StatelessWidget {
                         7,
                         (index) => index == 0
                             ? const AddNewGallaryItemBox()
-                            : GallaryItemBox(isLastItem: ((index + 1 == 7))),
+                            : GallaryItemBox(
+                                index: index - 1,
+                                isLastItem: ((index + 1 == 7))),
                       ),
                     )
                   ],
@@ -346,25 +437,36 @@ class BusinessProfileScreen extends StatelessWidget {
                           'Fill Your Own Box of 12 Cupcakes I Mix & Match Your Favorite Flavours',
                       price: 'N6,000',
                     ),
-                    const Padding(padding: EdgeInsets.all(6)),
-                    Center(
-                      child: ElevatedButton(
-                        style: TextButton.styleFrom(
-                            backgroundColor: Styles.colorSecondary,
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 8, horizontal: 40),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(12)),
-                            elevation: 0),
-                        onPressed: () {},
-                        child: const Text(
-                          'Add',
-                          style: TextStyle(
-                              fontWeight: FontWeight.normal,
-                              color: Styles.colorBlack),
+                    const Padding(padding: EdgeInsets.all(4)),
+                    /*      Center(
+                      child: SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.94,
+                        child: ElevatedButton(
+                          style: TextButton.styleFrom(
+                              backgroundColor: Styles.colorSecondary,
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 8, horizontal: 80),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12)),
+                              elevation: 0),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                  const ManageProductScreen()),
+                            );
+                          },
+                          child: const Text(
+                            'Create new post',
+                            style: TextStyle(
+                                fontWeight: FontWeight.normal,
+                                color: Styles.colorBlack),
+                          ),
                         ),
                       ),
-                    ),
+                    ),*/
+                    const Padding(padding: EdgeInsets.all(12))
                   ],
                 ),
               ),
@@ -418,6 +520,52 @@ class ProductDetailItem extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      Row(
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 8, vertical: 2),
+                            decoration: const BoxDecoration(
+                              color: Styles.colorSecondary,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(8)),
+                            ),
+                            child: const Text(
+                              'Featured',
+                              style: TextStyle(fontSize: 12),
+                            ),
+                          ),
+                          const Padding(padding: EdgeInsets.all(2)),
+                          SizedBox(
+                            height: 20,
+                            child: OutlinedButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const ManageProductScreen()),
+                                );
+                              },
+                              style: OutlinedButton.styleFrom(
+                                  shape: const StadiumBorder(),
+                                  side: const BorderSide(
+                                    color: Styles.colorGray,
+                                    style: BorderStyle.solid,
+                                    width: 1,
+                                  )),
+                              child: Text(
+                                'Promote Ad',
+                                style: TextStyle(
+                                    color:
+                                        Styles.colorTextBlack.withOpacity(0.8),
+                                    fontSize: 11),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Padding(padding: EdgeInsets.all(2)),
                       Text(
                         price,
                         style: const TextStyle(color: Styles.colorPrimary),
@@ -547,41 +695,83 @@ class ProductWithEditBtn extends StatelessWidget {
 
 class GallaryItemBox extends StatelessWidget {
   final bool isLastItem;
+  final String? imagePath;
+  final int index;
 
-  const GallaryItemBox({
-    Key? key,
-    this.isLastItem = false,
-  }) : super(key: key);
+  const GallaryItemBox(
+      {Key? key, this.isLastItem = false, this.imagePath, required this.index})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.fromLTRB(0, 0, isLastItem ? 0 : 7, 0),
-      height: 46,
-      width: 46,
-      decoration: const BoxDecoration(
-          color: Styles.colorBackground,
-          borderRadius: BorderRadius.all(Radius.circular(4))),
+    return GestureDetector(
+      onTap: () {
+        context.read<BusinessCubit>().setGallaryIndex(index);
+      },
+      child: Container(
+        margin: EdgeInsets.fromLTRB(0, 0, isLastItem ? 0 : 7, 0),
+        height: 46,
+        width: 46,
+        decoration: BoxDecoration(
+            image: (imagePath != null)
+                ? DecorationImage(
+                    fit: BoxFit.fill,
+                    image: FileImage(File(imagePath.toString())))
+                : null,
+            color: Styles.colorBackground,
+            borderRadius: const BorderRadius.all(Radius.circular(4))),
+      ),
     );
   }
 }
 
-class AddNewGallaryItemBox extends StatelessWidget {
+class AddNewGallaryItemBox extends StatefulWidget {
   const AddNewGallaryItemBox({
     Key? key,
   }) : super(key: key);
 
   @override
+  State<StatefulWidget> createState() => AddNewGallaryItemBoxState();
+}
+
+class AddNewGallaryItemBoxState extends State<AddNewGallaryItemBox> {
+  late ImagePicker _picker;
+
+  @override
+  void initState() {
+    _picker = ImagePicker();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.fromLTRB(0, 0, 7, 0),
-      height: 46,
-      width: 46,
-      alignment: Alignment.center,
-      decoration: BoxDecoration(
-          color: Styles.colorGray.withOpacity(0.1),
-          borderRadius: const BorderRadius.all(Radius.circular(4))),
-      child: const Icon(Icons.add_circle_sharp, color: Styles.colorPrimary),
+    return GestureDetector(
+      onTap: () async {
+        final List<XFile> images = await _picker.pickMultiImage();
+        if (images.isNotEmpty) {
+          if (!mounted) return;
+          if (kDebugMode) {
+            List<String> imgs = images.map((e) => e.path).toList();
+            print(imgs);
+            context.read<BusinessCubit>().setGalleryImages(imgs);
+          }
+        } else {}
+      },
+      child: Container(
+        margin: const EdgeInsets.fromLTRB(0, 0, 7, 0),
+        height: 46,
+        width: 46,
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+            color: Styles.colorGray.withOpacity(0.1),
+            borderRadius: const BorderRadius.all(Radius.circular(4))),
+        child: const Icon(Icons.add_circle_sharp, color: Styles.colorPrimary),
+      ),
     );
   }
 }

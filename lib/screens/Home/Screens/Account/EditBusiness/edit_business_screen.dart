@@ -259,7 +259,7 @@ class EditBusinessScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              StoreGallerySection(),
+              const StoreGallerySection(),
               const Padding(padding: EdgeInsets.all(6)),
               Center(
                 child: SizedBox(
@@ -308,8 +308,7 @@ class StoreGallerySection extends StatelessWidget {
     return Container(
       color: Styles.colorWhite,
       margin: const EdgeInsets.symmetric(vertical: 8),
-      padding:
-          const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
@@ -319,26 +318,41 @@ class StoreGallerySection extends StatelessWidget {
             style: TextStyle(color: Styles.colorTextBlack),
           ),
           const Padding(padding: EdgeInsets.all(4)),
-          Container(
-            padding: const EdgeInsets.all(12),
-            height: MediaQuery.of(context).size.width * 0.55,
-            width: MediaQuery.of(context).size.width * 0.95,
-            alignment: Alignment.topRight,
-            decoration: const BoxDecoration(
-                color: Styles.colorBackground,
-                borderRadius: BorderRadius.all(Radius.circular(4))),
-            child: const Icon(Gomart.trashCanIcon,
-                color: Styles.colorGray),
-          ),
+          BlocBuilder<BusinessCubit, BusinessState>(builder: (context, state) {
+            return Container(
+              padding: const EdgeInsets.all(12),
+              height: MediaQuery.of(context).size.width * 0.55,
+              width: MediaQuery.of(context).size.width * 0.95,
+              alignment: Alignment.topRight,
+              decoration: BoxDecoration(
+                  image: (state.gallaryPhotos.isNotEmpty &&
+                          state?.gallaryIndex != null)
+                      ? DecorationImage(
+                          fit: BoxFit.cover,
+                          image: FileImage(File(
+                              state.gallaryPhotos[state.gallaryIndex as int])))
+                      : null,
+                  color: Styles.colorBackground,
+                  borderRadius: BorderRadius.all(Radius.circular(4))),
+              child: const Icon(Gomart.trashCanIcon, color: Styles.colorGray),
+            );
+          }),
           const Padding(padding: EdgeInsets.all(4)),
-          Row(
-            children: List.generate(
-              7,
-              (index) => index == 0
-                  ? const AddNewGallaryItemBox()
-                  : GallaryItemBox(isLastItem: ((index + 1 == 7))),
-            ),
-          )
+          BlocBuilder<BusinessCubit, BusinessState>(builder: (context, state) {
+            return Wrap(
+              runSpacing: 6,
+              children: List.generate(
+                1 + state.gallaryPhotos.length,
+                (index) => index == 0
+                    ? const AddNewGallaryItemBox()
+                    : GallaryItemBox(
+                        index: index - 1,
+                        imagePath: state.gallaryPhotos[index - 1],
+                        isLastItem:
+                            ((index + 1 == 1 + state.gallaryPhotos.length))),
+              ),
+            );
+          }),
         ],
       ),
     );
@@ -370,80 +384,79 @@ class LogoPickSectionState extends State<LogoPickSection> {
 
   @override
   Widget build(BuildContext context) {
-    return  Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            BlocBuilder<BusinessCubit, BusinessState>(
-                builder: (context, state) {
-              return SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.2,
-                  height: MediaQuery.of(context).size.width * 0.2,
-                  child: GestureDetector(
-                    onTap: () async {
-                      final XFile? image =
-                      await _picker.pickImage(source: ImageSource.gallery);
-                      if (image?.path != null) {
-                        CroppedFile? croppedFile = await ImageCropper().cropImage(
-                          sourcePath: image?.path ?? '',
-                          cropStyle: CropStyle.circle,
-                          uiSettings: [
-                            AndroidUiSettings(
-                                toolbarTitle: 'Crop photo',
-                                toolbarColor: Colors.black,
-                                toolbarWidgetColor: Styles.colorWhite,
-                                showCropGrid: false,
-                                initAspectRatio: CropAspectRatioPreset.square,
-                                hideBottomControls: true,
-                                lockAspectRatio: true),
-                            IOSUiSettings(
-                              title: 'Cropper',
-                            ),
-                            WebUiSettings(
-                              context: context,
-                            ),
-                          ],
-                        );
-                        String? imagePath = croppedFile!.path;
-                        if (!mounted) return;
-                        context.read<BusinessCubit>().setLogoImage(imagePath);
-                      } else {}
-                    },
-                    child: Container(
-                      height: 30,
-                      width: 30,
-                      decoration: BoxDecoration(
-                          image: (state.logoUrl != null)
-                              ? DecorationImage(
-                              fit: BoxFit.fill,
-                              image: FileImage(File(state.logoUrl.toString())))
-                              : null,
-                          color: Styles.colorGray.withOpacity(0.08),
-                          borderRadius: BorderRadius.circular(60)),
-                      child: const Center(child: Text('Logo')),
-                    ),
-                  ));
-            }),
-            SizedBox(
-              width: MediaQuery.of(context).size.width * 0.72,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                  Text(
-                    'Business name',
-                    style: TextStyle(color: Styles.colorTextBlack),
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          BlocBuilder<BusinessCubit, BusinessState>(builder: (context, state) {
+            return SizedBox(
+                width: MediaQuery.of(context).size.width * 0.2,
+                height: MediaQuery.of(context).size.width * 0.2,
+                child: GestureDetector(
+                  onTap: () async {
+                    final XFile? image =
+                        await _picker.pickImage(source: ImageSource.gallery);
+                    if (image?.path != null) {
+                      CroppedFile? croppedFile = await ImageCropper().cropImage(
+                        sourcePath: image?.path ?? '',
+                        cropStyle: CropStyle.circle,
+                        uiSettings: [
+                          AndroidUiSettings(
+                              toolbarTitle: 'Crop photo',
+                              toolbarColor: Colors.black,
+                              toolbarWidgetColor: Styles.colorWhite,
+                              showCropGrid: false,
+                              initAspectRatio: CropAspectRatioPreset.square,
+                              hideBottomControls: true,
+                              lockAspectRatio: true),
+                          IOSUiSettings(
+                            title: 'Cropper',
+                          ),
+                          WebUiSettings(
+                            context: context,
+                          ),
+                        ],
+                      );
+                      String? imagePath = croppedFile!.path;
+                      if (!mounted) return;
+                      context.read<BusinessCubit>().setLogoImage(imagePath);
+                    } else {}
+                  },
+                  child: Container(
+                    height: 30,
+                    width: 30,
+                    decoration: BoxDecoration(
+                        image: (state.logoUrl != null)
+                            ? DecorationImage(
+                                fit: BoxFit.fill,
+                                image:
+                                    FileImage(File(state.logoUrl.toString())))
+                            : null,
+                        color: Styles.colorGray.withOpacity(0.08),
+                        borderRadius: BorderRadius.circular(60)),
+                    child: const Center(child: Text('Logo')),
                   ),
-                  Padding(padding: EdgeInsets.all(2)),
-                  BTextField()
-                ],
-              ),
+                ));
+          }),
+          SizedBox(
+            width: MediaQuery.of(context).size.width * 0.72,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: const [
+                Text(
+                  'Business name',
+                  style: TextStyle(color: Styles.colorTextBlack),
+                ),
+                Padding(padding: EdgeInsets.all(2)),
+                BTextField()
+              ],
             ),
-          ],
-        ),
-
+          ),
+        ],
+      ),
     );
   }
 }
@@ -536,7 +549,7 @@ class UploadBannerSectionState extends State<UploadBannerSection> {
             left: 5,
             child: Container(
                 decoration: BoxDecoration(
-                    color: Styles.colorBlack.withOpacity(0.4),
+                    color: Styles.colorBlack.withOpacity(0.2),
                     borderRadius: BorderRadius.circular(50)),
                 child: const BackButton(
                   color: Styles.colorWhite,
@@ -553,7 +566,27 @@ class BTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
+      height: 32,
+      child: TextField(
+
+        decoration: const InputDecoration(
+          focusColor: Styles.colorGray,
+            contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 8),
+            border: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: Styles.colorTextFieldBorder,
+                  width: 0.8,
+                  style: BorderStyle.solid,
+                ),
+                borderRadius: BorderRadius.all(Radius.circular(5)))),
+        onChanged: (value) {
+          // do something
+        },
+      ),
+    );
+
+    /*    return Container(
       height: 32,
       decoration: BoxDecoration(
         border: Border.all(
@@ -562,7 +595,7 @@ class BTextField extends StatelessWidget {
         ),
         borderRadius: const BorderRadius.all(Radius.circular(5)),
       ),
-    );
+    );*/
   }
 }
 

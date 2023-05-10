@@ -130,13 +130,37 @@ class EditBusinessScreen extends StatelessWidget {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
-                          Text(
+                        children: [
+                          const Text(
                             'Opening hours',
                             style: TextStyle(color: Styles.colorTextBlack),
                           ),
                           Padding(padding: EdgeInsets.all(2)),
-                          BTextField()
+                          SizedBox(
+                            height: 32,
+                            child: DropdownButtonFormField(
+                              decoration: InputDecoration(
+                                contentPadding: EdgeInsets.symmetric(
+                                    vertical: 0, horizontal: 6),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(5.0),
+                                ),
+                              ),
+                              items: const [
+                                DropdownMenuItem(
+                                  value: '08:00 am',
+                                  child: Text('08:00 am'),
+                                ),
+                                DropdownMenuItem(
+                                  value: '09:00 pm',
+                                  child: Text('09:30 am'),
+                                ),
+                              ],
+                              onChanged: (value) {
+                                // Handle value change
+                              },
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -145,13 +169,37 @@ class EditBusinessScreen extends StatelessWidget {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
-                          Text(
+                        children: [
+                          const Text(
                             'Closing hours',
                             style: TextStyle(color: Styles.colorTextBlack),
                           ),
                           Padding(padding: EdgeInsets.all(2)),
-                          BTextField()
+                          SizedBox(
+                            height: 32,
+                            child: DropdownButtonFormField(
+                              decoration: InputDecoration(
+                                contentPadding: EdgeInsets.symmetric(
+                                    vertical: 0, horizontal: 6),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(5.0),
+                                ),
+                              ),
+                              items: const [
+                                DropdownMenuItem(
+                                  value: '11:00 pm',
+                                  child: Text('11:00 pm'),
+                                ),
+                                DropdownMenuItem(
+                                  value: '13:00 pm',
+                                  child: Text('11:30 pm'),
+                                ),
+                              ],
+                              onChanged: (value) {
+                                // Handle value change
+                              },
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -160,13 +208,50 @@ class EditBusinessScreen extends StatelessWidget {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
-                          Text(
+                        children: [
+                          const Text(
                             'Days open',
                             style: TextStyle(color: Styles.colorTextBlack),
                           ),
-                          Padding(padding: EdgeInsets.all(2)),
-                          BTextField()
+                          const Padding(padding: EdgeInsets.all(2)),
+                          SizedBox(
+                            height: 32,
+                            child: DropdownButtonFormField(
+                              isExpanded: true,
+                              decoration: InputDecoration(
+                                contentPadding: EdgeInsets.symmetric(
+                                    vertical: 0, horizontal: 6),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(5.0),
+                                ),
+                              ),
+                              items: const [
+                                DropdownMenuItem(
+                                  value: 'Item 1',
+                                  child: Text('All Week',
+                                      style: TextStyle(
+                                          overflow: TextOverflow.ellipsis)),
+                                ),
+                                DropdownMenuItem(
+                                  value: 'Item 2',
+                                  child: Text('Monday to Saturday',
+                                      style: TextStyle(
+                                          overflow: TextOverflow.ellipsis)),
+                                ),
+                                DropdownMenuItem(
+                                  value: 'Item 3',
+                                  child: Text(
+                                    'Weekends only',
+                                    style: TextStyle(
+                                        overflow: TextOverflow.ellipsis),
+                                  ),
+                                ),
+                              ],
+                              onChanged: (value) {
+                                // Handle value change
+                              },
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -569,9 +654,8 @@ class BTextField extends StatelessWidget {
     return SizedBox(
       height: 32,
       child: TextField(
-
         decoration: const InputDecoration(
-          focusColor: Styles.colorGray,
+            focusColor: Styles.colorGray,
             contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 8),
             border: OutlineInputBorder(
                 borderSide: BorderSide(

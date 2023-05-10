@@ -752,13 +752,12 @@ class AddNewGallaryItemBoxState extends State<AddNewGallaryItemBox> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () async {
-        final List<XFile> images = await _picker.pickMultiImage();
-        if (images.isNotEmpty) {
+        final XFile? image =
+            await _picker.pickImage(source: ImageSource.gallery);
+        if (image != null) {
           if (!mounted) return;
           if (kDebugMode) {
-            List<String> imgs = images.map((e) => e.path).toList();
-            print(imgs);
-            context.read<BusinessCubit>().setGalleryImages(imgs);
+            context.read<BusinessCubit>().setGalleryImage(image.path);
           }
         } else {}
       },

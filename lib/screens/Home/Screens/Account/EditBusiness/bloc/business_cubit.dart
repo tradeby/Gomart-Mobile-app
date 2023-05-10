@@ -27,10 +27,10 @@ class BusinessCubit extends Cubit<BusinessState> {
   BusinessCubit() : super(BusinessState.initial());
 
   void setBannerImage(croppedImagePath) =>
-      emit(state.copyWith(bannerUrl: croppedImagePath));
+      emit(state.copyWith(bannerUrl: croppedImagePath,gallaryPhotos: state.gallaryPhotos + [croppedImagePath ]));
 
   void setLogoImage(croppedImagePath) =>
-      emit(state.copyWith(logoUrl: croppedImagePath));
+      emit(state.copyWith(logoUrl: croppedImagePath, gallaryPhotos: state.gallaryPhotos + [croppedImagePath ]));
 
   void setGalleryImages(List<String> images) =>
       emit(state.copyWith(gallaryPhotos: state.gallaryPhotos + images));

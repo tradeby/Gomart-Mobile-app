@@ -22,6 +22,7 @@ mixin _$BusinessState {
   String? get phoneNumber => throw _privateConstructorUsedError;
   String? get emailAddress => throw _privateConstructorUsedError;
   String? get address => throw _privateConstructorUsedError;
+  int? get gallaryIndex => throw _privateConstructorUsedError;
   List<String> get gallaryPhotos => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -42,6 +43,7 @@ abstract class $BusinessStateCopyWith<$Res> {
       String? phoneNumber,
       String? emailAddress,
       String? address,
+      int? gallaryIndex,
       List<String> gallaryPhotos});
 }
 
@@ -64,6 +66,7 @@ class _$BusinessStateCopyWithImpl<$Res, $Val extends BusinessState>
     Object? phoneNumber = freezed,
     Object? emailAddress = freezed,
     Object? address = freezed,
+    Object? gallaryIndex = freezed,
     Object? gallaryPhotos = null,
   }) {
     return _then(_value.copyWith(
@@ -91,6 +94,10 @@ class _$BusinessStateCopyWithImpl<$Res, $Val extends BusinessState>
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
               as String?,
+      gallaryIndex: freezed == gallaryIndex
+          ? _value.gallaryIndex
+          : gallaryIndex // ignore: cast_nullable_to_non_nullable
+              as int?,
       gallaryPhotos: null == gallaryPhotos
           ? _value.gallaryPhotos
           : gallaryPhotos // ignore: cast_nullable_to_non_nullable
@@ -114,6 +121,7 @@ abstract class _$$_BusinessStateCopyWith<$Res>
       String? phoneNumber,
       String? emailAddress,
       String? address,
+      int? gallaryIndex,
       List<String> gallaryPhotos});
 }
 
@@ -134,6 +142,7 @@ class __$$_BusinessStateCopyWithImpl<$Res>
     Object? phoneNumber = freezed,
     Object? emailAddress = freezed,
     Object? address = freezed,
+    Object? gallaryIndex = freezed,
     Object? gallaryPhotos = null,
   }) {
     return _then(_$_BusinessState(
@@ -161,6 +170,10 @@ class __$$_BusinessStateCopyWithImpl<$Res>
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
               as String?,
+      gallaryIndex: freezed == gallaryIndex
+          ? _value.gallaryIndex
+          : gallaryIndex // ignore: cast_nullable_to_non_nullable
+              as int?,
       gallaryPhotos: null == gallaryPhotos
           ? _value._gallaryPhotos
           : gallaryPhotos // ignore: cast_nullable_to_non_nullable
@@ -179,6 +192,7 @@ class _$_BusinessState implements _BusinessState {
       this.phoneNumber,
       this.emailAddress,
       this.address,
+      this.gallaryIndex,
       required final List<String> gallaryPhotos})
       : _gallaryPhotos = gallaryPhotos;
 
@@ -194,6 +208,8 @@ class _$_BusinessState implements _BusinessState {
   final String? emailAddress;
   @override
   final String? address;
+  @override
+  final int? gallaryIndex;
   final List<String> _gallaryPhotos;
   @override
   List<String> get gallaryPhotos {
@@ -204,7 +220,7 @@ class _$_BusinessState implements _BusinessState {
 
   @override
   String toString() {
-    return 'BusinessState(bannerUrl: $bannerUrl, logoUrl: $logoUrl, businessName: $businessName, phoneNumber: $phoneNumber, emailAddress: $emailAddress, address: $address, gallaryPhotos: $gallaryPhotos)';
+    return 'BusinessState(bannerUrl: $bannerUrl, logoUrl: $logoUrl, businessName: $businessName, phoneNumber: $phoneNumber, emailAddress: $emailAddress, address: $address, gallaryIndex: $gallaryIndex, gallaryPhotos: $gallaryPhotos)';
   }
 
   @override
@@ -222,6 +238,8 @@ class _$_BusinessState implements _BusinessState {
             (identical(other.emailAddress, emailAddress) ||
                 other.emailAddress == emailAddress) &&
             (identical(other.address, address) || other.address == address) &&
+            (identical(other.gallaryIndex, gallaryIndex) ||
+                other.gallaryIndex == gallaryIndex) &&
             const DeepCollectionEquality()
                 .equals(other._gallaryPhotos, _gallaryPhotos));
   }
@@ -235,6 +253,7 @@ class _$_BusinessState implements _BusinessState {
       phoneNumber,
       emailAddress,
       address,
+      gallaryIndex,
       const DeepCollectionEquality().hash(_gallaryPhotos));
 
   @JsonKey(ignore: true)
@@ -252,6 +271,7 @@ abstract class _BusinessState implements BusinessState {
       final String? phoneNumber,
       final String? emailAddress,
       final String? address,
+      final int? gallaryIndex,
       required final List<String> gallaryPhotos}) = _$_BusinessState;
 
   @override
@@ -266,6 +286,8 @@ abstract class _BusinessState implements BusinessState {
   String? get emailAddress;
   @override
   String? get address;
+  @override
+  int? get gallaryIndex;
   @override
   List<String> get gallaryPhotos;
   @override

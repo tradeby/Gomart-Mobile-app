@@ -64,7 +64,9 @@ class ManageProductScreen extends StatelessWidget {
                         7,
                         (index) => index == 0
                             ? const AddNewGallaryItemBox()
-                            : GallaryItemBox(isLastItem: ((index + 1 == 7))),
+                            : GallaryItemBox(
+                                index: index - 1,
+                                isLastItem: ((index + 1 == 7))),
                       ),
                     )
                   ],
@@ -156,7 +158,6 @@ class ManageProductScreen extends StatelessWidget {
                                 bottomLeft: Radius.circular(5),
                                 bottomRight: Radius.circular(5),
                               ),
-
                             ),
                             height: 30,
                             width: 37,
@@ -164,8 +165,9 @@ class ManageProductScreen extends StatelessWidget {
                               child: Text(
                                 '₦',
                                 style: TextStyle(
-                                  color: Styles.colorTextBlack,
-                                    fontWeight: FontWeight.w700, fontSize: 16),
+                                    color: Styles.colorTextBlack,
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 16),
                               ),
                             ),
                           ),
@@ -191,7 +193,8 @@ class ManageProductScreen extends StatelessWidget {
                     ),
                     const Padding(padding: EdgeInsets.all(4)),
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 8, vertical: 10),
                       decoration: BoxDecoration(
                         border: Border.all(
                           color: Styles.colorTextFieldBorder,
@@ -233,7 +236,8 @@ class ManageProductScreen extends StatelessWidget {
                     const Padding(padding: EdgeInsets.all(4)),
                     Container(
                       alignment: Alignment.topLeft,
-                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 8, vertical: 16),
                       decoration: BoxDecoration(
                         border: Border.all(
                           color: Styles.colorTextFieldBorder,
@@ -280,7 +284,7 @@ class ManageProductScreen extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Container(
-                                width: MediaQuery.of(context).size.width* 0.5,
+                                width: MediaQuery.of(context).size.width * 0.5,
                                 child: const Text(
                                   'Let your ad be on top of the listings',
                                   style: TextStyle(
@@ -334,12 +338,12 @@ class ManageProductScreen extends StatelessWidget {
                                         width: 0.8,
                                       ),
                                       borderRadius:
-                                      BorderRadius.all(Radius.circular(12)),
+                                          BorderRadius.all(Radius.circular(12)),
                                     ),
                                     child: const Text(
                                       '30 days',
                                       style:
-                                      TextStyle(color: Styles.colorPrimary),
+                                          TextStyle(color: Styles.colorPrimary),
                                     ),
                                   ),
                                 ],
@@ -352,14 +356,15 @@ class ManageProductScreen extends StatelessWidget {
                     const Padding(padding: EdgeInsets.all(6)),
                     Container(
                       alignment: Alignment.topLeft,
-                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 8, vertical: 16),
                       decoration: BoxDecoration(
                         border: Border.all(
                           color: Styles.colorTextFieldBorder,
                           width: 0.8,
                         ),
                         borderRadius:
-                        const BorderRadius.all(Radius.circular(10)),
+                            const BorderRadius.all(Radius.circular(10)),
                       ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -377,11 +382,11 @@ class ManageProductScreen extends StatelessWidget {
                             children: [
                               Container(
                                 padding: const EdgeInsets.symmetric(
-                                    horizontal:10, vertical: 4),
+                                    horizontal: 10, vertical: 4),
                                 decoration: const BoxDecoration(
                                   color: Styles.colorPromoteAdsPremium,
                                   borderRadius:
-                                  BorderRadius.all(Radius.circular(8)),
+                                      BorderRadius.all(Radius.circular(8)),
                                 ),
                                 child: const Text('Premium'),
                               ),
@@ -399,7 +404,7 @@ class ManageProductScreen extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               SizedBox(
-                                width: MediaQuery.of(context).size.width* 0.5,
+                                width: MediaQuery.of(context).size.width * 0.5,
                                 child: const Text(
                                   'Have your Ad on home and suggested on similar post',
                                   style: TextStyle(
@@ -417,12 +422,12 @@ class ManageProductScreen extends StatelessWidget {
                                     decoration: const BoxDecoration(
                                       color: Styles.colorButtonPay,
                                       borderRadius:
-                                      BorderRadius.all(Radius.circular(10)),
+                                          BorderRadius.all(Radius.circular(10)),
                                     ),
                                     child: const Text(
                                       '1 month',
                                       style:
-                                      TextStyle(color: Styles.colorPrimary),
+                                          TextStyle(color: Styles.colorPrimary),
                                     ),
                                   ),
                                   const Padding(padding: EdgeInsets.all(4)),
@@ -435,15 +440,14 @@ class ManageProductScreen extends StatelessWidget {
                                         width: 0.8,
                                       ),
                                       borderRadius:
-                                      BorderRadius.all(Radius.circular(12)),
+                                          BorderRadius.all(Radius.circular(12)),
                                     ),
                                     child: const Text(
                                       '3 months',
                                       style:
-                                      TextStyle(color: Styles.colorPrimary),
+                                          TextStyle(color: Styles.colorPrimary),
                                     ),
                                   ),
-
                                 ],
                               )
                             ],
@@ -454,7 +458,7 @@ class ManageProductScreen extends StatelessWidget {
                     const Padding(padding: EdgeInsets.all(6)),
                     Center(
                       child: SizedBox(
-                        width: MediaQuery.of(context).size.width*0.94,
+                        width: MediaQuery.of(context).size.width * 0.94,
                         child: ElevatedButton(
                           style: TextButton.styleFrom(
                               backgroundColor: Styles.colorSecondary,
@@ -467,7 +471,8 @@ class ManageProductScreen extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const BusinessProfileScreen()),
+                                  builder: (context) =>
+                                      const BusinessProfileScreen()),
                             );
                           },
                           child: const Text(

@@ -13,6 +13,7 @@ abstract class BusinessState with _$BusinessState {
     String? phoneNumber,
     String? emailAddress,
     String? address,
+    int? gallaryIndex,
     required List<String> gallaryPhotos,
   }) = _BusinessState;
 
@@ -30,4 +31,9 @@ class BusinessCubit extends Cubit<BusinessState> {
 
   void setLogoImage(croppedImagePath) =>
       emit(state.copyWith(logoUrl: croppedImagePath));
+
+  void setGalleryImages(List<String> images) =>
+      emit(state.copyWith(gallaryPhotos: state.gallaryPhotos + images));
+
+  void setGallaryIndex(int index) => emit(state.copyWith(gallaryIndex: index));
 }

@@ -756,9 +756,9 @@ class AddNewGallaryItemBoxState extends State<AddNewGallaryItemBox> {
             await _picker.pickImage(source: ImageSource.gallery);
         if (image != null) {
           if (!mounted) return;
-          if (kDebugMode) {
+
             context.read<BusinessCubit>().setGalleryImage(image.path);
-          }
+
         } else {}
       },
       child: Container(

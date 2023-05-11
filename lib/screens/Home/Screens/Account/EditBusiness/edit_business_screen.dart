@@ -1,5 +1,7 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:gomart/screens/Home/Screens/Account/EditBusiness/_map_edit_business.dart';
+import 'package:google_maps_webservice/places.dart';
 import '../../../../../styles/styles.dart';
 import '../BusinessProfile/business_profile_screen.dart';
 import '_address_auto_complete.dart';
@@ -8,6 +10,8 @@ import '_logo_pick_section.dart';
 import '_store_gallary_section.dart';
 import '_text_field.dart';
 import '_upload_banner_section.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 class EditBusinessScreen extends StatelessWidget {
   const EditBusinessScreen({Key? key}) : super(key: key);
@@ -201,9 +205,7 @@ class EditBusinessScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              const MapEditBusiness(),
-              const GetCurrentLocation(),
-              const EnterAddressAutoComplete(),
+              const AddressAndMap(),
               const StoreGallerySection(),
               const Padding(padding: EdgeInsets.all(6)),
               Center(
@@ -243,6 +245,81 @@ class EditBusinessScreen extends StatelessWidget {
   }
 }
 
+class AddressAndMap extends StatefulWidget {
+  const AddressAndMap({
+    super.key,
+  });
 
+  @override
+  State<StatefulWidget> createState() => _AddressAndMapState();
+}
 
+class _AddressAndMapState extends State<AddressAndMap> {
+  double? latitude;
+  double? longitude;
+  String address = '';
+  bool loadingMap = false;
 
+  _onLatLngSet(lat, lng) async {
+    setState(() {
+      loadingMap = true;
+    });
+
+    String _address = await getAddressFromLatLng(lat, lng);
+    print('**********->$_address');
+    await Future.delayed(const Duration(milliseconds: 20));
+
+    setState(() {
+      longitude = lng;
+      latitude = lat;
+      address = _address;
+    });
+
+    setState(() {
+      loadingMap = false;
+    });
+  }
+
+  _onAddressChange(String addressDesc, String formattedAddr) {
+    setState(() {
+      address = formattedAddr;
+    });
+  }
+
+  Future<String> getAddressFromLatLng(double latitude, double longitude) async {
+    final apiKey = 'AIzaSyDo0KVqGLzCqIUks4a8UJSuAJSW_k3ec3o';
+    final url = Uri.parse(
+        'https://maps.googleapis.com/maps/api/geocode/json?latlng=$latitude,$longitude&key=$apiKey');
+    final response = await http.get(url);
+    final json = jsonDecode(response.body);
+    final formattedAddress = json['results'][0]['formatted_address'];
+    return formattedAddress;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        (latitude != null && longitude != null && !loadingMap)
+            ? MapEditBusiness(
+                latitude: latitude as double, longitude: longitude as double)
+            : Container(
+                color: Styles.colorSkeletalBackground,
+                height: 90,
+                child: const Center(
+                  child: Text('Enter address to show on Map',
+                      style: TextStyle(color: Styles.colorGray)),
+                ),
+              ),
+        GetCurrentLocation(onLatitudeSet: _onLatLngSet),
+        (!loadingMap)
+            ? EnterAddressAutoComplete(
+                onLatitudeSet: _onLatLngSet,
+                onAddressChange: _onAddressChange,
+                initialAddress: address,
+              )
+            : Container(),
+      ],
+    );
+  }
+}

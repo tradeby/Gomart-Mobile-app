@@ -3,19 +3,32 @@ import 'package:gomart/styles/styles.dart';
 import 'package:google_maps_webservice/places.dart';
 
 class EnterAddressAutoComplete extends StatefulWidget {
-  const EnterAddressAutoComplete({
-    super.key,
-  });
+  final Function(double lat, double lng) onLatitudeSet;
+  final Function(String addressDescription, String formattedAddress)
+      onAddressChange;
+  final String initialAddress;
+
+  const EnterAddressAutoComplete(
+      {super.key,
+      required this.onLatitudeSet,
+      required this.initialAddress,
+      required this.onAddressChange});
 
   @override
   State<StatefulWidget> createState() => EnterAddressAutoCompleteState();
 }
 
 class EnterAddressAutoCompleteState extends State<EnterAddressAutoComplete> {
-  final _textController = TextEditingController();
+  late TextEditingController _textController;
   final _places =
-  GoogleMapsPlaces(apiKey: 'AIzaSyDo0KVqGLzCqIUks4a8UJSuAJSW_k3ec3o');
+      GoogleMapsPlaces(apiKey: 'AIzaSyDo0KVqGLzCqIUks4a8UJSuAJSW_k3ec3o');
   List<Prediction> _suggestions = [];
+
+  @override
+  void initState() {
+    _textController = TextEditingController(text: widget.initialAddress);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +50,7 @@ class EnterAddressAutoCompleteState extends State<EnterAddressAutoComplete> {
               decoration: const InputDecoration(
                   focusColor: Styles.colorGray,
                   contentPadding:
-                  EdgeInsets.symmetric(vertical: 0, horizontal: 8),
+                      EdgeInsets.symmetric(vertical: 0, horizontal: 8),
                   border: OutlineInputBorder(
                       borderSide: BorderSide(
                         color: Styles.colorTextFieldBorder,
@@ -78,13 +91,17 @@ class EnterAddressAutoCompleteState extends State<EnterAddressAutoComplete> {
 
   void _onSuggestionSelected(Prediction prediction) async {
     final details =
-    await _places.getDetailsByPlaceId(prediction.placeId as String);
+        await _places.getDetailsByPlaceId(prediction.placeId as String);
 
-    double? lat =  details.result.geometry?.location.lat;
-    double? lng =  details.result.geometry?.location.lng;
-
-    print('$lat, $lng');
+    double? lat = details.result.geometry?.location.lat;
+    double? lng = details.result.geometry?.location.lng;
+    widget.onLatitudeSet(lat as double, lng as double);
+    widget.onAddressChange(prediction.description as String,
+        details.result.formattedAddress as String);
+    //print('$lat, $lng');
     // do something with the place details
+    //send out the prediction.description
+    //send out details. formatted address
     setState(() {
       _suggestions = [];
       _textController.text = prediction.description as String;

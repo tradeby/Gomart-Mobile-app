@@ -50,8 +50,6 @@
 	<string>Gomart uses a feature that requires user to capture photo with his camera and upload it</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Gomart uses has features that require user to upload his photo or a product photo</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Gomart uses location when app is in use and when we need to use your location to suggest nearby products & Services</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>remote-notification</string>
@@ -77,5 +75,9 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>NSLocationWhenInUseUsageDescription</key>
+    <string>This app needs access to location when open.</string>
+    <key>NSLocationAlwaysUsageDescription</key>
+    <string>This app needs access to location when in the background.</string>
 </dict>
 </plist>

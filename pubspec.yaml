@@ -63,6 +63,7 @@ dependencies:
   google_mobile_ads: ^2.0.1
   stream_chat_flutter: ^5.3.0
   google_maps_webservice: ^0.0.20-nullsafety.5
+  geolocator: ^7.6.2
 
 dev_dependencies:
   flutter_test:

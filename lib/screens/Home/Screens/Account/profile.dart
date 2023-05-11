@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gomart/data/bloc/authentication/authentication_bloc.dart';
 import 'package:gomart/screens/debug/bloc/debug_cubit.dart';
 import 'package:gomart/screens/debug/debug_algolia_results.dart';
+import 'package:gomart/screens/debug/get_location_screen.dart';
 import 'package:gomart/styles/custom_home_icons.dart';
 
 import '../../../../styles/styles.dart';
@@ -58,18 +59,27 @@ class ProfileFragment extends StatelessWidget {
                                 fontSize: 14, fontWeight: FontWeight.w400),
                           ),
                           Expanded(
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: const [
-                                Text(
-                                  'Settings',
-                                  style:
-                                      TextStyle(color: Styles.colorTextBlack),
-                                ),
-                                Padding(padding: EdgeInsets.all(4)),
-                                Icon(Icons.settings)
-                              ],
+                            child: GestureDetector(
+                              onTap: (){
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => const LocationScreen()),
+                                );
+
+                              },
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: const [
+                                  Text(
+                                    'Settings',
+                                    style:
+                                        TextStyle(color: Styles.colorTextBlack),
+                                  ),
+                                  Padding(padding: EdgeInsets.all(4)),
+                                  Icon(Icons.settings)
+                                ],
+                              ),
                             ),
                           )
                         ],

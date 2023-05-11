@@ -8,11 +8,11 @@ import 'package:gomart/screens/Home/Screens/Account/EditBusiness/edit_business_s
 import 'package:gomart/styles/styles.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../../../../styles/custom_home_icons.dart';
-import '../../../Authentication/Register/register_screen_upload_photo.dart';
-import '../../../ProductDetail/product_detail.dart';
-import 'EditBusiness/bloc/business_cubit.dart';
-import 'manage_product_screen.dart';
+import '../../../../../styles/custom_home_icons.dart';
+import '../../../../Authentication/Register/register_screen_upload_photo.dart';
+import '../../../../ProductDetail/product_detail.dart';
+import '../EditBusiness/bloc/business_cubit.dart';
+import '../ManageProduct/manage_product_screen.dart';
 
 class BusinessProfileScreen extends StatelessWidget {
   const BusinessProfileScreen({Key? key}) : super(key: key);

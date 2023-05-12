@@ -87,7 +87,8 @@ class LogoPickSectionState extends State<LogoPickSection> {
                             : null,
                         color: Styles.colorGray.withOpacity(0.08),
                         borderRadius: BorderRadius.circular(60)),
-                    child: const Center(child: Text('Logo')),
+                    child:  (widget.logoUrl != null)
+                        ?Container():const Center(child: Text('Logo')),
                   ),
                 )),
           SizedBox(

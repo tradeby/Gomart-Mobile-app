@@ -32,8 +32,16 @@ class BusinessCubit extends Cubit<BusinessState> {
   void setLogoImage(croppedImagePath) => emit(state.copyWith(
       logoUrl: croppedImagePath, gallaryPhotos: state.gallaryPhotos));
 
-  void setGalleryImage(String image) =>
-      emit(state.copyWith(gallaryPhotos: state.gallaryPhotos + [image]));
+  void setGalleryImage(String image) {
+    emit(state.copyWith(gallaryPhotos: state.gallaryPhotos + [image]));
+    emit(state.copyWith(gallaryIndex: state.gallaryPhotos.length - 1));
+  }
 
   void setGallaryIndex(int index) => emit(state.copyWith(gallaryIndex: index));
+
+  void setPhoneNumber(_) => emit(state.copyWith(phoneNumber: _));
+
+  void setBusinessName(_) => emit(state.copyWith(businessName: _));
+
+  void setEmailAddress(_) => emit(state.copyWith(emailAddress: _));
 }

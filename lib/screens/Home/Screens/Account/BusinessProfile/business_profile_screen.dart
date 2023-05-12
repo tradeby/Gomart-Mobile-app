@@ -715,7 +715,7 @@ class GallaryItemBox extends StatelessWidget {
         decoration: BoxDecoration(
             image: (imagePath != null)
                 ? DecorationImage(
-                    fit: BoxFit.fill,
+                    fit: BoxFit.cover,
                     image: FileImage(File(imagePath.toString())))
                 : null,
             color: Styles.colorBackground,

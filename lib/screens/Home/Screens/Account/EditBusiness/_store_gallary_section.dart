@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gomart/screens/Home/Screens/Account/BusinessProfile/business_profile_screen.dart';
+import 'package:gomart/screens/ProductDetail/fade_route.dart';
+import 'package:gomart/screens/ProductDetail/image_preview_screen.dart';
 import 'package:gomart/styles/custom_home_icons.dart';
 import 'package:gomart/styles/styles.dart';
 
@@ -29,22 +31,39 @@ class StoreGallerySection extends StatelessWidget {
           ),
           const Padding(padding: EdgeInsets.all(4)),
           BlocBuilder<BusinessCubit, BusinessState>(builder: (context, state) {
-            return Container(
-              padding: const EdgeInsets.all(12),
-              height: MediaQuery.of(context).size.width * 0.55,
-              width: MediaQuery.of(context).size.width * 0.95,
-              alignment: Alignment.topRight,
-              decoration: BoxDecoration(
-                  image: (state.gallaryPhotos.isNotEmpty &&
-                      state?.gallaryIndex != null)
-                      ? DecorationImage(
-                      fit: BoxFit.cover,
-                      image: FileImage(File(
-                          state.gallaryPhotos[state.gallaryIndex as int])))
-                      : null,
-                  color: Styles.colorBackground,
-                  borderRadius: BorderRadius.all(Radius.circular(4))),
-              child: const Icon(Gomart.trashCanIcon, color: Styles.colorGray),
+            return GestureDetector(
+              onTap:  (state.gallaryPhotos.isNotEmpty &&
+                  state?.gallaryIndex != null)?(){
+                Navigator.push(
+                  context,
+                  FadeRoute(
+                    page: ImagePreview(
+                      isFile: true,
+                      imageUrl: state.gallaryPhotos[state?.gallaryIndex as int],
+                      heroTag: UniqueKey().toString(),
+                      productName: 'product.productName',
+                      productUrl: 'product.productUrl',
+                    ),
+                  ),
+                );
+              }:null,
+              child: Container(
+                padding: const EdgeInsets.all(12),
+                height: MediaQuery.of(context).size.width * 0.55,
+                width: MediaQuery.of(context).size.width * 0.95,
+                alignment: Alignment.topRight,
+                decoration: BoxDecoration(
+                    image: (state.gallaryPhotos.isNotEmpty &&
+                        state?.gallaryIndex != null)
+                        ? DecorationImage(
+                        fit: BoxFit.cover,
+                        image: FileImage(File(
+                            state.gallaryPhotos[state.gallaryIndex as int])))
+                        : null,
+                    color: Styles.colorBackground,
+                    borderRadius: BorderRadius.all(Radius.circular(4))),
+                child: const Icon(Gomart.trashCanIcon, color: Styles.colorGray),
+              ),
             );
           }),
           const Padding(padding: EdgeInsets.all(4)),

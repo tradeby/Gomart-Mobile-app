@@ -10,8 +10,10 @@ import '_text_field.dart';
 import 'bloc/business_cubit.dart';
 
 class LogoPickSection extends StatefulWidget {
+  final String? logoUrl;
+  final String? businessName;
   const LogoPickSection({
-    super.key,
+    super.key,  this.logoUrl, this.businessName,
   });
 
   @override
@@ -40,8 +42,7 @@ class LogoPickSectionState extends State<LogoPickSection> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          BlocBuilder<BusinessCubit, BusinessState>(builder: (context, state) {
-            return SizedBox(
+          SizedBox(
                 width: MediaQuery.of(context).size.width * 0.2,
                 height: MediaQuery.of(context).size.width * 0.2,
                 child: GestureDetector(
@@ -78,30 +79,33 @@ class LogoPickSectionState extends State<LogoPickSection> {
                     height: 30,
                     width: 30,
                     decoration: BoxDecoration(
-                        image: (state.logoUrl != null)
+                        image: (widget.logoUrl != null)
                             ? DecorationImage(
                             fit: BoxFit.fill,
                             image:
-                            FileImage(File(state.logoUrl.toString())))
+                            FileImage(File(widget.logoUrl.toString())))
                             : null,
                         color: Styles.colorGray.withOpacity(0.08),
                         borderRadius: BorderRadius.circular(60)),
                     child: const Center(child: Text('Logo')),
                   ),
-                ));
-          }),
+                )),
           SizedBox(
             width: MediaQuery.of(context).size.width * 0.72,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
-                Text(
+              children:  [
+                const Text(
                   'Business name',
                   style: TextStyle(color: Styles.colorTextBlack),
                 ),
-                Padding(padding: EdgeInsets.all(2)),
-                BTextField()
+                const Padding(padding: EdgeInsets.all(2)),
+                GomTextField(
+                    initialValue: widget.businessName,
+                    onChanged: (_) => context
+                        .read<BusinessCubit>()
+                        .setBusinessName(_))
               ],
             ),
           ),

@@ -34,7 +34,7 @@ void main() {
 
     timeString = '01:45';
     formattedTime = convertTime(timeString);
-    expect(formattedTime, equals('1:45 pm'));
+    expect(formattedTime, equals('1:45 am'));
 
     timeString = '00:00';
     formattedTime = convertTime(timeString);
@@ -48,10 +48,10 @@ void main() {
   test('convertTime should handle leading zeros in time string', () {
     String timeString = '09:05';
     String formattedTime = convertTime(timeString);
-    expect(formattedTime, equals('9:05 pm'));
+    expect(formattedTime, equals('9:05 am'));
 
     timeString = '05:08';
     formattedTime = convertTime(timeString);
-    expect(formattedTime, equals('5:08 pm'));
+    expect(formattedTime, equals('5:08 am'));
   });
 }

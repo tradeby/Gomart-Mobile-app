@@ -7,5 +7,5 @@ List<String> supportedTimeConverted = supportedTime.map((e) => convertTime(e)).t
 const List<String> supportedDays = [
   "All Week",
   "Mon to Sat",
-  "Weekends Only"
+  "Weekends"
 ];

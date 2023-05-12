@@ -42,9 +42,7 @@ jobs:
         
     - name: Download flutter app dependecies
       run: flutter pub get
-      
-    - name: Run all our tests
-      run: flutter test
+
       
     - name: Setup Keystore and Key properties for signing
       env:

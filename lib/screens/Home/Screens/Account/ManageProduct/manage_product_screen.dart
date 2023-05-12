@@ -87,7 +87,7 @@ class ManageProductScreen extends StatelessWidget {
                       ),
                     ),
                     Padding(padding: EdgeInsets.all(4)),
-                    BTextField()
+                    GomTextField()
                   ],
                 ),
               ),

@@ -14,8 +14,9 @@ class ImagePreview extends StatefulWidget {
   final String heroTag;
   final String productName;
   final String productUrl;
+ final bool isFile;
 
-  const ImagePreview({Key? key, required this.imageUrl, required this.heroTag, required this.productName, required this.productUrl}) : super(key: key);
+  const ImagePreview({Key? key, required this.imageUrl, required this.heroTag, required this.productName, required this.productUrl, this.isFile = false}) : super(key: key);
 
 
   @override
@@ -163,7 +164,7 @@ class ImagePreviewState extends State<ImagePreview> {
                     backgroundDecoration: BoxDecoration(
                       color: colorBackground,
                     ),
-                    imageProvider: NetworkImage(imageUrl),
+                    imageProvider:(widget.isFile?FileImage(File(imageUrl)) as ImageProvider: NetworkImage(imageUrl)),
                     heroAttributes: PhotoViewHeroAttributes(
                         tag: heroTag, transitionOnUserGestures: true),
                   ),

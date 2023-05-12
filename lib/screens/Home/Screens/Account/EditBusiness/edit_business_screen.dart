@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gomart/screens/Home/Screens/Account/EditBusiness/_map_edit_business.dart';
 import 'package:gomart/screens/Home/Screens/Account/EditBusiness/bloc/business_cubit.dart';
 import 'package:google_maps_webservice/places.dart';
+import '../../../../../shared_components/supportedOpeningClosingTimes/_supported_times.dart';
 import '../../../../../styles/styles.dart';
 import '../BusinessProfile/business_profile_screen.dart';
 import '_address_auto_complete.dart';
@@ -81,7 +82,8 @@ class LogoAndFieldsSection extends StatelessWidget {
     return BlocBuilder<BusinessCubit, BusinessState>(builder: (context, state) {
       return Column(
         children: [
-         LogoPickSection(logoUrl: state.logoUrl, businessName: state.businessName),
+          LogoPickSection(
+              logoUrl: state.logoUrl, businessName: state.businessName),
           Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
@@ -100,7 +102,7 @@ class LogoAndFieldsSection extends StatelessWidget {
                           ),
                           const Padding(padding: EdgeInsets.all(2)),
                           GomTextField(
-                            initialValue: state.phoneNumber,
+                              initialValue: state.phoneNumber,
                               onChanged: (_) => context
                                   .read<BusinessCubit>()
                                   .setPhoneNumber(_))
@@ -119,7 +121,7 @@ class LogoAndFieldsSection extends StatelessWidget {
                           ),
                           const Padding(padding: EdgeInsets.all(2)),
                           GomTextField(
-                            initialValue: state.emailAddress,
+                              initialValue: state.emailAddress,
                               onChanged: (_) => context
                                   .read<BusinessCubit>()
                                   .setEmailAddress(_))
@@ -147,27 +149,24 @@ class LogoAndFieldsSection extends StatelessWidget {
                       SizedBox(
                         height: 32,
                         child: DropdownButtonFormField(
-                          decoration: InputDecoration(
-                            contentPadding: const EdgeInsets.symmetric(
-                                vertical: 0, horizontal: 6),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(5.0),
+                            value: state.openingTime,
+                            decoration: InputDecoration(
+                              contentPadding: const EdgeInsets.symmetric(
+                                  vertical: 0, horizontal: 6),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(5.0),
+                              ),
                             ),
-                          ),
-                          items: const [
-                            DropdownMenuItem(
-                              value: '08:00 am',
-                              child: Text('08:00 am'),
-                            ),
-                            DropdownMenuItem(
-                              value: '09:00 pm',
-                              child: Text('09:30 am'),
-                            ),
-                          ],
-                          onChanged: (value) {
-                            // Handle value change
-                          },
-                        ),
+                            items: List.generate(
+                                supportedTimeConverted.length,
+                                (index) => DropdownMenuItem(
+                                      value: supportedTimeConverted[index],
+                                      child:
+                                          Text(supportedTimeConverted[index]),
+                                    )),
+                            onChanged: (_) => context
+                                .read<BusinessCubit>()
+                                .setOpeningTime(_)),
                       ),
                     ],
                   ),
@@ -186,14 +185,23 @@ class LogoAndFieldsSection extends StatelessWidget {
                       SizedBox(
                         height: 32,
                         child: DropdownButtonFormField(
-                          decoration: InputDecoration(
-                            contentPadding: const EdgeInsets.symmetric(
-                                vertical: 0, horizontal: 6),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(5.0),
+                            value: state.closingTime,
+                            decoration: InputDecoration(
+                              contentPadding: const EdgeInsets.symmetric(
+                                  vertical: 0, horizontal: 6),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(5.0),
+                              ),
                             ),
-                          ),
-                          items: const [
+                            items: List.generate(
+                                supportedTimeConverted.length,
+                                (index) => DropdownMenuItem(
+                                      value: supportedTimeConverted[index],
+                                      child:
+                                          Text(supportedTimeConverted[index]),
+                                    )),
+
+                            /* const [
                             DropdownMenuItem(
                               value: '11:00 pm',
                               child: Text('11:00 pm'),
@@ -202,11 +210,10 @@ class LogoAndFieldsSection extends StatelessWidget {
                               value: '13:00 pm',
                               child: Text('11:30 pm'),
                             ),
-                          ],
-                          onChanged: (value) {
-                            // Handle value change
-                          },
-                        ),
+                          ],*/
+                            onChanged: (_) => context
+                                .read<BusinessCubit>()
+                                .setClosingTime(_)),
                       ),
                     ],
                   ),
@@ -225,6 +232,7 @@ class LogoAndFieldsSection extends StatelessWidget {
                       SizedBox(
                         height: 32,
                         child: DropdownButtonFormField(
+                          value: state.daysOpen,
                           isExpanded: true,
                           decoration: InputDecoration(
                             contentPadding: const EdgeInsets.symmetric(
@@ -233,31 +241,17 @@ class LogoAndFieldsSection extends StatelessWidget {
                               borderRadius: BorderRadius.circular(5.0),
                             ),
                           ),
-                          items: const [
-                            DropdownMenuItem(
-                              value: 'Item 1',
-                              child: Text('All Week',
-                                  style: TextStyle(
-                                      overflow: TextOverflow.ellipsis)),
-                            ),
-                            DropdownMenuItem(
-                              value: 'Item 2',
-                              child: Text('Monday to Saturday',
-                                  style: TextStyle(
-                                      overflow: TextOverflow.ellipsis)),
-                            ),
-                            DropdownMenuItem(
-                              value: 'Item 3',
-                              child: Text(
-                                'Weekends only',
-                                style:
-                                    TextStyle(overflow: TextOverflow.ellipsis),
-                              ),
-                            ),
-                          ],
-                          onChanged: (value) {
-                            // Handle value change
-                          },
+                          items: List.generate(
+                              supportedDays.length,
+                                  (index) => DropdownMenuItem(
+                                value: supportedDays[index],
+                                child:
+                                Text(supportedDays[index]),
+                              )),
+
+                            onChanged: (_) => context
+                                .read<BusinessCubit>()
+                                .setDaysOpen(_),
                         ),
                       ),
                     ],
@@ -287,6 +281,19 @@ class _AddressAndMapState extends State<AddressAndMap> {
   String address = '';
   bool loadingMap = false;
 
+  @override
+  void initState() {
+    final businessBloc = BlocProvider.of<BusinessCubit>(context);
+    final currentState = businessBloc.state;
+    if (currentState.locationMap != null) {
+      latitude = currentState.locationMap?.latitude;
+      longitude = currentState.locationMap?.longitude;
+      address = currentState.locationMap?.address as String;
+    }
+
+    super.initState();
+  }
+
   _onLatLngSet(lat, lng) async {
     setState(() {
       loadingMap = true;
@@ -297,6 +304,11 @@ class _AddressAndMapState extends State<AddressAndMap> {
       print('**********->$_address');
     }
     //await Future.delayed(const Duration(milliseconds: 20));
+    //dispatch from here
+    if (context.mounted) {
+      context.read<BusinessCubit>().setMapLocation(
+          LocationMap(longitude: lng, latitude: lat, address: _address));
+    }
 
     setState(() {
       longitude = lng;

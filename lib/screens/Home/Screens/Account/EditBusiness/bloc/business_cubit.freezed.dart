@@ -21,8 +21,12 @@ mixin _$BusinessState {
   String? get businessName => throw _privateConstructorUsedError;
   String? get phoneNumber => throw _privateConstructorUsedError;
   String? get emailAddress => throw _privateConstructorUsedError;
+  String? get openingTime => throw _privateConstructorUsedError;
+  String? get closingTime => throw _privateConstructorUsedError;
+  String? get daysOpen => throw _privateConstructorUsedError;
   String? get address => throw _privateConstructorUsedError;
   int? get gallaryIndex => throw _privateConstructorUsedError;
+  LocationMap? get locationMap => throw _privateConstructorUsedError;
   List<String> get gallaryPhotos => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -42,8 +46,12 @@ abstract class $BusinessStateCopyWith<$Res> {
       String? businessName,
       String? phoneNumber,
       String? emailAddress,
+      String? openingTime,
+      String? closingTime,
+      String? daysOpen,
       String? address,
       int? gallaryIndex,
+      LocationMap? locationMap,
       List<String> gallaryPhotos});
 }
 
@@ -65,8 +73,12 @@ class _$BusinessStateCopyWithImpl<$Res, $Val extends BusinessState>
     Object? businessName = freezed,
     Object? phoneNumber = freezed,
     Object? emailAddress = freezed,
+    Object? openingTime = freezed,
+    Object? closingTime = freezed,
+    Object? daysOpen = freezed,
     Object? address = freezed,
     Object? gallaryIndex = freezed,
+    Object? locationMap = freezed,
     Object? gallaryPhotos = null,
   }) {
     return _then(_value.copyWith(
@@ -90,6 +102,18 @@ class _$BusinessStateCopyWithImpl<$Res, $Val extends BusinessState>
           ? _value.emailAddress
           : emailAddress // ignore: cast_nullable_to_non_nullable
               as String?,
+      openingTime: freezed == openingTime
+          ? _value.openingTime
+          : openingTime // ignore: cast_nullable_to_non_nullable
+              as String?,
+      closingTime: freezed == closingTime
+          ? _value.closingTime
+          : closingTime // ignore: cast_nullable_to_non_nullable
+              as String?,
+      daysOpen: freezed == daysOpen
+          ? _value.daysOpen
+          : daysOpen // ignore: cast_nullable_to_non_nullable
+              as String?,
       address: freezed == address
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
@@ -98,6 +122,10 @@ class _$BusinessStateCopyWithImpl<$Res, $Val extends BusinessState>
           ? _value.gallaryIndex
           : gallaryIndex // ignore: cast_nullable_to_non_nullable
               as int?,
+      locationMap: freezed == locationMap
+          ? _value.locationMap
+          : locationMap // ignore: cast_nullable_to_non_nullable
+              as LocationMap?,
       gallaryPhotos: null == gallaryPhotos
           ? _value.gallaryPhotos
           : gallaryPhotos // ignore: cast_nullable_to_non_nullable
@@ -120,8 +148,12 @@ abstract class _$$_BusinessStateCopyWith<$Res>
       String? businessName,
       String? phoneNumber,
       String? emailAddress,
+      String? openingTime,
+      String? closingTime,
+      String? daysOpen,
       String? address,
       int? gallaryIndex,
+      LocationMap? locationMap,
       List<String> gallaryPhotos});
 }
 
@@ -141,8 +173,12 @@ class __$$_BusinessStateCopyWithImpl<$Res>
     Object? businessName = freezed,
     Object? phoneNumber = freezed,
     Object? emailAddress = freezed,
+    Object? openingTime = freezed,
+    Object? closingTime = freezed,
+    Object? daysOpen = freezed,
     Object? address = freezed,
     Object? gallaryIndex = freezed,
+    Object? locationMap = freezed,
     Object? gallaryPhotos = null,
   }) {
     return _then(_$_BusinessState(
@@ -166,6 +202,18 @@ class __$$_BusinessStateCopyWithImpl<$Res>
           ? _value.emailAddress
           : emailAddress // ignore: cast_nullable_to_non_nullable
               as String?,
+      openingTime: freezed == openingTime
+          ? _value.openingTime
+          : openingTime // ignore: cast_nullable_to_non_nullable
+              as String?,
+      closingTime: freezed == closingTime
+          ? _value.closingTime
+          : closingTime // ignore: cast_nullable_to_non_nullable
+              as String?,
+      daysOpen: freezed == daysOpen
+          ? _value.daysOpen
+          : daysOpen // ignore: cast_nullable_to_non_nullable
+              as String?,
       address: freezed == address
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
@@ -174,6 +222,10 @@ class __$$_BusinessStateCopyWithImpl<$Res>
           ? _value.gallaryIndex
           : gallaryIndex // ignore: cast_nullable_to_non_nullable
               as int?,
+      locationMap: freezed == locationMap
+          ? _value.locationMap
+          : locationMap // ignore: cast_nullable_to_non_nullable
+              as LocationMap?,
       gallaryPhotos: null == gallaryPhotos
           ? _value._gallaryPhotos
           : gallaryPhotos // ignore: cast_nullable_to_non_nullable
@@ -191,8 +243,12 @@ class _$_BusinessState implements _BusinessState {
       this.businessName,
       this.phoneNumber,
       this.emailAddress,
+      this.openingTime,
+      this.closingTime,
+      this.daysOpen,
       this.address,
       this.gallaryIndex,
+      this.locationMap,
       required final List<String> gallaryPhotos})
       : _gallaryPhotos = gallaryPhotos;
 
@@ -207,9 +263,17 @@ class _$_BusinessState implements _BusinessState {
   @override
   final String? emailAddress;
   @override
+  final String? openingTime;
+  @override
+  final String? closingTime;
+  @override
+  final String? daysOpen;
+  @override
   final String? address;
   @override
   final int? gallaryIndex;
+  @override
+  final LocationMap? locationMap;
   final List<String> _gallaryPhotos;
   @override
   List<String> get gallaryPhotos {
@@ -220,7 +284,7 @@ class _$_BusinessState implements _BusinessState {
 
   @override
   String toString() {
-    return 'BusinessState(bannerUrl: $bannerUrl, logoUrl: $logoUrl, businessName: $businessName, phoneNumber: $phoneNumber, emailAddress: $emailAddress, address: $address, gallaryIndex: $gallaryIndex, gallaryPhotos: $gallaryPhotos)';
+    return 'BusinessState(bannerUrl: $bannerUrl, logoUrl: $logoUrl, businessName: $businessName, phoneNumber: $phoneNumber, emailAddress: $emailAddress, openingTime: $openingTime, closingTime: $closingTime, daysOpen: $daysOpen, address: $address, gallaryIndex: $gallaryIndex, locationMap: $locationMap, gallaryPhotos: $gallaryPhotos)';
   }
 
   @override
@@ -237,9 +301,17 @@ class _$_BusinessState implements _BusinessState {
                 other.phoneNumber == phoneNumber) &&
             (identical(other.emailAddress, emailAddress) ||
                 other.emailAddress == emailAddress) &&
+            (identical(other.openingTime, openingTime) ||
+                other.openingTime == openingTime) &&
+            (identical(other.closingTime, closingTime) ||
+                other.closingTime == closingTime) &&
+            (identical(other.daysOpen, daysOpen) ||
+                other.daysOpen == daysOpen) &&
             (identical(other.address, address) || other.address == address) &&
             (identical(other.gallaryIndex, gallaryIndex) ||
                 other.gallaryIndex == gallaryIndex) &&
+            (identical(other.locationMap, locationMap) ||
+                other.locationMap == locationMap) &&
             const DeepCollectionEquality()
                 .equals(other._gallaryPhotos, _gallaryPhotos));
   }
@@ -252,8 +324,12 @@ class _$_BusinessState implements _BusinessState {
       businessName,
       phoneNumber,
       emailAddress,
+      openingTime,
+      closingTime,
+      daysOpen,
       address,
       gallaryIndex,
+      locationMap,
       const DeepCollectionEquality().hash(_gallaryPhotos));
 
   @JsonKey(ignore: true)
@@ -270,8 +346,12 @@ abstract class _BusinessState implements BusinessState {
       final String? businessName,
       final String? phoneNumber,
       final String? emailAddress,
+      final String? openingTime,
+      final String? closingTime,
+      final String? daysOpen,
       final String? address,
       final int? gallaryIndex,
+      final LocationMap? locationMap,
       required final List<String> gallaryPhotos}) = _$_BusinessState;
 
   @override
@@ -285,9 +365,17 @@ abstract class _BusinessState implements BusinessState {
   @override
   String? get emailAddress;
   @override
+  String? get openingTime;
+  @override
+  String? get closingTime;
+  @override
+  String? get daysOpen;
+  @override
   String? get address;
   @override
   int? get gallaryIndex;
+  @override
+  LocationMap? get locationMap;
   @override
   List<String> get gallaryPhotos;
   @override

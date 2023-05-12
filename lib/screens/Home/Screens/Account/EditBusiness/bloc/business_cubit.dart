@@ -4,6 +4,15 @@ import 'package:injectable/injectable.dart';
 
 part 'business_cubit.freezed.dart';
 
+class LocationMap {
+  final double latitude;
+  final double longitude;
+  final String address;
+
+  const LocationMap(
+      {required this.longitude, required this.latitude, required this.address});
+}
+
 @freezed
 abstract class BusinessState with _$BusinessState {
   const factory BusinessState({
@@ -12,8 +21,12 @@ abstract class BusinessState with _$BusinessState {
     String? businessName,
     String? phoneNumber,
     String? emailAddress,
+    String? openingTime,
+    String? closingTime,
+    String? daysOpen,
     String? address,
     int? gallaryIndex,
+    LocationMap? locationMap,
     required List<String> gallaryPhotos,
   }) = _BusinessState;
 
@@ -44,4 +57,11 @@ class BusinessCubit extends Cubit<BusinessState> {
   void setBusinessName(_) => emit(state.copyWith(businessName: _));
 
   void setEmailAddress(_) => emit(state.copyWith(emailAddress: _));
+
+  void setOpeningTime(_) => emit(state.copyWith(openingTime: _));
+
+  void setClosingTime(_) => emit(state.copyWith(closingTime: _));
+  void setDaysOpen(_) => emit(state.copyWith(daysOpen: _));
+
+  void setMapLocation(LocationMap _) => emit(state.copyWith(locationMap: _));
 }

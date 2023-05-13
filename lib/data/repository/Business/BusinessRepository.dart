@@ -41,6 +41,9 @@ class FirebaseBusinessRepository implements IBusinessRepository {
     data['updatedOn'] = Timestamp.now();
     data['createdOn'] = Timestamp.now();
     data['membersSince'] = Timestamp.now();
+
+    //getCurrentUser
+    //setbusinessId
     await _firestore.collection('BUSINESSES').doc(business.id).set(data);
     //add business.id to User
   }

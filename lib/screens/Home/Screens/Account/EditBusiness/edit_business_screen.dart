@@ -33,11 +33,11 @@ class _EditBusinessScreenState extends State<EditBusinessScreen> {
       listener: (context, state) {},
       child: BlocBuilder<BusinessCubit, BusinessState>(
         builder: (context, state) {
-          return Stack(
-            children: [
-              Scaffold(
-                backgroundColor: Styles.colorWhite,
-                body: SafeArea(
+          return Scaffold(
+            backgroundColor: Styles.colorWhite,
+            body: Stack(
+              children: [
+                SafeArea(
                   child: SingleChildScrollView(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -83,16 +83,11 @@ class _EditBusinessScreenState extends State<EditBusinessScreen> {
                     ),
                   ),
                 ),
-              ),
-              (state.saving == true)
-                  ? LoadingDialog(
-                      key: _dialogKey,
-                      iconData: Gomart.accountGomartIcon,
-                      iconColor: Styles.colorPrimary,
-                      size: 80,
-                    )
-                  : Container()
-            ],
+                  (state.saving == true)
+                    ? const LoadingDialog()
+                    : Container()
+              ],
+            ),
           );
         },
       ),
@@ -101,16 +96,9 @@ class _EditBusinessScreenState extends State<EditBusinessScreen> {
 }
 
 class LoadingDialog extends StatelessWidget {
-  final IconData iconData;
-  final double size;
-  final Color iconColor;
-
   const LoadingDialog({
-    Key? key,
-    required this.iconData,
-    this.size = 48,
-    this.iconColor = Colors.white,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -118,25 +106,28 @@ class LoadingDialog extends StatelessWidget {
       children: [
         Container(
           color: Styles.colorWhite.withOpacity(0.9),
-          child: Center(
-            child: Icon(
-              iconData,
-              color: iconColor,
-              size: size,
-            ),
+          child:  Center(
+            child:Image.asset('assets/icon/icon-true-round.png',
+            height: 60,),
           ),
         ),
-        Center(
+        const Center(
           child: SizedBox(
-            width: size * 1.30,
-            height: size * 1.30,
-            child: const CircularProgressIndicator(
+            width: 60 * 1.20,
+            height: 60 * 1.20,
+            child: CircularProgressIndicator(
               strokeWidth: 6,
               valueColor: AlwaysStoppedAnimation<Color>(Styles.colorSecondary),
               backgroundColor: Styles.colorButtonPay,
             ),
           ),
         ),
+        Center(
+          child: Padding(
+            padding: EdgeInsets.fromLTRB(0, 150, 0, 0),
+            child: Text('Saving changes'),
+          ),
+        )
       ],
     );
   }

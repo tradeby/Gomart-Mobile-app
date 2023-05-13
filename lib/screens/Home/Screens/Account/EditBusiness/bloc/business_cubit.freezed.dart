@@ -16,6 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$BusinessState {
+  bool? get saving => throw _privateConstructorUsedError;
   String? get bannerUrl => throw _privateConstructorUsedError;
   String? get logoUrl => throw _privateConstructorUsedError;
   String? get businessName => throw _privateConstructorUsedError;
@@ -41,7 +42,8 @@ abstract class $BusinessStateCopyWith<$Res> {
       _$BusinessStateCopyWithImpl<$Res, BusinessState>;
   @useResult
   $Res call(
-      {String? bannerUrl,
+      {bool? saving,
+      String? bannerUrl,
       String? logoUrl,
       String? businessName,
       String? phoneNumber,
@@ -68,6 +70,7 @@ class _$BusinessStateCopyWithImpl<$Res, $Val extends BusinessState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? saving = freezed,
     Object? bannerUrl = freezed,
     Object? logoUrl = freezed,
     Object? businessName = freezed,
@@ -82,6 +85,10 @@ class _$BusinessStateCopyWithImpl<$Res, $Val extends BusinessState>
     Object? gallaryPhotos = null,
   }) {
     return _then(_value.copyWith(
+      saving: freezed == saving
+          ? _value.saving
+          : saving // ignore: cast_nullable_to_non_nullable
+              as bool?,
       bannerUrl: freezed == bannerUrl
           ? _value.bannerUrl
           : bannerUrl // ignore: cast_nullable_to_non_nullable
@@ -143,7 +150,8 @@ abstract class _$$_BusinessStateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String? bannerUrl,
+      {bool? saving,
+      String? bannerUrl,
       String? logoUrl,
       String? businessName,
       String? phoneNumber,
@@ -168,6 +176,7 @@ class __$$_BusinessStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? saving = freezed,
     Object? bannerUrl = freezed,
     Object? logoUrl = freezed,
     Object? businessName = freezed,
@@ -182,6 +191,10 @@ class __$$_BusinessStateCopyWithImpl<$Res>
     Object? gallaryPhotos = null,
   }) {
     return _then(_$_BusinessState(
+      saving: freezed == saving
+          ? _value.saving
+          : saving // ignore: cast_nullable_to_non_nullable
+              as bool?,
       bannerUrl: freezed == bannerUrl
           ? _value.bannerUrl
           : bannerUrl // ignore: cast_nullable_to_non_nullable
@@ -236,9 +249,10 @@ class __$$_BusinessStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_BusinessState implements _BusinessState {
+class _$_BusinessState with DiagnosticableTreeMixin implements _BusinessState {
   const _$_BusinessState(
-      {this.bannerUrl,
+      {this.saving,
+      this.bannerUrl,
       this.logoUrl,
       this.businessName,
       this.phoneNumber,
@@ -252,6 +266,8 @@ class _$_BusinessState implements _BusinessState {
       required final List<String> gallaryPhotos})
       : _gallaryPhotos = gallaryPhotos;
 
+  @override
+  final bool? saving;
   @override
   final String? bannerUrl;
   @override
@@ -283,8 +299,28 @@ class _$_BusinessState implements _BusinessState {
   }
 
   @override
-  String toString() {
-    return 'BusinessState(bannerUrl: $bannerUrl, logoUrl: $logoUrl, businessName: $businessName, phoneNumber: $phoneNumber, emailAddress: $emailAddress, openingTime: $openingTime, closingTime: $closingTime, daysOpen: $daysOpen, address: $address, gallaryIndex: $gallaryIndex, locationMap: $locationMap, gallaryPhotos: $gallaryPhotos)';
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'BusinessState(saving: $saving, bannerUrl: $bannerUrl, logoUrl: $logoUrl, businessName: $businessName, phoneNumber: $phoneNumber, emailAddress: $emailAddress, openingTime: $openingTime, closingTime: $closingTime, daysOpen: $daysOpen, address: $address, gallaryIndex: $gallaryIndex, locationMap: $locationMap, gallaryPhotos: $gallaryPhotos)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'BusinessState'))
+      ..add(DiagnosticsProperty('saving', saving))
+      ..add(DiagnosticsProperty('bannerUrl', bannerUrl))
+      ..add(DiagnosticsProperty('logoUrl', logoUrl))
+      ..add(DiagnosticsProperty('businessName', businessName))
+      ..add(DiagnosticsProperty('phoneNumber', phoneNumber))
+      ..add(DiagnosticsProperty('emailAddress', emailAddress))
+      ..add(DiagnosticsProperty('openingTime', openingTime))
+      ..add(DiagnosticsProperty('closingTime', closingTime))
+      ..add(DiagnosticsProperty('daysOpen', daysOpen))
+      ..add(DiagnosticsProperty('address', address))
+      ..add(DiagnosticsProperty('gallaryIndex', gallaryIndex))
+      ..add(DiagnosticsProperty('locationMap', locationMap))
+      ..add(DiagnosticsProperty('gallaryPhotos', gallaryPhotos));
   }
 
   @override
@@ -292,6 +328,7 @@ class _$_BusinessState implements _BusinessState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_BusinessState &&
+            (identical(other.saving, saving) || other.saving == saving) &&
             (identical(other.bannerUrl, bannerUrl) ||
                 other.bannerUrl == bannerUrl) &&
             (identical(other.logoUrl, logoUrl) || other.logoUrl == logoUrl) &&
@@ -319,6 +356,7 @@ class _$_BusinessState implements _BusinessState {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      saving,
       bannerUrl,
       logoUrl,
       businessName,
@@ -341,7 +379,8 @@ class _$_BusinessState implements _BusinessState {
 
 abstract class _BusinessState implements BusinessState {
   const factory _BusinessState(
-      {final String? bannerUrl,
+      {final bool? saving,
+      final String? bannerUrl,
       final String? logoUrl,
       final String? businessName,
       final String? phoneNumber,
@@ -354,6 +393,8 @@ abstract class _BusinessState implements BusinessState {
       final LocationMap? locationMap,
       required final List<String> gallaryPhotos}) = _$_BusinessState;
 
+  @override
+  bool? get saving;
   @override
   String? get bannerUrl;
   @override

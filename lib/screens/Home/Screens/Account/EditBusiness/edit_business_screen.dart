@@ -5,6 +5,7 @@ import 'package:gomart/screens/Home/Screens/Account/EditBusiness/_map_edit_busin
 import 'package:gomart/screens/Home/Screens/Account/EditBusiness/bloc/business_cubit.dart';
 import 'package:google_maps_webservice/places.dart';
 import '../../../../../shared_components/supportedOpeningClosingTimes/_supported_times.dart';
+import '../../../../../styles/custom_home_icons.dart';
 import '../../../../../styles/styles.dart';
 import '../BusinessProfile/business_profile_screen.dart';
 import '_address_auto_complete.dart';
@@ -16,58 +17,127 @@ import '_upload_banner_section.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-class EditBusinessScreen extends StatelessWidget {
+GlobalKey _dialogKey = GlobalKey();
+
+class EditBusinessScreen extends StatefulWidget {
   const EditBusinessScreen({Key? key}) : super(key: key);
 
   @override
+  State<StatefulWidget> createState() => _EditBusinessScreenState();
+}
+
+class _EditBusinessScreenState extends State<EditBusinessScreen> {
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Styles.colorWhite,
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
+    return BlocListener<BusinessCubit, BusinessState>(
+      listener: (context, state) {},
+      child: BlocBuilder<BusinessCubit, BusinessState>(
+        builder: (context, state) {
+          return Stack(
             children: [
-              const UploadBannerSection(),
-              const Padding(padding: EdgeInsets.all(6)),
-              const LogoAndFieldsSection(),
-              const AddressAndMap(),
-              const StoreGallerySection(),
-              const Padding(padding: EdgeInsets.all(6)),
-              Center(
-                child: SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.94,
-                  child: ElevatedButton(
-                    style: TextButton.styleFrom(
-                        backgroundColor: Styles.colorSecondary,
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 8, horizontal: 80),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12)),
-                        elevation: 0),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                const BusinessProfileScreen()),
-                      );
-                    },
-                    child: const Text(
-                      'Save',
-                      style: TextStyle(
-                          fontWeight: FontWeight.normal,
-                          color: Styles.colorBlack),
+              Scaffold(
+                backgroundColor: Styles.colorWhite,
+                body: SafeArea(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        const UploadBannerSection(),
+                        const Padding(padding: EdgeInsets.all(6)),
+                        const LogoAndFieldsSection(),
+                        const AddressAndMap(),
+                        const StoreGallerySection(),
+                        const Padding(padding: EdgeInsets.all(6)),
+                        Center(
+                          child: SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.94,
+                            child: ElevatedButton(
+                              style: TextButton.styleFrom(
+                                  backgroundColor: Styles.colorSecondary,
+                                  padding: const EdgeInsets.symmetric(
+                                      vertical: 8, horizontal: 80),
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(12)),
+                                  elevation: 0),
+                              onPressed: () async {
+                                context.read<BusinessCubit>().saveBusiness();
+                                /* Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const BusinessProfileScreen()),
+                              );*/
+                              },
+                              child: const Text(
+                                'Save',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.normal,
+                                    color: Styles.colorBlack),
+                              ),
+                            ),
+                          ),
+                        ),
+                        const Padding(padding: EdgeInsets.all(12))
+                      ],
                     ),
                   ),
                 ),
               ),
-              const Padding(padding: EdgeInsets.all(12))
+              (state.saving == true)
+                  ? LoadingDialog(
+                      key: _dialogKey,
+                      iconData: Gomart.accountGomartIcon,
+                      iconColor: Styles.colorPrimary,
+                      size: 80,
+                    )
+                  : Container()
             ],
+          );
+        },
+      ),
+    );
+  }
+}
+
+class LoadingDialog extends StatelessWidget {
+  final IconData iconData;
+  final double size;
+  final Color iconColor;
+
+  const LoadingDialog({
+    Key? key,
+    required this.iconData,
+    this.size = 48,
+    this.iconColor = Colors.white,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        Container(
+          color: Styles.colorWhite.withOpacity(0.9),
+          child: Center(
+            child: Icon(
+              iconData,
+              color: iconColor,
+              size: size,
+            ),
           ),
         ),
-      ),
+        Center(
+          child: SizedBox(
+            width: size * 1.30,
+            height: size * 1.30,
+            child: const CircularProgressIndicator(
+              strokeWidth: 6,
+              valueColor: AlwaysStoppedAnimation<Color>(Styles.colorSecondary),
+              backgroundColor: Styles.colorButtonPay,
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
@@ -243,15 +313,12 @@ class LogoAndFieldsSection extends StatelessWidget {
                           ),
                           items: List.generate(
                               supportedDays.length,
-                                  (index) => DropdownMenuItem(
-                                value: supportedDays[index],
-                                child:
-                                Text(supportedDays[index]),
-                              )),
-
-                            onChanged: (_) => context
-                                .read<BusinessCubit>()
-                                .setDaysOpen(_),
+                              (index) => DropdownMenuItem(
+                                    value: supportedDays[index],
+                                    child: Text(supportedDays[index]),
+                                  )),
+                          onChanged: (_) =>
+                              context.read<BusinessCubit>().setDaysOpen(_),
                         ),
                       ),
                     ],

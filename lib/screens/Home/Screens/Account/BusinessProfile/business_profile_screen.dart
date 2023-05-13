@@ -536,33 +536,11 @@ class ProductDetailItem extends StatelessWidget {
                             ),
                           ),
                           const Padding(padding: EdgeInsets.all(2)),
-                          SizedBox(
-                            height: 20,
-                            child: OutlinedButton(
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const ManageProductScreen()),
-                                );
-                              },
-                              style: OutlinedButton.styleFrom(
-                                  shape: const StadiumBorder(),
-                                  side: const BorderSide(
-                                    color: Styles.colorGray,
-                                    style: BorderStyle.solid,
-                                    width: 1,
-                                  )),
-                              child: Text(
-                                'Promote Ad',
-                                style: TextStyle(
-                                    color:
-                                        Styles.colorTextBlack.withOpacity(0.8),
-                                    fontSize: 11),
-                              ),
-                            ),
-                          ),
+                          Text('4 days to end',
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: Styles.colorPrimary.withOpacity(0.8)
+                          ),)
                         ],
                       ),
                       Padding(padding: EdgeInsets.all(2)),
@@ -583,8 +561,7 @@ class ProductDetailItem extends StatelessWidget {
                             ),
                             SizedBox(
                               height: 20,
-                              width: 60,
-                              child: OutlinedButton(
+                              child: FilledButton(
                                 onPressed: () {
                                   Navigator.push(
                                     context,
@@ -593,15 +570,12 @@ class ProductDetailItem extends StatelessWidget {
                                             const ManageProductScreen()),
                                   );
                                 },
-                                style: OutlinedButton.styleFrom(
-                                    shape: const StadiumBorder(),
-                                    side: const BorderSide(
-                                      color: Styles.colorGray,
-                                      style: BorderStyle.solid,
-                                      width: 1,
-                                    )),
+                                style: FilledButton.styleFrom(
+                                  backgroundColor: Styles.colorButtonPay,
+                                  shape: const StadiumBorder(),
+                                    ),
                                 child: Text(
-                                  'Edit',
+                                  'Promote',
                                   style: TextStyle(
                                       color: Styles.colorTextBlack
                                           .withOpacity(0.8),

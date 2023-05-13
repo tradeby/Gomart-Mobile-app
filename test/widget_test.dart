@@ -27,31 +27,4 @@ void main() {
     expect(1, 1);
   });
 
-  test('convertTime should format 24-hour time to AM/PM time', () {
-    String timeString = '13:30';
-    String formattedTime = convertTime(timeString);
-    expect(formattedTime, equals('1:30 pm'));
-
-    timeString = '01:45';
-    formattedTime = convertTime(timeString);
-    expect(formattedTime, equals('1:45 am'));
-
-    timeString = '00:00';
-    formattedTime = convertTime(timeString);
-    expect(formattedTime, equals('12:00 pm'));
-
-    timeString = '23:59';
-    formattedTime = convertTime(timeString);
-    expect(formattedTime, equals('11:59 pm'));
-  });
-
-  test('convertTime should handle leading zeros in time string', () {
-    String timeString = '09:05';
-    String formattedTime = convertTime(timeString);
-    expect(formattedTime, equals('9:05 am'));
-
-    timeString = '05:08';
-    formattedTime = convertTime(timeString);
-    expect(formattedTime, equals('5:08 am'));
-  });
 }

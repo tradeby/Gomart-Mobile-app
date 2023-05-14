@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gomart/screens/Home/Screens/Account/EditBusiness/edit_business_screen.dart';
+import 'package:gomart/screens/Home/Screens/Account/profile.dart';
 import 'package:gomart/styles/styles.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -103,7 +104,7 @@ class BusinessProfileScreen extends StatelessWidget {
                             fit: BoxFit.cover)),
                     height: 114,
                   ),
-                  Positioned(
+                  /*Positioned(
                       top: 5,
                       left: 5,
                       child: Container(
@@ -112,7 +113,7 @@ class BusinessProfileScreen extends StatelessWidget {
                               borderRadius: BorderRadius.circular(50)),
                           child: const BackButton(
                             color: Styles.colorWhite,
-                          ))),
+                          ))),*/
                   Positioned(
                     top: 5,
                     right: 5,
@@ -133,14 +134,17 @@ class BusinessProfileScreen extends StatelessWidget {
                         ),
                         onSelected: (String result) {
                           switch (result) {
-                            case 'filter1':
-                              print('filter 1 clicked');
+                            case 'editBusiness':
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => const EditBusinessScreen()),
+                              );
                               break;
-                            case 'filter2':
-                              print('filter 2 clicked');
-                              break;
-                            case 'clearFilters':
-                              print('Clear filters');
+                            case 'settings':
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => const ProfileSettingsScreen()),
+                              );
                               break;
                             default:
                           }
@@ -148,11 +152,11 @@ class BusinessProfileScreen extends StatelessWidget {
                         itemBuilder: (BuildContext context) =>
                             <PopupMenuEntry<String>>[
                           const PopupMenuItem<String>(
-                            value: 'filter1',
+                            value: 'editBusiness',
                             child: Text('Edit Business'),
                           ),
                           const PopupMenuItem<String>(
-                            value: 'filter1',
+                            value: 'settings',
                             child: Text('Settings'),
                           ),
                         ],

@@ -38,13 +38,14 @@ class CustomPersistentHeader extends SliverPersistentHeaderDelegate {
         AppBar(
           backgroundColor: Styles.colorWhite,
           elevation: 0,
-          leading: Padding(
-            padding: const EdgeInsets.fromLTRB(0, 4, 0, 4),
+          leading: Container(
+            height: 10,
+            padding: const EdgeInsets.fromLTRB(8,4, 0, 4),
             child: Image.asset(
-              'assets/icon/gomart-logo--with-text-home-screen.png',
+              'assets/icon/gomart_ho.png',
             )
           ),
-          leadingWidth: 200,
+          leadingWidth: 140,
           actions: [
             IconButton(
               onPressed: () {

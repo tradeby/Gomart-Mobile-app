@@ -27,10 +27,8 @@ class ProfileFragment extends StatelessWidget {
             .doc(FirebaseAuth.instance.currentUser?.uid)
             .get(),
         builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(
-              child: Text('Loading...'),
-            );
+          if (snapshot.connectionState == ConnectionState.waiting ) {
+            return const BusinessProfileLoading();
           }
           if (snapshot.hasError) {
             return Center(

@@ -61,6 +61,7 @@ Future<_i1.GetIt> init(
   gh.factory<_i8.IBusinessRepository>(() => _i9.FirebaseBusinessRepository(
         gh<_i5.FirebaseFirestore>(),
         gh<_i7.FirebaseStorage>(),
+        gh<_i4.FirebaseAuth>(),
       ));
   gh.factory<_i10.IProductRepository>(() => _i11.ProductRepository(
         gh<_i5.FirebaseFirestore>(),

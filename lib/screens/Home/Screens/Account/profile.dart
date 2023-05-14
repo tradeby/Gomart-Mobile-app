@@ -21,13 +21,13 @@ class ProfileFragment extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: FutureBuilder<DocumentSnapshot>(
-        future: FirebaseFirestore.instance
+      body: StreamBuilder<DocumentSnapshot>(
+        stream: FirebaseFirestore.instance
             .collection('USERS')
             .doc(FirebaseAuth.instance.currentUser?.uid)
-            .get(),
+            .snapshots(),
         builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting ) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
             return const BusinessProfileLoading();
           }
           if (snapshot.hasError) {
@@ -41,17 +41,20 @@ class ProfileFragment extends StatelessWidget {
             );
           }
           final userData = snapshot.data!.data()!;
-          final businessId = snapshot.data!.get('businessId');
+          try {
+            String? businessId = snapshot.data?.get('businessId');
 
-          if (businessId != null) {
-            return const BusinessProfileScreen();
-          } else {
+            if (businessId != null) {
+              return const BusinessProfileScreen();
+            } else {
+              return const ProfileSettingsScreen();
+            }
+          } catch (e) {
             return const ProfileSettingsScreen();
           }
         },
       ),
     );
-    // return ProfileSettingsScreen();
   }
 }
 

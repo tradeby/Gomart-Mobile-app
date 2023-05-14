@@ -30,7 +30,11 @@ class _EditBusinessScreenState extends State<EditBusinessScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocListener<BusinessCubit, BusinessState>(
-      listener: (context, state) {},
+      listener: (context, state) {
+        if (state.saving == false) {
+          Navigator.of(context).pop();
+        }
+      },
       child: BlocBuilder<BusinessCubit, BusinessState>(
         builder: (context, state) {
           return Scaffold(
@@ -83,9 +87,7 @@ class _EditBusinessScreenState extends State<EditBusinessScreen> {
                     ),
                   ),
                 ),
-                  (state.saving == true)
-                    ? const LoadingDialog()
-                    : Container()
+                (state.saving == true) ? const LoadingDialog() : Container()
               ],
             ),
           );
@@ -106,9 +108,11 @@ class LoadingDialog extends StatelessWidget {
       children: [
         Container(
           color: Styles.colorWhite.withOpacity(0.9),
-          child:  Center(
-            child:Image.asset('assets/icon/icon-true-round.png',
-            height: 60,),
+          child: Center(
+            child: Image.asset(
+              'assets/icon/icon-true-round.png',
+              height: 60,
+            ),
           ),
         ),
         const Center(

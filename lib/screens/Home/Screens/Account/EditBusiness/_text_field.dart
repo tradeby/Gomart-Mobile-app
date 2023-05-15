@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:gomart/shared_components/utilities/money_input_formatter.dart';
 
 import '../../../../../styles/styles.dart';
 
 class GomTextField extends StatefulWidget {
   final ValueChanged<String>? onChanged;
   final String? initialValue;
-
+  final Widget? leadingIcon;
+  final bool isTextArea;
+  final bool isMoney;
+  final TextInputType? keyboardType;
   const GomTextField({
     super.key,
     this.onChanged,
-    this.initialValue = '',
+    this.initialValue = '', this.leadingIcon,  this.isTextArea = false, this.keyboardType, this.isMoney = false,
   });
 
   @override
@@ -28,13 +32,17 @@ class _GomTextFieldState extends State<GomTextField> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 32,
+      height: widget.isTextArea? 100:32,
       child: TextField(
+          inputFormatters:widget.isMoney? [MoneyInputFormatter()]:null,
+        keyboardType: widget.keyboardType,
           controller: _textEditingController,
-          decoration: const InputDecoration(
+          maxLines:widget.isTextArea? 6:null,
+          decoration: InputDecoration(
+              prefixIcon: widget.leadingIcon,
               focusColor: Styles.colorGray,
-              contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 8),
-              border: OutlineInputBorder(
+              contentPadding:  EdgeInsets.symmetric(vertical: widget.isTextArea?8:0, horizontal: 8),
+              border: const OutlineInputBorder(
                   borderSide: BorderSide(
                     color: Styles.colorTextFieldBorder,
                     width: 0.8,

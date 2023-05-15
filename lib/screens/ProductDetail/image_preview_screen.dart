@@ -15,8 +15,9 @@ class ImagePreview extends StatefulWidget {
   final String productName;
   final String productUrl;
  final bool isFile;
+ final bool enableSharing;
 
-  const ImagePreview({Key? key, required this.imageUrl, required this.heroTag, required this.productName, required this.productUrl, this.isFile = false}) : super(key: key);
+  const ImagePreview({Key? key, required this.imageUrl, required this.heroTag, required this.productName, required this.productUrl, this.isFile = false, this.enableSharing = true}) : super(key: key);
 
 
   @override
@@ -98,7 +99,7 @@ class ImagePreviewState extends State<ImagePreview> {
               elevation: 0,
               centerTitle: true,
               actions: <Widget>[
-                (productUrl != null)
+                (widget.enableSharing)
                     ? IconButton(
                   onPressed: () async {
                 /*    final description =
@@ -270,10 +271,10 @@ Future<Color> getPaletteColor(String imageUrl) async {
 
     filters: [],
 // Images are square
-    size: Size(300, 300),
+    size: const Size(300, 300),
 
 // I want the dominant color of the top left section of the image
-    region: Offset.zero & Size(40, 40),
+    region: Offset.zero & const Size(40, 40),
   );
   // print('our palette is ${paletteGenerator.dominantColor.color}');
   return paletteGenerator.dominantColor?.color as Color;

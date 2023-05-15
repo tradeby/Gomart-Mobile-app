@@ -70,7 +70,7 @@ class _MessageFragmentState extends State<MessageFragment> {
           elevation: 0.2,
           centerTitle: true,
           title: const Text(
-            'Messages',
+            'Live Chat',
             style: TextStyle(color: Styles.colorBlack, fontSize: 16),
           ),
         ),

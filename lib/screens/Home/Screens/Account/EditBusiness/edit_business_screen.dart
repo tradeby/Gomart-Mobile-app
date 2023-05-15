@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gomart/screens/Home/Screens/Account/EditBusiness/_map_edit_business.dart';
 import 'package:gomart/screens/Home/Screens/Account/EditBusiness/bloc/business_cubit.dart';
+import 'package:gomart/shared_components/imageAddPreview/image_add_preview.dart';
+import 'package:gomart/shared_components/imageAddPreview/image_type_model.dart';
 import 'package:google_maps_webservice/places.dart';
 import '../../../../../shared_components/supportedOpeningClosingTimes/_supported_times.dart';
 import '../../../../../styles/custom_home_icons.dart';
@@ -11,7 +13,6 @@ import '../BusinessProfile/business_profile_screen.dart';
 import '_address_auto_complete.dart';
 import '_get_current_location.dart';
 import '_logo_pick_section.dart';
-import '_store_gallary_section.dart';
 import '_text_field.dart';
 import '_upload_banner_section.dart';
 import 'dart:convert';
@@ -51,7 +52,16 @@ class _EditBusinessScreenState extends State<EditBusinessScreen> {
                         const Padding(padding: EdgeInsets.all(6)),
                         const LogoAndFieldsSection(),
                         const AddressAndMap(),
-                        const StoreGallerySection(),
+                        StoreGallerySection(
+                          pGalleryPhotos: state.gallaryPhotos
+                              .map((e) => ImageTypeModel(isFile: true, url: e))
+                              .toList(),
+                          sectionTitle: 'Add Store Gallery Photos',
+                          onImagePicked: (img) => context
+                              .read<BusinessCubit>()
+                              .setGalleryImage(img.url),
+                          onImageRemoved: (img) => {},
+                        ),
                         const Padding(padding: EdgeInsets.all(6)),
                         Center(
                           child: SizedBox(

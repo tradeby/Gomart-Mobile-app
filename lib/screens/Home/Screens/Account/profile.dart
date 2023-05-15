@@ -12,6 +12,7 @@ import 'package:gomart/styles/custom_home_icons.dart';
 
 import '../../../../styles/styles.dart';
 import '../../../Authentication/Register/register_screen_upload_photo.dart';
+import 'BusinessProfile/_business_profile_loading_screen.dart';
 import 'BusinessProfile/business_profile_screen.dart';
 import 'EditBusiness/edit_business_screen.dart';
 

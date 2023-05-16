@@ -9,11 +9,12 @@ class GomTextField extends StatefulWidget {
   final Widget? leadingIcon;
   final bool isTextArea;
   final bool isMoney;
+  final bool isCompact;
   final TextInputType? keyboardType;
   const GomTextField({
     super.key,
     this.onChanged,
-    this.initialValue = '', this.leadingIcon,  this.isTextArea = false, this.keyboardType, this.isMoney = false,
+    this.initialValue = '', this.leadingIcon,  this.isTextArea = false, this.keyboardType, this.isMoney = false, this.isCompact = false  ,
   });
 
   @override
@@ -34,6 +35,9 @@ class _GomTextFieldState extends State<GomTextField> {
     return SizedBox(
       height: widget.isTextArea? 100:32,
       child: TextField(
+        style: widget.isCompact? const TextStyle(
+          fontSize: 12
+        ):null,
           inputFormatters:widget.isMoney? [MoneyInputFormatter()]:null,
         keyboardType: widget.keyboardType,
           controller: _textEditingController,
@@ -41,7 +45,7 @@ class _GomTextFieldState extends State<GomTextField> {
           decoration: InputDecoration(
               prefixIcon: widget.leadingIcon,
               focusColor: Styles.colorGray,
-              contentPadding:  EdgeInsets.symmetric(vertical: widget.isTextArea?8:0, horizontal: 8),
+              contentPadding:  EdgeInsets.symmetric(vertical: widget.isTextArea?8: widget.isCompact?2: 0, horizontal: 8),
               border: const OutlineInputBorder(
                   borderSide: BorderSide(
                     color: Styles.colorTextFieldBorder,

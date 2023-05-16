@@ -1,6 +1,8 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:gomart/shared_components/imageAddPreview/image_add_preview.dart';
 
+import '../../../../../shared_components/postSpecifications/specifications.dart';
 import '../../../../../shared_components/supportedOpeningClosingTimes/_supported_times.dart';
 import '../../../../../styles/custom_home_icons.dart';
 import '../../../../../styles/styles.dart';
@@ -169,265 +171,7 @@ class ManageProductScreen extends StatelessWidget {
               const Padding(
                 padding: EdgeInsets.all(6.0),
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      'Specifications',
-                      style: TextStyle(
-                          color: Styles.colorTextBlack,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500),
-                    ),
-                    const Padding(
-                      padding: EdgeInsets.all(8.0),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.38,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Padding(padding: EdgeInsets.all(4)),
-                              SizedBox(
-                                height: 32,
-                                child: DropdownButtonFormField(
-                                    decoration: InputDecoration(
-                                      contentPadding:
-                                      const EdgeInsets.symmetric(
-                                          vertical: 0, horizontal: 6),
-                                      border: OutlineInputBorder(
-                                        borderRadius:
-                                        BorderRadius.circular(5.0),
-                                      ),
-                                    ),
-                                    items: List.generate(
-                                        supportedTimeConverted.length,
-                                            (index) => DropdownMenuItem(
-                                          value:
-                                          supportedTimeConverted[index],
-                                          child: Text(
-                                              supportedTimeConverted[
-                                              index]),
-                                        )),
-                                    onChanged: (_) => {}),
-                              ),
-                            ],
-                          ),
-                        ),
-                        const Padding(padding: EdgeInsets.all(4)),
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.40,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-
-                              const Padding(padding: EdgeInsets.all(4)),
-                              GomTextField(),
-                            ],
-                          ),
-                        ),
-                        IconButton(
-                          color: Styles.colorWhite,
-                          icon: Container(
-                              margin: const EdgeInsets.symmetric(
-                                  vertical: 0, horizontal: 4),
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 4, horizontal: 4),
-
-                              child: Icon(Icons.remove_circle, color: Colors.redAccent)),
-                          onPressed: () {
-
-                          },
-                        )
-
-                      ],
-                    ),     Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.38,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Padding(padding: EdgeInsets.all(4)),
-                              SizedBox(
-                                height: 32,
-                                child: DropdownButtonFormField(
-                                    decoration: InputDecoration(
-                                      contentPadding:
-                                      const EdgeInsets.symmetric(
-                                          vertical: 0, horizontal: 6),
-                                      border: OutlineInputBorder(
-                                        borderRadius:
-                                        BorderRadius.circular(5.0),
-                                      ),
-                                    ),
-                                    items: List.generate(
-                                        supportedTimeConverted.length,
-                                            (index) => DropdownMenuItem(
-                                          value:
-                                          supportedTimeConverted[index],
-                                          child: Text(
-                                              supportedTimeConverted[
-                                              index]),
-                                        )),
-                                    onChanged: (_) => {}),
-                              ),
-                            ],
-                          ),
-                        ),
-                        const Padding(padding: EdgeInsets.all(4)),
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.40,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-
-                              const Padding(padding: EdgeInsets.all(4)),
-                              GomTextField(),
-                            ],
-                          ),
-                        ),
-                        IconButton(
-                          color: Styles.colorWhite,
-                          icon: Container(
-                              margin: const EdgeInsets.symmetric(
-                                  vertical: 0, horizontal: 4),
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 4, horizontal: 4),
-
-                              child: Icon(Icons.remove_circle, color: Colors.redAccent)),
-                          onPressed: () {
-
-                          },
-                        )
-
-                      ],
-                    ),
-                    const Padding(
-                      padding: EdgeInsets.all(8.0),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.38,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Text(
-                                'Title',
-                                style: TextStyle(color: Styles.colorTextBlack),
-                              ),
-                              const Padding(padding: EdgeInsets.all(2)),
-                              SizedBox(
-                                height: 32,
-                                child: DropdownButtonFormField(
-                                    decoration: InputDecoration(
-                                      contentPadding:
-                                          const EdgeInsets.symmetric(
-                                              vertical: 0, horizontal: 6),
-                                      border: OutlineInputBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(5.0),
-                                      ),
-                                    ),
-                                    items: List.generate(
-                                        supportedTimeConverted.length,
-                                        (index) => DropdownMenuItem(
-                                              value:
-                                                  supportedTimeConverted[index],
-                                              child: Text(
-                                                  supportedTimeConverted[
-                                                      index]),
-                                            )),
-                                    onChanged: (_) => {}),
-                              ),
-                            ],
-                          ),
-                        ),
-                        const Padding(padding: EdgeInsets.all(4)),
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.40,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Text(
-                                'Value',
-                                style: TextStyle(color: Styles.colorTextBlack),
-                              ),
-                              const Padding(padding: EdgeInsets.all(2)),
-                              SizedBox(
-                                height: 32,
-                                child: DropdownButtonFormField(
-                                    decoration: InputDecoration(
-                                      contentPadding:
-                                          const EdgeInsets.symmetric(
-                                              vertical: 0, horizontal: 6),
-                                      border: OutlineInputBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(5.0),
-                                      ),
-                                    ),
-                                    items: List.generate(
-                                        supportedTimeConverted.length,
-                                        (index) => DropdownMenuItem(
-                                              value:
-                                                  supportedTimeConverted[index],
-                                              child: Text(
-                                                  supportedTimeConverted[
-                                                      index]),
-                                            )),
-
-                                    /* const [
-                                DropdownMenuItem(
-                                  value: '11:00 pm',
-                                  child: Text('11:00 pm'),
-                                ),
-                                DropdownMenuItem(
-                                  value: '13:00 pm',
-                                  child: Text('11:30 pm'),
-                                ),
-                              ],*/
-                                    onChanged: (_) => {}),
-                              ),
-                            ],
-                          ),
-                        ),
-                        IconButton(
-                          color: Styles.colorWhite,
-                          icon: Container(
-                            margin: const EdgeInsets.symmetric(
-                                vertical: 12, horizontal: 4),
-                              padding: const EdgeInsets.symmetric(
-                                vertical: 4, horizontal: 4),
-
-                            child: Icon(Icons.add_circle_sharp, color: Styles.colorPrimary)),
-                          onPressed: () {
-
-                          },
-                        )
-
-                      ],
-                    ),
-                  ],
-                ),
-              ),
+              const SpecificationsSection(),
               const Padding(padding: EdgeInsets.all(6)),
               Container(
                 padding: EdgeInsets.all(8),
@@ -744,5 +488,324 @@ class ManageProductScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class SpecificationsSection extends StatefulWidget {
+  const SpecificationsSection({
+    super.key,
+  });
+
+  @override
+  State<SpecificationsSection> createState() => _SpecificationsSectionState();
+}
+
+class SpecItemModel {
+  final String id;
+  final String? specItemTitle;
+  final String? specItemValue;
+
+  const SpecItemModel(
+      {required this.id, this.specItemTitle, this.specItemValue});
+}
+
+class _SpecificationsSectionState extends State<SpecificationsSection> {
+  List<SpecItemModel> specItems = [];
+  int lastItemCount = 0;
+
+  _onTemplateSelect(SpecificationsTemplateModel template) {
+    List<SpecItemModel> newSpecs = template.specifications
+        .asMap()
+        .map((index, item) {
+          return MapEntry(
+              index,
+              SpecItemModel(
+                  id: 'k_${index}_$lastItemCount', specItemTitle: item));
+        })
+        .values
+        .toList();
+
+    setState(() {
+      specItems = [];
+    });
+    setState(() {
+      specItems = newSpecs;
+    });
+  }
+
+  _onItemRemove(String id) {
+    setState(() {
+      specItems = specItems.where((element) => element.id != id).toList();
+    });
+  }
+
+  _onAddNewSpec(String title, String value) {
+    setState(() {
+      specItems = specItems +
+          [
+            SpecItemModel(
+                id: 'b_$lastItemCount',
+                specItemTitle: title,
+                specItemValue: value)
+          ];
+      lastItemCount = lastItemCount + 1;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            'Specifications',
+            style: TextStyle(
+                color: Styles.colorTextBlack,
+                fontSize: 16,
+                fontWeight: FontWeight.w500),
+          ),
+          const Padding(
+            padding: EdgeInsets.all(4),
+          ),
+          ChooseSpecificationTemplate(
+            onTemplateSelect: _onTemplateSelect,
+          ),
+          Column(
+            children: List.generate(
+                specItems.length,
+                (index) => SpecificationItem(
+                      key: Key('$index+${specItems[index].specItemTitle}'),
+                      title: specItems[index].specItemTitle,
+                      value: specItems[index].specItemValue,
+                      id: specItems[index].id,
+                      onRemoveItem: _onItemRemove,
+                    )),
+          ),
+          const Padding(
+            padding: EdgeInsets.all(8.0),
+          ),
+          AddNewSpecSection(onAddSpec: _onAddNewSpec),
+        ],
+      ),
+    );
+  }
+}
+
+class AddNewSpecSection extends StatefulWidget {
+  final Function(String title, String value)? onAddSpec;
+
+  const AddNewSpecSection({
+    super.key,
+    this.onAddSpec,
+  });
+
+  @override
+  State<AddNewSpecSection> createState() => _AddNewSpecSectionState();
+}
+
+class _AddNewSpecSectionState extends State<AddNewSpecSection> {
+  String title = '';
+  String value = '';
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SizedBox(
+          width: MediaQuery.of(context).size.width * 0.38,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                'Title',
+                style: TextStyle(color: Styles.colorTextBlack),
+              ),
+              const Padding(padding: EdgeInsets.all(2)),
+              GomTextField(
+                key: const Key('title'),
+                initialValue: title,
+                isCompact: true,
+                onChanged: (value) => setState(() {
+                  title = value;
+                }),
+              ),
+            ],
+          ),
+        ),
+        const Padding(padding: EdgeInsets.all(4)),
+        SizedBox(
+          width: MediaQuery.of(context).size.width * 0.40,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                'Value',
+                style: TextStyle(color: Styles.colorTextBlack),
+              ),
+              const Padding(padding: EdgeInsets.all(2)),
+              GomTextField(
+                key: const Key('value'),
+                initialValue: value,
+                isCompact: true,
+                onChanged: (val) => setState(() {
+                  value = val;
+                }),
+              ),
+            ],
+          ),
+        ),
+        IconButton(
+          color: Styles.colorWhite,
+          icon: Container(
+              margin: const EdgeInsets.symmetric(vertical: 12, horizontal: 4),
+              padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 4),
+              child: const Icon(Icons.add_circle_sharp,
+                  color: Styles.colorPrimary)),
+          onPressed: () {
+            widget.onAddSpec!(title, value);
+          },
+        )
+      ],
+    );
+  }
+}
+
+class SpecificationItem extends StatelessWidget {
+  final String id;
+  final String? title;
+  final String? value;
+  final Function(String id)? onRemoveItem;
+
+  const SpecificationItem(
+      {super.key, this.title, this.value, required this.id, this.onRemoveItem});
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 40,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width * 0.40,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Padding(padding: EdgeInsets.all(4)),
+                  GomTextField(
+                    initialValue: title,
+                    isCompact: true,
+                  ),
+                ],
+              ),
+            ),
+          ),
+          const Padding(padding: EdgeInsets.all(4)),
+          SizedBox(
+            width: MediaQuery.of(context).size.width * 0.41,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Padding(padding: EdgeInsets.all(4)),
+                GomTextField(key: Key(id+value.toString()), initialValue: value, isCompact: true),
+              ],
+            ),
+          ),
+          IconButton(
+            color: Styles.colorWhite,
+            icon: Container(
+                margin: const EdgeInsets.symmetric(vertical: 0, horizontal: 4),
+                padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 4),
+                child:
+                    const Icon(Icons.remove_circle, color: Colors.redAccent)),
+            onPressed: () => onRemoveItem!(id),
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class ChooseSpecificationTemplate extends StatefulWidget {
+  final Function(SpecificationsTemplateModel template)? onTemplateSelect;
+
+  const ChooseSpecificationTemplate({
+    super.key,
+    this.onTemplateSelect,
+  });
+
+  @override
+  State<ChooseSpecificationTemplate> createState() =>
+      _ChooseSpecificationTemplateState();
+}
+
+class _ChooseSpecificationTemplateState
+    extends State<ChooseSpecificationTemplate> {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        GestureDetector(
+          onTap: () {
+            // Open dropdown on text click
+            // Show the PopupMenu on tap
+            showPopupMenu(context);
+          },
+          child: const Text(
+            'Choose a specification template',
+            style: TextStyle(
+                color: Styles.colorPrimary,
+                fontSize: 14,
+                fontWeight: FontWeight.w500),
+          ),
+        ),
+        const Padding(
+          padding: EdgeInsets.all(4),
+        ),
+      ],
+    );
+  }
+
+  void showPopupMenu(BuildContext context) {
+    final RenderBox button = context.findRenderObject() as RenderBox;
+    final RenderBox overlay =
+        Overlay.of(context).context.findRenderObject() as RenderBox;
+    final RelativeRect position = RelativeRect.fromRect(
+      Rect.fromPoints(
+        button.localToGlobal(button.size.bottomLeft(Offset.zero),
+            ancestor: overlay),
+        button.localToGlobal(button.size.bottomRight(Offset.zero),
+            ancestor: overlay),
+      ),
+      Offset.zero & overlay.size,
+    );
+
+    showMenu(
+      context: context,
+      position: position,
+      items: List.generate(
+          specTemplates.length,
+          (index) => PopupMenuItem(
+                value: specTemplates[index],
+                child: Text(specTemplates[index].templateName),
+              )),
+      elevation: 8,
+    ).then((SpecificationsTemplateModel? value) {
+      if (value != null) {
+        widget.onTemplateSelect!(value);
+        // Handle the selected option
+      }
+    });
   }
 }

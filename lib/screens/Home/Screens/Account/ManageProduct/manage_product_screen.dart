@@ -763,7 +763,7 @@ class _ChooseSpecificationTemplateState
             showPopupMenu(context);
           },
           child: const Text(
-            'Choose a specification template',
+            'Choose from template',
             style: TextStyle(
                 color: Styles.colorPrimary,
                 fontSize: 14,

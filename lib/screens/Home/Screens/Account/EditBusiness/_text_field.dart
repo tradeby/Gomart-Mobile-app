@@ -36,7 +36,7 @@ class _GomTextFieldState extends State<GomTextField> {
       height: widget.isTextArea? 100:32,
       child: TextField(
         style: widget.isCompact? const TextStyle(
-          fontSize: 12
+          fontSize: 14
         ):null,
           inputFormatters:widget.isMoney? [MoneyInputFormatter()]:null,
         keyboardType: widget.keyboardType,

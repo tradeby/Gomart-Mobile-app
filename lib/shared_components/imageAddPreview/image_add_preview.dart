@@ -58,7 +58,6 @@ class _StoreGallerySection extends State<StoreGallerySection> {
     if (widget.pGalleryPhotos != null) {
       setState(() {
         galleryPhotos = widget.pGalleryPhotos as List<ImageTypeModel>;
-        galleryIndex = 0;
       });
     }
 

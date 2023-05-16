@@ -104,7 +104,7 @@ class _PromoteAdListItemState extends State<PromoteAdListItem> {
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
       margin: const EdgeInsets.symmetric(vertical: 4),
       decoration: BoxDecoration(
-        color: widget.isPromoteItemSelected?Colors.yellowAccent.withOpacity(0.1):null,
+        color: widget.isPromoteItemSelected?Color(0xfffafafa):null,
         border: Border.all(
           color: Styles.colorTextFieldBorder,
           width: 0.8,

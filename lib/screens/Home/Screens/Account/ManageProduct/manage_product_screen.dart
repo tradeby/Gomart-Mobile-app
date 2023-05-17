@@ -389,7 +389,7 @@ class PaymentMethodSelect extends StatelessWidget {
         ),
         PopupMenuItem(
           value: 'h',
-          child: Container(
+          child: SizedBox(
             width: MediaQuery.of(context).size.width,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -399,8 +399,8 @@ class PaymentMethodSelect extends StatelessWidget {
                     height: 30,
                 width: 35,),
                 const Padding(padding: EdgeInsets.all(4)),
-                Padding(
-                  padding: const EdgeInsets.all(6.0),
+                const Padding(
+                  padding: EdgeInsets.all(6.0),
                   child: Text('Add debit/credit card',
                     style: TextStyle(
                       fontSize:16,

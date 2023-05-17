@@ -11,10 +11,16 @@ class GomTextField extends StatefulWidget {
   final bool isMoney;
   final bool isCompact;
   final TextInputType? keyboardType;
+
   const GomTextField({
     super.key,
     this.onChanged,
-    this.initialValue = '', this.leadingIcon,  this.isTextArea = false, this.keyboardType, this.isMoney = false, this.isCompact = false  ,
+    this.initialValue = '',
+    this.leadingIcon,
+    this.isTextArea = false,
+    this.keyboardType,
+    this.isMoney = false,
+    this.isCompact = false,
   });
 
   @override
@@ -33,22 +39,31 @@ class _GomTextFieldState extends State<GomTextField> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: widget.isTextArea? 100:32,
+      height: widget.isTextArea ? 100 : 32,
       child: TextField(
-        style: widget.isCompact? const TextStyle(
-          fontSize: 14
-        ):null,
-          inputFormatters:widget.isMoney? [MoneyInputFormatter()]:null,
-        keyboardType: widget.keyboardType,
+          style: widget.isCompact ? const TextStyle(fontSize: 14) : null,
+          inputFormatters: widget.isMoney ? [MoneyInputFormatter()] : null,
+          keyboardType: widget.keyboardType,
           controller: _textEditingController,
-          maxLines:widget.isTextArea? 6:null,
+          maxLines: widget.isTextArea ? 6 : null,
           decoration: InputDecoration(
               prefixIcon: widget.leadingIcon,
-              focusColor: Styles.colorGray,
-              contentPadding:  EdgeInsets.symmetric(vertical: widget.isTextArea?8: widget.isCompact?2: 0, horizontal: 8),
+         enabledBorder:  OutlineInputBorder(
+           borderSide: BorderSide(color: Styles.colorTextFieldBorder,  width: 0.8,),
+         ),
+              focusedBorder:  OutlineInputBorder(
+           borderSide: BorderSide(color: Styles.colorPrimary,  width: 0.8,),
+         ),
+              contentPadding: EdgeInsets.symmetric(
+                  vertical: widget.isTextArea
+                      ? 8
+                      : widget.isCompact
+                          ? 2
+                          : 0,
+                  horizontal: 8),
               border: const OutlineInputBorder(
                   borderSide: BorderSide(
-                    color: Styles.colorTextFieldBorder,
+                    color: Colors.white,
                     width: 0.8,
                     style: BorderStyle.solid,
                   ),

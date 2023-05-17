@@ -226,9 +226,19 @@ class LogoAndFieldsSection extends StatelessWidget {
                         child: DropdownButtonFormField(
                             value: state.openingTime,
                             decoration: InputDecoration(
+                              focusedBorder:  OutlineInputBorder(
+                                borderSide: BorderSide(color: Styles.colorPrimary,  width: 0.8,),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: Styles.colorTextFieldBorder, width: 0.8
+                                  )),
                               contentPadding: const EdgeInsets.symmetric(
                                   vertical: 0, horizontal: 6),
                               border: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Styles.colorTextFieldBorder, width: 0.8
+                                ),
                                 borderRadius: BorderRadius.circular(5.0),
                               ),
                             ),
@@ -262,6 +272,13 @@ class LogoAndFieldsSection extends StatelessWidget {
                         child: DropdownButtonFormField(
                             value: state.closingTime,
                             decoration: InputDecoration(
+                              enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: Styles.colorTextFieldBorder, width: 0.8
+                                  )),
+                              focusedBorder:  OutlineInputBorder(
+                                borderSide: BorderSide(color: Styles.colorPrimary,  width: 0.8,),
+                              ),
                               contentPadding: const EdgeInsets.symmetric(
                                   vertical: 0, horizontal: 6),
                               border: OutlineInputBorder(
@@ -310,6 +327,13 @@ class LogoAndFieldsSection extends StatelessWidget {
                           value: state.daysOpen,
                           isExpanded: true,
                           decoration: InputDecoration(
+                            enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Styles.colorTextFieldBorder, width: 0.8
+                                )),
+                            focusedBorder:  OutlineInputBorder(
+                              borderSide: BorderSide(color: Styles.colorPrimary,  width: 0.8,),
+                            ),
                             contentPadding: const EdgeInsets.symmetric(
                                 vertical: 0, horizontal: 6),
                             border: OutlineInputBorder(

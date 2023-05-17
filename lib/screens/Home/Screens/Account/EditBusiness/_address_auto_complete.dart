@@ -48,7 +48,14 @@ class EnterAddressAutoCompleteState extends State<EnterAddressAutoComplete> {
             child: TextField(
               controller: _textController,
               decoration: const InputDecoration(
+                  enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                          color: Styles.colorTextFieldBorder, width: 0.8
+                      )),
                   focusColor: Styles.colorGray,
+                  focusedBorder:  OutlineInputBorder(
+                    borderSide: BorderSide(color: Styles.colorPrimary,  width: 0.8,),
+                  ),
                   contentPadding:
                       EdgeInsets.symmetric(vertical: 0, horizontal: 8),
                   border: OutlineInputBorder(

@@ -32,7 +32,7 @@ class _AddNewSpecSectionState extends State<AddNewSpecSection> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Text(
-                'Title',
+                'Title (eg. Colors)',
                 style: TextStyle(color: Styles.colorTextBlack),
               ),
               const Padding(padding: EdgeInsets.all(2)),
@@ -55,7 +55,7 @@ class _AddNewSpecSectionState extends State<AddNewSpecSection> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Text(
-                'Value',
+                'Value (e.g Blue, Red)',
                 style: TextStyle(color: Styles.colorTextBlack),
               ),
               const Padding(padding: EdgeInsets.all(2)),

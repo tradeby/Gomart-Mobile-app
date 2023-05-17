@@ -118,7 +118,7 @@ class _PromoteAdListItemState extends State<PromoteAdListItem> {
           GestureDetector(
             onTap: _onTap,
             child:  Icon(
-              widget.isPromoteItemSelected?Icons.circle:  Icons.circle_outlined,
+              widget.isPromoteItemSelected?Icons.check_circle:  Icons.circle_outlined,
               color: widget.isPromoteItemSelected?Styles.colorPrimary: Styles.colorGray,
               size: 18,
             ),
@@ -156,18 +156,21 @@ class _PromoteAdListItemState extends State<PromoteAdListItem> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(
-                width: MediaQuery.of(context).size.width * 0.6,
-                child: Text(
-                  widget.promoteItemModel.description,
-                  style: const TextStyle(
-                      color: Styles.colorGray,
-                      fontSize: 14,
-                      fontWeight: FontWeight.normal),
+            GestureDetector(
+            onTap: _onTap,
+                child: SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.6,
+                  child: Text(
+                    widget.promoteItemModel.description,
+                    style: const TextStyle(
+                        color: Styles.colorGray,
+                        fontSize: 14,
+                        fontWeight: FontWeight.normal),
+                  ),
                 ),
               ),
               const Padding(padding: EdgeInsets.all(4)),
-              Row(
+              Wrap(
                 children: List.generate(
                     widget.promoteItemModel.supportedPeriods.length,
                     (index) => PromotePeriodItem(
@@ -208,7 +211,7 @@ class _PromotePeriodItemState extends State<PromotePeriodItem> {
       onTap: () => widget.onPeriodChange(widget.period),
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: 4),
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
         decoration: BoxDecoration(
           border: Border.all(
             color:
@@ -216,7 +219,7 @@ class _PromotePeriodItemState extends State<PromotePeriodItem> {
             width: 0.8,
           ),
           color: widget.isSelected ? Styles.colorButtonPay : null,
-          borderRadius: const BorderRadius.all(Radius.circular(10)),
+          borderRadius: const BorderRadius.all(Radius.circular(8)),
         ),
         child: Text(
           widget.period.title,

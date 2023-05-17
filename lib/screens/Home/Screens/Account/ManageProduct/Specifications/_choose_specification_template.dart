@@ -33,8 +33,7 @@ class _ChooseSpecificationTemplateState
             'Choose from template',
             style: TextStyle(
                 color: Styles.colorPrimary,
-                fontSize: 14,
-                fontWeight: FontWeight.w500),
+                fontSize: 14),
           ),
         ),
         const Padding(

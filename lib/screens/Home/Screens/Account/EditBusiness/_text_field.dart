@@ -29,6 +29,8 @@ class GomTextField extends StatefulWidget {
 
 class _GomTextFieldState extends State<GomTextField> {
   late TextEditingController _textEditingController;
+  double _textFieldHeight = 32;
+  int _newlineCount =1;
 
   @override
   void initState() {
@@ -36,24 +38,45 @@ class _GomTextFieldState extends State<GomTextField> {
     super.initState();
   }
 
+  _onTextChange(String value) {
+    double lines = _textEditingController.text.length / 38;
+    int newlineCount = _textEditingController.text.split('\n').length - 1;
+
+    setState(() {
+      _textFieldHeight = lines < 1
+          ? (1+newlineCount) * 32
+          : lines > 6
+              ? (6+newlineCount) * 32
+              : (lines.ceil() +newlineCount)* 32;
+      _newlineCount = _newlineCount;
+    });
+    widget.onChanged!(value);
+  }
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: widget.isTextArea ? 100 : 32,
+      height: widget.isTextArea ? _textFieldHeight : 32,
       child: TextField(
           style: widget.isCompact ? const TextStyle(fontSize: 14) : null,
           inputFormatters: widget.isMoney ? [MoneyInputFormatter()] : null,
           keyboardType: widget.keyboardType,
           controller: _textEditingController,
-          maxLines: widget.isTextArea ? 6 : null,
+          maxLines: widget.isTextArea ?  12: null,
           decoration: InputDecoration(
               prefixIcon: widget.leadingIcon,
-         enabledBorder:  OutlineInputBorder(
-           borderSide: BorderSide(color: Styles.colorTextFieldBorder,  width: 0.8,),
-         ),
-              focusedBorder:  OutlineInputBorder(
-           borderSide: BorderSide(color: Styles.colorPrimary,  width: 0.8,),
-         ),
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: Styles.colorTextFieldBorder,
+                  width: 0.8,
+                ),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: Styles.colorPrimary,
+                  width: 0.8,
+                ),
+              ),
               contentPadding: EdgeInsets.symmetric(
                   vertical: widget.isTextArea
                       ? 8
@@ -68,7 +91,7 @@ class _GomTextFieldState extends State<GomTextField> {
                     style: BorderStyle.solid,
                   ),
                   borderRadius: BorderRadius.all(Radius.circular(5)))),
-          onChanged: widget.onChanged),
+          onChanged: _onTextChange),
     );
 
     /*    return Container(

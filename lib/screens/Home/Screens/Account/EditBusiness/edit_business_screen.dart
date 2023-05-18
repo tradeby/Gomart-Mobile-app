@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gomart/data/model/Business/business_model.dart';
 import 'package:gomart/screens/Home/Screens/Account/EditBusiness/_map_edit_business.dart';
 import 'package:gomart/screens/Home/Screens/Account/EditBusiness/bloc/business_cubit.dart';
 import 'package:gomart/shared_components/imageAddPreview/image_add_preview.dart';
@@ -21,20 +22,26 @@ import 'package:http/http.dart' as http;
 GlobalKey _dialogKey = GlobalKey();
 
 class EditBusinessScreen extends StatefulWidget {
-  const EditBusinessScreen({Key? key}) : super(key: key);
+  final BusinessModel? businessModel;
+  const EditBusinessScreen({Key? key,  this.businessModel}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => _EditBusinessScreenState();
 }
 
 class _EditBusinessScreenState extends State<EditBusinessScreen> {
+
   @override
   Widget build(BuildContext context) {
+    if(widget.businessModel!=null){
+      context.read<BusinessCubit>().initiateState(widget.businessModel!);
+    }
+
     return BlocListener<BusinessCubit, BusinessState>(
       listener: (context, state) {
-        if (state.saving == false) {
+        /*if (state.saving == false) {
           Navigator.of(context).pop();
-        }
+        }*/
       },
       child: BlocBuilder<BusinessCubit, BusinessState>(
         builder: (context, state) {

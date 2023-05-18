@@ -15,7 +15,6 @@ _$_BusinessEntity _$$_BusinessEntityFromJson(Map<String, dynamic> json) =>
       closingTime: json['closingTime'] as String?,
       openingTime: json['openingTime'] as String?,
       daysOpen: json['daysOpen'] as String?,
-      membersSince: json['membersSince'] as String?,
       numberOfFollowers: json['numberOfFollowers'] as int?,
       phoneNumber: json['phoneNumber'] as String?,
       state: json['state'] as String?,
@@ -32,8 +31,6 @@ _$_BusinessEntity _$$_BusinessEntityFromJson(Map<String, dynamic> json) =>
       galleryPhotos: (json['galleryPhotos'] as List<dynamic>?)
           ?.map((e) => e as String)
           .toList(),
-      createdOn: json['createdOn'] as String?,
-      updatedOn: json['updatedOn'] as String?,
     );
 
 Map<String, dynamic> _$$_BusinessEntityToJson(_$_BusinessEntity instance) =>
@@ -45,7 +42,6 @@ Map<String, dynamic> _$$_BusinessEntityToJson(_$_BusinessEntity instance) =>
       'closingTime': instance.closingTime,
       'openingTime': instance.openingTime,
       'daysOpen': instance.daysOpen,
-      'membersSince': instance.membersSince,
       'numberOfFollowers': instance.numberOfFollowers,
       'phoneNumber': instance.phoneNumber,
       'state': instance.state,
@@ -58,6 +54,4 @@ Map<String, dynamic> _$$_BusinessEntityToJson(_$_BusinessEntity instance) =>
       'isPublished': instance.isPublished,
       'coverPhotoUrl': instance.coverPhotoUrl,
       'galleryPhotos': instance.galleryPhotos,
-      'createdOn': instance.createdOn,
-      'updatedOn': instance.updatedOn,
     };

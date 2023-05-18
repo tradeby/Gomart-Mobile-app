@@ -6,6 +6,8 @@ abstract class IBusinessRepository {
   Future<String> uploadBusinessPhoto(
       String localPhotoUrl, String businessId, String folderPath);
 
+  Future<BusinessModel?> getBusinessById(String businessId);
+
   String generateBusinessId();
 
   Future<List<String>> uploadMultiplePhotos(

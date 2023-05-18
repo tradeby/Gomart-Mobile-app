@@ -27,12 +27,14 @@ import 'package:gomart/screens/Authentication/Login/bloc/login_cubit.dart'
     as _i14;
 import 'package:gomart/screens/Authentication/Register/bloc/registration_cubit.dart'
     as _i15;
-import 'package:gomart/screens/debug/bloc/debug_cubit.dart' as _i19;
+import 'package:gomart/screens/debug/bloc/debug_cubit.dart' as _i20;
+import 'package:gomart/screens/Home/Screens/Account/BusinessProfile/bloc/business_profile_cubit.dart'
+    as _i19;
 import 'package:gomart/screens/Home/Screens/Account/EditBusiness/bloc/business_cubit.dart'
     as _i18;
-import 'package:gomart/screens/Home/Screens/Home/bloc/home_cubit.dart' as _i20;
+import 'package:gomart/screens/Home/Screens/Home/bloc/home_cubit.dart' as _i21;
 import 'package:gomart/screens/Search/bloc/search_cubit.dart' as _i16;
-import 'package:gomart/service/app_module.dart' as _i21;
+import 'package:gomart/service/app_module.dart' as _i22;
 import 'package:gomart/service/firebase_service.dart' as _i6;
 import 'package:injectable/injectable.dart' as _i2;
 
@@ -86,11 +88,13 @@ Future<_i1.GetIt> init(
       () => _i17.AuthenticationBloc(gh<_i12.IUserRepository>()));
   gh.factory<_i18.BusinessCubit>(
       () => _i18.BusinessCubit(gh<_i8.IBusinessRepository>()));
-  gh.factory<_i19.DebugCubit>(
-      () => _i19.DebugCubit(gh<_i10.IProductRepository>()));
-  gh.factory<_i20.HomeCubit>(
-      () => _i20.HomeCubit(gh<_i10.IProductRepository>()));
+  gh.factory<_i19.BusinessProfileCubit>(
+      () => _i19.BusinessProfileCubit(gh<_i8.IBusinessRepository>()));
+  gh.factory<_i20.DebugCubit>(
+      () => _i20.DebugCubit(gh<_i10.IProductRepository>()));
+  gh.factory<_i21.HomeCubit>(
+      () => _i21.HomeCubit(gh<_i10.IProductRepository>()));
   return getIt;
 }
 
-class _$AppModule extends _i21.AppModule {}
+class _$AppModule extends _i22.AppModule {}

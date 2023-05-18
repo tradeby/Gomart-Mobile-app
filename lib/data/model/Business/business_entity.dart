@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'business_entity.freezed.dart';
@@ -15,7 +16,7 @@ class BusinessEntity with _$BusinessEntity {
     String? closingTime,
     String? openingTime,
     String? daysOpen,
-    String? membersSince,
+    //Timestamp? membersSince,
     int? numberOfFollowers,
     String? phoneNumber,
     String? state,
@@ -29,8 +30,8 @@ class BusinessEntity with _$BusinessEntity {
     String? coverPhotoUrl,
     List<String>? galleryPhotos,
     //BusinessManagerEntity? businessManager,
-    String? createdOn,
-    String? updatedOn,
+   // Timestamp? createdOn,
+   // Timestamp? updatedOn,
   }) = _BusinessEntity;
 
   factory BusinessEntity.fromJson(Map<String, dynamic> json) =>
@@ -38,6 +39,9 @@ class BusinessEntity with _$BusinessEntity {
 
   static BusinessEntity fromSnapshot(DocumentSnapshot snap) {
     Map<String, dynamic> data = snap.data() as Map<String, dynamic>;
+    if (kDebugMode) {
+      print('*****##########$data');
+    }
     return BusinessEntity.fromJson(data);
   }
 }

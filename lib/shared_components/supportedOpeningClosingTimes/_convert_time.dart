@@ -1,5 +1,8 @@
 String convertTime(String timeString) {
   // Parse the input time string into hours and minutes
+  if(timeString.contains('pm') || timeString.contains('am')){
+    return timeString;
+  }
   List<String> parts = timeString.split(':');
   int hours = int.parse(parts[0]);
   int minutes = int.parse(parts[1]);

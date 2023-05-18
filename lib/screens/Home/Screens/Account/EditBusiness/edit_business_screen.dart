@@ -57,16 +57,14 @@ class _EditBusinessScreenState extends State<EditBusinessScreen> {
                       children: [
                         const UploadBannerSection(),
                         const Padding(padding: EdgeInsets.all(6)),
-                        const LogoAndFieldsSection(),
+                       const LogoAndFieldsSection(),
                         const AddressAndMap(),
                         StoreGallerySection(
-                          pGalleryPhotos: state.gallaryPhotos
-                              .map((e) => ImageTypeModel(isFile: true, url: e))
-                              .toList(),
+                          pGalleryPhotos: state.gallaryPhotos,
                           sectionTitle: 'Add Store Gallery Photos',
                           onImagePicked: (img) => context
                               .read<BusinessCubit>()
-                              .setGalleryImage(img.url),
+                              .setGalleryImage(ImageTypeModel(  isFile: true, url: img.url)),
                           onImageRemoved: (img) => {},
                         ),
                         const Padding(padding: EdgeInsets.all(6)),
@@ -143,7 +141,7 @@ class LoadingDialog extends StatelessWidget {
             ),
           ),
         ),
-        Center(
+        const Center(
           child: Padding(
             padding: EdgeInsets.fromLTRB(0, 150, 0, 0),
             child: Text('Saving changes'),
@@ -165,7 +163,7 @@ class LogoAndFieldsSection extends StatelessWidget {
       return Column(
         children: [
           LogoPickSection(
-              logoUrl: state.logoUrl, businessName: state.businessName),
+              logoUrl: state.logoUrl , businessName: state.businessName),
           Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(

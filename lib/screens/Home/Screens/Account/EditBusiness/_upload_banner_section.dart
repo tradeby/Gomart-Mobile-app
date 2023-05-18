@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../../../../shared_components/imageAddPreview/image_type_model.dart';
 import '../../../../../styles/styles.dart';
 import 'bloc/business_cubit.dart';
 
@@ -40,7 +41,12 @@ class UploadBannerSectionState extends State<UploadBannerSection> {
               image: (state.bannerUrl != null)
                   ? DecorationImage(
                   fit: BoxFit.cover,
-                  image: FileImage(File(state.bannerUrl.toString())))
+                  image: state.bannerUrl?.isFile == true
+                      ? FileImage(
+                      File(state.bannerUrl?.url as String))
+                  as ImageProvider
+                      : NetworkImage(state.bannerUrl?.url as String),)
+                 // image: FileImage(File(state.bannerUrl.toString())))
                   : null,
               color: Styles.colorGray.withOpacity(0.08),
             ),
@@ -80,7 +86,7 @@ class UploadBannerSectionState extends State<UploadBannerSection> {
                     );
                     String? imagePath = croppedFile!.path;
                     if (!mounted) return;
-                    context.read<BusinessCubit>().setBannerImage(imagePath);
+                    context.read<BusinessCubit>().setBannerImage(ImageTypeModel(isFile: true, url:imagePath ) );
                   } else {}
                 },
                 child: const Text(

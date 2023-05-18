@@ -5,6 +5,9 @@ import 'package:gomart/data/model/Business/business_model.dart';
 import 'package:gomart/data/repository/Business/IBusinessRepository.dart';
 import 'package:injectable/injectable.dart';
 
+import '../../../../../../shared_components/imageAddPreview/image_type_model.dart';
+import '../../../../../../shared_components/supportedOpeningClosingTimes/_convert_time.dart';
+
 part 'business_cubit.freezed.dart';
 
 class LocationMap {
@@ -20,8 +23,9 @@ class LocationMap {
 abstract class BusinessState with _$BusinessState {
   const factory BusinessState({
     bool? saving,
-    String? bannerUrl,
-    String? logoUrl,
+    String? businessId,
+    ImageTypeModel? bannerUrl,
+    ImageTypeModel? logoUrl,
     String? businessName,
     String? phoneNumber,
     String? emailAddress,
@@ -31,7 +35,7 @@ abstract class BusinessState with _$BusinessState {
     String? address,
     int? gallaryIndex,
     LocationMap? locationMap,
-    required List<String> gallaryPhotos,
+    required List<ImageTypeModel> gallaryPhotos,
   }) = _BusinessState;
 
   factory BusinessState.initial() => const BusinessState(
@@ -48,32 +52,34 @@ class BusinessCubit extends Cubit<BusinessState> {
   void initiateState(BusinessModel bus) {
     BusinessState newState = BusinessState(
       saving: false,
-      bannerUrl: bus.coverPhotoUrl,
-      logoUrl: bus.logoUrl,
+        businessId: bus.id,
+      bannerUrl: bus.coverPhotoUrl!=null? ImageTypeModel(isFile: false , url:  bus.coverPhotoUrl!):null,
+      logoUrl: bus.logoUrl!=null? ImageTypeModel(isFile: false , url:  bus.logoUrl!):null,
       businessName: bus.companyName,
       phoneNumber: bus.phoneNumber,
       emailAddress: 'bus.emailAddress',
-      openingTime: bus.openingTime,
-      closingTime: bus.closingTime,
-      daysOpen: bus.daysOpen,
+      openingTime: bus.openingTime!=null? convertTime(bus.openingTime!):null,
+      closingTime: bus.closingTime!=null? convertTime(bus.closingTime!):null,
+      daysOpen: null,//bus.daysOpen,
       address: bus.address,
       gallaryIndex: null,
       locationMap: LocationMap(
           longitude: bus.map!['longitude'] ?? 0,
           latitude: bus.map!['latitude'] ?? 0,
           address: bus.address ?? ''),
-      gallaryPhotos: bus.galleryPhotos ?? [],
+      gallaryPhotos: bus.galleryPhotos?.map((e) => ImageTypeModel(isFile: false , url: e))
+          .toList() ?? [],
     );
     emit(newState);
   }
 
-  void setBannerImage(croppedImagePath) => emit(state.copyWith(
+  void setBannerImage(ImageTypeModel croppedImagePath) => emit(state.copyWith(
       bannerUrl: croppedImagePath, gallaryPhotos: state.gallaryPhotos));
 
-  void setLogoImage(croppedImagePath) => emit(state.copyWith(
+  void setLogoImage(ImageTypeModel croppedImagePath) => emit(state.copyWith(
       logoUrl: croppedImagePath, gallaryPhotos: state.gallaryPhotos));
 
-  void setGalleryImage(String image) {
+  void setGalleryImage(ImageTypeModel image) {
     emit(state.copyWith(gallaryPhotos: state.gallaryPhotos + [image]));
     emit(state.copyWith(gallaryIndex: state.gallaryPhotos.length - 1));
   }
@@ -102,19 +108,18 @@ class BusinessCubit extends Cubit<BusinessState> {
       String? logoImageUrl;
       String? bannerImageUrl;
       List<String> gallaryImagesUrls = [];
-      String businessId = 'RhX5gDFTBJZIleUmZoyz';
-      // String businessId = _businessRepo.generateBusinessId();
+      String businessId =state.businessId==null? _businessRepo.generateBusinessId():state.businessId!;
       if (kDebugMode) {
         print('****** business id is $businessId');
       }
       if (state.logoUrl != null) {
         logoImageUrl = await _businessRepo.uploadBusinessPhoto(
-            state.logoUrl as String, businessId, 'LOGO');
+            state.logoUrl!, businessId, 'LOGO');
       }
 
       if (state.bannerUrl != null) {
         bannerImageUrl = await _businessRepo.uploadBusinessPhoto(
-            state.bannerUrl as String, businessId, 'BANNER');
+            state.bannerUrl!, businessId, 'BANNER');
       }
 
       if (state.gallaryPhotos.isNotEmpty) {

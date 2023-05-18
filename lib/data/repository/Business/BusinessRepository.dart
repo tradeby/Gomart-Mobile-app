@@ -8,6 +8,7 @@ import 'package:gomart/data/model/Business/business_entity.dart';
 import 'package:gomart/data/model/Business/business_model.dart';
 import 'package:injectable/injectable.dart';
 
+import '../../../shared_components/imageAddPreview/image_type_model.dart';
 import 'IBusinessRepository.dart';
 
 @Injectable(as: IBusinessRepository)
@@ -20,8 +21,11 @@ class FirebaseBusinessRepository implements IBusinessRepository {
       this._firestore, this._firebaseStorage, this._firebaseAuth);
 
   Future<String> _uploadBusinessPhotos(
-      String localPhotoUrl, String businessId, String folderPath) async {
-    File imgFile = File(localPhotoUrl);
+      ImageTypeModel localPhotoUrl, String businessId, String folderPath) async {
+    if(!localPhotoUrl.isFile){
+      return localPhotoUrl.url;
+    }
+    File imgFile = File(localPhotoUrl.url);
     String uploadFolderPath = "BUSINESS/$businessId/$folderPath/";
     final Reference storageReference =
         _firebaseStorage.ref().child(uploadFolderPath);
@@ -69,7 +73,7 @@ class FirebaseBusinessRepository implements IBusinessRepository {
 
   @override
   Future<String> uploadBusinessPhoto(
-      String localPhotoUrl, String businessId, String folderPath) async {
+      ImageTypeModel localPhotoUrl, String businessId, String folderPath) async {
     String imageUrl =
         await _uploadBusinessPhotos(localPhotoUrl, businessId, folderPath);
     return imageUrl;
@@ -77,7 +81,7 @@ class FirebaseBusinessRepository implements IBusinessRepository {
 
   @override
   Future<List<String>> uploadMultiplePhotos(
-      List<String> localPhotoUrls, String businessId, String folderPath) async {
+      List<ImageTypeModel> localPhotoUrls, String businessId, String folderPath) async {
     List<String> imageUrls = [];
     for (int i = 0; i < localPhotoUrls.length; i++) {
       String imageUrl = await _uploadBusinessPhotos(

@@ -5,6 +5,7 @@ import 'package:gomart/screens/Home/Screens/Account/BusinessProfile/_business_pr
 import 'package:gomart/screens/Home/Screens/Account/EditBusiness/edit_business_screen.dart';
 import 'package:gomart/screens/Home/Screens/Account/profile.dart';
 import 'package:gomart/shared_components/imageAddPreview/image_add_preview.dart';
+import 'package:gomart/shared_components/imageAddPreview/image_type_model.dart';
 import 'package:gomart/styles/styles.dart';
 
 import '../../../../../styles/custom_home_icons.dart';
@@ -51,12 +52,12 @@ class BusinessProfileScreen extends StatelessWidget {
                   Stack(
                     children: [
                       Container(
-                        decoration: const BoxDecoration(
+                        decoration:  BoxDecoration(
                             color: Styles.colorBackground,
-                            image: DecorationImage(
-                                image: NetworkImage(
-                                    'https://firebasestorage.googleapis.com/v0/b/gomart-apps.appspot.com/o/product-detail%2Fbanner.png?alt=media&token=8274b345-e083-451a-9cdb-dbf1b15d9763'),
-                                fit: BoxFit.cover)),
+                            image:state.business?.coverPhotoUrl!=null? DecorationImage(
+                                image: NetworkImage(state.business?.coverPhotoUrl as String),
+                                fit: BoxFit.cover):null,
+                        ),
                         height: 114,
                       ),
                       /*Positioned(
@@ -190,10 +191,9 @@ class BusinessProfileScreen extends StatelessWidget {
                                 height: 60,
                                 width: 60,
                                 decoration: BoxDecoration(
-                                    image: const DecorationImage(
-                                        image: NetworkImage(
-                                            'https://firebasestorage.googleapis.com/v0/b/gomart-apps.appspot.com/o/product-detail%2FbusinessLogo.png?alt=media&token=128b8d3c-ce25-4a78-b769-fa92c3d6c014'),
-                                        fit: BoxFit.cover),
+                                    image: state.business?.logoUrl!=null? DecorationImage(
+                                        image: NetworkImage(state.business?.logoUrl as String),
+                                        fit: BoxFit.cover):null,
                                     borderRadius: BorderRadius.circular(60),
                                     color: Styles.colorGray),
                               ),
@@ -211,7 +211,9 @@ class BusinessProfileScreen extends StatelessWidget {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    const Text('3ple F Bakers'),
+                                    Text(state.business?.companyName as String,
+                                        style: const TextStyle(
+                                            fontSize: 16)),
                                     Row(
                                       children: [
                                         Row(
@@ -233,19 +235,22 @@ class BusinessProfileScreen extends StatelessWidget {
                                     ),
                                   ],
                                 ),
-                                const Padding(padding: EdgeInsets.all(4)),
-                                const Text(
-                                  'No. 885 Darmanawa Tudun Fulani',
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                  ),
-                                ),
                                 const Padding(padding: EdgeInsets.all(2)),
+                                 SizedBox(
+                                   width: MediaQuery.of(context).size.width*0.6,
+                                   child: Text(
+                                state.business?.address as String,
+                                    style: const TextStyle(
+                                      fontSize: 12,
+                                    ),
+                                ),
+                                 ),
+                               /* const Padding(padding: EdgeInsets.all(2)),
                                 const Text(
                                   'Darmanawa, Kano',
                                   style: TextStyle(
                                       fontSize: 12, color: Styles.colorPrimary),
-                                ),
+                                ),*/
                                 const Padding(padding: EdgeInsets.all(2)),
                                 Row(
                                   mainAxisAlignment:
@@ -256,15 +261,41 @@ class BusinessProfileScreen extends StatelessWidget {
                                           MainAxisAlignment.start,
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
-                                      children: const [
-                                        Text(
-                                          'Hours: Open . Closes 5pm',
-                                          style: TextStyle(
+                                      children:  [
+                                        Row(
+                                          children:  [
+                                            const  Text(
+                                              'Hours: ',
+                                              style: TextStyle(
+                                                  fontSize: 12,
+                                                  color: Styles.colorTextDark),
+                                            ),
+                                            const   Text(
+                                              true ? 'Open' : 'Closed',
+                                              style: TextStyle(
+                                                  fontSize: 12,
+                                                  color: true //product.isOpen
+                                                      ? Styles.colorTextGreen
+                                                      : Styles.colorTextRed),
+                                            ),
+                                            Text(
+                                              true // product.isOpen
+                                                  ? ' - Closes ${state.business?.closingTime as String}'
+                                                  : ' - Opens 5pm',
+                                              style: const TextStyle(
+                                                  fontSize: 12,
+                                                  color: Styles.colorTextDark),
+                                            ),
+                                          ],
+                                        ),
+                                /*        Text(
+                                          'Hours: Open . Closes ${state.business?.closingTime as String}',
+                                          style: const TextStyle(
                                             fontSize: 12,
                                           ),
-                                        ),
-                                        Padding(padding: EdgeInsets.all(2)),
-                                        Text(
+                                        ),*/
+                                        const Padding(padding: EdgeInsets.all(2)),
+                                        const Text(
                                           'Members since August 2022',
                                           style: TextStyle(
                                               fontSize: 12,
@@ -301,13 +332,14 @@ class BusinessProfileScreen extends StatelessWidget {
                         const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
                     color: Styles.colorWhite,
                     child: Row(
-                      children: const [
-                        Icon(
+                      children:  [
+                        const Icon(
                           Gomart.locationIcon,
                           size: 16,
                         ),
                         Text(
-                          'Darmanawa, Kano  -  1.6 kilometers',
+                          '${state.business?.address}',
+                         // 'Darmanawa, Kano  -  1.6 kilometers',
                           style: TextStyle(fontSize: 14),
                         ),
                         /* Row(
@@ -335,7 +367,10 @@ class BusinessProfileScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                  const StoreGallerySection(
+                  StoreGallerySection(
+                    pGalleryPhotos:state.business?.galleryPhotos?.map((e) => ImageTypeModel(isFile: false , url: e))
+                        .toList(),
+
                       sectionTitle: 'Add Store Gallery Photos'),
                   Container(
                     color: Styles.colorWhite,

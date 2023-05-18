@@ -17,8 +17,9 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$BusinessState {
   bool? get saving => throw _privateConstructorUsedError;
-  String? get bannerUrl => throw _privateConstructorUsedError;
-  String? get logoUrl => throw _privateConstructorUsedError;
+  String? get businessId => throw _privateConstructorUsedError;
+  ImageTypeModel? get bannerUrl => throw _privateConstructorUsedError;
+  ImageTypeModel? get logoUrl => throw _privateConstructorUsedError;
   String? get businessName => throw _privateConstructorUsedError;
   String? get phoneNumber => throw _privateConstructorUsedError;
   String? get emailAddress => throw _privateConstructorUsedError;
@@ -28,7 +29,7 @@ mixin _$BusinessState {
   String? get address => throw _privateConstructorUsedError;
   int? get gallaryIndex => throw _privateConstructorUsedError;
   LocationMap? get locationMap => throw _privateConstructorUsedError;
-  List<String> get gallaryPhotos => throw _privateConstructorUsedError;
+  List<ImageTypeModel> get gallaryPhotos => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $BusinessStateCopyWith<BusinessState> get copyWith =>
@@ -43,8 +44,9 @@ abstract class $BusinessStateCopyWith<$Res> {
   @useResult
   $Res call(
       {bool? saving,
-      String? bannerUrl,
-      String? logoUrl,
+      String? businessId,
+      ImageTypeModel? bannerUrl,
+      ImageTypeModel? logoUrl,
       String? businessName,
       String? phoneNumber,
       String? emailAddress,
@@ -54,7 +56,7 @@ abstract class $BusinessStateCopyWith<$Res> {
       String? address,
       int? gallaryIndex,
       LocationMap? locationMap,
-      List<String> gallaryPhotos});
+      List<ImageTypeModel> gallaryPhotos});
 }
 
 /// @nodoc
@@ -71,6 +73,7 @@ class _$BusinessStateCopyWithImpl<$Res, $Val extends BusinessState>
   @override
   $Res call({
     Object? saving = freezed,
+    Object? businessId = freezed,
     Object? bannerUrl = freezed,
     Object? logoUrl = freezed,
     Object? businessName = freezed,
@@ -89,14 +92,18 @@ class _$BusinessStateCopyWithImpl<$Res, $Val extends BusinessState>
           ? _value.saving
           : saving // ignore: cast_nullable_to_non_nullable
               as bool?,
+      businessId: freezed == businessId
+          ? _value.businessId
+          : businessId // ignore: cast_nullable_to_non_nullable
+              as String?,
       bannerUrl: freezed == bannerUrl
           ? _value.bannerUrl
           : bannerUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as ImageTypeModel?,
       logoUrl: freezed == logoUrl
           ? _value.logoUrl
           : logoUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as ImageTypeModel?,
       businessName: freezed == businessName
           ? _value.businessName
           : businessName // ignore: cast_nullable_to_non_nullable
@@ -136,7 +143,7 @@ class _$BusinessStateCopyWithImpl<$Res, $Val extends BusinessState>
       gallaryPhotos: null == gallaryPhotos
           ? _value.gallaryPhotos
           : gallaryPhotos // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<ImageTypeModel>,
     ) as $Val);
   }
 }
@@ -151,8 +158,9 @@ abstract class _$$_BusinessStateCopyWith<$Res>
   @useResult
   $Res call(
       {bool? saving,
-      String? bannerUrl,
-      String? logoUrl,
+      String? businessId,
+      ImageTypeModel? bannerUrl,
+      ImageTypeModel? logoUrl,
       String? businessName,
       String? phoneNumber,
       String? emailAddress,
@@ -162,7 +170,7 @@ abstract class _$$_BusinessStateCopyWith<$Res>
       String? address,
       int? gallaryIndex,
       LocationMap? locationMap,
-      List<String> gallaryPhotos});
+      List<ImageTypeModel> gallaryPhotos});
 }
 
 /// @nodoc
@@ -177,6 +185,7 @@ class __$$_BusinessStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? saving = freezed,
+    Object? businessId = freezed,
     Object? bannerUrl = freezed,
     Object? logoUrl = freezed,
     Object? businessName = freezed,
@@ -195,14 +204,18 @@ class __$$_BusinessStateCopyWithImpl<$Res>
           ? _value.saving
           : saving // ignore: cast_nullable_to_non_nullable
               as bool?,
+      businessId: freezed == businessId
+          ? _value.businessId
+          : businessId // ignore: cast_nullable_to_non_nullable
+              as String?,
       bannerUrl: freezed == bannerUrl
           ? _value.bannerUrl
           : bannerUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as ImageTypeModel?,
       logoUrl: freezed == logoUrl
           ? _value.logoUrl
           : logoUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as ImageTypeModel?,
       businessName: freezed == businessName
           ? _value.businessName
           : businessName // ignore: cast_nullable_to_non_nullable
@@ -242,7 +255,7 @@ class __$$_BusinessStateCopyWithImpl<$Res>
       gallaryPhotos: null == gallaryPhotos
           ? _value._gallaryPhotos
           : gallaryPhotos // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<ImageTypeModel>,
     ));
   }
 }
@@ -252,6 +265,7 @@ class __$$_BusinessStateCopyWithImpl<$Res>
 class _$_BusinessState with DiagnosticableTreeMixin implements _BusinessState {
   const _$_BusinessState(
       {this.saving,
+      this.businessId,
       this.bannerUrl,
       this.logoUrl,
       this.businessName,
@@ -263,15 +277,17 @@ class _$_BusinessState with DiagnosticableTreeMixin implements _BusinessState {
       this.address,
       this.gallaryIndex,
       this.locationMap,
-      required final List<String> gallaryPhotos})
+      required final List<ImageTypeModel> gallaryPhotos})
       : _gallaryPhotos = gallaryPhotos;
 
   @override
   final bool? saving;
   @override
-  final String? bannerUrl;
+  final String? businessId;
   @override
-  final String? logoUrl;
+  final ImageTypeModel? bannerUrl;
+  @override
+  final ImageTypeModel? logoUrl;
   @override
   final String? businessName;
   @override
@@ -290,9 +306,9 @@ class _$_BusinessState with DiagnosticableTreeMixin implements _BusinessState {
   final int? gallaryIndex;
   @override
   final LocationMap? locationMap;
-  final List<String> _gallaryPhotos;
+  final List<ImageTypeModel> _gallaryPhotos;
   @override
-  List<String> get gallaryPhotos {
+  List<ImageTypeModel> get gallaryPhotos {
     if (_gallaryPhotos is EqualUnmodifiableListView) return _gallaryPhotos;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_gallaryPhotos);
@@ -300,7 +316,7 @@ class _$_BusinessState with DiagnosticableTreeMixin implements _BusinessState {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'BusinessState(saving: $saving, bannerUrl: $bannerUrl, logoUrl: $logoUrl, businessName: $businessName, phoneNumber: $phoneNumber, emailAddress: $emailAddress, openingTime: $openingTime, closingTime: $closingTime, daysOpen: $daysOpen, address: $address, gallaryIndex: $gallaryIndex, locationMap: $locationMap, gallaryPhotos: $gallaryPhotos)';
+    return 'BusinessState(saving: $saving, businessId: $businessId, bannerUrl: $bannerUrl, logoUrl: $logoUrl, businessName: $businessName, phoneNumber: $phoneNumber, emailAddress: $emailAddress, openingTime: $openingTime, closingTime: $closingTime, daysOpen: $daysOpen, address: $address, gallaryIndex: $gallaryIndex, locationMap: $locationMap, gallaryPhotos: $gallaryPhotos)';
   }
 
   @override
@@ -309,6 +325,7 @@ class _$_BusinessState with DiagnosticableTreeMixin implements _BusinessState {
     properties
       ..add(DiagnosticsProperty('type', 'BusinessState'))
       ..add(DiagnosticsProperty('saving', saving))
+      ..add(DiagnosticsProperty('businessId', businessId))
       ..add(DiagnosticsProperty('bannerUrl', bannerUrl))
       ..add(DiagnosticsProperty('logoUrl', logoUrl))
       ..add(DiagnosticsProperty('businessName', businessName))
@@ -329,6 +346,8 @@ class _$_BusinessState with DiagnosticableTreeMixin implements _BusinessState {
         (other.runtimeType == runtimeType &&
             other is _$_BusinessState &&
             (identical(other.saving, saving) || other.saving == saving) &&
+            (identical(other.businessId, businessId) ||
+                other.businessId == businessId) &&
             (identical(other.bannerUrl, bannerUrl) ||
                 other.bannerUrl == bannerUrl) &&
             (identical(other.logoUrl, logoUrl) || other.logoUrl == logoUrl) &&
@@ -357,6 +376,7 @@ class _$_BusinessState with DiagnosticableTreeMixin implements _BusinessState {
   int get hashCode => Object.hash(
       runtimeType,
       saving,
+      businessId,
       bannerUrl,
       logoUrl,
       businessName,
@@ -380,8 +400,9 @@ class _$_BusinessState with DiagnosticableTreeMixin implements _BusinessState {
 abstract class _BusinessState implements BusinessState {
   const factory _BusinessState(
       {final bool? saving,
-      final String? bannerUrl,
-      final String? logoUrl,
+      final String? businessId,
+      final ImageTypeModel? bannerUrl,
+      final ImageTypeModel? logoUrl,
       final String? businessName,
       final String? phoneNumber,
       final String? emailAddress,
@@ -391,14 +412,16 @@ abstract class _BusinessState implements BusinessState {
       final String? address,
       final int? gallaryIndex,
       final LocationMap? locationMap,
-      required final List<String> gallaryPhotos}) = _$_BusinessState;
+      required final List<ImageTypeModel> gallaryPhotos}) = _$_BusinessState;
 
   @override
   bool? get saving;
   @override
-  String? get bannerUrl;
+  String? get businessId;
   @override
-  String? get logoUrl;
+  ImageTypeModel? get bannerUrl;
+  @override
+  ImageTypeModel? get logoUrl;
   @override
   String? get businessName;
   @override
@@ -418,7 +441,7 @@ abstract class _BusinessState implements BusinessState {
   @override
   LocationMap? get locationMap;
   @override
-  List<String> get gallaryPhotos;
+  List<ImageTypeModel> get gallaryPhotos;
   @override
   @JsonKey(ignore: true)
   _$$_BusinessStateCopyWith<_$_BusinessState> get copyWith =>

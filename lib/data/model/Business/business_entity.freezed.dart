@@ -26,8 +26,8 @@ mixin _$BusinessEntity {
   String? get address => throw _privateConstructorUsedError;
   String? get closingTime => throw _privateConstructorUsedError;
   String? get openingTime => throw _privateConstructorUsedError;
-  String? get daysOpen => throw _privateConstructorUsedError;
-  String? get membersSince => throw _privateConstructorUsedError;
+  String? get daysOpen =>
+      throw _privateConstructorUsedError; //Timestamp? membersSince,
   int? get numberOfFollowers => throw _privateConstructorUsedError;
   String? get phoneNumber => throw _privateConstructorUsedError;
   String? get state => throw _privateConstructorUsedError;
@@ -39,10 +39,7 @@ mixin _$BusinessEntity {
   bool? get isDeactivated => throw _privateConstructorUsedError;
   bool? get isPublished => throw _privateConstructorUsedError;
   String? get coverPhotoUrl => throw _privateConstructorUsedError;
-  List<String>? get galleryPhotos =>
-      throw _privateConstructorUsedError; //BusinessManagerEntity? businessManager,
-  String? get createdOn => throw _privateConstructorUsedError;
-  String? get updatedOn => throw _privateConstructorUsedError;
+  List<String>? get galleryPhotos => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -64,7 +61,6 @@ abstract class $BusinessEntityCopyWith<$Res> {
       String? closingTime,
       String? openingTime,
       String? daysOpen,
-      String? membersSince,
       int? numberOfFollowers,
       String? phoneNumber,
       String? state,
@@ -76,9 +72,7 @@ abstract class $BusinessEntityCopyWith<$Res> {
       bool? isDeactivated,
       bool? isPublished,
       String? coverPhotoUrl,
-      List<String>? galleryPhotos,
-      String? createdOn,
-      String? updatedOn});
+      List<String>? galleryPhotos});
 }
 
 /// @nodoc
@@ -101,7 +95,6 @@ class _$BusinessEntityCopyWithImpl<$Res, $Val extends BusinessEntity>
     Object? closingTime = freezed,
     Object? openingTime = freezed,
     Object? daysOpen = freezed,
-    Object? membersSince = freezed,
     Object? numberOfFollowers = freezed,
     Object? phoneNumber = freezed,
     Object? state = freezed,
@@ -114,8 +107,6 @@ class _$BusinessEntityCopyWithImpl<$Res, $Val extends BusinessEntity>
     Object? isPublished = freezed,
     Object? coverPhotoUrl = freezed,
     Object? galleryPhotos = freezed,
-    Object? createdOn = freezed,
-    Object? updatedOn = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -145,10 +136,6 @@ class _$BusinessEntityCopyWithImpl<$Res, $Val extends BusinessEntity>
       daysOpen: freezed == daysOpen
           ? _value.daysOpen
           : daysOpen // ignore: cast_nullable_to_non_nullable
-              as String?,
-      membersSince: freezed == membersSince
-          ? _value.membersSince
-          : membersSince // ignore: cast_nullable_to_non_nullable
               as String?,
       numberOfFollowers: freezed == numberOfFollowers
           ? _value.numberOfFollowers
@@ -198,14 +185,6 @@ class _$BusinessEntityCopyWithImpl<$Res, $Val extends BusinessEntity>
           ? _value.galleryPhotos
           : galleryPhotos // ignore: cast_nullable_to_non_nullable
               as List<String>?,
-      createdOn: freezed == createdOn
-          ? _value.createdOn
-          : createdOn // ignore: cast_nullable_to_non_nullable
-              as String?,
-      updatedOn: freezed == updatedOn
-          ? _value.updatedOn
-          : updatedOn // ignore: cast_nullable_to_non_nullable
-              as String?,
     ) as $Val);
   }
 }
@@ -226,7 +205,6 @@ abstract class _$$_BusinessEntityCopyWith<$Res>
       String? closingTime,
       String? openingTime,
       String? daysOpen,
-      String? membersSince,
       int? numberOfFollowers,
       String? phoneNumber,
       String? state,
@@ -238,9 +216,7 @@ abstract class _$$_BusinessEntityCopyWith<$Res>
       bool? isDeactivated,
       bool? isPublished,
       String? coverPhotoUrl,
-      List<String>? galleryPhotos,
-      String? createdOn,
-      String? updatedOn});
+      List<String>? galleryPhotos});
 }
 
 /// @nodoc
@@ -261,7 +237,6 @@ class __$$_BusinessEntityCopyWithImpl<$Res>
     Object? closingTime = freezed,
     Object? openingTime = freezed,
     Object? daysOpen = freezed,
-    Object? membersSince = freezed,
     Object? numberOfFollowers = freezed,
     Object? phoneNumber = freezed,
     Object? state = freezed,
@@ -274,8 +249,6 @@ class __$$_BusinessEntityCopyWithImpl<$Res>
     Object? isPublished = freezed,
     Object? coverPhotoUrl = freezed,
     Object? galleryPhotos = freezed,
-    Object? createdOn = freezed,
-    Object? updatedOn = freezed,
   }) {
     return _then(_$_BusinessEntity(
       id: freezed == id
@@ -305,10 +278,6 @@ class __$$_BusinessEntityCopyWithImpl<$Res>
       daysOpen: freezed == daysOpen
           ? _value.daysOpen
           : daysOpen // ignore: cast_nullable_to_non_nullable
-              as String?,
-      membersSince: freezed == membersSince
-          ? _value.membersSince
-          : membersSince // ignore: cast_nullable_to_non_nullable
               as String?,
       numberOfFollowers: freezed == numberOfFollowers
           ? _value.numberOfFollowers
@@ -358,21 +327,15 @@ class __$$_BusinessEntityCopyWithImpl<$Res>
           ? _value._galleryPhotos
           : galleryPhotos // ignore: cast_nullable_to_non_nullable
               as List<String>?,
-      createdOn: freezed == createdOn
-          ? _value.createdOn
-          : createdOn // ignore: cast_nullable_to_non_nullable
-              as String?,
-      updatedOn: freezed == updatedOn
-          ? _value.updatedOn
-          : updatedOn // ignore: cast_nullable_to_non_nullable
-              as String?,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_BusinessEntity implements _BusinessEntity {
+class _$_BusinessEntity
+    with DiagnosticableTreeMixin
+    implements _BusinessEntity {
   const _$_BusinessEntity(
       {this.id,
       this.companyName,
@@ -381,7 +344,6 @@ class _$_BusinessEntity implements _BusinessEntity {
       this.closingTime,
       this.openingTime,
       this.daysOpen,
-      this.membersSince,
       this.numberOfFollowers,
       this.phoneNumber,
       this.state,
@@ -393,9 +355,7 @@ class _$_BusinessEntity implements _BusinessEntity {
       this.isDeactivated,
       this.isPublished,
       this.coverPhotoUrl,
-      final List<String>? galleryPhotos,
-      this.createdOn,
-      this.updatedOn})
+      final List<String>? galleryPhotos})
       : _map = map,
         _analytics = analytics,
         _chat = chat,
@@ -418,8 +378,7 @@ class _$_BusinessEntity implements _BusinessEntity {
   final String? openingTime;
   @override
   final String? daysOpen;
-  @override
-  final String? membersSince;
+//Timestamp? membersSince,
   @override
   final int? numberOfFollowers;
   @override
@@ -476,15 +435,35 @@ class _$_BusinessEntity implements _BusinessEntity {
     return EqualUnmodifiableListView(value);
   }
 
-//BusinessManagerEntity? businessManager,
   @override
-  final String? createdOn;
-  @override
-  final String? updatedOn;
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'BusinessEntity(id: $id, companyName: $companyName, businessCategory: $businessCategory, address: $address, closingTime: $closingTime, openingTime: $openingTime, daysOpen: $daysOpen, numberOfFollowers: $numberOfFollowers, phoneNumber: $phoneNumber, state: $state, area: $area, map: $map, analytics: $analytics, chat: $chat, logoUrl: $logoUrl, isDeactivated: $isDeactivated, isPublished: $isPublished, coverPhotoUrl: $coverPhotoUrl, galleryPhotos: $galleryPhotos)';
+  }
 
   @override
-  String toString() {
-    return 'BusinessEntity(id: $id, companyName: $companyName, businessCategory: $businessCategory, address: $address, closingTime: $closingTime, openingTime: $openingTime, daysOpen: $daysOpen, membersSince: $membersSince, numberOfFollowers: $numberOfFollowers, phoneNumber: $phoneNumber, state: $state, area: $area, map: $map, analytics: $analytics, chat: $chat, logoUrl: $logoUrl, isDeactivated: $isDeactivated, isPublished: $isPublished, coverPhotoUrl: $coverPhotoUrl, galleryPhotos: $galleryPhotos, createdOn: $createdOn, updatedOn: $updatedOn)';
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'BusinessEntity'))
+      ..add(DiagnosticsProperty('id', id))
+      ..add(DiagnosticsProperty('companyName', companyName))
+      ..add(DiagnosticsProperty('businessCategory', businessCategory))
+      ..add(DiagnosticsProperty('address', address))
+      ..add(DiagnosticsProperty('closingTime', closingTime))
+      ..add(DiagnosticsProperty('openingTime', openingTime))
+      ..add(DiagnosticsProperty('daysOpen', daysOpen))
+      ..add(DiagnosticsProperty('numberOfFollowers', numberOfFollowers))
+      ..add(DiagnosticsProperty('phoneNumber', phoneNumber))
+      ..add(DiagnosticsProperty('state', state))
+      ..add(DiagnosticsProperty('area', area))
+      ..add(DiagnosticsProperty('map', map))
+      ..add(DiagnosticsProperty('analytics', analytics))
+      ..add(DiagnosticsProperty('chat', chat))
+      ..add(DiagnosticsProperty('logoUrl', logoUrl))
+      ..add(DiagnosticsProperty('isDeactivated', isDeactivated))
+      ..add(DiagnosticsProperty('isPublished', isPublished))
+      ..add(DiagnosticsProperty('coverPhotoUrl', coverPhotoUrl))
+      ..add(DiagnosticsProperty('galleryPhotos', galleryPhotos));
   }
 
   @override
@@ -504,8 +483,6 @@ class _$_BusinessEntity implements _BusinessEntity {
                 other.openingTime == openingTime) &&
             (identical(other.daysOpen, daysOpen) ||
                 other.daysOpen == daysOpen) &&
-            (identical(other.membersSince, membersSince) ||
-                other.membersSince == membersSince) &&
             (identical(other.numberOfFollowers, numberOfFollowers) ||
                 other.numberOfFollowers == numberOfFollowers) &&
             (identical(other.phoneNumber, phoneNumber) ||
@@ -524,11 +501,7 @@ class _$_BusinessEntity implements _BusinessEntity {
             (identical(other.coverPhotoUrl, coverPhotoUrl) ||
                 other.coverPhotoUrl == coverPhotoUrl) &&
             const DeepCollectionEquality()
-                .equals(other._galleryPhotos, _galleryPhotos) &&
-            (identical(other.createdOn, createdOn) ||
-                other.createdOn == createdOn) &&
-            (identical(other.updatedOn, updatedOn) ||
-                other.updatedOn == updatedOn));
+                .equals(other._galleryPhotos, _galleryPhotos));
   }
 
   @JsonKey(ignore: true)
@@ -542,7 +515,6 @@ class _$_BusinessEntity implements _BusinessEntity {
         closingTime,
         openingTime,
         daysOpen,
-        membersSince,
         numberOfFollowers,
         phoneNumber,
         state,
@@ -554,9 +526,7 @@ class _$_BusinessEntity implements _BusinessEntity {
         isDeactivated,
         isPublished,
         coverPhotoUrl,
-        const DeepCollectionEquality().hash(_galleryPhotos),
-        createdOn,
-        updatedOn
+        const DeepCollectionEquality().hash(_galleryPhotos)
       ]);
 
   @JsonKey(ignore: true)
@@ -582,7 +552,6 @@ abstract class _BusinessEntity implements BusinessEntity {
       final String? closingTime,
       final String? openingTime,
       final String? daysOpen,
-      final String? membersSince,
       final int? numberOfFollowers,
       final String? phoneNumber,
       final String? state,
@@ -594,9 +563,7 @@ abstract class _BusinessEntity implements BusinessEntity {
       final bool? isDeactivated,
       final bool? isPublished,
       final String? coverPhotoUrl,
-      final List<String>? galleryPhotos,
-      final String? createdOn,
-      final String? updatedOn}) = _$_BusinessEntity;
+      final List<String>? galleryPhotos}) = _$_BusinessEntity;
 
   factory _BusinessEntity.fromJson(Map<String, dynamic> json) =
       _$_BusinessEntity.fromJson;
@@ -615,9 +582,7 @@ abstract class _BusinessEntity implements BusinessEntity {
   String? get openingTime;
   @override
   String? get daysOpen;
-  @override
-  String? get membersSince;
-  @override
+  @override //Timestamp? membersSince,
   int? get numberOfFollowers;
   @override
   String? get phoneNumber;
@@ -641,10 +606,6 @@ abstract class _BusinessEntity implements BusinessEntity {
   String? get coverPhotoUrl;
   @override
   List<String>? get galleryPhotos;
-  @override //BusinessManagerEntity? businessManager,
-  String? get createdOn;
-  @override
-  String? get updatedOn;
   @override
   @JsonKey(ignore: true)
   _$$_BusinessEntityCopyWith<_$_BusinessEntity> get copyWith =>

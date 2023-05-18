@@ -92,4 +92,14 @@ class FirebaseBusinessRepository implements IBusinessRepository {
     String generatedId = _firestore.collection('UPLOADED_PHOTOS').doc().id;
     return generatedId;
   }
+
+  @override
+  Future<BusinessModel?> getBusinessById(String businessId) async {
+    final businessRef = _firestore.collection('BUSINESSES').doc(businessId);
+    final businessDoc = await businessRef.get();
+    if (businessDoc.exists) {
+      return BusinessModel.fromEntity(BusinessEntity.fromSnapshot(businessDoc));
+    }
+    return null;
+  }
 }

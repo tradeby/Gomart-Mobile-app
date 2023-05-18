@@ -22,8 +22,8 @@ mixin _$BusinessModel {
   String? get address => throw _privateConstructorUsedError;
   String? get closingTime => throw _privateConstructorUsedError;
   String? get openingTime => throw _privateConstructorUsedError;
-  String? get daysOpen => throw _privateConstructorUsedError;
-  String? get membersSince => throw _privateConstructorUsedError;
+  String? get daysOpen =>
+      throw _privateConstructorUsedError; //Timestamp? membersSince,
   int? get numberOfFollowers => throw _privateConstructorUsedError;
   String? get phoneNumber => throw _privateConstructorUsedError;
   String? get state => throw _privateConstructorUsedError;
@@ -35,10 +35,7 @@ mixin _$BusinessModel {
   bool? get isDeactivated => throw _privateConstructorUsedError;
   bool? get isPublished => throw _privateConstructorUsedError;
   String? get coverPhotoUrl => throw _privateConstructorUsedError;
-  List<String>? get galleryPhotos =>
-      throw _privateConstructorUsedError; //BusinessManagerModel? businessManager,
-  String? get createdOn => throw _privateConstructorUsedError;
-  String? get updatedOn => throw _privateConstructorUsedError;
+  List<String>? get galleryPhotos => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $BusinessModelCopyWith<BusinessModel> get copyWith =>
@@ -59,7 +56,6 @@ abstract class $BusinessModelCopyWith<$Res> {
       String? closingTime,
       String? openingTime,
       String? daysOpen,
-      String? membersSince,
       int? numberOfFollowers,
       String? phoneNumber,
       String? state,
@@ -71,9 +67,7 @@ abstract class $BusinessModelCopyWith<$Res> {
       bool? isDeactivated,
       bool? isPublished,
       String? coverPhotoUrl,
-      List<String>? galleryPhotos,
-      String? createdOn,
-      String? updatedOn});
+      List<String>? galleryPhotos});
 }
 
 /// @nodoc
@@ -96,7 +90,6 @@ class _$BusinessModelCopyWithImpl<$Res, $Val extends BusinessModel>
     Object? closingTime = freezed,
     Object? openingTime = freezed,
     Object? daysOpen = freezed,
-    Object? membersSince = freezed,
     Object? numberOfFollowers = freezed,
     Object? phoneNumber = freezed,
     Object? state = freezed,
@@ -109,8 +102,6 @@ class _$BusinessModelCopyWithImpl<$Res, $Val extends BusinessModel>
     Object? isPublished = freezed,
     Object? coverPhotoUrl = freezed,
     Object? galleryPhotos = freezed,
-    Object? createdOn = freezed,
-    Object? updatedOn = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -140,10 +131,6 @@ class _$BusinessModelCopyWithImpl<$Res, $Val extends BusinessModel>
       daysOpen: freezed == daysOpen
           ? _value.daysOpen
           : daysOpen // ignore: cast_nullable_to_non_nullable
-              as String?,
-      membersSince: freezed == membersSince
-          ? _value.membersSince
-          : membersSince // ignore: cast_nullable_to_non_nullable
               as String?,
       numberOfFollowers: freezed == numberOfFollowers
           ? _value.numberOfFollowers
@@ -193,14 +180,6 @@ class _$BusinessModelCopyWithImpl<$Res, $Val extends BusinessModel>
           ? _value.galleryPhotos
           : galleryPhotos // ignore: cast_nullable_to_non_nullable
               as List<String>?,
-      createdOn: freezed == createdOn
-          ? _value.createdOn
-          : createdOn // ignore: cast_nullable_to_non_nullable
-              as String?,
-      updatedOn: freezed == updatedOn
-          ? _value.updatedOn
-          : updatedOn // ignore: cast_nullable_to_non_nullable
-              as String?,
     ) as $Val);
   }
 }
@@ -221,7 +200,6 @@ abstract class _$$_BusinessModelCopyWith<$Res>
       String? closingTime,
       String? openingTime,
       String? daysOpen,
-      String? membersSince,
       int? numberOfFollowers,
       String? phoneNumber,
       String? state,
@@ -233,9 +211,7 @@ abstract class _$$_BusinessModelCopyWith<$Res>
       bool? isDeactivated,
       bool? isPublished,
       String? coverPhotoUrl,
-      List<String>? galleryPhotos,
-      String? createdOn,
-      String? updatedOn});
+      List<String>? galleryPhotos});
 }
 
 /// @nodoc
@@ -256,7 +232,6 @@ class __$$_BusinessModelCopyWithImpl<$Res>
     Object? closingTime = freezed,
     Object? openingTime = freezed,
     Object? daysOpen = freezed,
-    Object? membersSince = freezed,
     Object? numberOfFollowers = freezed,
     Object? phoneNumber = freezed,
     Object? state = freezed,
@@ -269,8 +244,6 @@ class __$$_BusinessModelCopyWithImpl<$Res>
     Object? isPublished = freezed,
     Object? coverPhotoUrl = freezed,
     Object? galleryPhotos = freezed,
-    Object? createdOn = freezed,
-    Object? updatedOn = freezed,
   }) {
     return _then(_$_BusinessModel(
       id: freezed == id
@@ -300,10 +273,6 @@ class __$$_BusinessModelCopyWithImpl<$Res>
       daysOpen: freezed == daysOpen
           ? _value.daysOpen
           : daysOpen // ignore: cast_nullable_to_non_nullable
-              as String?,
-      membersSince: freezed == membersSince
-          ? _value.membersSince
-          : membersSince // ignore: cast_nullable_to_non_nullable
               as String?,
       numberOfFollowers: freezed == numberOfFollowers
           ? _value.numberOfFollowers
@@ -353,14 +322,6 @@ class __$$_BusinessModelCopyWithImpl<$Res>
           ? _value._galleryPhotos
           : galleryPhotos // ignore: cast_nullable_to_non_nullable
               as List<String>?,
-      createdOn: freezed == createdOn
-          ? _value.createdOn
-          : createdOn // ignore: cast_nullable_to_non_nullable
-              as String?,
-      updatedOn: freezed == updatedOn
-          ? _value.updatedOn
-          : updatedOn // ignore: cast_nullable_to_non_nullable
-              as String?,
     ));
   }
 }
@@ -376,7 +337,6 @@ class _$_BusinessModel extends _BusinessModel {
       this.closingTime,
       this.openingTime,
       this.daysOpen,
-      this.membersSince,
       this.numberOfFollowers,
       this.phoneNumber,
       this.state,
@@ -388,9 +348,7 @@ class _$_BusinessModel extends _BusinessModel {
       this.isDeactivated,
       this.isPublished,
       this.coverPhotoUrl,
-      final List<String>? galleryPhotos,
-      this.createdOn,
-      this.updatedOn})
+      final List<String>? galleryPhotos})
       : _map = map,
         _analytics = analytics,
         _chat = chat,
@@ -411,8 +369,7 @@ class _$_BusinessModel extends _BusinessModel {
   final String? openingTime;
   @override
   final String? daysOpen;
-  @override
-  final String? membersSince;
+//Timestamp? membersSince,
   @override
   final int? numberOfFollowers;
   @override
@@ -469,15 +426,9 @@ class _$_BusinessModel extends _BusinessModel {
     return EqualUnmodifiableListView(value);
   }
 
-//BusinessManagerModel? businessManager,
-  @override
-  final String? createdOn;
-  @override
-  final String? updatedOn;
-
   @override
   String toString() {
-    return 'BusinessModel(id: $id, companyName: $companyName, businessCategory: $businessCategory, address: $address, closingTime: $closingTime, openingTime: $openingTime, daysOpen: $daysOpen, membersSince: $membersSince, numberOfFollowers: $numberOfFollowers, phoneNumber: $phoneNumber, state: $state, area: $area, map: $map, analytics: $analytics, chat: $chat, logoUrl: $logoUrl, isDeactivated: $isDeactivated, isPublished: $isPublished, coverPhotoUrl: $coverPhotoUrl, galleryPhotos: $galleryPhotos, createdOn: $createdOn, updatedOn: $updatedOn)';
+    return 'BusinessModel(id: $id, companyName: $companyName, businessCategory: $businessCategory, address: $address, closingTime: $closingTime, openingTime: $openingTime, daysOpen: $daysOpen, numberOfFollowers: $numberOfFollowers, phoneNumber: $phoneNumber, state: $state, area: $area, map: $map, analytics: $analytics, chat: $chat, logoUrl: $logoUrl, isDeactivated: $isDeactivated, isPublished: $isPublished, coverPhotoUrl: $coverPhotoUrl, galleryPhotos: $galleryPhotos)';
   }
 
   @override
@@ -497,8 +448,6 @@ class _$_BusinessModel extends _BusinessModel {
                 other.openingTime == openingTime) &&
             (identical(other.daysOpen, daysOpen) ||
                 other.daysOpen == daysOpen) &&
-            (identical(other.membersSince, membersSince) ||
-                other.membersSince == membersSince) &&
             (identical(other.numberOfFollowers, numberOfFollowers) ||
                 other.numberOfFollowers == numberOfFollowers) &&
             (identical(other.phoneNumber, phoneNumber) ||
@@ -517,11 +466,7 @@ class _$_BusinessModel extends _BusinessModel {
             (identical(other.coverPhotoUrl, coverPhotoUrl) ||
                 other.coverPhotoUrl == coverPhotoUrl) &&
             const DeepCollectionEquality()
-                .equals(other._galleryPhotos, _galleryPhotos) &&
-            (identical(other.createdOn, createdOn) ||
-                other.createdOn == createdOn) &&
-            (identical(other.updatedOn, updatedOn) ||
-                other.updatedOn == updatedOn));
+                .equals(other._galleryPhotos, _galleryPhotos));
   }
 
   @override
@@ -534,7 +479,6 @@ class _$_BusinessModel extends _BusinessModel {
         closingTime,
         openingTime,
         daysOpen,
-        membersSince,
         numberOfFollowers,
         phoneNumber,
         state,
@@ -546,9 +490,7 @@ class _$_BusinessModel extends _BusinessModel {
         isDeactivated,
         isPublished,
         coverPhotoUrl,
-        const DeepCollectionEquality().hash(_galleryPhotos),
-        createdOn,
-        updatedOn
+        const DeepCollectionEquality().hash(_galleryPhotos)
       ]);
 
   @JsonKey(ignore: true)
@@ -567,7 +509,6 @@ abstract class _BusinessModel extends BusinessModel {
       final String? closingTime,
       final String? openingTime,
       final String? daysOpen,
-      final String? membersSince,
       final int? numberOfFollowers,
       final String? phoneNumber,
       final String? state,
@@ -579,9 +520,7 @@ abstract class _BusinessModel extends BusinessModel {
       final bool? isDeactivated,
       final bool? isPublished,
       final String? coverPhotoUrl,
-      final List<String>? galleryPhotos,
-      final String? createdOn,
-      final String? updatedOn}) = _$_BusinessModel;
+      final List<String>? galleryPhotos}) = _$_BusinessModel;
   const _BusinessModel._() : super._();
 
   @override
@@ -598,9 +537,7 @@ abstract class _BusinessModel extends BusinessModel {
   String? get openingTime;
   @override
   String? get daysOpen;
-  @override
-  String? get membersSince;
-  @override
+  @override //Timestamp? membersSince,
   int? get numberOfFollowers;
   @override
   String? get phoneNumber;
@@ -624,10 +561,6 @@ abstract class _BusinessModel extends BusinessModel {
   String? get coverPhotoUrl;
   @override
   List<String>? get galleryPhotos;
-  @override //BusinessManagerModel? businessManager,
-  String? get createdOn;
-  @override
-  String? get updatedOn;
   @override
   @JsonKey(ignore: true)
   _$$_BusinessModelCopyWith<_$_BusinessModel> get copyWith =>

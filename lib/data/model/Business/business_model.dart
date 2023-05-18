@@ -1,4 +1,5 @@
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'business_entity.dart';
@@ -18,7 +19,7 @@ class BusinessModel with _$BusinessModel {
     String? closingTime,
     String? openingTime,
     String? daysOpen,
-    String? membersSince,
+    //Timestamp? membersSince,
     int? numberOfFollowers,
     String? phoneNumber,
     String? state,
@@ -32,8 +33,8 @@ class BusinessModel with _$BusinessModel {
     String? coverPhotoUrl,
     List<String>? galleryPhotos,
     //BusinessManagerModel? businessManager,
-    String? createdOn,
-    String? updatedOn,
+    //Timestamp? createdOn,
+    //Timestamp? updatedOn,
   }) = _BusinessModel;
 
   BusinessEntity toEntity() {
@@ -45,7 +46,7 @@ class BusinessModel with _$BusinessModel {
       closingTime: closingTime,
       openingTime: openingTime,
       daysOpen: daysOpen,
-      membersSince: membersSince,
+     // membersSince: membersSince,
       numberOfFollowers: numberOfFollowers,
       phoneNumber: phoneNumber,
       state: state,
@@ -59,8 +60,8 @@ class BusinessModel with _$BusinessModel {
       coverPhotoUrl: coverPhotoUrl,
       galleryPhotos: galleryPhotos,
      // businessManager: businessManager?.toEntity(),
-      createdOn: createdOn,
-      updatedOn: updatedOn,
+     // createdOn: createdOn,
+     // updatedOn: updatedOn,
     );
   }
 
@@ -73,7 +74,7 @@ class BusinessModel with _$BusinessModel {
       closingTime: entity.closingTime,
       openingTime: entity.openingTime,
       daysOpen: entity.daysOpen,
-      membersSince: entity.membersSince,
+     // membersSince: entity.membersSince,
       numberOfFollowers: entity.numberOfFollowers,
       phoneNumber: entity.phoneNumber,
       state: entity.state,
@@ -89,8 +90,8 @@ class BusinessModel with _$BusinessModel {
     /*  businessManager: entity.businessManager != null
           ? BusinessManagerModel.fromEntity(entity.businessManager!)
           : null,*/
-      createdOn: entity.createdOn,
-      updatedOn: entity.updatedOn,
+     // createdOn: entity.createdOn,
+     // updatedOn: entity.updatedOn,
     );
   }
 }

@@ -46,7 +46,7 @@ class ProfileFragment extends StatelessWidget {
             String? businessId = snapshot.data?.get('businessId');
 
             if (businessId != null) {
-              return const BusinessProfileScreen();
+              return BusinessProfileScreen(businessId: businessId);
             } else {
               return const ProfileSettingsScreen();
             }
@@ -78,7 +78,8 @@ class ProfileSettingsScreen extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 2),
                 width: MediaQuery.of(context).size.width,
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
@@ -219,8 +220,8 @@ class ProfileSettingsScreen extends StatelessWidget {
                 child: ElevatedButton(
                   style: TextButton.styleFrom(
                       backgroundColor: Styles.colorSecondary,
-                      padding:
-                          const EdgeInsets.symmetric(vertical: 8, horizontal: 40),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 8, horizontal: 40),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12)),
                       elevation: 0),
@@ -234,7 +235,8 @@ class ProfileSettingsScreen extends StatelessWidget {
                   child: const Text(
                     'Start selling on Gomart',
                     style: TextStyle(
-                        fontWeight: FontWeight.normal, color: Styles.colorBlack),
+                        fontWeight: FontWeight.normal,
+                        color: Styles.colorBlack),
                   ),
                 ),
               ),

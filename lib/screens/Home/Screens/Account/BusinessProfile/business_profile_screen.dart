@@ -1,6 +1,7 @@
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gomart/screens/Home/Screens/Account/BusinessProfile/_business_profile_loading_screen.dart';
 import 'package:gomart/screens/Home/Screens/Account/EditBusiness/edit_business_screen.dart';
 import 'package:gomart/screens/Home/Screens/Account/profile.dart';
 import 'package:gomart/shared_components/imageAddPreview/image_add_preview.dart';
@@ -9,97 +10,56 @@ import 'package:gomart/styles/styles.dart';
 import '../../../../../styles/custom_home_icons.dart';
 import '../../../../ProductDetail/product_detail.dart';
 import '../ManageProduct/manage_product_screen.dart';
+import 'bloc/business_profile_cubit.dart';
 
 class BusinessProfileScreen extends StatelessWidget {
-  const BusinessProfileScreen({Key? key}) : super(key: key);
+  final String businessId;
+
+  const BusinessProfileScreen({Key? key, required this.businessId})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Styles.colorBackground,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => const ManageProductScreen()),
-          );
-        },
-        backgroundColor: Styles.colorPrimary,
-        child: const Icon(Icons.add),
-      ),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              /*   Container(
-                padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 2),
-                width: MediaQuery.of(context).size.width,
-                child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Row(
-                        children: <Widget>[
-                          (FirebaseAuth.instance.currentUser?.photoURL != null)
-                              ? CircleAvatar(
-                                  radius: 30,
-                                  child: ClipOval(
-                                      child: Image.network(
-                                    FirebaseAuth.instance.currentUser?.photoURL
-                                        as String,
-                                    width: 60,
-                                  )),
-                                )
-                              : CharacterAvatar(
-                                  heightWidth: 40,
-                                  ch: FirebaseAuth
-                                          .instance.currentUser?.displayName ??
-                                      'Null',
-                                ),
-                          const Padding(padding: EdgeInsets.all(8)),
-                          Text(
-                            '${FirebaseAuth.instance.currentUser?.displayName}',
-                            style: const TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.w400),
-                          ),
-                          Expanded(
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: const [
-                                Text(
-                                  'Settings',
-                                  style:
-                                      TextStyle(color: Styles.colorTextBlack),
-                                ),
-                                Padding(padding: EdgeInsets.all(4)),
-                                Icon(Icons.settings)
-                              ],
-                            ),
-                          )
-                        ],
-                      )
-                    ],
-                  ),
-                ),
-              ),*/
-              Stack(
+    context.read<BusinessProfileCubit>().loadBusiness(businessId);
+
+    return BlocBuilder<BusinessProfileCubit, BusinessProfileState>(
+        builder: (context, state) {
+      if (state.loading) {
+        return const BusinessProfileLoading();
+      } else if (!state.loading && state.error != null) {
+        return const Center(child: Text('Error encountered'));
+      } else {
+        return Scaffold(
+          backgroundColor: Styles.colorBackground,
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const ManageProductScreen()),
+              );
+            },
+            backgroundColor: Styles.colorPrimary,
+            child: const Icon(Icons.add),
+          ),
+          body: SafeArea(
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Container(
-                    decoration: const BoxDecoration(
-                        color: Styles.colorBackground,
-                        image: DecorationImage(
-                            image: NetworkImage(
-                                'https://firebasestorage.googleapis.com/v0/b/gomart-apps.appspot.com/o/product-detail%2Fbanner.png?alt=media&token=8274b345-e083-451a-9cdb-dbf1b15d9763'),
-                            fit: BoxFit.cover)),
-                    height: 114,
-                  ),
-                  /*Positioned(
+                  Stack(
+                    children: [
+                      Container(
+                        decoration: const BoxDecoration(
+                            color: Styles.colorBackground,
+                            image: DecorationImage(
+                                image: NetworkImage(
+                                    'https://firebasestorage.googleapis.com/v0/b/gomart-apps.appspot.com/o/product-detail%2Fbanner.png?alt=media&token=8274b345-e083-451a-9cdb-dbf1b15d9763'),
+                                fit: BoxFit.cover)),
+                        height: 114,
+                      ),
+                      /*Positioned(
                       top: 5,
                       left: 5,
                       child: Container(
@@ -109,54 +69,58 @@ class BusinessProfileScreen extends StatelessWidget {
                           child: const BackButton(
                             color: Styles.colorWhite,
                           ))),*/
-                  Positioned(
-                    top: 5,
-                    right: 5,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 4),
-                      child: PopupMenuButton<String>(
-                        color: Styles.colorWhite,
-                        elevation: 2,
-                        shadowColor: Styles.colorBlack,
-                        icon: Container(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 4, horizontal: 4),
-                          decoration: BoxDecoration(
-                              color: Styles.colorBlack.withOpacity(0.2),
-                              borderRadius: BorderRadius.circular(50)),
-                          child:
-                              Icon(Icons.more_vert, color: Styles.colorWhite),
-                        ),
-                        onSelected: (String result) {
-                          switch (result) {
-                            case 'editBusiness':
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => const EditBusinessScreen()),
-                              );
-                              break;
-                            case 'settings':
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => const ProfileSettingsScreen()),
-                              );
-                              break;
-                            default:
-                          }
-                        },
-                        itemBuilder: (BuildContext context) =>
-                            <PopupMenuEntry<String>>[
-                          const PopupMenuItem<String>(
-                            value: 'editBusiness',
-                            child: Text('Edit Business'),
+                      Positioned(
+                        top: 5,
+                        right: 5,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 4),
+                          child: PopupMenuButton<String>(
+                            color: Styles.colorWhite,
+                            elevation: 2,
+                            shadowColor: Styles.colorBlack,
+                            icon: Container(
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 4, horizontal: 4),
+                              decoration: BoxDecoration(
+                                  color: Styles.colorBlack.withOpacity(0.2),
+                                  borderRadius: BorderRadius.circular(50)),
+                              child: Icon(Icons.more_vert,
+                                  color: Styles.colorWhite),
+                            ),
+                            onSelected: (String result) {
+                              switch (result) {
+                                case 'editBusiness':
+                                  (state.business!=null)?  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            EditBusinessScreen(businessModel:state.business!)),
+                                  ):null;
+                                  break;
+                                case 'settings':
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const ProfileSettingsScreen()),
+                                  );
+                                  break;
+                                default:
+                              }
+                            },
+                            itemBuilder: (BuildContext context) =>
+                                <PopupMenuEntry<String>>[
+                              const PopupMenuItem<String>(
+                                value: 'editBusiness',
+                                child: Text('Edit Business'),
+                              ),
+                              const PopupMenuItem<String>(
+                                value: 'settings',
+                                child: Text('Settings'),
+                              ),
+                            ],
                           ),
-                          const PopupMenuItem<String>(
-                            value: 'settings',
-                            child: Text('Settings'),
-                          ),
-                        ],
-                      ),
-                      /*PopupMenuButton<String>(
+                          /*PopupMenuButton<String>(
                           onSelected: (String result) {
                             switch (result) {
                               case 'option1':
@@ -187,7 +151,7 @@ class BusinessProfileScreen extends StatelessWidget {
                           ],
                         )
                         ]*/
-                      /* child: SizedBox(
+                          /* child: SizedBox(
                         height: 20,
                         width: 60,
                         child: OutlinedButton(
@@ -208,138 +172,145 @@ class BusinessProfileScreen extends StatelessWidget {
                           ),
                         ),
                       ),*/
-                    ),
-                  )
-                ],
-              ),
-              Container(
-                  color: Styles.colorWhite,
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 10, horizontal: 6),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Column(
-                        children: [
-                          Container(
-                            height: 60,
-                            width: 60,
-                            decoration: BoxDecoration(
-                                image: const DecorationImage(
-                                    image: NetworkImage(
-                                        'https://firebasestorage.googleapis.com/v0/b/gomart-apps.appspot.com/o/product-detail%2FbusinessLogo.png?alt=media&token=128b8d3c-ce25-4a78-b769-fa92c3d6c014'),
-                                    fit: BoxFit.cover),
-                                borderRadius: BorderRadius.circular(60),
-                                color: Styles.colorGray),
-                          ),
-                        ],
-                      ),
-                      const Padding(padding: EdgeInsets.all(8)),
-                      Container(
-                        color: Styles.colorWhite,
-                        width: MediaQuery.of(context).size.width * 0.762,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                const Text('3ple F Bakers'),
-                                Row(
-                                  children: [
-                                    Row(
-                                      children: const [
-                                        Icon(Icons.star,
-                                            size: 15,
-                                            color: Styles.colorSecondary),
-                                      ],
-                                    ),
-                                    const Padding(padding: EdgeInsets.all(1)),
-                                    const Text(
-                                      '(52 Reviews)',
-                                      style: TextStyle(
-                                          color: Styles.colorPrimary,
-                                          fontSize: 12),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                            const Padding(padding: EdgeInsets.all(4)),
-                            const Text(
-                              'No. 885 Darmanawa Tudun Fulani',
-                              style: TextStyle(
-                                fontSize: 12,
-                              ),
-                            ),
-                            const Padding(padding: EdgeInsets.all(2)),
-                            const Text(
-                              'Darmanawa, Kano',
-                              style: TextStyle(
-                                  fontSize: 12, color: Styles.colorPrimary),
-                            ),
-                            const Padding(padding: EdgeInsets.all(2)),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: const [
-                                    Text(
-                                      'Hours: Open . Closes 5pm',
-                                      style: TextStyle(
-                                        fontSize: 12,
-                                      ),
-                                    ),
-                                    Padding(padding: EdgeInsets.all(2)),
-                                    Text(
-                                      'Members since August 2022',
-                                      style: TextStyle(
-                                          fontSize: 12,
-                                          color: Styles.colorGray),
-                                    ),
-                                  ],
-                                ),
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: const [
-                                    Text(
-                                      '1,121 Followers',
-                                      style: TextStyle(
-                                        fontSize: 12,
-                                      ),
-                                    ),
-                                    Padding(padding: EdgeInsets.all(2)),
-                                  ],
-                                ),
-                              ],
-                            ),
-                            const Padding(padding: EdgeInsets.all(2)),
-                          ],
                         ),
                       )
                     ],
-                  )),
-              const MapSample(),
-              Container(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
-                color: Styles.colorWhite,
-                child: Row(
-                  children: const [
-                    Icon(
-                      Gomart.locationIcon,
-                      size: 16,
-                    ),
-                    Text(
-                      'Darmanawa, Kano  -  1.6 kilometers',
-                      style: TextStyle(fontSize: 14),
-                    ),
-                    /* Row(
+                  ),
+                  Container(
+                      color: Styles.colorWhite,
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 10, horizontal: 6),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Column(
+                            children: [
+                              Container(
+                                height: 60,
+                                width: 60,
+                                decoration: BoxDecoration(
+                                    image: const DecorationImage(
+                                        image: NetworkImage(
+                                            'https://firebasestorage.googleapis.com/v0/b/gomart-apps.appspot.com/o/product-detail%2FbusinessLogo.png?alt=media&token=128b8d3c-ce25-4a78-b769-fa92c3d6c014'),
+                                        fit: BoxFit.cover),
+                                    borderRadius: BorderRadius.circular(60),
+                                    color: Styles.colorGray),
+                              ),
+                            ],
+                          ),
+                          const Padding(padding: EdgeInsets.all(8)),
+                          Container(
+                            color: Styles.colorWhite,
+                            width: MediaQuery.of(context).size.width * 0.762,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    const Text('3ple F Bakers'),
+                                    Row(
+                                      children: [
+                                        Row(
+                                          children: const [
+                                            Icon(Icons.star,
+                                                size: 15,
+                                                color: Styles.colorSecondary),
+                                          ],
+                                        ),
+                                        const Padding(
+                                            padding: EdgeInsets.all(1)),
+                                        const Text(
+                                          '(52 Reviews)',
+                                          style: TextStyle(
+                                              color: Styles.colorPrimary,
+                                              fontSize: 12),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                                const Padding(padding: EdgeInsets.all(4)),
+                                const Text(
+                                  'No. 885 Darmanawa Tudun Fulani',
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                  ),
+                                ),
+                                const Padding(padding: EdgeInsets.all(2)),
+                                const Text(
+                                  'Darmanawa, Kano',
+                                  style: TextStyle(
+                                      fontSize: 12, color: Styles.colorPrimary),
+                                ),
+                                const Padding(padding: EdgeInsets.all(2)),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: const [
+                                        Text(
+                                          'Hours: Open . Closes 5pm',
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                          ),
+                                        ),
+                                        Padding(padding: EdgeInsets.all(2)),
+                                        Text(
+                                          'Members since August 2022',
+                                          style: TextStyle(
+                                              fontSize: 12,
+                                              color: Styles.colorGray),
+                                        ),
+                                      ],
+                                    ),
+                                    Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
+                                      children: const [
+                                        Text(
+                                          '1,121 Followers',
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                          ),
+                                        ),
+                                        Padding(padding: EdgeInsets.all(2)),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                                const Padding(padding: EdgeInsets.all(2)),
+                              ],
+                            ),
+                          )
+                        ],
+                      )),
+                  const MapSample(),
+                  Container(
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
+                    color: Styles.colorWhite,
+                    child: Row(
+                      children: const [
+                        Icon(
+                          Gomart.locationIcon,
+                          size: 16,
+                        ),
+                        Text(
+                          'Darmanawa, Kano  -  1.6 kilometers',
+                          style: TextStyle(fontSize: 14),
+                        ),
+                        /* Row(
                       children:  [
                         const Text(
                           'Darmanawa, Kano  - ',
@@ -361,45 +332,47 @@ class BusinessProfileScreen extends StatelessWidget {
                         )
                       ],
                     ),*/
-                  ],
-                ),
-              ),
-               const StoreGallerySection(sectionTitle:  'Add Store Gallery Photos'),
-              Container(
-                color: Styles.colorWhite,
-                padding: const EdgeInsets.all(8),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Container(
-                        padding: const EdgeInsets.all(8),
-                        decoration: BoxDecoration(
-                            color: Styles.colorBackground,
-                            borderRadius: BorderRadius.circular(4)),
-                        child: const Text(
-                          'Search all 29 items',
-                          style: TextStyle(
-                              fontSize: 12, color: Styles.colorTextLightGrey),
-                        )),
-                    const Padding(padding: EdgeInsets.all(8)),
-                    const ProductDetailItem(
-                      imageUrl:
-                          'https://firebasestorage.googleapis.com/v0/b/gomart-apps.appspot.com/o/product-detail%2Fproduct1.png?alt=media&token=10cb319c-9d42-46c9-916c-c124ec190920',
-                      productTitle:
-                          'Fill Your Own Box of 12 Cupcakes I Mix & Match Your Favorite Flavours',
-                      price: 'N8,000',
+                      ],
                     ),
-                    const Padding(padding: EdgeInsets.all(6)),
-                    const ProductDetailItem(
-                      imageUrl:
-                          'https://firebasestorage.googleapis.com/v0/b/gomart-apps.appspot.com/o/product-detail%2Fproduct2.png?alt=media&token=c1a89179-590e-4d51-aedd-003623274e0d',
-                      productTitle:
-                          'Fill Your Own Box of 12 Cupcakes I Mix & Match Your Favorite Flavours',
-                      price: 'N6,000',
-                    ),
-                    const Padding(padding: EdgeInsets.all(4)),
-                    /*      Center(
+                  ),
+                  const StoreGallerySection(
+                      sectionTitle: 'Add Store Gallery Photos'),
+                  Container(
+                    color: Styles.colorWhite,
+                    padding: const EdgeInsets.all(8),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Container(
+                            padding: const EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                                color: Styles.colorBackground,
+                                borderRadius: BorderRadius.circular(4)),
+                            child: const Text(
+                              'Search all 29 items',
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: Styles.colorTextLightGrey),
+                            )),
+                        const Padding(padding: EdgeInsets.all(8)),
+                        const ProductDetailItem(
+                          imageUrl:
+                              'https://firebasestorage.googleapis.com/v0/b/gomart-apps.appspot.com/o/product-detail%2Fproduct1.png?alt=media&token=10cb319c-9d42-46c9-916c-c124ec190920',
+                          productTitle:
+                              'Fill Your Own Box of 12 Cupcakes I Mix & Match Your Favorite Flavours',
+                          price: 'N8,000',
+                        ),
+                        const Padding(padding: EdgeInsets.all(6)),
+                        const ProductDetailItem(
+                          imageUrl:
+                              'https://firebasestorage.googleapis.com/v0/b/gomart-apps.appspot.com/o/product-detail%2Fproduct2.png?alt=media&token=c1a89179-590e-4d51-aedd-003623274e0d',
+                          productTitle:
+                              'Fill Your Own Box of 12 Cupcakes I Mix & Match Your Favorite Flavours',
+                          price: 'N6,000',
+                        ),
+                        const Padding(padding: EdgeInsets.all(4)),
+                        /*      Center(
                       child: SizedBox(
                         width: MediaQuery.of(context).size.width * 0.94,
                         child: ElevatedButton(
@@ -427,18 +400,17 @@ class BusinessProfileScreen extends StatelessWidget {
                         ),
                       ),
                     ),*/
-                    const Padding(padding: EdgeInsets.all(12))
-                  ],
-                ),
+                        const Padding(padding: EdgeInsets.all(12))
+                      ],
+                    ),
+                  ),
+                  const Padding(padding: EdgeInsets.all(12))
+                ],
               ),
-              const Padding(padding: EdgeInsets.all(12))
-            ],
+            ),
           ),
-        ),
-      ),
-    );
+        );
+      }
+    });
   }
 }
-
-
-

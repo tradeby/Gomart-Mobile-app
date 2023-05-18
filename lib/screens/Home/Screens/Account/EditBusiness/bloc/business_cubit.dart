@@ -45,6 +45,28 @@ class BusinessCubit extends Cubit<BusinessState> {
 
   BusinessCubit(this._businessRepo) : super(BusinessState.initial());
 
+  void initiateState(BusinessModel bus) {
+    BusinessState newState = BusinessState(
+      saving: false,
+      bannerUrl: bus.coverPhotoUrl,
+      logoUrl: bus.logoUrl,
+      businessName: bus.companyName,
+      phoneNumber: bus.phoneNumber,
+      emailAddress: 'bus.emailAddress',
+      openingTime: bus.openingTime,
+      closingTime: bus.closingTime,
+      daysOpen: bus.daysOpen,
+      address: bus.address,
+      gallaryIndex: null,
+      locationMap: LocationMap(
+          longitude: bus.map!['longitude'] ?? 0,
+          latitude: bus.map!['latitude'] ?? 0,
+          address: bus.address ?? ''),
+      gallaryPhotos: bus.galleryPhotos ?? [],
+    );
+    emit(newState);
+  }
+
   void setBannerImage(croppedImagePath) => emit(state.copyWith(
       bannerUrl: croppedImagePath, gallaryPhotos: state.gallaryPhotos));
 
@@ -80,8 +102,8 @@ class BusinessCubit extends Cubit<BusinessState> {
       String? logoImageUrl;
       String? bannerImageUrl;
       List<String> gallaryImagesUrls = [];
-     String businessId = 'RhX5gDFTBJZIleUmZoyz';
-     // String businessId = _businessRepo.generateBusinessId();
+      String businessId = 'RhX5gDFTBJZIleUmZoyz';
+      // String businessId = _businessRepo.generateBusinessId();
       if (kDebugMode) {
         print('****** business id is $businessId');
       }

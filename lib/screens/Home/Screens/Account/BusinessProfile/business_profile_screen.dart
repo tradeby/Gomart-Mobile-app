@@ -199,6 +199,9 @@ class BusinessProfileScreen extends StatelessWidget {
                               ),
                             ],
                           ),
+
+
+
                           const Padding(padding: EdgeInsets.all(8)),
                           Container(
                             color: Styles.colorWhite,

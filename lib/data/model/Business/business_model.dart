@@ -11,6 +11,8 @@ part 'business_model.freezed.dart';
 class BusinessModel with _$BusinessModel {
   const BusinessModel._();
 
+
+
   const factory BusinessModel({
     String? id,
     String? companyName,

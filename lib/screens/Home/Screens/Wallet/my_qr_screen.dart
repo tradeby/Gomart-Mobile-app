@@ -75,7 +75,7 @@ class MyQrScreen extends StatelessWidget {
                 ),
               ),
               const Padding(padding: EdgeInsets.all(16)),
-              Container(
+    /*          Container(
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
                     color: Styles.colorWhite,
@@ -86,7 +86,7 @@ class MyQrScreen extends StatelessWidget {
                   version: QrVersions.auto,
                   size: MediaQuery.of(context).size.width * 0.76,
                 ),
-
+*/
                 /*Container(
                 width: MediaQuery.of(context).size.width * 0.76,
                 height: MediaQuery.of(context).size.width * 0.76,
@@ -97,7 +97,7 @@ class MyQrScreen extends StatelessWidget {
                         image: NetworkImage(
                             'https://firebasestorage.googleapis.com/v0/b/gomart-apps.appspot.com/o/products-picture-sample%2Fqrcodesample.png?alt=media&token=1af2b9bc-5465-4be6-8441-936971336217'))),
               )*/
-              ),
+            //  ),
               const Padding(padding: EdgeInsets.all(24)),
               const Text('Scan me')
             ],

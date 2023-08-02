@@ -12,6 +12,7 @@ import 'package:gomart/screens/Home/Screens/Account/EditBusiness/bloc/business_c
 import 'package:gomart/screens/Home/Screens/Home/bloc/home_cubit.dart';
 import 'package:gomart/screens/Search/bloc/search_cubit.dart';
 import 'package:gomart/screens/debug/bloc/debug_cubit.dart';
+import 'package:gomart/styles/color_schemes.dart';
 import 'package:gomart/styles/styles.dart';
 import 'package:gomart/service/bloc_service.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
@@ -96,13 +97,15 @@ class MyApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       title: 'Gomart app',
-      theme: ThemeData(
+      theme: ThemeData(useMaterial3: true, colorScheme: lightColorScheme),
+      darkTheme: ThemeData(useMaterial3: true, colorScheme: darkColorScheme),
+/*      theme: ThemeData(
         useMaterial3: true,
         primarySwatch: Colors.blue,
         appBarTheme: const AppBarTheme(
           systemOverlayStyle: SystemUiOverlayStyle.light,
         ),
-      ),
+      ),*/
       home: const Authentication(),
     );
   }

@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:gomart/data/model/Product/product_model.dart';
 import 'package:gomart/screens/Home/Screens/Home/bloc/bloc.dart';
 import 'package:gomart/screens/Home/Screens/Home/bloc/bloc.dart';
@@ -39,10 +40,12 @@ class CustomPersistentHeader extends SliverPersistentHeaderDelegate {
           backgroundColor: Styles.colorWhite,
           elevation: 0,
           leading: Container(
-            height: 10,
+            height: 14,
             padding: const EdgeInsets.fromLTRB(8,4, 0, 4),
-            child: Image.asset(
-              'assets/icon/gomart_ho.png',
+            child: SvgPicture.asset(
+                'assets/icon/gomart_h2.svg',
+                height: 12,
+                semanticsLabel: 'Gomart Logo'
             )
           ),
           leadingWidth: 140,
@@ -65,7 +68,7 @@ class CustomPersistentHeader extends SliverPersistentHeaderDelegate {
         ),
         Container(
             color: Styles.colorWhite,
-            padding: const EdgeInsets.fromLTRB(4, 0, 4, 12),
+            padding: const EdgeInsets.fromLTRB(4, 0, 4,4),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [

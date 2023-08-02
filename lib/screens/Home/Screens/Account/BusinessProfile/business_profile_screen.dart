@@ -27,9 +27,7 @@ class BusinessProfileScreen extends StatelessWidget {
         builder: (context, state) {
       if (state.loading) {
         return const BusinessProfileLoading();
-      } else if (!state.loading && state.error != null) {
-        return const Center(child: Text('Error encountered'));
-      } else {
+      }else if (state.business!=null) {
         return Scaffold(
           backgroundColor: Styles.colorBackground,
           floatingActionButton: FloatingActionButton(
@@ -239,7 +237,7 @@ class BusinessProfileScreen extends StatelessWidget {
                                  SizedBox(
                                    width: MediaQuery.of(context).size.width*0.6,
                                    child: Text(
-                                state.business?.address as String,
+                                '${state.business?.address}' ,
                                     style: const TextStyle(
                                       fontSize: 12,
                                     ),
@@ -445,7 +443,9 @@ class BusinessProfileScreen extends StatelessWidget {
             ),
           ),
         );
-      }
-    });
+      }else  {
+          return const Center(child: Text('Error encountered'));
+          }
+        });
   }
 }

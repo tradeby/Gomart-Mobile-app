@@ -97,6 +97,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Gomart app',
       theme: ThemeData(
+        useMaterial3: true,
         primarySwatch: Colors.blue,
         appBarTheme: const AppBarTheme(
           systemOverlayStyle: SystemUiOverlayStyle.light,

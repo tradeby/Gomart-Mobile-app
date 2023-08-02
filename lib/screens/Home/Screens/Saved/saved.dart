@@ -28,18 +28,16 @@ class StateSavedFragment extends State<SavedFragment> {
               padding: EdgeInsets.symmetric(
                 vertical: 200,
               ),
-              indicatorColor: Styles.colorBackground,
-              indicatorWeight: 0.1,
-              labelColor: Styles.colorBlack,
               labelStyle: TextStyle(fontSize: 12),
               tabs: [
-                Tab(
-                  icon: Icon(Icons.domain),
-                  text: 'Businesses',
-                ),
+
                 Tab(
                   icon: Icon(Icons.favorite_border_outlined),
                   text: 'Saved items',
+                ),
+                Tab(
+                  icon: Icon(Icons.domain),
+                  text: 'Businesses',
                 ),
                 Tab(
                   icon: Icon(Icons.history),
@@ -49,8 +47,9 @@ class StateSavedFragment extends State<SavedFragment> {
             ),
           ),
           body: const TabBarView(children: [
-            BusinessesTab(),
             SavedItemsTab(),
+            BusinessesTab(),
+
             RecentlyViewedTab(),
           ]),
         ),

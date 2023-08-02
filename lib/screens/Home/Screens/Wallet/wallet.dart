@@ -28,8 +28,8 @@ class WalletFragment extends StatelessWidget {
                   ),
                 );
               },
-              child: Row(
-                children: const [
+              child: const Row(
+                children: [
                   Padding(padding: EdgeInsets.symmetric(horizontal: 4)),
                   Text(
                     'Receive',

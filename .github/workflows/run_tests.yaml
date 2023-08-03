@@ -31,7 +31,7 @@ jobs:
       - name: Setting up flutter environment
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.7.0'
+          flutter-version: '3.10.5'
 
       - name: Download flutter app dependecies
         run: flutter pub get

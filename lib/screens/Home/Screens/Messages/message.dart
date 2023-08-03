@@ -63,32 +63,30 @@ class _MessageFragmentState extends State<MessageFragment> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Styles.colorWhite,
-          elevation: 0.2,
-          centerTitle: true,
-          title: const Text(
-            'Live Chat',
-            style: TextStyle(color: Styles.colorBlack, fontSize: 16),
-          ),
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Styles.colorWhite,
+        elevation: 0.2,
+        centerTitle: true,
+        title: const Text(
+          'Live Chat',
+          style: TextStyle(color: Styles.colorBlack, fontSize: 16),
         ),
-        body: StreamChannelListView(
-          controller: _listController,
-          onChannelTap: (channel) {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) {
-                  return StreamChannel(
-                    channel: channel,
-                    child: const ChannelPage(),
-                  );
-                },
-              ),
-            );
-          },
-        ),
+      ),
+      body: StreamChannelListView(
+        controller: _listController,
+        onChannelTap: (channel) {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) {
+                return StreamChannel(
+                  channel: channel,
+                  child: const ChannelPage(),
+                );
+              },
+            ),
+          );
+        },
       ),
     );
   }

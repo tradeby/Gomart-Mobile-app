@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:gomart/data/bloc/authentication/authentication_bloc.dart';
 import 'package:gomart/screens/Authentication/Login/bloc/login_cubit.dart';
@@ -22,16 +23,16 @@ import 'package:stream_chat_flutter/stream_chat_flutter.dart';
 import 'injection.dart';
 
 Future<void> main() async {
-  //WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-  //FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
-
+ /* WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+*/
   WidgetsFlutterBinding.ensureInitialized();
   MobileAds.instance.initialize();
   Bloc.observer = BlocDelegateObserver();
   await configureDependencies();
   final client = StreamChatClient(
     'mkx4q8pu4yd4',
-    logLevel: Level.INFO,
+   // logLevel: Level.INFO,
   );
 
   await client.connectUser(

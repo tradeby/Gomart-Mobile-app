@@ -15,45 +15,42 @@ class SavedFragment extends StatefulWidget {
 class StateSavedFragment extends State<SavedFragment> {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: DefaultTabController(
-        length: 3,
-        child: Scaffold(
-          backgroundColor: Styles.colorWhite,
-          appBar: AppBar(
-            elevation: 0,
-            toolbarHeight: 90,
-            backgroundColor: Styles.colorBackground,
-            title: const TabBar(
-              padding: EdgeInsets.symmetric(
-                vertical: 200,
-              ),
-              indicatorColor: Styles.colorBackground,
-              indicatorWeight: 0.1,
-              labelColor: Styles.colorBlack,
-              labelStyle: TextStyle(fontSize: 12),
-              tabs: [
-                Tab(
-                  icon: Icon(Icons.domain),
-                  text: 'Businesses',
-                ),
-                Tab(
-                  icon: Icon(Icons.favorite_border_outlined),
-                  text: 'Saved items',
-                ),
-                Tab(
-                  icon: Icon(Icons.history),
-                  text: 'Recently viewed',
-                ),
-              ],
+    return DefaultTabController(
+      length: 3,
+      child: Scaffold(
+        backgroundColor: Styles.colorWhite,
+        appBar: AppBar(
+          elevation: 0,
+          toolbarHeight: 90,
+          backgroundColor: Styles.colorBackground,
+          title: const TabBar(
+            padding: EdgeInsets.symmetric(
+              vertical: 200,
             ),
+            labelStyle: TextStyle(fontSize: 12),
+            tabs: [
+
+              Tab(
+                icon: Icon(Icons.favorite_border_outlined),
+                text: 'Saved items',
+              ),
+              Tab(
+                icon: Icon(Icons.domain),
+                text: 'Businesses',
+              ),
+              Tab(
+                icon: Icon(Icons.history),
+                text: 'Recently viewed',
+              ),
+            ],
           ),
-          body: const TabBarView(children: [
-            BusinessesTab(),
-            SavedItemsTab(),
-            RecentlyViewedTab(),
-          ]),
         ),
+        body: const TabBarView(children: [
+          SavedItemsTab(),
+          BusinessesTab(),
+
+          RecentlyViewedTab(),
+        ]),
       ),
     );
   }

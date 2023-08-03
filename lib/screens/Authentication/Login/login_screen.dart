@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:gomart/screens/Authentication/Login/bloc/login_cubit.dart';
 import 'package:gomart/screens/Authentication/Login/bloc/login_cubit.dart';
 import 'package:gomart/screens/Authentication/Login/bloc/login_state.dart';
@@ -21,7 +22,6 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      backgroundColor: Styles.colorBackground,
       body: GestureDetector(
         onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
         child: Center(
@@ -31,8 +31,8 @@ class LoginScreen extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.fromLTRB(0, 80, 0, 0),
                 width: MediaQuery.of(context).size.width,
-                decoration: const BoxDecoration(
-                  color: Styles.colorPrimary,
+                decoration:  BoxDecoration(
+                  color: Theme.of(context).primaryColor,
                   borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(50.0),
                     bottomRight: Radius.circular(50.0),
@@ -44,11 +44,13 @@ class LoginScreen extends StatelessWidget {
                       'Welcome back',
                       style: TextStyle(color: Styles.colorWhite, fontSize: 18),
                     ),
-                    const Padding(padding: EdgeInsets.all(16)),
-                    Image.asset(
-                      'assets/icon/gomart-logo-with-text.png',
-                      width: 200,
+                    const Padding(padding: EdgeInsets.all(8)),
+                    SvgPicture.asset(
+                        'assets/icon/splash_svg.svg',
+                        height: 80,
+                        semanticsLabel: 'Gomart Logo'
                     ),
+                    const Padding(padding: EdgeInsets.all(8)),
                   ],
                 ),
               ),

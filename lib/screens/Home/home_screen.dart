@@ -22,7 +22,6 @@ import 'Screens/Wallet/wallet.dart';
 class SampleWidget extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => StateSampleWidget();
-
 }
 
 class StateSampleWidget extends State<SampleWidget> {
@@ -30,13 +29,11 @@ class StateSampleWidget extends State<SampleWidget> {
   Widget build(BuildContext context) {
     return const Scaffold(
         body: SingleChildScrollView(
-          child: Center(
-            child: Text('Hello world sample shit'),
-          ),
-        )
-    );
+      child: Center(
+        child: Text('Hello world sample shit'),
+      ),
+    ));
   }
-
 }
 
 class HomeScreen extends StatefulWidget {
@@ -54,7 +51,38 @@ class StateHomeScreen extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: AnnotatedRegion<SystemUiOverlayStyle>(
+ /*     bottomNavigationBar: NavigationBar(
+        onDestinationSelected: (int index) {
+          setState(() {
+            currentPage = index;
+          });
+        },
+        backgroundColor: Theme.of(context).colorScheme.background,
+        selectedIndex: currentPage,
+        destinations: const <Widget>[
+          NavigationDestination(
+            icon: Icon(Gomart.home),
+            label: 'Home',
+          ),
+          NavigationDestination(
+            icon: Icon(Gomart.heart),
+            label: 'Saved',
+          ),
+          NavigationDestination(
+            icon: Icon(Gomart.wallet),
+            label: 'Wallet',
+          ),
+          NavigationDestination(
+            icon: Icon(Gomart.message),
+            label: 'Wallet',
+          ),
+          NavigationDestination(
+            icon: Badge(child: Icon(Gomart.profile)),
+            label: 'Account',
+          ),
+        ],
+      ),*/
+        bottomNavigationBar: AnnotatedRegion<SystemUiOverlayStyle>(
           value: const SystemUiOverlayStyle(
             systemNavigationBarColor: Styles.colorWhite, // navigation bar color
             statusBarColor:Styles.colorWhite, // status bar color

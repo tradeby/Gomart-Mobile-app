@@ -34,12 +34,11 @@ class CustomPersistentHeader extends SliverPersistentHeaderDelegate {
   @override
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
-    return Column(
-      children: [
-        AppBar(
-          backgroundColor: Styles.colorWhite,
-          elevation: 0,
-          leading: Container(
+    return   Container(
+      color: Theme.of(context).colorScheme.background,
+      child: AppBar(
+        forceMaterialTransparency: true,
+        leading: Container(
             height: 14,
             padding: const EdgeInsets.fromLTRB(8,4, 0, 4),
             child: SvgPicture.asset(
@@ -47,186 +46,188 @@ class CustomPersistentHeader extends SliverPersistentHeaderDelegate {
                 height: 12,
                 semanticsLabel: 'Gomart Logo'
             )
-          ),
-          leadingWidth: 140,
-          actions: [
-            IconButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const NotificationsScreen()),
-                );
-              },
-              icon: const Icon(
-                Gomart.notificationBell,
-                color: Styles.colorTextDark,
-                size: 25,
-              ),
-            )
-          ],
         ),
-        Container(
-            color: Styles.colorWhite,
-            padding: const EdgeInsets.fromLTRB(4, 0, 4,4),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    //
-                    Navigator.of(context)
-                        .push(CustomPageRoute(const SearchInputScreen()));
-                  },
-                  child: Container(
-                    padding: const EdgeInsets.all(8),
-                    width: MediaQuery.of(context).size.width * 0.46,
-                    decoration: BoxDecoration(
-                        color: Styles.colorTextFieldBackground,
-                        borderRadius: BorderRadius.circular(5)),
-                    child: const Text(
-                      'Search here',
-                      style: TextStyle(
-                          fontSize: 12, color: Styles.colorTextFieldHint),
-                    ),
-                  ),
-                ),
-                /*SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.46,
-                  height: 30,
-                  child: TextField(
-                    textInputAction: TextInputAction.search,
-                    onChanged: (text) {},
-                    onSubmitted: (event) {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  const SearchResults()));
-                      if (kDebugMode) {
-                        print('Search submitted');
-                      }
+        leadingWidth: 140,
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const NotificationsScreen()),
+              );
+            },
+            icon: const Icon(
+              Gomart.notificationBell,
+              color: Styles.colorTextDark,
+              size: 25,
+            ),
+          )
+        ],
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(50.0), // Height of the bottom area
+          child:   Container(
+              padding: const EdgeInsets.fromLTRB(4, 0, 4,12),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      //
+                      Navigator.of(context)
+                          .push(CustomPageRoute(const SearchInputScreen()));
                     },
-                    style:
-                        const TextStyle(fontSize: 12, color: Styles.colorBlack),
-                    cursorColor: Styles.colorPrimary,
-                    textAlign: TextAlign.start,
-                    decoration: InputDecoration(
-                      hintStyle: const TextStyle(
-                          fontSize: 12, color: Styles.colorTextFieldHint),
-                      fillColor: Styles.colorTextFieldBackground,
-                      filled: true,
-                      contentPadding: const EdgeInsets.all(8),
-                      focusColor: Styles.colorWhite,
-                      hoverColor: Styles.colorWhite,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(5),
-                        borderSide: BorderSide.none,
+                    child: Container(
+                      padding: const EdgeInsets.all(8),
+                      width: MediaQuery.of(context).size.width * 0.46,
+                      decoration: BoxDecoration(
+                          color: Styles.colorTextFieldBackground,
+                          borderRadius: BorderRadius.circular(5)),
+                      child: const Text(
+                        'Search here',
+                        style: TextStyle(
+                            fontSize: 12, color: Styles.colorTextFieldHint),
                       ),
-                      hintText: 'Search here',
                     ),
                   ),
-                ),*/
-                GestureDetector(
-                  onTap: () {
-                    showGeneralDialog(
-                        context: context,
-                        barrierDismissible: true,
-                        barrierLabel: 'barrier text',
-                        transitionDuration: const Duration(milliseconds: 400),
-                        pageBuilder: (bc, ania, anis) {
-                          return Dialog(
-                            child: Container(
-                              padding: const EdgeInsets.all(16),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  const Padding(padding: EdgeInsets.all(8)),
-                                  const Text(
-                                    'Choose your location',
-                                    style: TextStyle(fontSize: 15),
-                                  ),
-                                  const Padding(padding: EdgeInsets.all(8)),
-                                  TextFieldDropdown(
-                                    options: StateAndCities.states,
-                                    currentSelectedValue:
-                                        StateAndCities.states[0],
-                                  ),
-                                  const Padding(padding: EdgeInsets.all(4)),
-                                  TextFieldDropdown(
-                                    options: StateAndCities.cities,
-                                    currentSelectedValue:
-                                        StateAndCities.cities[0],
-                                  ),
-                                  const Padding(padding: EdgeInsets.all(8)),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      TextButton(
-                                        style: TextButton.styleFrom(
-                                          backgroundColor:
-                                              Styles.colorBackground,
-                                          padding: const EdgeInsets.symmetric(
-                                              vertical: 0, horizontal: 30),
-                                          shape: const StadiumBorder(),
-                                        ),
-                                        onPressed: () {
-                                          Navigator.of(context).pop();
-                                        },
-                                        child: const Text(
-                                          'Cancel',
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.normal,
-                                              color: Styles.colorBlack),
-                                        ),
-                                      ),
-                                      TextButton(
-                                        style: TextButton.styleFrom(
-                                          backgroundColor:
-                                              Styles.colorSecondary,
-                                          padding: const EdgeInsets.symmetric(
-                                              vertical: 0, horizontal: 30),
-                                          shape: const StadiumBorder(),
-                                        ),
-                                        onPressed: () {
-                                          Navigator.of(context).pop();
-                                        },
-                                        child: const Text(
-                                          'Apply',
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.normal,
-                                              color: Styles.colorBlack),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  const Padding(padding: EdgeInsets.all(8)),
-                                ],
-                              ),
-                            ),
-                          );
-                        });
-                  },
-                  child: Container(
-                    padding: const EdgeInsets.all(8),
+                  /*SizedBox(
                     width: MediaQuery.of(context).size.width * 0.46,
-                    decoration: BoxDecoration(
-                        color: Styles.colorTextFieldBackground,
-                        borderRadius: BorderRadius.circular(5)),
-                    child: const Text(
-                      'Where?',
-                      style: TextStyle(
-                          fontSize: 12, color: Styles.colorTextFieldHint),
+                    height: 30,
+                    child: TextField(
+                      textInputAction: TextInputAction.search,
+                      onChanged: (text) {},
+                      onSubmitted: (event) {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    const SearchResults()));
+                        if (kDebugMode) {
+                          print('Search submitted');
+                        }
+                      },
+                      style:
+                          const TextStyle(fontSize: 12, color: Styles.colorBlack),
+                      cursorColor: Styles.colorPrimary,
+                      textAlign: TextAlign.start,
+                      decoration: InputDecoration(
+                        hintStyle: const TextStyle(
+                            fontSize: 12, color: Styles.colorTextFieldHint),
+                        fillColor: Styles.colorTextFieldBackground,
+                        filled: true,
+                        contentPadding: const EdgeInsets.all(8),
+                        focusColor: Styles.colorWhite,
+                        hoverColor: Styles.colorWhite,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(5),
+                          borderSide: BorderSide.none,
+                        ),
+                        hintText: 'Search here',
+                      ),
+                    ),
+                  ),*/
+                  GestureDetector(
+                    onTap: () {
+                      showGeneralDialog(
+                          context: context,
+                          barrierDismissible: true,
+                          barrierLabel: 'barrier text',
+                          transitionDuration: const Duration(milliseconds: 400),
+                          pageBuilder: (bc, ania, anis) {
+                            return Dialog(
+                              child: Container(
+                                padding: const EdgeInsets.all(16),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    const Padding(padding: EdgeInsets.all(8)),
+                                    const Text(
+                                      'Choose your location',
+                                      style: TextStyle(fontSize: 15),
+                                    ),
+                                    const Padding(padding: EdgeInsets.all(8)),
+                                    TextFieldDropdown(
+                                      options: StateAndCities.states,
+                                      currentSelectedValue:
+                                      StateAndCities.states[0],
+                                    ),
+                                    const Padding(padding: EdgeInsets.all(4)),
+                                    TextFieldDropdown(
+                                      options: StateAndCities.cities,
+                                      currentSelectedValue:
+                                      StateAndCities.cities[0],
+                                    ),
+                                    const Padding(padding: EdgeInsets.all(8)),
+                                    Row(
+                                      mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                      crossAxisAlignment:
+                                      CrossAxisAlignment.center,
+                                      children: [
+                                        TextButton(
+                                          style: TextButton.styleFrom(
+                                            backgroundColor:
+                                            Theme.of(context).colorScheme.background,
+                                            padding: const EdgeInsets.symmetric(
+                                                vertical: 0, horizontal: 30),
+                                            shape: const StadiumBorder(),
+                                          ),
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                          child: const Text(
+                                            'Cancel',
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.normal,
+                                                color: Styles.colorBlack),
+                                          ),
+                                        ),
+                                        TextButton(
+                                          style: TextButton.styleFrom(
+                                            backgroundColor:
+                                            Styles.colorSecondary,
+                                            padding: const EdgeInsets.symmetric(
+                                                vertical: 0, horizontal: 30),
+                                            shape: const StadiumBorder(),
+                                          ),
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                          child: const Text(
+                                            'Apply',
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.normal,
+                                                color: Styles.colorBlack),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    const Padding(padding: EdgeInsets.all(8)),
+                                  ],
+                                ),
+                              ),
+                            );
+                          });
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.all(8),
+                      width: MediaQuery.of(context).size.width * 0.46,
+                      decoration: BoxDecoration(
+                          color: Styles.colorTextFieldBackground,
+                          borderRadius: BorderRadius.circular(5)),
+                      child: const Text(
+                        'Where?',
+                        style: TextStyle(
+                            fontSize: 12, color: Styles.colorTextFieldHint),
+                      ),
                     ),
                   ),
-                ),
-              ],
-            )),
-      ],
+                ],
+              )),
+
+        ),
+      ),
     );
   }
 
@@ -325,10 +326,8 @@ class HomeFragment extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Styles.colorBackground,
-      child: Scaffold(
-        backgroundColor: Styles.colorBackground,
+    return Scaffold(
+        backgroundColor: Theme.of(context).colorScheme.background,
         body: GestureDetector(
           onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
           child: SafeArea(
@@ -373,8 +372,7 @@ class HomeFragment extends StatelessWidget {
             ]),
           ),
         ),
-      ),
-    );
+      );
   }
 }
 

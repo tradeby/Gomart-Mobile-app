@@ -29,7 +29,6 @@ class LoginOtpCodeScreen extends StatelessWidget {
         }
       },
       child: Scaffold(
-        backgroundColor: Styles.colorBackground,
         body: GestureDetector(
           onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
           child: SingleChildScrollView(

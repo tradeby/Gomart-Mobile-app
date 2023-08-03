@@ -26,18 +26,10 @@ class ManageProductScreen extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 0),
                 child: SizedBox(
                   height: 25,
-                  width: 80,
                   child: OutlinedButton(
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
-                    style: OutlinedButton.styleFrom(
-                        shape: const StadiumBorder(),
-                        side: const BorderSide(
-                          color: Styles.colorGray,
-                          style: BorderStyle.solid,
-                          width: 1,
-                        )),
                     child: Text(
                       'Cancel',
                       style: TextStyle(

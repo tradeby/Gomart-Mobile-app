@@ -51,7 +51,7 @@ class StateHomeScreen extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: NavigationBar(
+ /*     bottomNavigationBar: NavigationBar(
         onDestinationSelected: (int index) {
           setState(() {
             currentPage = index;
@@ -81,8 +81,8 @@ class StateHomeScreen extends State<HomeScreen> {
             label: 'Account',
           ),
         ],
-      ),
-      /*  bottomNavigationBar: AnnotatedRegion<SystemUiOverlayStyle>(
+      ),*/
+        bottomNavigationBar: AnnotatedRegion<SystemUiOverlayStyle>(
           value: const SystemUiOverlayStyle(
             systemNavigationBarColor: Styles.colorWhite, // navigation bar color
             statusBarColor:Styles.colorWhite, // status bar color
@@ -145,7 +145,7 @@ class StateHomeScreen extends State<HomeScreen> {
                 label: 'Account'),
           ],
         ),
-      ),*/
+      ),
       body: _currentPage(),
     );
   }

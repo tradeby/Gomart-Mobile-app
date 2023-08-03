@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:gomart/screens/Authentication/Register/bloc/register_state.dart';
 import 'package:gomart/screens/Authentication/Register/register_screen_upload_photo.dart';
 import 'package:gomart/styles/styles.dart';
@@ -40,11 +41,13 @@ class RegisterScreenAddBasicInfo extends StatelessWidget {
                       'Find shops & services near you',
                       style: TextStyle(color: Styles.colorWhite, fontSize: 18),
                     ),
-                    const Padding(padding: EdgeInsets.all(16)),
-                    Image.asset(
-                      'assets/icon/gomart-logo-with-text.png',
-                      width: 200,
+                    const Padding(padding: EdgeInsets.all(8)),
+                    SvgPicture.asset(
+                        'assets/icon/splash_svg.svg',
+                        height: 80,
+                        semanticsLabel: 'Gomart Logo'
                     ),
+                    const Padding(padding: EdgeInsets.all(8)),
                   ],
                 ),
               ),

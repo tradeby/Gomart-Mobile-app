@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:gomart/data/model/FlagCountryCode/flag_country_code.dart';
 import 'package:gomart/screens/Authentication/Register/bloc/register_state.dart';
 import 'package:gomart/screens/Authentication/Register/bloc/registration_cubit.dart';
@@ -42,11 +43,13 @@ class RegisterScreen extends StatelessWidget {
                         style:
                             TextStyle(color: Styles.colorWhite, fontSize: 18),
                       ),
-                      const Padding(padding: EdgeInsets.all(16)),
-                      Image.asset(
-                        'assets/icon/gomart-logo-with-text.png',
-                        width: 200,
+                      const Padding(padding: EdgeInsets.all(8)),
+                      SvgPicture.asset(
+                          'assets/icon/splash_svg.svg',
+                          height: 80,
+                          semanticsLabel: 'Gomart Logo'
                       ),
+                      const Padding(padding: EdgeInsets.all(8)),
                     ],
                   ),
                 ),
@@ -138,7 +141,7 @@ class PhoneNumberInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width * 0.68,
+      width: MediaQuery.of(context).size.width * 0.8,
       height: 40,
       decoration: BoxDecoration(
         color: Styles.colorWhite,

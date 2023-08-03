@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:gomart/screens/Authentication/Login/login_screen.dart';
 import 'package:gomart/screens/Authentication/Register/register_screen.dart';
 import 'package:gomart/styles/styles.dart';
@@ -51,10 +52,10 @@ class StateGetStartedScreen extends State<GetStartedScreen> {
                     0,
                     0),
                 duration: const Duration(milliseconds: 300),
-                child: Image.asset(
-                  'assets/icon/gomart-logo-with-text.png',
-                  width: 250,
-                ),
+                child: SvgPicture.asset(
+                    'assets/icon/splash_svg.svg',
+                    semanticsLabel: 'Gomart Logo'
+                )
               ),
               AnimatedSwitcher(
                 duration: const Duration(milliseconds: 300),

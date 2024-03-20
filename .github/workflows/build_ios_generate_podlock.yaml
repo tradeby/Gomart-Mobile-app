@@ -59,3 +59,30 @@ jobs:
         run: cd ios && pod install
       - name: Print ios folder content
         run: cd ios && ls
+      - name: Build app iOS app
+        env:
+          EXPORT_PLIST: ${{ secrets.IOS_EXPORT_PRODUCTION}}
+        run: |
+          # create export options
+          EXPORT_PLIST_PATH=$RUNNER_TEMP/ExportOptions.plist
+          echo -n "$EXPORT_PLIST" | base64 --decode --output $EXPORT_PLIST_PATH
+          flutter build ipa --export-options-plist=$EXPORT_PLIST_PATH --build-name=1.2.0+${{ steps.buildnumber.outputs.build_number }} --build-number=${{ steps.buildnumber.outputs.build_number }}
+      - name: Decode auth. api key file and save it
+        env:
+          API_KEY_BASE64: ${{ secrets.APPSTORE_API_PRIVATE_KEY }}
+        run: |
+          mkdir ~/private_keys
+          echo -n "$API_KEY_BASE64" | base64 --decode --output ~/private_keys/AuthKey_${{ secrets.APPSTORE_API_KEY_ID }}.p8
+          echo "After saving: "
+          ls ~/private_keys
+
+      - name: "upload file to test flight using CLI"
+        run: |
+          echo "Starting upload.. "
+          ls ~/private_keys
+          xcrun altool --upload-app --type ios -f build/ios/ipa/*.ipa --apiKey "${{ secrets.APPSTORE_API_KEY_ID }}" --apiIssuer "${{ secrets.APPSTORE_ISSUER_ID }}"
+
+
+
+
+

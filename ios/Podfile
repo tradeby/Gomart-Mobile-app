@@ -32,7 +32,7 @@ target 'Runner' do
   use_modular_headers!
 
   # Override Firebase SDK Version
-  $FirebaseSDKVersion = '10.22.0'
+  $FirebaseSDKVersion = '11.0.0'
 
   flutter_install_all_ios_pods File.dirname(File.realpath(__FILE__))
 end

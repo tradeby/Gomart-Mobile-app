@@ -2,9 +2,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'business_entity.dart';
 
 part 'business_model.freezed.dart';
+part 'business_model.g.dart';
 
 
 @freezed
@@ -39,61 +39,11 @@ class BusinessModel with _$BusinessModel {
     //Timestamp? updatedOn,
   }) = _BusinessModel;
 
-  BusinessEntity toEntity() {
-    return BusinessEntity(
-      id: id,
-      companyName: companyName,
-      businessCategory: businessCategory,
-      address: address,
-      closingTime: closingTime,
-      openingTime: openingTime,
-      daysOpen: daysOpen,
-     // membersSince: membersSince,
-      numberOfFollowers: numberOfFollowers,
-      phoneNumber: phoneNumber,
-      state: state,
-      area: area,
-      map: map,
-      analytics: analytics,
-      chat: chat,
-      logoUrl: logoUrl,
-      isDeactivated: isDeactivated,
-      isPublished: isPublished,
-      coverPhotoUrl: coverPhotoUrl,
-      galleryPhotos: galleryPhotos,
-     // businessManager: businessManager?.toEntity(),
-     // createdOn: createdOn,
-     // updatedOn: updatedOn,
-    );
-  }
+  factory BusinessModel .fromJson(Map<String, dynamic> json) =>
+      _$BusinessModelFromJson(json);
 
-  static BusinessModel fromEntity(BusinessEntity entity) {
-    return BusinessModel(
-      id: entity.id,
-      companyName: entity.companyName,
-      businessCategory: entity.businessCategory,
-      address: entity.address,
-      closingTime: entity.closingTime,
-      openingTime: entity.openingTime,
-      daysOpen: entity.daysOpen,
-     // membersSince: entity.membersSince,
-      numberOfFollowers: entity.numberOfFollowers,
-      phoneNumber: entity.phoneNumber,
-      state: entity.state,
-      area: entity.area,
-      map: entity.map,
-      analytics: entity.analytics,
-      chat: entity.chat,
-      logoUrl: entity.logoUrl,
-      isDeactivated: entity.isDeactivated,
-      isPublished: entity.isPublished,
-      coverPhotoUrl: entity.coverPhotoUrl,
-      galleryPhotos: entity.galleryPhotos,
-    /*  businessManager: entity.businessManager != null
-          ? BusinessManagerModel.fromEntity(entity.businessManager!)
-          : null,*/
-     // createdOn: entity.createdOn,
-     // updatedOn: entity.updatedOn,
-    );
+  static BusinessModel fromSnapshot(DocumentSnapshot snap) {
+    Map<String, dynamic> data = snap.data() as Map<String, dynamic>;
+    return BusinessModel.fromJson(data);
   }
 }

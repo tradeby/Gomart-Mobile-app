@@ -4,7 +4,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
-import 'package:gomart/data/model/Business/business_entity.dart';
 import 'package:gomart/data/model/Business/business_model.dart';
 import 'package:injectable/injectable.dart';
 
@@ -44,7 +43,7 @@ class FirebaseBusinessRepository implements IBusinessRepository {
 
   @override
   Future<void> saveBusiness(BusinessModel business) async {
-    final data = business.toEntity().toJson();
+    final data = business.toJson();
     data['updatedOn'] = Timestamp.now();
     data['createdOn'] = Timestamp.now();
     data['membersSince'] = Timestamp.now();
@@ -102,7 +101,7 @@ class FirebaseBusinessRepository implements IBusinessRepository {
     final businessRef = _firestore.collection('BUSINESSES').doc(businessId);
     final businessDoc = await businessRef.get();
     if (businessDoc.exists) {
-      return BusinessModel.fromEntity(BusinessEntity.fromSnapshot(businessDoc));
+      return BusinessModel.fromSnapshot(businessDoc);
     }
     return null;
   }

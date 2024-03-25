@@ -14,6 +14,10 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
+BusinessModel _$BusinessModelFromJson(Map<String, dynamic> json) {
+  return _BusinessModel.fromJson(json);
+}
+
 /// @nodoc
 mixin _$BusinessModel {
   String? get id => throw _privateConstructorUsedError;
@@ -37,6 +41,7 @@ mixin _$BusinessModel {
   String? get coverPhotoUrl => throw _privateConstructorUsedError;
   List<String>? get galleryPhotos => throw _privateConstructorUsedError;
 
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $BusinessModelCopyWith<BusinessModel> get copyWith =>
       throw _privateConstructorUsedError;
@@ -327,7 +332,7 @@ class __$$_BusinessModelCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$_BusinessModel extends _BusinessModel {
   const _$_BusinessModel(
       {this.id,
@@ -354,6 +359,9 @@ class _$_BusinessModel extends _BusinessModel {
         _chat = chat,
         _galleryPhotos = galleryPhotos,
         super._();
+
+  factory _$_BusinessModel.fromJson(Map<String, dynamic> json) =>
+      _$$_BusinessModelFromJson(json);
 
   @override
   final String? id;
@@ -469,6 +477,7 @@ class _$_BusinessModel extends _BusinessModel {
                 .equals(other._galleryPhotos, _galleryPhotos));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
@@ -498,6 +507,13 @@ class _$_BusinessModel extends _BusinessModel {
   @pragma('vm:prefer-inline')
   _$$_BusinessModelCopyWith<_$_BusinessModel> get copyWith =>
       __$$_BusinessModelCopyWithImpl<_$_BusinessModel>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_BusinessModelToJson(
+      this,
+    );
+  }
 }
 
 abstract class _BusinessModel extends BusinessModel {
@@ -522,6 +538,9 @@ abstract class _BusinessModel extends BusinessModel {
       final String? coverPhotoUrl,
       final List<String>? galleryPhotos}) = _$_BusinessModel;
   const _BusinessModel._() : super._();
+
+  factory _BusinessModel.fromJson(Map<String, dynamic> json) =
+      _$_BusinessModel.fromJson;
 
   @override
   String? get id;

@@ -38,8 +38,6 @@ import 'package:gomart/service/app_module.dart' as _i22;
 import 'package:gomart/service/firebase_service.dart' as _i6;
 import 'package:injectable/injectable.dart' as _i2;
 
-// ignore_for_file: unnecessary_lambdas
-// ignore_for_file: lines_longer_than_80_chars
 // initializes the registration of main-scope dependencies inside of GetIt
 Future<_i1.GetIt> init(
   _i1.GetIt getIt, {

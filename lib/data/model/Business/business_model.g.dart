@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'business_entity.dart';
+part of 'business_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_BusinessEntity _$$_BusinessEntityFromJson(Map<String, dynamic> json) =>
-    _$_BusinessEntity(
+_$_BusinessModel _$$_BusinessModelFromJson(Map<String, dynamic> json) =>
+    _$_BusinessModel(
       id: json['id'] as String?,
       companyName: json['companyName'] as String?,
       businessCategory: json['businessCategory'] as String?,
@@ -33,7 +33,7 @@ _$_BusinessEntity _$$_BusinessEntityFromJson(Map<String, dynamic> json) =>
           .toList(),
     );
 
-Map<String, dynamic> _$$_BusinessEntityToJson(_$_BusinessEntity instance) =>
+Map<String, dynamic> _$$_BusinessModelToJson(_$_BusinessModel instance) =>
     <String, dynamic>{
       'id': instance.id,
       'companyName': instance.companyName,

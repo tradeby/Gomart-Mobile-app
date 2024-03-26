@@ -62,7 +62,7 @@ dependencies:
   share_plus: ^7.0.2
   google_maps_flutter: ^2.2.6
   google_mobile_ads: ^2.0.1
-  stream_chat_flutter: 6.9.0
+  stream_chat_flutter: ^6.5.0
   google_maps_webservice: ^0.0.20-nullsafety.5
   geolocator: ^7.6.2
   http: ^0.13.6

@@ -49,3 +49,7 @@ A beautiful piece of code that might be useful
           }
         },
       ),
+
+
+
+flutter run --no-enable-impeller --enable-software-rendering

@@ -1,3 +1,11 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android' // only if you use Kotlin
+    id 'org.jetbrains.kotlin.android' // if using Kotlin
+    // id 'com.google.gms.google-services' // if you have Firebase, optional
+    // id 'flutter' // This replaces the old apply method
+}
+
 def localProperties = new Properties()
 def localPropertiesFile = rootProject.file('local.properties')
 if (localPropertiesFile.exists()) {
@@ -32,7 +40,7 @@ if (keystorePropertiesFile.exists()) {
 }
 
 android {
-    compileSdkVersion flutter.compileSdkVersion
+    compileSdkVersion 34
     ndkVersion flutter.ndkVersion
 
     compileOptions {

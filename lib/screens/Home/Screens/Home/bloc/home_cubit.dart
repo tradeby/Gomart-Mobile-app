@@ -28,6 +28,6 @@ class HomeCubit extends Cubit<HomeState> {
         print('******* our error is $error');
       }
 
-    emit(HomeState.productsLoadFailure(error));
+    emit(HomeState.productsLoadFailure(error.toString()));
   }
 }

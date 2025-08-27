@@ -61,7 +61,7 @@ Future<void> main() async {
             create: (context) => locator<DebugCubit>(),
           ),
           BlocProvider<HomeCubit>(
-            create: (context) => locator<HomeCubit>()..loadHomeProducts(),
+            create: (context) => locator<HomeCubit>()//..loadHomeProducts(),
           ),
           BlocProvider<SearchCubit>(
             create: (context) => locator<SearchCubit>(),

@@ -335,7 +335,7 @@ class HomeFragment extends StatelessWidget {
               SliverPersistentHeader(
                   floating: true, delegate: CustomPersistentHeader()),
               BlocBuilder<HomeCubit, HomeState>(
-                builder: (context, state) {
+                builder: (context, state) { 
                   if (state.loadInProgress) {
                     return SliverList(
                       delegate: SliverChildBuilderDelegate(childCount: 3,
@@ -344,14 +344,16 @@ class HomeFragment extends StatelessWidget {
                       }),
                     );
                   } else if (state.loadSuccess) {
+                    // return ListView.builder(
+              // itemCount: 6,
+              // itemBuilder: (item, count)=>
+              //  ProductCard(product: SampleProducts.listOfProducts[count],));
                     return SliverList(
                       delegate: SliverChildBuilderDelegate(
-                          childCount: state.homeProducts?.length,
+                          childCount: SampleProducts.listOfProducts.length,
                           (BuildContext context, int index) {
                         return ProductCard(
-                          product: SampleProducts.toProductModel(
-                            state.homeProducts![index],
-                          ),
+                          product: SampleProducts.listOfProducts[index]
                         );
                       }),
                     );

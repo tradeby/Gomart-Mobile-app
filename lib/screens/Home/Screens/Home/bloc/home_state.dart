@@ -16,9 +16,9 @@ class HomeState with _$HomeState {
 
   factory HomeState.initial() {
     return const HomeState(
-      loadInProgress: true,
+      loadInProgress: false,
       loadFailure: false,
-      loadSuccess: false,
+      loadSuccess: true,
     );
   }
 

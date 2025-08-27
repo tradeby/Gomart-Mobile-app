@@ -344,10 +344,6 @@ class HomeFragment extends StatelessWidget {
                       }),
                     );
                   } else if (state.loadSuccess) {
-                    // return ListView.builder(
-              // itemCount: 6,
-              // itemBuilder: (item, count)=>
-              //  ProductCard(product: SampleProducts.listOfProducts[count],));
                     return SliverList(
                       delegate: SliverChildBuilderDelegate(
                           childCount: SampleProducts.listOfProducts.length,
@@ -571,7 +567,7 @@ class ProductCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.37,
+                    width: MediaQuery.of(context).size.width * 0.33,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,

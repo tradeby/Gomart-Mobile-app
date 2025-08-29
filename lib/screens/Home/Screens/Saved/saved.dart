@@ -89,7 +89,7 @@ class SavedItemsTab extends StatelessWidget {
         child: SizedBox(
           height: MediaQuery.of(context).size.height,
           child: ListView.builder(
-              itemCount: 3,
+              itemCount: 4,
               itemBuilder: (item, count)=>
                ProductCard(product: SampleProducts.listOfProducts[count],)),
         ),

@@ -1406,7 +1406,7 @@ SPEC CHECKSUMS:
   FirebaseFirestoreInternal: 04b8afa77b4e5b84e86ab5ad985193e9573239fa
   FirebaseSharedSwift: 0274086954b1b2d5fd7e829eccc587044d72a4ba
   FirebaseStorage: bc7bddc743548a89cfb896843a77cf4bdde2c231
-  Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
+  Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   flutter_native_splash: 52501b97d1c0a5f898d687f1646226c1f93c56ef
   FMDB: 57486c1117fd8e0e6b947b2f54c3f42bf8e57a4e
   geolocator_apple: b741765c55dc21950e3e106e8b3584e55cf81ce5

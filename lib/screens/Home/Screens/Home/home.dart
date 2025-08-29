@@ -335,7 +335,7 @@ class HomeFragment extends StatelessWidget {
               SliverPersistentHeader(
                   floating: true, delegate: CustomPersistentHeader()),
               BlocBuilder<HomeCubit, HomeState>(
-                builder: (context, state) {
+                builder: (context, state) { 
                   if (state.loadInProgress) {
                     return SliverList(
                       delegate: SliverChildBuilderDelegate(childCount: 3,
@@ -346,12 +346,10 @@ class HomeFragment extends StatelessWidget {
                   } else if (state.loadSuccess) {
                     return SliverList(
                       delegate: SliverChildBuilderDelegate(
-                          childCount: state.homeProducts?.length,
+                          childCount: SampleProducts.listOfProducts.length,
                           (BuildContext context, int index) {
                         return ProductCard(
-                          product: SampleProducts.toProductModel(
-                            state.homeProducts![index],
-                          ),
+                          product: SampleProducts.listOfProducts[index]
                         );
                       }),
                     );
@@ -569,162 +567,220 @@ class ProductCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.40,
+                    width: MediaQuery.of(context).size.width * 0.33,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        FadeInImage(
-                          width: MediaQuery.of(context).size.width * 0.36,
-                          height: MediaQuery.of(context).size.width * 0.28,
-                          placeholder: const AssetImage(
-                              'assets/images/placeholder-image.png'),
-                          image: NetworkImage(product.productImageUrl),
-                          fit: BoxFit.fitWidth,
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(20),
+                          child: FadeInImage(
+                            width: MediaQuery.of(context).size.width * 0.3,
+                            height: MediaQuery.of(context).size.width * 0.3,
+                            placeholder: const AssetImage(
+                                'assets/images/placeholder-image.png'),
+                            image: NetworkImage(product.productImageUrl),
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ],
                     ),
                   ),
-                  const Padding(padding: EdgeInsets.all(8)),
+                  // const Padding(padding: EdgeInsets.all(5)),
                   SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.50,
+                    width: MediaQuery.of(context).size.width * 0.59,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          product.productName,
-                          style: const TextStyle(color: Styles.colorBlack),
+                        Row(
+                          // mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.45,
+                              child: Text(
+                                product.productName,
+                                overflow: TextOverflow.ellipsis,
+                                style: const TextStyle(fontSize:17 , color: Styles.colorBlack),
+                              ),
+                            ),
+                            // const Padding(padding: EdgeInsets.all(2)),
+                            // IconButton(onPressed: (){}, icon: Icon(Icons.favorite_outline,))
+                            SizedBox(width: MediaQuery.of(context).size.width*0.05),
+                            Icon(Icons.favorite_outline,)
+                          ],
                         ),
-                        const Padding(padding: EdgeInsets.all(8)),
+                        const Padding(padding: EdgeInsets.all(2)),
+                        Text(
+                          product.companyName,
+                          style: const TextStyle(
+                            fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                              color: Styles.colorTextDark),
+                        ),
+                        const Padding(padding: EdgeInsets.all(2)),
                         Text(
                           product.price ?? 'Contact us for price',
                           style: const TextStyle(
                             fontSize: 16,
-                            color: Styles.colorTextBlue,
+                            color:  Color(0xFF37700E)
                           ),
                         ),
-                        const Padding(padding: EdgeInsets.all(6)),
-                        Text(
-                          product.companyName,
-                          style: const TextStyle(
-                              fontWeight: FontWeight.w500,
-                              color: Styles.colorTextDark),
-                        ),
-                        const Padding(padding: EdgeInsets.all(4)),
-                        product.openingAndClosingTime != null
-                            ? Row(
-                                children: [
-                                  const Text('Hours: ',
-                                      style: TextStyle(
-                                          fontSize: 10,
-                                          color: Styles.colorTextDark,
-                                          fontWeight: FontWeight.w500)),
-                                  Text(
-                                    product.openingAndClosingTime ?? '',
-                                    style: const TextStyle(
-                                        fontSize: 10,
-                                        color: Styles.colorTextDark),
-                                  ),
-                                ],
-                              )
-                            : Row(
-                                children: [
-                                  const Text(
-                                    'Hours: ',
-                                    style: TextStyle(
-                                        fontSize: 12,
-                                        color: Styles.colorTextDark),
-                                  ),
-                                  Text(
-                                    product.isOpen ? 'Open' : 'Closed',
-                                    style: TextStyle(
-                                        fontSize: 12,
-                                        color: product.isOpen
-                                            ? Styles.colorTextGreen
-                                            : Styles.colorTextRed),
-                                  ),
-                                  Text(
-                                    product.isOpen
-                                        ? ' - Closes ${product.closingTime}'
-                                        : ' - Opens ${product.closingTime}',
-                                    style: const TextStyle(
-                                        fontSize: 12,
-                                        color: Styles.colorTextDark),
-                                  ),
-                                ],
+                        SizedBox(height: MediaQuery.of(context).size.height*0.01),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            SizedBox(width: MediaQuery.of(context).size.width*0.1),
+                            InkWell(
+                              onTap: () async {
+                                String url = "tel:${product.phoneNumber}";
+                                if (await canLaunchUrlString(url)) {
+                                  await launchUrlString(
+                                      "tel:${product.phoneNumber}");
+                                }
+                              },
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 3, horizontal: 14),
+                                decoration: BoxDecoration(
+                                  color: Styles.colorSecondary,
+                                  borderRadius: BorderRadius.circular(16),
+                                ),
+                                child: const Text(
+                                  'Call',
+                                  style: TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.normal,
+                                      color: Styles.colorBlack),
+                                ),
                               ),
-                        const Padding(padding: EdgeInsets.all(8)),
+                            )
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              product.address,
+                              style: const TextStyle(
+                                  color: Color(0xFF007C98), fontSize: 12),
+                            ),
+                            Row(
+                              children: [
+                                Text(
+                                  '1.5 km',
+                                  style: const TextStyle(
+                                      color: Styles.colorTextDark, fontSize: 12),
+                                ),
+                                const Icon(
+                                  Gomart.locationIcon,
+                                  size: 16,
+                                ),
+                                // Text(
+                                //   product.address,
+                                //   style: const TextStyle(
+                                //       color: Styles.colorTextDark, fontSize: 12),
+                                // ),
+                              ],
+                            ),
+                            /*const Padding(padding: EdgeInsets.all(8)),
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.50,
+                              child: Padding(
+                                padding: const EdgeInsets.fromLTRB(0, 0, 8, 0),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      product.phoneNumber,
+                                      style: const TextStyle(
+                                        color: Styles.colorTextBlue,
+                                        fontSize: 13,
+                                      ),
+                                    ),
+                                    const Padding(padding: EdgeInsets.all(4)),
+                                    InkWell(
+                                      onTap: () async {
+                                        String url = "tel:${product.phoneNumber}";
+                                        if (await canLaunchUrlString(url)) {
+                                          await launchUrlString(
+                                              "tel:${product.phoneNumber}");
+                                        }
+                                      },
+                                      child: Container(
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 4, horizontal: 10),
+                                        decoration: BoxDecoration(
+                                          color: Styles.colorSecondary,
+                                          borderRadius: BorderRadius.circular(16),
+                                        ),
+                                        child: const Text(
+                                          'Call',
+                                          style: TextStyle(
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.normal,
+                                              color: Styles.colorBlack),
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            )*/
+                          ],
+                        )
+                                  
+                        // const Padding(padding: EdgeInsets.all(4)),
+                        // product.openingAndClosingTime != null
+                        //     ? Row(
+                        //         children: [
+                        //           const Text('Hours: ',
+                        //               style: TextStyle(
+                        //                   fontSize: 10,
+                        //                   color: Styles.colorTextDark,
+                        //                   fontWeight: FontWeight.w500)),
+                        //           Text(
+                        //             product.openingAndClosingTime ?? '',
+                        //             style: const TextStyle(
+                        //                 fontSize: 10,
+                        //                 color: Styles.colorTextDark),
+                        //           ),
+                        //         ],
+                        //       )
+                        //     : Row(
+                        //         children: [
+                        //           const Text(
+                        //             'Hours: ',
+                        //             style: TextStyle(
+                        //                 fontSize: 12,
+                        //                 color: Styles.colorTextDark),
+                        //           ),
+                        //           Text(
+                        //             product.isOpen ? 'Open' : 'Closed',
+                        //             style: TextStyle(
+                        //                 fontSize: 12,
+                        //                 color: product.isOpen
+                        //                     ? Styles.colorTextGreen
+                        //                     : Styles.colorTextRed),
+                        //           ),
+                        //           Text(
+                        //             product.isOpen
+                        //                 ? ' - Closes ${product.closingTime}'
+                        //                 : ' - Opens ${product.closingTime}',
+                        //             style: const TextStyle(
+                        //                 fontSize: 12,
+                        //                 color: Styles.colorTextDark),
+                        //           ),
+                        //         ],
+                        //       ),
+                        // const Padding(padding: EdgeInsets.all(8)),
                       ],
                     ),
                   )
                 ],
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.40,
-                      child: Row(
-                        children: [
-                          const Icon(
-                            Gomart.locationIcon,
-                            size: 16,
-                          ),
-                          Text(
-                            product.address,
-                            style: const TextStyle(
-                                color: Styles.colorTextDark, fontSize: 12),
-                          ),
-                        ],
-                      )),
-                  const Padding(padding: EdgeInsets.all(8)),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.50,
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(0, 0, 8, 0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            product.phoneNumber,
-                            style: const TextStyle(
-                              color: Styles.colorTextBlue,
-                              fontSize: 13,
-                            ),
-                          ),
-                          const Padding(padding: EdgeInsets.all(4)),
-                          InkWell(
-                            onTap: () async {
-                              String url = "tel:${product.phoneNumber}";
-                              if (await canLaunchUrlString(url)) {
-                                await launchUrlString(
-                                    "tel:${product.phoneNumber}");
-                              }
-                            },
-                            child: Container(
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 4, horizontal: 10),
-                              decoration: BoxDecoration(
-                                color: Styles.colorSecondary,
-                                borderRadius: BorderRadius.circular(16),
-                              ),
-                              child: const Text(
-                                'Call',
-                                style: TextStyle(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.normal,
-                                    color: Styles.colorBlack),
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                  )
-                ],
-              )
+              
             ],
           )),
     );
@@ -992,7 +1048,7 @@ class SampleProducts {
     ),
     SampleProducts(
       productId: '001',
-      productName: 'Wholesale & Retail of Computers & Printing',
+      productName: ' Wholesale & Retail of Computers & Printing',
       phoneNumber: '08067397760',
       address: 'Wuse Zone 3, Abuja',
       companyName: 'Foretec Investment ',

@@ -67,59 +67,59 @@ class RegisterScreenAddBasicInfo extends StatelessWidget {
                   onChanged: (text) {
                     context.read<RegistrationCubit>().setLastName(text);
                   }),
-              const Padding(padding: EdgeInsets.all(12)),
-              SizedBox(
-                width: MediaQuery.of(context).size.width * 0.6,
-                child: const Text(
-                    'Your Date of birth, so we can wish you happy birthdays',
-                    textAlign: TextAlign.center,
-                    style:
-                        TextStyle(color: Styles.colorTextDark, fontSize: 12)),
-              ),
-              const Padding(padding: EdgeInsets.all(4)),
-              GestureDetector(
-                onTap: (Platform.isIOS)
-                    ? () {
-                        showModalBottomSheet<void>(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return const SelectDateOfBirthIos();
-                          },
-                        );
-                      }
-                    : () async {
-                        await showDatePicker(
-                          context: context,
-                          initialDate: DateTime.now(),
-                          firstDate: DateTime(1900),
-                          lastDate: DateTime.now(),
-                        ).then((date) => {
-                              if (date != null)
-                                context
-                                    .read<RegistrationCubit>()
-                                    .setDateOfBirth(date)
-                            });
-                      },
-                child: Container(
-                  width: MediaQuery.of(context).size.width * 0.6,
-                  height: 40,
-                  decoration: BoxDecoration(
-                      color: Styles.colorWhite,
-                      borderRadius: BorderRadius.circular(20)),
-                  child: Center(
-                      child: BlocBuilder<RegistrationCubit, RegisterState>(
-                    builder: (context, state) {
-                      return Text(
-                        (state.dateOfBirth != null) ?
-                        '${state.dateOfBirth?.day}/${state.dateOfBirth?.month}/${state.dateOfBirth?.year}'
-                            : 'Date of birth',
-                        style: const TextStyle(color: Styles.colorTextDark),
-                      );
-                    },
-                  )),
-                ),
-              ),
-              const Padding(padding: EdgeInsets.all(8)),
+              // const Padding(padding: EdgeInsets.all(12)),
+              // SizedBox(
+              //   width: MediaQuery.of(context).size.width * 0.6,
+              //   child: const Text(
+              //       'Your Date of birth, so we can wish you happy birthdays',
+              //       textAlign: TextAlign.center,
+              //       style:
+              //           TextStyle(color: Styles.colorTextDark, fontSize: 12)),
+              // ),
+              // const Padding(padding: EdgeInsets.all(4)),
+              // GestureDetector(
+              //   onTap: (Platform.isIOS)
+              //       ? () {
+              //           showModalBottomSheet<void>(
+              //             context: context,
+              //             builder: (BuildContext context) {
+              //               return const SelectDateOfBirthIos();
+              //             },
+              //           );
+              //         }
+              //       : () async {
+              //           await showDatePicker(
+              //             context: context,
+              //             initialDate: DateTime.now(),
+              //             firstDate: DateTime(1900),
+              //             lastDate: DateTime.now(),
+              //           ).then((date) => {
+              //                 if (date != null)
+              //                   context
+              //                       .read<RegistrationCubit>()
+              //                       .setDateOfBirth(date)
+              //               });
+              //         },
+              //   child: Container(
+              //     width: MediaQuery.of(context).size.width * 0.6,
+              //     height: 40,
+              //     decoration: BoxDecoration(
+              //         color: Styles.colorWhite,
+              //         borderRadius: BorderRadius.circular(20)),
+              //     child: Center(
+              //         child: BlocBuilder<RegistrationCubit, RegisterState>(
+              //       builder: (context, state) {
+              //         return Text(
+              //           (state.dateOfBirth != null) ?
+              //           '${state.dateOfBirth?.day}/${state.dateOfBirth?.month}/${state.dateOfBirth?.year}'
+              //               : 'Date of birth',
+              //           style: const TextStyle(color: Styles.colorTextDark),
+              //         );
+              //       },
+              //     )),
+              //   ),
+              // ),
+              // const Padding(padding: EdgeInsets.all(8)),
               const Padding(padding: EdgeInsets.all(16)),
               BlocBuilder<RegistrationCubit, RegisterState>(
                 builder: (context, state) {

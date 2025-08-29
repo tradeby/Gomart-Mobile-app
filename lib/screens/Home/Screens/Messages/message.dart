@@ -51,7 +51,7 @@ class _MessageFragmentState extends State<MessageFragment> {
       'members',
       [StreamChat.of(context).currentUser!.id],
     ),
-    sort: const [SortOption('last_message_at')],
+    // sort: const [SortOption('last_message_at')],
     limit: 40,
   );
 

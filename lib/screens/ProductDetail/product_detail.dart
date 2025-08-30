@@ -10,7 +10,7 @@ import 'package:gomart/styles/styles.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:photo_view/photo_view.dart';
-import 'package:stream_chat_flutter/stream_chat_flutter.dart';
+
 import '../Home/Screens/Messages/message.dart';
 import 'fade_route.dart';
 import 'image_preview_screen.dart';
@@ -1009,27 +1009,9 @@ class ChatButtonState extends State<ChatButton> {
         }
       },*/
       onPressed: () async {
-        final client = StreamChat.of(context).client;
-        final channel = client.channel(
-          'messaging',
-          id: 'reSureAutoServiceId',
-          extraData: {
-            'name': 'Resure Auto Service',
-            'members': [ 'msjahun'],
-          },
-        );
+    
 
-       await channel.watch();
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) {
-              return StreamChannel(
-                channel: channel,
-                child: const ChannelPage(),
-              );
-            },
-          ),
-        );
+
       },
       child: const Text(
         'Chat',

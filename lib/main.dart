@@ -29,18 +29,8 @@ Future<void> main() async {
   MobileAds.instance.initialize();
   Bloc.observer = BlocDelegateObserver();
   await configureDependencies();
-  final client = StreamChatClient(
-    'mkx4q8pu4yd4',
-   // logLevel: Level.INFO,
-  );
 
-  await client.connectUser(
-    User(id: 'msjahun', extraData: const {
-      "name": "John Doe",
-      "image": "https://i.imgur.com/fR9Jz14.png",
-    }),
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoibXNqYWh1biJ9.0-lWg_JCl-hiJCs2OG8kR8nqgVtxAVjTbVr4Wz8Xsh8',
-  );
+
   runApp(
     Phoenix(
       child: MultiBlocProvider(
@@ -72,9 +62,7 @@ Future<void> main() async {
             create: (context) => locator<BusinessProfileCubit>(),
           )
         ],
-        child: MyApp(
-          client: client,
-        ),
+        child: MyApp(),
       ),
     ),
   );
@@ -83,9 +71,9 @@ Future<void> main() async {
 class MyApp extends StatelessWidget {
   const MyApp({
     Key? key,
-    required this.client,
+
   }) : super(key: key);
-  final StreamChatClient client;
+
 
   // This widget is the root of your application.
   @override

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:stream_chat_flutter/stream_chat_flutter.dart';
+
 import '../../../../styles/styles.dart';
 import '../../../Empty-state/empty_state_screen.dart';
 
-/*class MessageFragment extends StatelessWidget {
+class MessageFragment extends StatelessWidget {
   const MessageFragment({Key? key}) : super(key: key);
 
   @override
@@ -34,7 +34,9 @@ import '../../../Empty-state/empty_state_screen.dart';
       ),
     );
   }
-}*/
+}
+
+/*
 class MessageFragment extends StatefulWidget {
   const MessageFragment({
     Key? key,
@@ -112,3 +114,4 @@ class ChannelPage extends StatelessWidget {
     );
   }
 }
+*/

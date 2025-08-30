@@ -17,7 +17,6 @@ import 'package:gomart/styles/color_schemes.dart';
 import 'package:gomart/styles/styles.dart';
 import 'package:gomart/service/bloc_service.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:stream_chat_flutter/stream_chat_flutter.dart';
 
 //import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'injection.dart';
@@ -92,10 +91,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      builder: (context, child) => StreamChat(
-        client: client,
-        child: child,
-      ),
       debugShowCheckedModeBanner: false,
       title: 'Gomart app',
       theme: ThemeData(useMaterial3: true, colorScheme: lightColorScheme),

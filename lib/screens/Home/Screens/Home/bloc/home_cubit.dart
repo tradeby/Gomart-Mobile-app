@@ -13,7 +13,7 @@ class HomeCubit extends Cubit<HomeState> {
   HomeCubit(this._productRepo) : super(HomeState.initial());
 
   loadHomeProducts() {
-    HomeState.initial();
+    emit(HomeState.initial());
    _productRepo
         .getHomeProducts()
         .then((productOut) => homeProductsUpdated(productOut))
@@ -29,5 +29,13 @@ class HomeCubit extends Cubit<HomeState> {
       }
 
     emit(HomeState.productsLoadFailure(error.toString()));
+  }
+
+  loadProduct(){
+    emit(state.copyWith(loadInProgress: true, loadFailure: false, loadSuccess: false));
+    Future.delayed( const Duration(seconds: 2), (){
+      emit( state.copyWith(loadInProgress: false, loadFailure: false, loadSuccess: true));
+    });
+    
   }
 }

@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gomart/screens/Home/Screens/Home/home.dart';
 import 'package:gomart/styles/custom_home_icons.dart';
 import 'package:gomart/styles/styles.dart';
@@ -12,6 +13,7 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:stream_chat_flutter/stream_chat_flutter.dart';
 import '../Home/Screens/Messages/message.dart';
+import '../Home/Screens/Saved/bloc/saved_cubit.dart';
 import 'fade_route.dart';
 import 'image_preview_screen.dart';
 
@@ -505,10 +507,18 @@ class ProductDetail extends StatelessWidget {
                       decoration: BoxDecoration(
                           color: Styles.colorGray.withOpacity(0.6),
                           borderRadius: BorderRadius.circular(40)),
-                      child: IconButton(
-                        onPressed: () {},
-                        color: Styles.colorWhite,
-                        icon: const Icon(Icons.favorite_border),
+                      child: BlocBuilder<FavoritesCubit, List<SampleProducts>>(
+                        builder: (context, favorite) {
+                           final isFav = favorite.contains(product);
+                          return IconButton(
+                            onPressed: () {
+                               context.read<FavoritesCubit>().toggleFavorite(product);
+                            },
+                            color: Styles.colorBarBottomSheet,
+                            icon:  Icon(isFav ? Icons.favorite : Icons.favorite_border,
+                            color: isFav ? Colors.red : Colors.grey,),
+                          );
+                        }
                       ),
                     ),
                   ),

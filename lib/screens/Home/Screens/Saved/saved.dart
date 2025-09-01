@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gomart/injection.dart';
+import 'package:gomart/screens/Home/Screens/Saved/bloc/saved_cubit.dart';
 
 import '../../../../styles/styles.dart';
 import '../Home/home.dart';
@@ -88,10 +90,18 @@ class SavedItemsTab extends StatelessWidget {
       body: SingleChildScrollView(
         child: SizedBox(
           height: MediaQuery.of(context).size.height,
-          child: ListView.builder(
-              itemCount: 4,
-              itemBuilder: (item, count)=>
-               ProductCard(product: SampleProducts.listOfProducts[count],)),
+          child: BlocBuilder<FavoritesCubit, List<SampleProducts>>(
+            builder: (context, favorites) {
+              if (favorites.isEmpty) {
+                return const Center(child: Text("No favorites yet"));
+              }
+              return ListView.builder(
+                itemCount: favorites.length,
+                itemBuilder: (item, count)=>
+                ProductCard(product: favorites[count],)
+              );
+            }
+          ),
         ),
       ) ,
     );

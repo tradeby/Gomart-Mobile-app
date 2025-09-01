@@ -18,7 +18,7 @@ class HomeState with _$HomeState {
     return const HomeState(
       loadInProgress: false,
       loadFailure: false,
-      loadSuccess: true,
+      loadSuccess: false,
     );
   }
 

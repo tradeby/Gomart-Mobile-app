@@ -5,12 +5,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:gomart/data/bloc/authentication/authentication_bloc.dart';
+import 'package:gomart/data/model/Product/product_model.dart';
 import 'package:gomart/screens/Authentication/Login/bloc/login_cubit.dart';
 import 'package:gomart/screens/Authentication/Register/bloc/registration_cubit.dart';
 import 'package:gomart/screens/Authentication/authentication_screen.dart';
 import 'package:gomart/screens/Home/Screens/Account/BusinessProfile/bloc/business_profile_cubit.dart';
 import 'package:gomart/screens/Home/Screens/Account/EditBusiness/bloc/business_cubit.dart';
 import 'package:gomart/screens/Home/Screens/Home/bloc/home_cubit.dart';
+import 'package:gomart/screens/Home/Screens/Saved/bloc/saved_cubit.dart';
 import 'package:gomart/screens/Search/bloc/search_cubit.dart';
 import 'package:gomart/screens/debug/bloc/debug_cubit.dart';
 import 'package:gomart/styles/color_schemes.dart';
@@ -61,7 +63,7 @@ Future<void> main() async {
             create: (context) => locator<DebugCubit>(),
           ),
           BlocProvider<HomeCubit>(
-            create: (context) => locator<HomeCubit>()//..loadHomeProducts(),
+            create: (context) => locator<HomeCubit>()..loadProduct(),
           ),
           BlocProvider<SearchCubit>(
             create: (context) => locator<SearchCubit>(),
@@ -71,7 +73,10 @@ Future<void> main() async {
           ),
           BlocProvider<BusinessProfileCubit>(
             create: (context) => locator<BusinessProfileCubit>(),
-          )
+          ),
+          BlocProvider<FavoritesCubit>(
+            create: (context) => FavoritesCubit(),
+          ),
         ],
         child: MyApp(
           client: client,

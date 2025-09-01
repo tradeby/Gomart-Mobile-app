@@ -9,6 +9,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:gomart/data/model/Product/product_model.dart';
 import 'package:gomart/screens/Home/Screens/Home/bloc/bloc.dart';
 import 'package:gomart/screens/Home/Screens/Home/bloc/bloc.dart';
+import 'package:gomart/screens/Home/Screens/Saved/bloc/saved_cubit.dart';
 import 'package:gomart/screens/ProductDetail/product_detail.dart';
 import 'package:gomart/screens/Search/search_input.dart';
 import 'package:gomart/screens/Search/search_results.dart';
@@ -344,6 +345,17 @@ class HomeFragment extends StatelessWidget {
                       }),
                     );
                   } else if (state.loadSuccess) {
+                    /*return SliverList(
+                        delegate: SliverChildBuilderDelegate(
+                            childCount: state.homeProducts?.length,
+                            (BuildContext context, int index) {
+                             return ProductCard(
+                             product: SampleProducts.toProductModel(
+                               state.homeProducts![index],
+                             ),
+                           );
+                         }),
+                       );*/
                     return SliverList(
                       delegate: SliverChildBuilderDelegate(
                           childCount: SampleProducts.listOfProducts.length,
@@ -604,10 +616,21 @@ class ProductCard extends StatelessWidget {
                                 style: const TextStyle(fontSize:17 , color: Styles.colorBlack),
                               ),
                             ),
-                            // const Padding(padding: EdgeInsets.all(2)),
-                            // IconButton(onPressed: (){}, icon: Icon(Icons.favorite_outline,))
                             SizedBox(width: MediaQuery.of(context).size.width*0.05),
-                            Icon(Icons.favorite_outline,)
+                            BlocBuilder<FavoritesCubit, List<SampleProducts>>(
+                              builder: (context, favorites) {
+                                final isFav = favorites.contains(product);
+                                return GestureDetector(
+                                  onTap: () {
+                                    context.read<FavoritesCubit>().toggleFavorite(product);
+                                  },
+                                  child: Icon(
+                                    isFav ? Icons.favorite : Icons.favorite_border,
+                                    color: isFav ? Colors.red : Colors.grey,
+                                  ),
+                                );
+                              }
+                            )
                           ],
                         ),
                         const Padding(padding: EdgeInsets.all(2)),

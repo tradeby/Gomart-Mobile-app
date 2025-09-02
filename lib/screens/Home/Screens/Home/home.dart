@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:gomart/data/model/Product/product_model.dart';
 import 'package:gomart/screens/Home/Screens/Home/bloc/bloc.dart';
 import 'package:gomart/screens/Home/Screens/Home/bloc/bloc.dart';
@@ -21,6 +22,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 import '../../../../styles/styles.dart';
+import '../Account/EditBusiness/_get_current_location.dart';
 
 class StateAndCities {
   static List<String> states = [
@@ -550,11 +552,17 @@ class ProductCardLoading extends StatelessWidget {
   }
 }
 
-class ProductCard extends StatelessWidget {
+class ProductCard extends StatefulWidget {
   final SampleProducts product;
 
   const ProductCard({Key? key, required this.product}) : super(key: key);
 
+  @override
+  State<ProductCard> createState() => _ProductCardState();
+}
+
+class _ProductCardState extends State<ProductCard> {
+  
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -563,7 +571,7 @@ class ProductCard extends StatelessWidget {
           context,
           MaterialPageRoute(
               builder: (context) => ProductDetailScreen(
-                    product: product,
+                    product: widget.product,
                   )),
         );
       },
@@ -591,7 +599,7 @@ class ProductCard extends StatelessWidget {
                             height: MediaQuery.of(context).size.width * 0.3,
                             placeholder: const AssetImage(
                                 'assets/images/placeholder-image.png'),
-                            image: NetworkImage(product.productImageUrl),
+                            image: NetworkImage(widget.product.productImageUrl),
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -611,7 +619,7 @@ class ProductCard extends StatelessWidget {
                             SizedBox(
                               width: MediaQuery.of(context).size.width * 0.45,
                               child: Text(
-                                product.productName,
+                                widget.product.productName,
                                 overflow: TextOverflow.ellipsis,
                                 style: const TextStyle(fontSize:17 , color: Styles.colorBlack),
                               ),
@@ -619,10 +627,10 @@ class ProductCard extends StatelessWidget {
                             SizedBox(width: MediaQuery.of(context).size.width*0.05),
                             BlocBuilder<FavoritesCubit, List<SampleProducts>>(
                               builder: (context, favorites) {
-                                final isFav = favorites.contains(product);
+                                final isFav = favorites.contains(widget.product);
                                 return GestureDetector(
                                   onTap: () {
-                                    context.read<FavoritesCubit>().toggleFavorite(product);
+                                    context.read<FavoritesCubit>().toggleFavorite(widget.product);
                                   },
                                   child: Icon(
                                     isFav ? Icons.favorite : Icons.favorite_border,
@@ -635,7 +643,7 @@ class ProductCard extends StatelessWidget {
                         ),
                         const Padding(padding: EdgeInsets.all(2)),
                         Text(
-                          product.companyName,
+                          widget.product.companyName,
                           style: const TextStyle(
                             fontSize: 14,
                               fontWeight: FontWeight.w500,
@@ -643,7 +651,7 @@ class ProductCard extends StatelessWidget {
                         ),
                         const Padding(padding: EdgeInsets.all(2)),
                         Text(
-                          product.price ?? 'Contact us for price',
+                          widget.product.price ?? 'Contact us for price',
                           style: const TextStyle(
                             fontSize: 16,
                             color:  Color(0xFF37700E)
@@ -656,10 +664,10 @@ class ProductCard extends StatelessWidget {
                             SizedBox(width: MediaQuery.of(context).size.width*0.1),
                             InkWell(
                               onTap: () async {
-                                String url = "tel:${product.phoneNumber}";
+                                String url = "tel:${widget.product.phoneNumber}";
                                 if (await canLaunchUrlString(url)) {
                                   await launchUrlString(
-                                      "tel:${product.phoneNumber}");
+                                      "tel:${widget.product.phoneNumber}");
                                 }
                               },
                               child: Container(
@@ -685,16 +693,28 @@ class ProductCard extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              product.address,
+                              widget.product.address,
                               style: const TextStyle(
                                   color: Color(0xFF007C98), fontSize: 12),
                             ),
                             Row(
                               children: [
-                                Text(
-                                  '1.5 km',
-                                  style: const TextStyle(
-                                      color: Styles.colorTextDark, fontSize: 12),
+                                BlocBuilder<HomeCubit, HomeState>(
+                                  builder: (context, location) {
+                                    double distanceInMeters = Geolocator.distanceBetween(
+                                    location.latitude,
+                                    location.longitude,
+                                    widget.product.geoloc!['latitude']!,
+                                    widget.product.geoloc!['longitude']!,
+                                  );
+                                  // Convert to km
+                                  final distanceInKm = distanceInMeters / 1000;
+                                    return Text(
+                                      '${distanceInKm.toStringAsFixed(2)} km',
+                                      style: const TextStyle(
+                                          color: Styles.colorTextDark, fontSize: 12),
+                                    );
+                                  }
                                 ),
                                 const Icon(
                                   Gomart.locationIcon,
@@ -1002,6 +1022,7 @@ class SampleProducts {
   final String? openingAndClosingTime;
   final String productImageUrl;
   final String companyName;
+  final Map<String, double>? geoloc;
 
   const SampleProducts(
       {required this.productName,
@@ -1013,6 +1034,7 @@ class SampleProducts {
       required this.productId,
       required this.productImageUrl,
       required this.companyName,
+      this.geoloc,
       this.openingAndClosingTime});
 
   static SampleProducts toProductModel(ProductModel product) {
@@ -1038,6 +1060,7 @@ class SampleProducts {
       companyName: '3PLE F Bakers',
       isOpen: false,
       closingTime: '10pm',
+      geoloc: {'longitude':  8.542405 , 'latitude':  11.971300},
       productImageUrl:
           'https://firebasestorage.googleapis.com/v0/b/gomart-apps.appspot.com/o/products-picture-sample%2Fimage3.png?alt=media&token=283e2392-5149-4a7b-a490-14bef689b532',
     ),
@@ -1049,6 +1072,7 @@ class SampleProducts {
       companyName: 'Foretec Investment ',
       isOpen: true,
       closingTime: '10pm',
+      geoloc: {'longitude': 20.1, 'latitude': 23.7},
       productImageUrl:
           'https://firebasestorage.googleapis.com/v0/b/gomart-apps.appspot.com/o/products-picture-sample%2Fimage6.png?alt=media&token=283e2392-5149-4a7b-a490-14bef689b532',
     ),
@@ -1061,6 +1085,7 @@ class SampleProducts {
       companyName: 'Resure Auto Service ',
       isOpen: false,
       closingTime: '9am',
+      geoloc: {'longitude': 20.1, 'latitude': 23.7},
       productImageUrl:
           'https://firebasestorage.googleapis.com/v0/b/gomart-apps.appspot.com/o/products-picture-sample%2Fimage1.png?alt=media&token=283e2392-5149-4a7b-a490-14bef689b532',
     ),
@@ -1074,6 +1099,7 @@ class SampleProducts {
       openingAndClosingTime: 'Monday to Saturday 9am to 6pm',
       isOpen: false,
       closingTime: '9am',
+      geoloc: {'longitude': 20.1, 'latitude': 44.7},
       productImageUrl:
           'https://firebasestorage.googleapis.com/v0/b/gomart-apps.appspot.com/o/products-picture-sample%2Fimage2.png?alt=media&token=283e2392-5149-4a7b-a490-14bef689b532',
     ),
@@ -1086,6 +1112,7 @@ class SampleProducts {
       companyName: '3PLE F Bakers',
       isOpen: false,
       closingTime: '10pm',
+      geoloc: {'longitude': 19.1, 'latitude': 98.7},
       productImageUrl:
           'https://firebasestorage.googleapis.com/v0/b/gomart-apps.appspot.com/o/products-picture-sample%2Fimage3.png?alt=media&token=283e2392-5149-4a7b-a490-14bef689b532',
     ),
@@ -1097,6 +1124,7 @@ class SampleProducts {
       companyName: 'Foretec Investment ',
       isOpen: true,
       closingTime: '10pm',
+      geoloc: {'longitude': 43.1, 'latitude': 23.7},
       productImageUrl:
           'https://firebasestorage.googleapis.com/v0/b/gomart-apps.appspot.com/o/products-picture-sample%2Fimage6.png?alt=media&token=283e2392-5149-4a7b-a490-14bef689b532',
     ),
@@ -1109,6 +1137,7 @@ class SampleProducts {
       companyName: 'Resure Auto Service ',
       isOpen: false,
       closingTime: '9am',
+      geoloc: {'longitude': 20.1, 'latitude': 29.7},
       productImageUrl:
           'https://firebasestorage.googleapis.com/v0/b/gomart-apps.appspot.com/o/products-picture-sample%2Fimage1.png?alt=media&token=283e2392-5149-4a7b-a490-14bef689b532',
     ),
@@ -1122,6 +1151,7 @@ class SampleProducts {
       openingAndClosingTime: 'Monday to Saturday 9am to 6pm',
       isOpen: false,
       closingTime: '9am',
+      geoloc: {'longitude': 2.1, 'latitude': 3.7},
       productImageUrl:
           'https://firebasestorage.googleapis.com/v0/b/gomart-apps.appspot.com/o/products-picture-sample%2Fimage2.png?alt=media&token=283e2392-5149-4a7b-a490-14bef689b532',
     ),
@@ -1134,6 +1164,7 @@ class SampleProducts {
       companyName: '3PLE F Bakers',
       isOpen: false,
       closingTime: '10pm',
+      geoloc: {'longitude': 5.1, 'latitude': 6.7},
       productImageUrl:
           'https://firebasestorage.googleapis.com/v0/b/gomart-apps.appspot.com/o/products-picture-sample%2Fimage3.png?alt=media&token=283e2392-5149-4a7b-a490-14bef689b532',
     ),
@@ -1145,6 +1176,7 @@ class SampleProducts {
       companyName: 'Foretec Investment ',
       isOpen: true,
       closingTime: '10pm',
+      geoloc: {'longitude': 8.1, 'latitude': 7.7},
       productImageUrl:
           'https://firebasestorage.googleapis.com/v0/b/gomart-apps.appspot.com/o/products-picture-sample%2Fimage6.png?alt=media&token=283e2392-5149-4a7b-a490-14bef689b532',
     ),
@@ -1157,6 +1189,7 @@ class SampleProducts {
       companyName: 'Resure Auto Service ',
       isOpen: false,
       closingTime: '9am',
+      geoloc: {'longitude': 10.1, 'latitude': 2.7},
       productImageUrl:
           'https://firebasestorage.googleapis.com/v0/b/gomart-apps.appspot.com/o/products-picture-sample%2Fimage1.png?alt=media&token=283e2392-5149-4a7b-a490-14bef689b532',
     ),
@@ -1170,6 +1203,7 @@ class SampleProducts {
       openingAndClosingTime: 'Monday to Saturday 9am to 6pm',
       isOpen: false,
       closingTime: '9am',
+      geoloc: {'longitude': 1.1, 'latitude': 2.7},
       productImageUrl:
           'https://firebasestorage.googleapis.com/v0/b/gomart-apps.appspot.com/o/products-picture-sample%2Fimage2.png?alt=media&token=283e2392-5149-4a7b-a490-14bef689b532',
     ),

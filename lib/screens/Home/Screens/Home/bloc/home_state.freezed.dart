@@ -19,6 +19,8 @@ mixin _$HomeState {
   bool get loadInProgress => throw _privateConstructorUsedError;
   bool get loadFailure => throw _privateConstructorUsedError;
   bool get loadSuccess => throw _privateConstructorUsedError;
+  double get longitude => throw _privateConstructorUsedError;
+  double get latitude => throw _privateConstructorUsedError;
   String? get error => throw _privateConstructorUsedError;
   List<ProductModel>? get homeProducts => throw _privateConstructorUsedError;
   ProductRepositoryOutput? get productsOutput =>
@@ -38,6 +40,8 @@ abstract class $HomeStateCopyWith<$Res> {
       {bool loadInProgress,
       bool loadFailure,
       bool loadSuccess,
+      double longitude,
+      double latitude,
       String? error,
       List<ProductModel>? homeProducts,
       ProductRepositoryOutput? productsOutput});
@@ -59,6 +63,8 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
     Object? loadInProgress = null,
     Object? loadFailure = null,
     Object? loadSuccess = null,
+    Object? longitude = null,
+    Object? latitude = null,
     Object? error = freezed,
     Object? homeProducts = freezed,
     Object? productsOutput = freezed,
@@ -76,6 +82,14 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
           ? _value.loadSuccess
           : loadSuccess // ignore: cast_nullable_to_non_nullable
               as bool,
+      longitude: null == longitude
+          ? _value.longitude
+          : longitude // ignore: cast_nullable_to_non_nullable
+              as double,
+      latitude: null == latitude
+          ? _value.latitude
+          : latitude // ignore: cast_nullable_to_non_nullable
+              as double,
       error: freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -103,6 +117,8 @@ abstract class _$$_HomeStateCopyWith<$Res> implements $HomeStateCopyWith<$Res> {
       {bool loadInProgress,
       bool loadFailure,
       bool loadSuccess,
+      double longitude,
+      double latitude,
       String? error,
       List<ProductModel>? homeProducts,
       ProductRepositoryOutput? productsOutput});
@@ -122,6 +138,8 @@ class __$$_HomeStateCopyWithImpl<$Res>
     Object? loadInProgress = null,
     Object? loadFailure = null,
     Object? loadSuccess = null,
+    Object? longitude = null,
+    Object? latitude = null,
     Object? error = freezed,
     Object? homeProducts = freezed,
     Object? productsOutput = freezed,
@@ -139,6 +157,14 @@ class __$$_HomeStateCopyWithImpl<$Res>
           ? _value.loadSuccess
           : loadSuccess // ignore: cast_nullable_to_non_nullable
               as bool,
+      longitude: null == longitude
+          ? _value.longitude
+          : longitude // ignore: cast_nullable_to_non_nullable
+              as double,
+      latitude: null == latitude
+          ? _value.latitude
+          : latitude // ignore: cast_nullable_to_non_nullable
+              as double,
       error: freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -162,6 +188,8 @@ class _$_HomeState implements _HomeState {
       {required this.loadInProgress,
       required this.loadFailure,
       required this.loadSuccess,
+      required this.longitude,
+      required this.latitude,
       this.error,
       final List<ProductModel>? homeProducts,
       this.productsOutput})
@@ -173,6 +201,10 @@ class _$_HomeState implements _HomeState {
   final bool loadFailure;
   @override
   final bool loadSuccess;
+  @override
+  final double longitude;
+  @override
+  final double latitude;
   @override
   final String? error;
   final List<ProductModel>? _homeProducts;
@@ -190,7 +222,7 @@ class _$_HomeState implements _HomeState {
 
   @override
   String toString() {
-    return 'HomeState(loadInProgress: $loadInProgress, loadFailure: $loadFailure, loadSuccess: $loadSuccess, error: $error, homeProducts: $homeProducts, productsOutput: $productsOutput)';
+    return 'HomeState(loadInProgress: $loadInProgress, loadFailure: $loadFailure, loadSuccess: $loadSuccess, longitude: $longitude, latitude: $latitude, error: $error, homeProducts: $homeProducts, productsOutput: $productsOutput)';
   }
 
   @override
@@ -204,6 +236,10 @@ class _$_HomeState implements _HomeState {
                 other.loadFailure == loadFailure) &&
             (identical(other.loadSuccess, loadSuccess) ||
                 other.loadSuccess == loadSuccess) &&
+            (identical(other.longitude, longitude) ||
+                other.longitude == longitude) &&
+            (identical(other.latitude, latitude) ||
+                other.latitude == latitude) &&
             (identical(other.error, error) || other.error == error) &&
             const DeepCollectionEquality()
                 .equals(other._homeProducts, _homeProducts) &&
@@ -217,6 +253,8 @@ class _$_HomeState implements _HomeState {
       loadInProgress,
       loadFailure,
       loadSuccess,
+      longitude,
+      latitude,
       error,
       const DeepCollectionEquality().hash(_homeProducts),
       productsOutput);
@@ -233,6 +271,8 @@ abstract class _HomeState implements HomeState {
       {required final bool loadInProgress,
       required final bool loadFailure,
       required final bool loadSuccess,
+      required final double longitude,
+      required final double latitude,
       final String? error,
       final List<ProductModel>? homeProducts,
       final ProductRepositoryOutput? productsOutput}) = _$_HomeState;
@@ -243,6 +283,10 @@ abstract class _HomeState implements HomeState {
   bool get loadFailure;
   @override
   bool get loadSuccess;
+  @override
+  double get longitude;
+  @override
+  double get latitude;
   @override
   String? get error;
   @override

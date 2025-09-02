@@ -10,6 +10,8 @@ class HomeState with _$HomeState {
       {required bool loadInProgress,
       required bool loadFailure,
       required bool loadSuccess,
+      required double longitude,
+      required double latitude,
         String? error,
       List<ProductModel>? homeProducts,
       ProductRepositoryOutput? productsOutput }) = _HomeState;
@@ -19,12 +21,14 @@ class HomeState with _$HomeState {
       loadInProgress: false,
       loadFailure: false,
       loadSuccess: false,
+      longitude: 0.0,
+      latitude: 0.0,
     );
   }
 
   factory HomeState.productsLoadFailure(String error) {
     return  HomeState(
-        loadFailure: true, loadInProgress: false, loadSuccess: false,
+        loadFailure: true, loadInProgress: false, loadSuccess: false, longitude: 0.0, latitude: 0.0,
         error: error,);
   }
 
@@ -33,6 +37,8 @@ class HomeState with _$HomeState {
         loadFailure: false,
         loadInProgress: false,
         loadSuccess: true,
+        longitude: 0.0,
+        latitude: 0.0,
         homeProducts: productOutput.productsList,
         productsOutput: productOutput);
   }

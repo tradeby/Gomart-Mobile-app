@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:gomart/data/bloc/authentication/authentication_bloc.dart';
 import 'package:gomart/data/model/Product/product_model.dart';
 import 'package:gomart/screens/Authentication/Login/bloc/login_cubit.dart';
@@ -36,7 +37,6 @@ Future<void> main() async {
     'mkx4q8pu4yd4',
    // logLevel: Level.INFO,
   );
-
   await client.connectUser(
     User(id: 'msjahun', extraData: const {
       "name": "John Doe",
@@ -63,7 +63,7 @@ Future<void> main() async {
             create: (context) => locator<DebugCubit>(),
           ),
           BlocProvider<HomeCubit>(
-            create: (context) => locator<HomeCubit>()..loadProduct(),
+            create: (context) => locator<HomeCubit>()..loadProduct()..currentLocation(),
           ),
           BlocProvider<SearchCubit>(
             create: (context) => locator<SearchCubit>(),

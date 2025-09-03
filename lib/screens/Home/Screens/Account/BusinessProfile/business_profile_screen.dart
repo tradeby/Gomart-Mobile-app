@@ -68,7 +68,7 @@ class BusinessProfileScreen extends StatelessWidget {
                           color: Styles.colorWhite,
                         ))),*/
                     Positioned(
-                      top: 6,
+                      top: 40,
                       right: 5,
                       child: Padding(
                         padding: const EdgeInsets.symmetric(vertical: 4),

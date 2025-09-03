@@ -634,7 +634,7 @@ class _ProductCardState extends State<ProductCard> {
                                   },
                                   child: Icon(
                                     isFav ? Icons.favorite : Icons.favorite_border,
-                                    color: isFav ? Colors.red : Colors.grey,
+                                    color: isFav ? Colors.red : Colors.black,
                                   ),
                                 );
                               }
@@ -903,7 +903,7 @@ class ProductCardSponsored extends StatelessWidget {
                                   },
                                   child: Icon(
                                     isFav ? Icons.favorite : Icons.favorite_border,
-                                    color: isFav ? Colors.red : Colors.grey,
+                                    color: isFav ? Colors.red : Colors.black,
                                   ),
                                 );
                               }
@@ -986,10 +986,22 @@ class ProductCardSponsored extends StatelessWidget {
                             ),
                             Row(
                               children: [
-                                Text(
-                                  '1.5 km',
-                                  style: const TextStyle(
-                                      color: Styles.colorTextDark, fontSize: 12),
+                                BlocBuilder<HomeCubit, HomeState>(
+                                  builder: (context, location) {
+                                    double distanceInMeters = Geolocator.distanceBetween(
+                                    location.latitude,
+                                    location.longitude,
+                                    product.geoloc!['latitude']!,
+                                    product.geoloc!['longitude']!,
+                                  );
+                                  // Convert to km
+                                  final distanceInKm = distanceInMeters / 1000;
+                                    return Text(
+                                      '${distanceInKm.toStringAsFixed(2)} km',
+                                      style: const TextStyle(
+                                          color: Styles.colorTextDark, fontSize: 12),
+                                    );
+                                  }
                                 ),
                                 const Icon(
                                   Gomart.locationIcon,
@@ -1072,7 +1084,7 @@ class SampleProducts {
       companyName: 'Foretec Investment ',
       isOpen: true,
       closingTime: '10pm',
-      geoloc: {'longitude': 20.1, 'latitude': 23.7},
+      geoloc: {'longitude': 7.123563, 'latitude': 13.790013},
       productImageUrl:
           'https://firebasestorage.googleapis.com/v0/b/gomart-apps.appspot.com/o/products-picture-sample%2Fimage6.png?alt=media&token=283e2392-5149-4a7b-a490-14bef689b532',
     ),
@@ -1085,7 +1097,7 @@ class SampleProducts {
       companyName: 'Resure Auto Service ',
       isOpen: false,
       closingTime: '9am',
-      geoloc: {'longitude': 20.1, 'latitude': 23.7},
+      geoloc: {'longitude': 9.651001, 'latitude': 10.597321},
       productImageUrl:
           'https://firebasestorage.googleapis.com/v0/b/gomart-apps.appspot.com/o/products-picture-sample%2Fimage1.png?alt=media&token=283e2392-5149-4a7b-a490-14bef689b532',
     ),

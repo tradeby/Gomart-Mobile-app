@@ -74,6 +74,7 @@ class ProfileSettingsScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
+            SizedBox(height:MediaQuery.of(context).size.height*0.06 ),
             Container(
               color: Styles.colorWhite,
               padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 2),
